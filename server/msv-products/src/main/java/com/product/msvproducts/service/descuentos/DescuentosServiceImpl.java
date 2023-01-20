@@ -26,7 +26,7 @@ public class DescuentosServiceImpl implements IDescuentosService{
 
     @Override
     public Descuentos createDescuentos(Descuentos descuentos) {
-         descuentos.setCreated(new Date());
+         descuentos.setCreationDate(new Date());
          return repository.save(descuentos);
     }
 

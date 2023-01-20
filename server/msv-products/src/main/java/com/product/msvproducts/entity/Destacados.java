@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "destacados")
+@Table(name = "features")
 @Data
 @AllArgsConstructor @NoArgsConstructor
 public class Destacados {
@@ -20,14 +20,13 @@ public class Destacados {
 
     @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "destacado_id")
+    @JoinColumn(name = "featured_id")
     private List<Product> products;
 
-    @Column(name = "time_destacado")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date timedestacado;
+    @Column(name = "featured_time")
+    private String featuredTime;
 
-    @Column(name = "created")
+    @Column(name = "creationDate")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date created;
+    private Date creationDate;
 }

@@ -19,8 +19,8 @@ public class Category {
 
     private String description;
 
-    @Column(name = "created")
+    @Column(name = "creationDate")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date created;
+    private Date creationDate;
     
 }

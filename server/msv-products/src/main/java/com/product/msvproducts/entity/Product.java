@@ -21,21 +21,24 @@ public class Product {
     private String description;
     private Double price;
     private Double stock;
-    @Column(name = "precio_compra")
-    private Double precioCompra;
-    @Column(name = "precio_venta")
-    private Double precioVenta;
+    @Column(name = "purchase_price")
+    private Double purchasePrice;
+
+    @Column(name = "sale_price")
+    private Double salePrice;
+
     @Column(name = "photo_url")
     private String photoUrl;
-    @Column(name = "created")
+
+    @Column(name = "creationDate")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date created;
+    private Date creationDate;
 
-    @Column(name = "destacado_id")
-    private Long destacadoId;
+    @Column(name = "featured_id")
+    private Long featuredId;
 
-    @Column(name = "descuento_id")
-    private Long descuentoId;
+    @Column(name = "discount_id")
+    private Long discountId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")

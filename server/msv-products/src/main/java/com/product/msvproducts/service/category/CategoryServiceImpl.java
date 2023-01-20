@@ -22,7 +22,7 @@ public class CategoryServiceImpl implements ICategoryService{
 
     @Override
     public Category createCategory(Category category) {
-        category.setCreated(new Date());
+        category.setCreationDate(new Date());
         category.setDescription(category.getDescription());
         category.setName(category.getName());
         return repository.save(category);
