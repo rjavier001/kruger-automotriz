@@ -17,6 +17,8 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>discovery-server</module>
+        <module>gateway-server</module>
         <module>msv-users</module>
         <module>msv-products</module>
         <module>msv-orders</module>
