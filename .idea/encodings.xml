@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/server/discovery-server/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/server/gateway-server/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/server/msv-orders/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/server/msv-orders/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/server/msv-products/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/server/msv-products/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/server/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/server/src/main/resources" charset="UTF-8" />
+  </component>
+</project>
