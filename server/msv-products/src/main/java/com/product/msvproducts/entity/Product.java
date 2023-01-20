@@ -2,6 +2,10 @@ package com.product.msvproducts.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,19 +21,31 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    //campo requerido
+    
+    @NotEmpty(message = "Name should not be empty")
+    @NotNull(message = "Name should not be null")
     private String name;
+
     private String description;
-    //campo requerido
+
+    @NotNull(message = "Price should not be empty")
+    @Min(3)
+    @Max(1000)
     private Double price;
-    //campo requerido
+
+    @NotNull(message = "Stock should not be empty")
+    @Min(3)
+    @Max(1000)
     private Double stock;
-    //campo requerido
-    @Column(name = "purchase_price")
+
+    @NotNull(message = "Purchase Price should not be empty")
+    @Min(3)
+    @Max(1000)
     private Double purchasePrice;
 
-    //campo requerido
-    @Column(name = "sale_price")
+    @NotNull(message = "Sales Price should not be empty")
+    @Min(3)
+    @Max(100)
     private Double salePrice;
 
     @Column(name = "photo_url")
