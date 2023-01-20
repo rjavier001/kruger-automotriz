@@ -1,7 +1,8 @@
 package com.product.msvproducts.repository;
 
-import com.product.msvproducts.entity.Destacados;
+import com.product.msvproducts.entity.FeaturedEntity;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface DestacadosRepository extends JpaRepository<Destacados,Long> {
+public interface DestacadosRepository extends JpaRepository<FeaturedEntity,Long> {
 }

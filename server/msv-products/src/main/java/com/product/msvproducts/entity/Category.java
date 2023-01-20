@@ -1,9 +1,12 @@
 package com.product.msvproducts.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 
 import java.util.Date;
 @Entity
@@ -15,7 +18,8 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    //campo requerido
+    @NotEmpty(message = "Name should not be empty")
+    @NotNull(message = "Name should not be null")
     private String name;
 
     private String description;

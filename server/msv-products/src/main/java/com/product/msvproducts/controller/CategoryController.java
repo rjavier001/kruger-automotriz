@@ -2,15 +2,20 @@ package com.product.msvproducts.controller;
 
 import com.product.msvproducts.entity.Category;
 import com.product.msvproducts.service.category.ICategoryService;
+
+import jakarta.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
 
 @RestController
 @RequestMapping("/api/categories")
@@ -29,14 +34,9 @@ public class CategoryController {
     }
 
     @PostMapping("/save")
-    public ResponseEntity<Category> createCategory(@RequestBody Category category, BindingResult result){
-
-        if(result.hasErrors()){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
-        }
-
+    public ResponseEntity<Category> createCategory(@RequestBody @Valid Category category){
         Category createdCategory = service.createCategory(category);
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdCategory);
+        return ResponseEntity.accepted().body(createdCategory);
     }
 
     @PutMapping(value="/{id}")
@@ -54,4 +54,6 @@ public class CategoryController {
         service.deleteCategory(id);
         return  ResponseEntity.status(HttpStatus.OK).body("Successfully operation. ");
     }
+
+
 }
