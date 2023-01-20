@@ -1,6 +1,6 @@
 package com.product.msvproducts.entity;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
