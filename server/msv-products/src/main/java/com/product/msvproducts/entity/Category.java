@@ -22,4 +22,5 @@ public class Category {
     @Column(name = "created")
     @Temporal(TemporalType.TIMESTAMP)
     private Date created;
+    
 }
