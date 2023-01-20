@@ -1,0 +1,45 @@
+
+server:
+  port: 8080
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
+
+spring:
+  application:
+    name: gateway-service
+  cloud:
+    gateway:
+      routes:
+        - id: course
+          uri: lb://MSVC-COURSE
+          predicates:
+            - Path=/api/course/**
+            - Method=GET,POST,PUT,DELETE
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: retailCourseCircuitBreaker
+                fallbackUri: forward:/fallback/retailCourseFallback
+        - id: user
+          uri: lb://MSVC-USER
+          predicates:
+            - Path=/api/user/**
+      default-filters:
+        - TokenRelay
+  security:
+    oauth2:
+      client:
+        provider:
+          keycloak:
+            issuerUri: http://localhost:9091/realms/kruger-realm
+        registration:
+          spring-cloud-gateway-client:
+            client-id: spring-cloud-gateway-client
+            client-secret: Hj5AdFlSa7y3arUBJ19Hvs9bnkXHfDIv
+            provider: keycloak
+            authorization-grant-type: authorization_code
+            redirect-uri: http://localhost:8080/login/oauth2/code/spring-cloud-gateway-client
+
