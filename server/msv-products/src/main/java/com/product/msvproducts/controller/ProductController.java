@@ -3,7 +3,8 @@ package com.product.msvproducts.controller;
 import com.product.msvproducts.entity.Product;
 import com.product.msvproducts.service.product.IProductService;
 
-import jakarta.validation.Valid;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
