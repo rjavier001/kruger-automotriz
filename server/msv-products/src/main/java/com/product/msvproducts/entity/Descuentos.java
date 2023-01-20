@@ -23,8 +23,10 @@ public class Descuentos {
     @JoinColumn(name = "discount_id")
     private List<Product> products;
 
+    //campo requerido
     private String name;
     private String description;
+    //campo requerido
     private Double price;
 
     @Column(name = "time_oferta")

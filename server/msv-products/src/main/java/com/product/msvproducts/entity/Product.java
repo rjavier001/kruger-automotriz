@@ -17,13 +17,18 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    //campo requerido
     private String name;
     private String description;
+    //campo requerido
     private Double price;
+    //campo requerido
     private Double stock;
+    //campo requerido
     @Column(name = "purchase_price")
     private Double purchasePrice;
 
+    //campo requerido
     @Column(name = "sale_price")
     private Double salePrice;
 
@@ -44,7 +49,5 @@ public class Product {
     @JoinColumn(name = "category_id")
     @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
     private Category category;
-
-
 
 }
