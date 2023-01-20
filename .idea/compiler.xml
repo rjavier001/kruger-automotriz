@@ -2,13 +2,15 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="msv-users (1) (com.user)" />
         <module name="gateway-server" />
-        <module name="msv-products" />
         <module name="msv-order" />
+        <module name="msv-products" />
         <module name="discovery-service" />
       </profile>
     </annotationProcessing>
@@ -19,6 +21,7 @@
       <module name="msv-order" target="17" />
       <module name="msv-orders" target="17" />
       <module name="msv-products" target="17" />
+      <module name="msv-users (1) (com.user)" target="17" />
       <module name="msv_user" target="17" />
     </bytecodeTargetLevel>
   </component>
@@ -29,6 +32,7 @@
       <module name="msv-order" options="-parameters" />
       <module name="msv-orders" options="-parameters" />
       <module name="msv-products" options="-parameters" />
+      <module name="msv-users (1) (com.user)" options="-parameters" />
       <module name="msv_user" options="-parameters" />
     </option>
   </component>
