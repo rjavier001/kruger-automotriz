@@ -24,7 +24,7 @@ public class DestacadosServiceImpl implements IDestacadosService{
 
     @Override
     public Destacados createDestacados(Destacados destacados) {
-        destacados.setCreated(new Date());
+        destacados.setCreationDate(new Date());
         return repository.save(destacados);
     }
 

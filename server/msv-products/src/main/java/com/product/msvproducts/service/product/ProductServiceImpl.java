@@ -25,7 +25,7 @@ public class ProductServiceImpl implements IProductService{
 
     @Override
     public Product createProduct(Product product) {
-        product.setCreated(new Date());
+        product.setCreationDate(new Date());
         return repository.save(product);
     }
 
@@ -40,11 +40,11 @@ public class ProductServiceImpl implements IProductService{
         productUpdate.setDescription(product.getDescription());
         productUpdate.setPrice(product.getPrice());
         productUpdate.setStock(product.getStock());
-        productUpdate.setPrecioCompra(product.getPrecioCompra());
-        productUpdate.setPrecioVenta(product.getPrecioVenta());
+        productUpdate.setPurchasePrice(product.getPurchasePrice());
+        productUpdate.setSalePrice(product.getSalePrice());
         productUpdate.setPhotoUrl(product.getPhotoUrl());
-        productUpdate.setDestacadoId(product.getDestacadoId());
-        productUpdate.setDescuentoId(product.getDescuentoId());
+        productUpdate.setFeaturedId(product.getFeaturedId());
+        productUpdate.setDiscountId(product.getDiscountId());
         return repository.save(productUpdate);
     }
 
