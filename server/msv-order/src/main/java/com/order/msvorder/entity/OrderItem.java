@@ -1,8 +1,8 @@
 package com.order.msvorder.entity;
 
 import com.order.msvorder.model.Product;
-import jakarta.persistence.*;
-import jakarta.validation.constraints.Positive;
+import javax.persistence.*;
+import javax.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -1,6 +1,6 @@
 package com.order.msvorder.entity;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
