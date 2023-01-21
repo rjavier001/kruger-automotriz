@@ -1,7 +1,6 @@
 package com.order.msvorder.services.order;
 
-import com.order.msvorder.client.CustomerClient;
-import com.order.msvorder.client.ProductClient;
+
 import com.order.msvorder.entity.Order;
 import com.order.msvorder.entity.OrderItem;
 import com.order.msvorder.entity.Payment;
@@ -26,11 +25,6 @@ public class OrderServiceImpl implements IOrderService{
     @Autowired
     PaymentServiceImpl paymentServiceImpl;
 
-    @Autowired
-    ProductClient productClient;
-
-    @Autowired
-    CustomerClient customerClient;
 
     // -------------------create order service--------------------------------------------
     public Order createOrder(Order order, Long customerId){
@@ -43,18 +37,6 @@ public class OrderServiceImpl implements IOrderService{
         //Al crear la orden se debe también crear el payment
         paymentServiceImpl.createPayment(new Payment("CREATED", UUID.randomUUID(), new Date(),createdOrder));
 
-        //Al crear la orden se crea el cart con el customerId y el orderId
-        customerClient.addOrder(new OrderRequest(customerId,order.getId()));
-
-        //Actualizar el stock del producto
-        createdOrder.getItems().forEach( orderItem ->{
-            productClient.updateStockProduct(orderItem.getProductId(), orderItem.getQuantity() * -1);
-        });
-
-        //Actualizar el contador de ventas en el producto
-        createdOrder.getItems().forEach( orderItem ->{
-            productClient.updateSaleCounter(orderItem.getProductId(), orderItem.getQuantity());
-        });
 
         return createdOrder;
 
@@ -63,14 +45,6 @@ public class OrderServiceImpl implements IOrderService{
     // -------------------getOrder by ID service--------------------------------------------
     public Order getOrder(Long id){
         Order orderDB = orderRepository.findById(id).orElse(null);
-        if(orderDB != null){
-            List<OrderItem> listItems =  orderDB.getItems().stream().map(orderItem ->{
-                    Product product = productClient.getProduct(orderItem.getProductId()).getBody();
-                    orderItem.setProduct(product);
-                    return orderItem;
-                }).collect(Collectors.toList());
-                orderDB.setItems(listItems);
-        }
         return orderDB;
     }
 
