@@ -10,8 +10,8 @@
         <module name="gateway-server" />
         <module name="msv-users" />
         <module name="discovery-server" />
-        <module name="msv-order" />
         <module name="msv-products" />
+        <module name="msv-order" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

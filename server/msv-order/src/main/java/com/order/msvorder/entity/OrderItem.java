@@ -9,9 +9,7 @@ import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
-/**
- * This microservice was created by Kevin and David
- */
+
 @Data
 @Entity
 @Table(name="orderItems")
