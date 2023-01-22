@@ -15,4 +15,6 @@ public interface IOrderService {
     public void deleteOrder(Long id);
 
     public Order getOrder(Long id);
+
+    List<Order> listByIds(Iterable<Long> ids);
 }

@@ -48,6 +48,12 @@ public class OrderServiceImpl implements IOrderService{
         return orderDB;
     }
 
+    // Mostrar todas las ordenes de un usuario
+    @Override
+    public List<Order> listByIds(Iterable<Long> ids) {
+        return orderRepository.findAllById(ids);
+    }
+
     // -------------------Delete order --------------------------------------------
     public void deleteOrder(Long id){
         orderRepository.deleteById(id);
