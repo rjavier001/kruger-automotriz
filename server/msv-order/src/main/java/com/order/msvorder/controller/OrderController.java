@@ -92,6 +92,11 @@ public class OrderController {
         return  ResponseEntity.status(HttpStatus.OK).body("Successfully operation. ");
     }
 
+    @GetMapping("/orders-by-user")
+    public ResponseEntity<?> getAllOrdersByUser(@RequestParam List<Long> ids){
+        return ResponseEntity.ok(orderService.listByIds(ids));
+    }
+
     private String formatMessage( BindingResult result){
         List<Map<String,String>> errors = result.getFieldErrors().stream()
                 .map(err ->{
