@@ -71,4 +71,9 @@ public class OrderServiceImpl implements IOrderService{
         return  orderRepository.findAll();
     }
 
+    @Override
+    public Order save(Order order) {
+        return orderRepository.save(order);
+    }
+
 }
