@@ -8,6 +8,8 @@ public interface IOrderService {
 
     public List<Order> findAllOrders();
 
+    Order save(Order order);
+
     public Order createOrder(Order Order, Long customerId);
     public Order updateOrder(Order Order);
     public void deleteOrder(Long id);
