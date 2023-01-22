@@ -1,11 +1,18 @@
-package com.user.msvusers.model;
+package com.user.msvusers.model.entity;
 
+import com.user.msvusers.model.Order;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "users")
 @Data
@@ -27,4 +34,22 @@ public class User {
   @NotNull(message = "Password should not be null")
   private String password;
 
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+  @JoinColumn(name = "user_id")
+  private List<UserOrder> userOrders;
+
+  public void addUserOrder(UserOrder userOrder){
+    userOrders.add(userOrder);
+  }
+  public void  removeUserOrder(UserOrder userOrder){
+    userOrders.remove(userOrder);
+  }
+
+  @Transient
+  private List<Order> orders;
+
+  public User() {
+    userOrders = new ArrayList<>();
+    orders = new ArrayList<>();
+  }
 }
