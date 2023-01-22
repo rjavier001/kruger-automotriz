@@ -7,16 +7,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-@FeignClient(name = "msv-order", url = "localhost:8003")
+@FeignClient(name = "msv-order", url = "localhost:8003/api/orders")
 public interface OrderClientRest {
 
     @GetMapping(value = "/{id}")
     Order getOrder(@PathVariable("id") long id);
 
     @PostMapping(value= "/user/{id}")
-    Order  createOrder(@RequestBody Order order, @PathVariable("id") long customerId);
+    Order createOrder(@RequestBody Order order, @PathVariable("id") long customerId);
 
     @PostMapping("/")
-    Order  createO(@RequestBody Order order);
+    Order createO(@RequestBody Order order);
 
 }
