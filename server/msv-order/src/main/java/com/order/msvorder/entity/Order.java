@@ -3,6 +3,8 @@ package com.order.msvorder.entity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
 import javax.validation.Valid;
+
+import com.order.msvorder.model.Product;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,7 +18,7 @@ import java.util.List;
 @Entity
 @Table(name="orders")
 @AllArgsConstructor
-@NoArgsConstructor
+//@NoArgsConstructor
 public class Order {
 
     @Id
@@ -52,8 +54,12 @@ public class Order {
     @JoinColumn(name = "order_id")
     private List<OrderProduct> orderProducts;
 
+    @Transient
+    private List<Product> products;
+
     public Order() {
         orderProducts = new ArrayList<>();
+        products = new ArrayList<>();
     }
 
     public void addOrderProduct(OrderProduct orderProduct){
