@@ -1,6 +1,6 @@
 package com.order.msvorder.entity;
 
-import com.order.msvorder.model.Product;
+import com.order.msvorder.model.ProductD;
 import javax.persistence.*;
 import javax.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
@@ -32,7 +32,7 @@ public class OrderItem {
     private Double subTotal;
 
     @Transient
-    private Product product;
+    private ProductD productD;
 
     @Temporal(TemporalType.DATE)
     private Date created;
