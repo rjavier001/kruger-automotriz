@@ -64,4 +64,9 @@ public class ProductController {
         return  ResponseEntity.status(HttpStatus.OK).body("Successfully operation. ");
     }
 
+    @GetMapping("/products-by-order")
+    public ResponseEntity<?> getAllProductsByOrder(@RequestParam List<Long> ids){
+        return ResponseEntity.ok(service.listByIds(ids));
+    }
+
 }
