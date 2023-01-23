@@ -106,6 +106,12 @@ public class UserController {
     return  ResponseEntity.notFound().build();
   }
 
+  @DeleteMapping("/delete-user-order")
+  public ResponseEntity<?> deleteUserOrderById(@PathVariable Long id){
+    service.deleteUserOrderById(id);
+    return ResponseEntity.noContent().build();
+  }
+
 
 
 }
