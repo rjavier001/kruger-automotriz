@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 @FeignClient(name = "msv-users", url = "localhost:8001/api/users")
 public interface UserClientRest {
+
+    //se aprovecha para elimnar de una vez tanto la orden en la tabla ORDER y la Orden de la tabla ed USUARIOS
     @DeleteMapping("/delete-user-order/{id}")
     void deleteUserOrderById(@PathVariable Long id);
 }

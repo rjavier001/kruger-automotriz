@@ -65,7 +65,8 @@ public class OrderServiceImpl implements IOrderService{
     @Transactional
     public void deleteOrder(Long id){
         orderRepository.deleteById(id);
-        //se aprovecha este metodo para eliminar de una vez utilizando ClientRest
+        //se aprovecha este metodo para eliminar de una vez Order de User
+        //eliminamos order de ORDERS y order de USER
         client.deleteUserOrderById(id);
     }
 
