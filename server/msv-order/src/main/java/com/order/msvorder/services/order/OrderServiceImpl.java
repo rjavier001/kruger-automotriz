@@ -10,6 +10,7 @@ import com.order.msvorder.repository.OrderRepository;
 import com.order.msvorder.services.payment.PaymentServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
@@ -50,6 +51,7 @@ public class OrderServiceImpl implements IOrderService{
 
     // Mostrar todas las ordenes de un usuario
     @Override
+    @Transactional(readOnly = true)
     public List<Order> listByIds(Iterable<Long> ids) {
         return orderRepository.findAllById(ids);
     }

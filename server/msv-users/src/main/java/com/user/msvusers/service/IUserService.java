@@ -17,6 +17,7 @@ public interface IUserService {
 
   //METODOS relacionados con el cliente http
   //Optional<Product> asignarProducts
+  Optional<User> findByIdWithOrders(Long id);
   //Recibe la orden y el ID del usuario, asigna a un usuario ya existente en BDD
   Optional<Order> assignOrder(Order order, Long userId);
   //Recibe la orden y el ID del usuario, es para un usuario que todabia no existe en BDD

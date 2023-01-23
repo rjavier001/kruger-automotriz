@@ -2,10 +2,9 @@ package com.user.msvusers.clients;
 
 import com.user.msvusers.model.Order;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @FeignClient(name = "msv-order", url = "localhost:8003/api/orders")
 public interface OrderClientRest {
@@ -18,5 +17,8 @@ public interface OrderClientRest {
 
     @PostMapping("/")
     Order createO(@RequestBody Order order);
+
+    @GetMapping("/orders-by-user")
+    List<Order> getAllOrdersByUser(@RequestParam Iterable<Long> ids);
 
 }
