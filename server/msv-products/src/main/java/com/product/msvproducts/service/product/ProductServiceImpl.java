@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProductServiceImpl implements IProductService{
@@ -21,6 +22,11 @@ public class ProductServiceImpl implements IProductService{
     @Override
     public Product getProduct(Long id) {
         return repository.findById(id).orElse(null);
+    }
+
+    @Override
+    public Optional<Product> findById(Long id) {
+        return repository.findById(id);
     }
 
     @Override
