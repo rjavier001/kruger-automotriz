@@ -3,10 +3,13 @@ package com.order.msvorder.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.order.msvorder.entity.Order;
+import com.order.msvorder.model.Product;
+import com.order.msvorder.model.ProductD;
 import com.order.msvorder.services.order.OrderServiceImpl;
 
 import javax.validation.Valid;
 
+import feign.FeignException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,9 +17,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
@@ -95,6 +96,36 @@ public class OrderController {
     @GetMapping("/orders-by-user")
     public ResponseEntity<?> getAllOrdersByUser(@RequestParam List<Long> ids){
         return ResponseEntity.ok(orderService.listByIds(ids));
+    }
+
+    @PutMapping("/assign-product/{orderId}")
+    public ResponseEntity<?> assignProduct(@RequestBody Product product, @PathVariable Long orderId){
+        Optional<Product> o;
+        try{
+            o = orderService.assignProduct(product, orderId);
+        } catch (FeignException e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Collections.singletonMap("mensaje","No existe el producto por el id o no se logro la comunicación"+ e.getMessage()));
+        }
+
+        if(o.isPresent()){
+            return ResponseEntity.status(HttpStatus.CREATED).body(o.get());
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    @DeleteMapping("/delete-product/{orderId}")
+    public ResponseEntity<?> deleteProduct(@RequestBody Product product, @PathVariable Long orderId){
+        Optional<Product> o;
+        try{
+            o = orderService.deleteProduct(product, orderId);
+        } catch (FeignException e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Collections.singletonMap("mensaje","No existe el producto por el id o no se logro la comunicación"+ e.getMessage()));
+        }
+
+        if(o.isPresent()){
+            return ResponseEntity.status(HttpStatus.OK).body(o.get());
+        }
+        return ResponseEntity.notFound().build();
     }
 
     private String formatMessage( BindingResult result){
