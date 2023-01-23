@@ -26,6 +26,7 @@ public interface IOrderService {
     Optional<Product> assignProduct(Product product, Long orderId);
     //Este metodo no se lo voy  a implementar , crea un producto nuevo
     //Optional<Product> createProduct(Product product, Long orderId);
+    //Elimina el producto de la orden no de la BDD
     Optional<Product> deleteProduct(Product product, Long orderId);
 
 
