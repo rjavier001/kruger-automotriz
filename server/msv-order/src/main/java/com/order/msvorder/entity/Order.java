@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -45,4 +46,18 @@ public class Order {
     private List<OrderItem> items;
 
 
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "")
+    private List<OrderProduct> orderProducts;
+
+    public Order() {
+        orderProducts = new ArrayList<>();
+    }
+
+    public void addOrderProduct(OrderProduct orderProduct){
+        orderProducts.add(orderProduct);
+    }
+    public void removeOrderProduct(OrderProduct orderProduct){
+        orderProducts.remove((orderProduct));
+    }
 }
