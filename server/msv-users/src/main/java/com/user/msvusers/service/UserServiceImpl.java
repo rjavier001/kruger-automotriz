@@ -2,7 +2,6 @@ package com.user.msvusers.service;
 
 
 import com.user.msvusers.clients.OrderClientRest;
-import com.user.msvusers.clients.ProductsClientRest;
 import com.user.msvusers.model.Order;
 import com.user.msvusers.model.entity.User;
 import com.user.msvusers.model.entity.UserOrder;
@@ -13,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements IUserService{
@@ -45,6 +45,23 @@ public class UserServiceImpl implements IUserService{
   @Transactional
   public void delete(Long id) {
     repository.deleteById(id);
+  }
+
+  @Override
+  @Transactional(readOnly = true)
+  public Optional<User> findByIdWithOrders(Long id) {
+    Optional<User> o = repository.findById(id);
+    if(o.isPresent()){
+      User user = o.get();
+      if(!user.getUserOrders().isEmpty()){
+        List<Long> ids = user.getUserOrders().stream().map( uo -> uo.getOrderId()).collect(Collectors.toList());
+
+        List<Order> orders = client.getAllOrdersByUser(ids);
+        user.setOrders(orders);
+      }
+      return Optional.of(user);
+    }
+    return Optional.empty();
   }
 
   @Override
