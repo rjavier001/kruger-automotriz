@@ -106,7 +106,7 @@ public class UserController {
     return  ResponseEntity.notFound().build();
   }
 
-  @DeleteMapping("/delete-user-order")
+  @DeleteMapping("/delete-user-order/{id}")
   public ResponseEntity<?> deleteUserOrderById(@PathVariable Long id){
     service.deleteUserOrderById(id);
     return ResponseEntity.noContent().build();
