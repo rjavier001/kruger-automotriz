@@ -38,16 +38,18 @@ public class Order {
     @Column(name="shipment_date")
     private Date shipmentDate;
 
-
+/*
     @Valid
     @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "order_id")
     private List<OrderItem> items;
 
+ */
+
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "")
+    @JoinColumn(name = "order_id")
     private List<OrderProduct> orderProducts;
 
     public Order() {
