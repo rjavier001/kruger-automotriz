@@ -15,6 +15,8 @@ public interface IUserService {
   User save(User user);
   void delete(Long id);
 
+  void deleteUserOrderById(Long id);
+
   //METODOS relacionados con el cliente http
   //Optional<Product> asignarProducts
   Optional<User> findByIdWithOrders(Long id);

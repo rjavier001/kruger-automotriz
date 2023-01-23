@@ -48,6 +48,12 @@ public class UserServiceImpl implements IUserService{
   }
 
   @Override
+  @Transactional
+  public void deleteUserOrderById(Long id) {
+    repository.deleteUserOrderById(id);
+  }
+
+  @Override
   @Transactional(readOnly = true)
   public Optional<User> findByIdWithOrders(Long id) {
     Optional<User> o = repository.findById(id);
