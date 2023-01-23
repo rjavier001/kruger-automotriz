@@ -1,6 +1,7 @@
 package com.order.msvorder.services.order;
 
 
+import com.order.msvorder.clients.UserClientRest;
 import com.order.msvorder.entity.Order;
 import com.order.msvorder.entity.OrderItem;
 import com.order.msvorder.entity.Payment;
@@ -25,6 +26,9 @@ public class OrderServiceImpl implements IOrderService{
 
     @Autowired
     PaymentServiceImpl paymentServiceImpl;
+
+    @Autowired
+    private UserClientRest client;
 
 
     // -------------------create order service--------------------------------------------
@@ -57,8 +61,12 @@ public class OrderServiceImpl implements IOrderService{
     }
 
     // -------------------Delete order --------------------------------------------
+    @Override
+    @Transactional
     public void deleteOrder(Long id){
         orderRepository.deleteById(id);
+        //se aprovecha este metodo para eliminar de una vez utilizando ClientRest
+        client.deleteUserOrderById(id);
     }
 
     // -------------------UpdateOrder service--------------------------------------------
