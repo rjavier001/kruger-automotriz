@@ -4,6 +4,7 @@ package com.order.msvorder.services.order;
 import com.order.msvorder.clients.UserClientRest;
 import com.order.msvorder.entity.Order;
 import com.order.msvorder.entity.Payment;
+import com.order.msvorder.model.Product;
 import com.order.msvorder.repository.OrderRepository;
 import com.order.msvorder.services.payment.PaymentServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -54,6 +56,16 @@ public class OrderServiceImpl implements IOrderService{
     @Transactional(readOnly = true)
     public List<Order> listByIds(Iterable<Long> ids) {
         return orderRepository.findAllById(ids);
+    }
+
+    @Override
+    public Optional<Product> assignProduct(Product product, Long orderId) {
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<Product> deleteProduct(Product product, Long orderId) {
+        return Optional.empty();
     }
 
     // -------------------Delete order --------------------------------------------
