@@ -17,6 +17,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class OrderServiceImpl implements IOrderService{
@@ -61,6 +62,24 @@ public class OrderServiceImpl implements IOrderService{
     @Transactional(readOnly = true)
     public List<Order> listByIds(Iterable<Long> ids) {
         return orderRepository.findAllById(ids);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<Order> findByIdWithProducts(Long id) {
+        Optional<Order> o= orderRepository.findById(id);
+
+        if(o.isPresent()){
+            Order order = o.get();
+            if(!order.getOrderProducts().isEmpty()){
+                List<Long> ids = order.getOrderProducts().stream().map(op -> op.getProductId()).collect(Collectors.toList());
+
+                List<Product> products = clientProduct.getAllProductsByOrder(ids);
+                order.setProducts(products);
+            }
+            return Optional.of(order);
+        }
+        return Optional.empty();
     }
 
     @Override
