@@ -16,7 +16,7 @@ public class OrderProduct {
     private Long id;
 
     //Con la regla unique not nemos repetido el mismo product en la order
-    @Column(name = "product_id", unique = true)
+    //@Column(name = "product_id", unique = true)
     private Long productId;
 
     @Override
