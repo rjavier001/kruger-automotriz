@@ -18,4 +18,18 @@ public class OrderProduct {
     //Con la regla unique not nemos repetido el mismo product en la order
     @Column(name = "product_id", unique = true)
     private Long productId;
+
+    @Override
+    public boolean equals(Object obj) {
+        if(this == obj){
+            return true;
+        }
+        if(!(obj instanceof OrderProduct)){
+            return false;
+        }
+
+        OrderProduct o = (OrderProduct) obj;
+        return this.productId != null && this.productId.equals(o.productId);
+
+    }
 }
