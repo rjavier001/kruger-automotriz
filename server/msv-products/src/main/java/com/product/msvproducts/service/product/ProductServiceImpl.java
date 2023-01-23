@@ -4,6 +4,7 @@ import com.product.msvproducts.entity.Product;
 import com.product.msvproducts.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
@@ -27,6 +28,12 @@ public class ProductServiceImpl implements IProductService{
     @Override
     public Optional<Product> findById(Long id) {
         return repository.findById(id);
+    }
+
+    @Override
+    @Transactional
+    public List<Product> listByIds(Iterable<Long> ids) {
+        return repository.findAllById(ids);
     }
 
     @Override
