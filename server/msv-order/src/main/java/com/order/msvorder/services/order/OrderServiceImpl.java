@@ -3,10 +3,7 @@ package com.order.msvorder.services.order;
 
 import com.order.msvorder.clients.UserClientRest;
 import com.order.msvorder.entity.Order;
-import com.order.msvorder.entity.OrderItem;
 import com.order.msvorder.entity.Payment;
-import com.order.msvorder.model.OrderRequest;
-import com.order.msvorder.model.Product;
 import com.order.msvorder.repository.OrderRepository;
 import com.order.msvorder.services.payment.PaymentServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Service
 public class OrderServiceImpl implements IOrderService{

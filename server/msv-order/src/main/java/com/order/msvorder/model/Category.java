@@ -13,5 +13,7 @@ public class Category {
 
     private String description;
 
-    private Date created;
+    //private Date created;
+    private Date creationDate;
+
 }
