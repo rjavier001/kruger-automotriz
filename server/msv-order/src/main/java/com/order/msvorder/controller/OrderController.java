@@ -43,11 +43,13 @@ public class OrderController {
     // -------------------Retrieve Single Order------------------------------------------
     @GetMapping(value = "/{id}")
     public ResponseEntity<Order> getOrder(@PathVariable("id") long id) {
-        Order Order  = orderService.getOrder(id);
-        if (null == Order) {
+        //Order Order  = orderService.findByIdWithProducts(id) //orderService.getOrder(id);
+        Optional<Order>  o = orderService.findByIdWithProducts(id); //orderService.getOrder(id);
+
+        if (!o.isPresent()) {
             return  ResponseEntity.notFound().build();
         }
-        return  ResponseEntity.ok(Order);
+        return  ResponseEntity.ok(o.get());
     }
 
     //Aqui debo recibir el ID del customer ya que lo necesitare para crear el cart en un futuro

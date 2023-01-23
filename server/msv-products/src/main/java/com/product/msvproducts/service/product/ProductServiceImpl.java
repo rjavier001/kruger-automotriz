@@ -31,7 +31,7 @@ public class ProductServiceImpl implements IProductService{
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public List<Product> listByIds(Iterable<Long> ids) {
         return repository.findAllById(ids);
     }

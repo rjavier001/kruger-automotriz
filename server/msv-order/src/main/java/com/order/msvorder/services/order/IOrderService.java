@@ -3,7 +3,6 @@ package com.order.msvorder.services.order;
 import com.order.msvorder.entity.Order;
 import com.order.msvorder.model.Product;
 
-
 import java.util.List;
 import java.util.Optional;
 
@@ -20,6 +19,8 @@ public interface IOrderService {
     public Order getOrder(Long id);
 
     List<Order> listByIds(Iterable<Long> ids);
+
+    Optional<Order> findByIdWithProducts(Long id);
 
     //Metodos remotos
     //Recibe el objeto dle producto y el id de la orden
