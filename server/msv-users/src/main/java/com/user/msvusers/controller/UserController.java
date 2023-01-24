@@ -46,8 +46,12 @@ public class UserController {
     if(optionalUser.isPresent()){
       User userDB=optionalUser.get();
       userDB.setName(req.getName());
+      userDB.setLastName(req.getLastName());
+      userDB.setAge(req.getAge());
+      userDB.setPhone(req.getPhone());
       userDB.setEmail(req.getEmail());
       userDB.setPassword(req.getPassword());
+      userDB.setRole(req.getRole());
       return new ResponseEntity<>(service.save(userDB),HttpStatus.CREATED);
     }
     return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
@@ -111,7 +115,5 @@ public class UserController {
     service.deleteUserOrderById(id);
     return ResponseEntity.noContent().build();
   }
-
-
 
 }
