@@ -11,7 +11,6 @@ import {
   useTheme,
 } from "@mui/material";
 import { styled, alpha } from "@mui/material/styles";
-import CatchingPokemonIcon from "@mui/icons-material/CatchingPokemon";
 import SearchIcon from "@mui/icons-material/Search";
 import DrawerComp from "./DrawerComp";
 import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
