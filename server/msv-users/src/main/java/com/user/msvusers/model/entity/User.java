@@ -1,5 +1,6 @@
 package com.user.msvusers.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.user.msvusers.model.Order;
 import lombok.Data;
 import lombok.Getter;
@@ -25,6 +26,16 @@ public class User {
   @NotNull(message = "Name should not be null")
   private String name;
 
+
+  @NotEmpty(message = "LastName should not be empty")
+  @NotNull(message = "LastName should not be null")
+  private String lastName;
+
+  @NotEmpty(message = "Age should not be empty")
+  @NotNull(message = "Age should not be null")
+  private String age;
+
+
   @NotEmpty(message = "Email should not be empty")
   @NotNull(message = "Email should not be null")
   @Column(unique = true)
@@ -33,6 +44,15 @@ public class User {
   @NotEmpty(message = "Password should not be empty")
   @NotNull(message = "Password should not be null")
   private String password;
+
+  @NotEmpty(message = "Phone should not be empty")
+  @NotNull(message = "Phone should not be null")
+  private String phone;
+
+
+  @NotEmpty(message = "Role should not be empty")
+  @NotNull(message = "Role should not be null")
+  private String role;
 
   @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
   @JoinColumn(name = "user_id")
@@ -52,4 +72,9 @@ public class User {
     userOrders = new ArrayList<>();
     orders = new ArrayList<>();
   }
+
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "company_id")
+  @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
+  private Company company;
 }
