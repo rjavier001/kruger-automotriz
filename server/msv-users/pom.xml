@@ -12,7 +12,7 @@
     <groupId>com.user</groupId>
     <artifactId>msv-users</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>msv-products</name>
+    <name>msv-users</name>
     <description>Users microservice</description>
     <properties>
         <java.version>17</java.version>
@@ -57,6 +57,11 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-loadbalancer</artifactId>
             <version>3.1.4</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-crypto</artifactId>
+            <version>5.7.3</version>
         </dependency>
     </dependencies>
     <dependencyManagement>
