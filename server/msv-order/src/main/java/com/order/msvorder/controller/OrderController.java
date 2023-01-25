@@ -70,14 +70,14 @@ public class OrderController {
         if (result.hasErrors()){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, this.formatMessage(result));
         }
-        Order OrderDB = orderService.save(order);
+        Order OrderDB = orderService.createOrder2(order);
 
         return  ResponseEntity.status( HttpStatus.CREATED).body(OrderDB);
     }
 
     // ------------------- Update a Order ------------------------------------------------
     @PutMapping(value = "/{id}")
-    public ResponseEntity<?> updateOrder(@PathVariable("id") long id, @RequestBody Order Order) {
+    public ResponseEntity<?> updateOrder(@PathVariable(name="id") Long id, @RequestBody Order Order) {
 
         Order.setId(id);
         Order currentOrder=orderService.updateOrder(Order);
