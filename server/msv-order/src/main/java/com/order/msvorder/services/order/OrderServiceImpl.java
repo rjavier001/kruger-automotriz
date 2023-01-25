@@ -44,7 +44,24 @@ public class OrderServiceImpl implements IOrderService{
         Order createdOrder = orderRepository.save(order);
 
         //Al crear la orden se debe también crear el payment
-        paymentServiceImpl.createPayment(new Payment("CREATED", UUID.randomUUID(), new Date(),createdOrder));
+        paymentServiceImpl.createPayment(new Payment("CREATED", UUID.randomUUID(), new Date()));
+
+
+        return createdOrder;
+
+    }
+
+    // -------------------create order sin userId--------------------------------------------
+    public Order createOrder2(Order order){
+        //crear un payment por defecto al crearse una orden
+        Payment payment = new Payment("CREATED", UUID.randomUUID(), new Date());
+
+        order.setCreated(new Date());
+        order.setShipmentDate(new Date());
+        order.setPayment(payment);
+        Order createdOrder = orderRepository.save(order);
+
+
 
 
         return createdOrder;
@@ -130,15 +147,19 @@ public class OrderServiceImpl implements IOrderService{
     }
 
     // -------------------UpdateOrder service--------------------------------------------
-
+    @Override
     public Order updateOrder(Order order){
-        Order existingOrder = orderRepository.findById(order.getId()).orElse(null);
-
+        Order existingOrder = getOrder(order.getId());
+        if(existingOrder == null){
+            return null;
+        }
+//        Order existingOrder = orderRepository.findById(order.getId()).orElse(null);
         existingOrder.setStatus(order.getStatus());
         existingOrder.setCreated(order.getCreated());
         existingOrder.setShipmentAddress(order.getShipmentAddress());
         existingOrder.setShipmentDate(order.getShipmentDate());
         existingOrder.setTotalPrice(order.getTotalPrice());
+        existingOrder.setPayment(order.getPayment());
         return orderRepository.save(existingOrder);
     }
 

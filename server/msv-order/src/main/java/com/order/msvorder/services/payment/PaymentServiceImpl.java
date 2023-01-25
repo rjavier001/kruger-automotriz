@@ -18,6 +18,16 @@ public class PaymentServiceImpl implements IPaymentService{
         payment.setCreated(new Date());
         return paymentRepository.save(payment);
     }
+    // -------------------Update Payment--------------------------------------------
+    public Payment updatePayment(Payment payment){
+        Payment existingPayment = paymentRepository.findById(payment.getId()).orElse(null);
+
+        existingPayment.setStatus(payment.getStatus());
+        existingPayment.setCreated(payment.getCreated());
+        existingPayment.setPayPallPaymentId(payment.getPayPallPaymentId());
+        existingPayment.setCreated(new Date());
+        return paymentRepository.save(existingPayment);
+    }
     // -------------------getPayment by ID service--------------------------------------------
     public Payment getPayment(Long id){
         return paymentRepository.findById(id).orElse(null);
