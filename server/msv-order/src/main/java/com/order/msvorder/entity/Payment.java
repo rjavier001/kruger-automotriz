@@ -16,11 +16,11 @@ public class Payment {
     public Payment() {
     }
 
-    public Payment(String status, UUID payPallPaymentId, Date created, Order order) {
+    public Payment(String status, UUID payPallPaymentId, Date created) {
         this.status = status;
         this.payPallPaymentId = payPallPaymentId;
         this.created = created;
-        this.order = order;
+//        this.order = order;
     }
 
 
@@ -35,9 +35,9 @@ public class Payment {
     @Temporal(TemporalType.DATE)
     private Date created;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "order_id")
-    private Order order;
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "order_id")
+//    private Order order;
 
 
 }

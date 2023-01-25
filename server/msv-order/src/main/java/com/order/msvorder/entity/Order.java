@@ -68,4 +68,8 @@ public class Order {
     public void removeOrderProduct(OrderProduct orderProduct){
         orderProducts.remove((orderProduct));
     }
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "payment_id")
+    private Payment payment;
 }
