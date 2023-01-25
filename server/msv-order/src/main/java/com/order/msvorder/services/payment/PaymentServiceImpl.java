@@ -1,5 +1,6 @@
 package com.order.msvorder.services.payment;
 
+import com.order.msvorder.entity.Order;
 import com.order.msvorder.entity.Payment;
 import com.order.msvorder.repository.PaymentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,16 @@ public class PaymentServiceImpl implements IPaymentService{
     public Payment createPayment(Payment payment){
         payment.setCreated(new Date());
         return paymentRepository.save(payment);
+    }
+
+    public Payment updatePayment(Payment payment){
+        Payment existingPayment = paymentRepository.findById(payment.getId()).orElse(null);
+
+        existingPayment.setStatus(payment.getStatus());
+        existingPayment.setCreated(payment.getCreated());
+        existingPayment.setPayPallPaymentId(payment.getPayPallPaymentId());
+        existingPayment.setCreated(new Date());
+        return paymentRepository.save(existingPayment);
     }
     // -------------------getPayment by ID service--------------------------------------------
     public Payment getPayment(Long id){

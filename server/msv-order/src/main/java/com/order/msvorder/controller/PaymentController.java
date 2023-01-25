@@ -36,6 +36,17 @@ public class PaymentController {
         return  ResponseEntity.status( HttpStatus.CREATED).body(paymentDB);
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Payment> updatePayment (@PathVariable("id") long id, @RequestBody Payment payment){
+        payment.setId(id);
+        Payment currentPayment = paymentService.updatePayment(payment);
+        if (currentPayment == null) {
+            return  ResponseEntity.notFound().build();
+        }
+
+        return  ResponseEntity.ok(currentPayment);
+    }
+
     @GetMapping
     public ResponseEntity<List<Payment>> listAllOrders(){
         List<Payment> payments = paymentService.findAllPayments();

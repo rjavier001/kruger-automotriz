@@ -44,5 +44,8 @@ public class Order {
     @JoinColumn(name = "order_id")
     private List<OrderItem> items;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "payment_id")
+    private Payment payment;
 
 }
