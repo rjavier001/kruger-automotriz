@@ -77,7 +77,7 @@ public class OrderController {
 
     // ------------------- Update a Order ------------------------------------------------
     @PutMapping(value = "/{id}")
-    public ResponseEntity<?> updateOrder(@PathVariable("id") long id, @RequestBody Order Order) {
+    public ResponseEntity<?> updateOrder(@PathVariable(name="id") Long id, @RequestBody Order Order) {
 
         Order.setId(id);
         Order currentOrder=orderService.updateOrder(Order);
