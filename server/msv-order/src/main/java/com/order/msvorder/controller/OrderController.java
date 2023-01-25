@@ -70,7 +70,7 @@ public class OrderController {
         if (result.hasErrors()){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, this.formatMessage(result));
         }
-        Order OrderDB = orderService.save(order);
+        Order OrderDB = orderService.createOrder2(order);
 
         return  ResponseEntity.status( HttpStatus.CREATED).body(OrderDB);
     }
