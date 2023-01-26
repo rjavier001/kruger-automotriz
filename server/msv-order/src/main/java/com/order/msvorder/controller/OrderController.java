@@ -3,10 +3,13 @@ package com.order.msvorder.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.order.msvorder.entity.Order;
+import com.order.msvorder.model.Product;
+import com.order.msvorder.model.ProductD;
 import com.order.msvorder.services.order.OrderServiceImpl;
 
 import javax.validation.Valid;
 
+import feign.FeignException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,9 +17,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
@@ -42,11 +43,13 @@ public class OrderController {
     // -------------------Retrieve Single Order------------------------------------------
     @GetMapping(value = "/{id}")
     public ResponseEntity<Order> getOrder(@PathVariable("id") long id) {
-        Order Order  = orderService.getOrder(id);
-        if (null == Order) {
+        //Order Order  = orderService.findByIdWithProducts(id) //orderService.getOrder(id);
+        Optional<Order>  o = orderService.findByIdWithProducts(id); //orderService.getOrder(id);
+
+        if (!o.isPresent()) {
             return  ResponseEntity.notFound().build();
         }
-        return  ResponseEntity.ok(Order);
+        return  ResponseEntity.ok(o.get());
     }
 
     //Aqui debo recibir el ID del customer ya que lo necesitare para crear el cart en un futuro
@@ -67,14 +70,14 @@ public class OrderController {
         if (result.hasErrors()){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, this.formatMessage(result));
         }
-        Order OrderDB = orderService.save(order);
+        Order OrderDB = orderService.createOrder2(order);
 
         return  ResponseEntity.status( HttpStatus.CREATED).body(OrderDB);
     }
 
     // ------------------- Update a Order ------------------------------------------------
     @PutMapping(value = "/{id}")
-    public ResponseEntity<?> updateOrder(@PathVariable("id") long id, @RequestBody Order Order) {
+    public ResponseEntity<?> updateOrder(@PathVariable(name="id") Long id, @RequestBody Order Order) {
 
         Order.setId(id);
         Order currentOrder=orderService.updateOrder(Order);
@@ -95,6 +98,36 @@ public class OrderController {
     @GetMapping("/orders-by-user")
     public ResponseEntity<?> getAllOrdersByUser(@RequestParam List<Long> ids){
         return ResponseEntity.ok(orderService.listByIds(ids));
+    }
+
+    @PutMapping("/assign-product/{orderId}")
+    public ResponseEntity<?> assignProduct(@RequestBody Product product, @PathVariable Long orderId){
+        Optional<Product> o;
+        try{
+            o = orderService.assignProduct(product, orderId);
+        } catch (FeignException e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Collections.singletonMap("mensaje","No existe el producto por el id o no se logro la comunicación"+ e.getMessage()));
+        }
+
+        if(o.isPresent()){
+            return ResponseEntity.status(HttpStatus.CREATED).body(o.get());
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    @DeleteMapping("/delete-product/{orderId}")
+    public ResponseEntity<?> deleteProduct(@RequestBody Product product, @PathVariable Long orderId){
+        Optional<Product> o;
+        try{
+            o = orderService.deleteProduct(product, orderId);
+        } catch (FeignException e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Collections.singletonMap("mensaje","No existe el producto por el id o no se logro la comunicación"+ e.getMessage()));
+        }
+
+        if(o.isPresent()){
+            return ResponseEntity.status(HttpStatus.OK).body(o.get());
+        }
+        return ResponseEntity.notFound().build();
     }
 
     private String formatMessage( BindingResult result){

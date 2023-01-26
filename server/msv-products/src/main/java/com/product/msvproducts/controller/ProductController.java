@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("api/products")
@@ -30,6 +31,15 @@ public class ProductController {
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.ok(products);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> detail(@PathVariable Long id){
+        Optional<Product> productOptional = service.findById(id);
+        if(productOptional.isPresent()){
+            return ResponseEntity.ok(productOptional.get());
+        }
+        return ResponseEntity.notFound().build();
     }
 
     @PostMapping("/save")
@@ -52,6 +62,11 @@ public class ProductController {
     public ResponseEntity<?> deleteProduct(@PathVariable(name="id") Long id){
         service.deleteProduct(id);
         return  ResponseEntity.status(HttpStatus.OK).body("Successfully operation. ");
+    }
+
+    @GetMapping("/products-by-order")
+    public ResponseEntity<?> getAllProductsByOrder(@RequestParam List<Long> ids){
+        return ResponseEntity.ok(service.listByIds(ids));
     }
 
 }
