@@ -2,7 +2,7 @@ html{
   scroll-behavior: smooth;
 }
 
-root{
+:root{
   --color-variant1:#ff5000;
   --color-variant2:#ff910d;
   --color-variant3:#ffb814;
@@ -24,6 +24,11 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+
+.navlink{
+  text-decoration: none;
 }
 
 code {

@@ -4,6 +4,7 @@ import Image from "mui-image";
 import { Button, Stack, Typography } from "@mui/material";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
+import { NavLink } from "react-router-dom";
 
 const SERVICES = ["Repuestos", "Manufactura", "Motor"];
 const Home = () => {
@@ -32,20 +33,22 @@ const Home = () => {
             Magni, consequuntur! Placeat esse sit, magni sequi pariatur corrupti
             perspiciatis officia illum fugiat omnis.
           </Typography>
-          <Button
-            variant="contained"
-            sx={{
-              width: 200,
-              marginTop: 2,
-              backgroundColor: "#00b040",
-              "&:hover": {
-                backgroundColor: "#fff",
-                color: "#3c52b2",
-              },
-            }}
-          >
-            Comprar
-          </Button>
+          <NavLink to={"/checkout"} className="navlink">
+            <Button
+              variant="contained"
+              sx={{
+                width: 200,
+                marginTop: 2,
+                backgroundColor: "#00b040",
+                "&:hover": {
+                  backgroundColor: "#fff",
+                  color: "#3c52b2",
+                },
+              }}
+            >
+              Comprar
+            </Button>
+          </NavLink>
         </Stack>
         <Image
           src={HomeIcon}
