@@ -1,13 +1,13 @@
-import { Box } from '@mui/system';
-import React from 'react'
+import { Box } from "@mui/system";
+import React from "react";
+import uiConfigs from "../Configs/ui.configs";
 
 // import Carousel from 'react-material-ui-carousel'
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay} from "swiper";
-import 'swiper/css';
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper";
+import "swiper/css";
 
-const CarouselComp = ({items}) => {
-    
+const CarouselComp = ({ items }) => {
   return (
     <Box
       sx={{
@@ -22,26 +22,26 @@ const CarouselComp = ({items}) => {
           left: 0,
           zIndex: 2,
           pointerEvents: "none",
+          ...uiConfigs.style.gradientBgImage[theme.palette.mode],
         },
         paddingTop: {
           xs: "2.5%",
         },
       }}
     >
-
       <Swiper
-      grabCursor={true}
-      loop={true}
-      modules={[Autoplay]}
-      style={{ width: "100%", height: "max-content" }}
-      autoplay={{
-        delay: 5000,
-        disableOnInteraction: false,
-      }}>
-          {
-            items.map((item,i)=> (
-              <SwiperSlide key={i}>
-              <Box
+        grabCursor={true}
+        loop={true}
+        modules={[Autoplay]}
+        style={{ width: "100%", height: "max-content" }}
+        autoplay={{
+          delay: 5000,
+          disableOnInteraction: false,
+        }}
+      >
+        {items.map((item, i) => (
+          <SwiperSlide key={i}>
+            <Box
               sx={{
                 paddingTop: {
                   xs: "100%",
@@ -50,16 +50,16 @@ const CarouselComp = ({items}) => {
                   lg: "25%",
                 },
                 backgroundPosition: "top",
-                backgroundRepeat:"no-repeat",
+                backgroundRepeat: "no-repeat",
                 backgroundSize: "40% 25rem",
                 backgroundImage: `url(${item.photoUrl})`,
               }}
-              />
-            </SwiperSlide>
-          ))}
+            />
+          </SwiperSlide>
+        ))}
       </Swiper>
     </Box>
-  )
-}
+  );
+};
 
-export default CarouselComp
+export default CarouselComp;
