@@ -7,12 +7,13 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import TwitterIcon from "@mui/icons-material/Twitter";
 
 import Logo from "../../Assets/LOGO_KRUGERMOTORS.png";
+import { Box } from "@mui/system";
 
 const Footer = () => {
   return (
     <Stack
-      sx={{ marginTop: "180px", background: "#ff910d" }}
-      height={180}
+      sx={{ marginTop: "40px", background: "#ff910d" }}
+      height={200}
       direction="row"
       spacing={12}
       justifyContent="space-evenly"
@@ -38,7 +39,7 @@ const Footer = () => {
         </IconButton>
       </Stack>
 
-      <Image width="10%" src={Logo} />
+      <Image width="auto" src={Logo} />
     </Stack>
   );
 };

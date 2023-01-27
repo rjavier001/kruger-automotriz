@@ -9,6 +9,9 @@ import { NavLink } from "react-router-dom";
 import HeroSlide from "../Components/common/HeroSlide";
 import PopularCategories from "../Components/common/PopularCategories";
 import Footer from "../Components/common/Footer";
+import { Box } from "@mui/system";
+
+import Logo from "../Assets/LOGO_KRUGERMOTORS.png";
 
 const SERVICES = ["Repuestos", "Manufactura", "Motor"];
 const Home = () => {
@@ -73,6 +76,7 @@ const Home = () => {
       >
         Escoje tu servicio:
       </Typography>
+
       <Typography
         sx={{
           textAlign: "center",
@@ -83,6 +87,7 @@ const Home = () => {
         asperiores, deleniti ex, amet quam nihil natus odit assumenda aut nulla
         veritatis. Laborum eum animi cumque vero sapiente error odit aspernatur.
       </Typography>
+
       <Stack
         direction={{ sm: "row", xs: "column" }}
         spacing={{ xs: 1, sm: 2, md: 2 }}
