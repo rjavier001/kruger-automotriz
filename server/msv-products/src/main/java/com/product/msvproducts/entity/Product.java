@@ -42,7 +42,7 @@ public class Product {
 
     @NotNull(message = "Sales Price should not be empty")
     @Min(3)
-    @Max(100)
+    @Max(1000)
     private Double salePrice;
 
     @Column(name = "photo_url")
