@@ -1,4 +1,6 @@
-import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { loadProducts } from "../redux/actions";
+import { useEffect } from "react";
 import HomeIcon from "../Assets/items.png";
 import Image from "mui-image";
 import { Button, Stack, Typography } from "@mui/material";
@@ -8,6 +10,15 @@ import { NavLink } from "react-router-dom";
 
 const SERVICES = ["Repuestos", "Manufactura", "Motor"];
 const Home = () => {
+  const { products } = useSelector((state) => state.data);
+
+  let dispatch = useDispatch();
+
+  //LOAD Products WITH REDUX DISPATCH
+  useEffect(() => {
+    dispatch(loadProducts());
+  }, []);
+
   return (
     <Stack>
       <Stack

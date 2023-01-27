@@ -5,9 +5,22 @@ import React, { useState } from "react";
 import Divider from "@mui/material/Divider";
 import Image from "mui-image";
 import AddIcon from "@mui/icons-material/Add";
+import { useSelector, useDispatch } from "react-redux";
+import { loadProducts } from "../redux/actions";
+import { useEffect } from "react";
 
 const CheckOutPage = () => {
   const [counter, setCounter] = useState(1);
+
+  const { products } = useSelector((state) => state.data);
+
+  let dispatch = useDispatch();
+
+  //LOAD Products WITH REDUX DISPATCH
+  useEffect(() => {
+    dispatch(loadProducts());
+  }, []);
+
   return (
     <Stack
       direction={{ sm: "row", xs: "column" }}
@@ -16,9 +29,8 @@ const CheckOutPage = () => {
     >
       <Box sx={styles.boxLeft}>
         <Typography variant="h5">Detalles de Orden</Typography>
-
         <Box>
-          Nombre producto
+          Nombre
           <Stack
             direction={{ sm: "row", xs: "column" }}
             spacing={{ xs: 1, sm: 2, md: 4 }}
@@ -51,6 +63,7 @@ const CheckOutPage = () => {
             </IconButton>
           </Stack>
         </Box>
+        ;
       </Box>
 
       <Box sx={styles.boxRight}>
@@ -83,7 +96,11 @@ const CheckOutPage = () => {
           <Typography variant="h8">155.99$</Typography>
         </Stack>
 
-        <Button variant="contained" sx={styles.btnPagar}>
+        <Button
+          variant="contained"
+          sx={styles.btnPagar}
+          onClick={() => console.log(products)}
+        >
           Pagar
         </Button>
       </Box>
@@ -100,6 +117,7 @@ export const styles = {
     backgroundColor: "#ffffff",
     borderRadius: 5,
     padding: 5,
+    boxShadow: "-13px 18px 8px -5px rgba(34, 60, 80, 0.2)",
   },
   boxRight: {
     width: 250,
@@ -107,10 +125,11 @@ export const styles = {
     backgroundColor: "#ffffff",
     borderRadius: 5,
     padding: 5,
+    boxShadow: "-13px 18px 8px -5px rgba(34, 60, 80, 0.2)",
   },
   stackContainer: {
     justifyContent: "center",
-    alignItems: "flex-start",
+    alignItems: "center",
     backgroundColor: "#f2f2f2",
     padding: 5,
     height: "100%",
