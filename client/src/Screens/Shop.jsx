@@ -3,6 +3,8 @@ import { Container } from '@mui/system'
 import React from 'react'
 import CardComp from '../Components/CardComp'
 import CarouselComp from '../Components/CarouselComp'
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 
 
 
@@ -38,6 +40,17 @@ console.log(ima)
 
 
 const Shop = () => {
+    const dispatch=useDispatch();
+    const [products, setProducts] = useState([]);
+
+    useEffect(() => {
+    first
+
+    return () => {
+        second
+    }
+    }, [third])
+
   return (
     <>
     
