@@ -6,19 +6,19 @@ import Divider from "@mui/material/Divider";
 import Image from "mui-image";
 import AddIcon from "@mui/icons-material/Add";
 import { useSelector, useDispatch } from "react-redux";
-import { deleteOrder, getSingleOrder, loadOrders } from "../redux/actions";
+import { loadProducts } from "../redux/actions";
 import { useEffect } from "react";
 
 const CheckOutPage = () => {
   const [counter, setCounter] = useState(1);
 
-  const { orders } = useSelector((state) => state.data);
+  const { products } = useSelector((state) => state.data);
 
   let dispatch = useDispatch();
 
-  //LOAD ORDERS WITH REDUX DISPATCH
+  //LOAD Products WITH REDUX DISPATCH
   useEffect(() => {
-    dispatch(loadOrders());
+    dispatch(loadProducts());
   }, []);
 
   return (
@@ -30,7 +30,7 @@ const CheckOutPage = () => {
       <Box sx={styles.boxLeft}>
         <Typography variant="h5">Detalles de Orden</Typography>
         <Box>
-          {orders.id}
+          Nombre
           <Stack
             direction={{ sm: "row", xs: "column" }}
             spacing={{ xs: 1, sm: 2, md: 4 }}
@@ -99,7 +99,7 @@ const CheckOutPage = () => {
         <Button
           variant="contained"
           sx={styles.btnPagar}
-          onClick={() => console.log(orders)}
+          onClick={() => console.log(products)}
         >
           Pagar
         </Button>
