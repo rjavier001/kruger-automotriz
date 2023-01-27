@@ -13,28 +13,28 @@ const list = [
     name: "test",
     subtitulo: "esto es un subtitulo",
     image:
-      "https://images.unsplash.com/photo-1578632749014-ca77efd052eb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+      "https://res.cloudinary.com/dhaklfydk/image/upload/v1674796029/kruger-products/correa3_arlmh5.png",
   },
   {
     id: 2,
     name: "test1",
     subtitulo: "esto es un subtitulo2",
     image:
-      "https://images.unsplash.com/photo-1578632749014-ca77efd052eb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+      "https://res.cloudinary.com/dhaklfydk/image/upload/v1674796027/kruger-products/bujia3_p3bn0e.png",
   },
   {
     id: 3,
     name: "test2",
     subtitulo: "esto es un subtitulo2",
     image:
-      "https://images.unsplash.com/photo-1578632749014-ca77efd052eb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+      "https://res.cloudinary.com/dhaklfydk/image/upload/v1674796022/kruger-products/alevas1_aelyxq.png",
   },
   {
     id: 4,
     name: "test3",
     subtitulo: "esto es un subtitulo2",
     image:
-      "https://images.unsplash.com/photo-1578632749014-ca77efd052eb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+      "https://res.cloudinary.com/dhaklfydk/image/upload/v1674796017/kruger-products/faro12_ucdlcv.png",
   },
 ];
 
@@ -52,7 +52,6 @@ const Shop = () => {
   return (
     <>
       <CarouselComp items={products} />
-
       <Container>
         <Grid item container spacing={2} marginTop="2px">
           {list.map((item, i) => (
@@ -68,9 +67,7 @@ const Shop = () => {
               <CardComp
                 title={item.name}
                 subtitle={item.subtitulo}
-                imageUrl={
-                  "https://images.unsplash.com/photo-1578632749014-ca77efd052eb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
-                }
+                imageUrl={item.image}                 
               />
             </Grid>
           ))}
