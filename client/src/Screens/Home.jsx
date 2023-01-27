@@ -1,10 +1,13 @@
 import React from "react";
 import HomeIcon from "../Assets/items.png";
+import Vehicle from "../Assets/Vehicle_engineering.jpg";
 import Image from "mui-image";
 import { Button, Stack, Typography } from "@mui/material";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import { NavLink } from "react-router-dom";
+import HeroSlide from "../Components/common/HeroSlide";
+import PopularCategories from "../Components/common/PopularCategories";
 
 const SERVICES = ["Repuestos", "Manufactura", "Motor"];
 const Home = () => {
@@ -51,14 +54,17 @@ const Home = () => {
           </NavLink>
         </Stack>
         <Image
-          src={HomeIcon}
+          src={Vehicle}
           height="60%"
           width="60%"
           fit="cover"
           sx={{ marginLeft: "auto", marginTop: 5 }}
         />
       </Stack>
+      <PopularCategories />
+
       <Typography
+        p={5}
         variant="h4"
         sx={{
           textAlign: "center",
