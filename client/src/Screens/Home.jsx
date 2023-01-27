@@ -1,4 +1,6 @@
-import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { loadProducts } from "../redux/actions";
+import { useEffect } from "react";
 import HomeIcon from "../Assets/items.png";
 import Vehicle from "../Assets/Vehicle_engineering.jpg";
 import Image from "mui-image";
@@ -11,6 +13,15 @@ import PopularCategories from "../Components/common/PopularCategories";
 
 const SERVICES = ["Repuestos", "Manufactura", "Motor"];
 const Home = () => {
+  const { products } = useSelector((state) => state.data);
+
+  let dispatch = useDispatch();
+
+  //LOAD Products WITH REDUX DISPATCH
+  useEffect(() => {
+    dispatch(loadProducts());
+  }, []);
+
   return (
     <Stack>
       <Stack
