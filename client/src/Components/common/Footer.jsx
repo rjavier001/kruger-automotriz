@@ -11,7 +11,7 @@ import Logo from "../../Assets/LOGO_KRUGERMOTORS.png";
 const Footer = () => {
   return (
     <Stack
-      sx={{ background: "#ff910d" }}
+      sx={{ marginTop: "180px", background: "#ff910d" }}
       height={180}
       direction="row"
       spacing={12}

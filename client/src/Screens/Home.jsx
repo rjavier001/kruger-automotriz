@@ -116,10 +116,19 @@ const Home = () => {
           </TabList>
 
           <TabPanel>
-            <h2>Any content 1</h2>
+            <Typography textAlign="center" variant="h2">
+              Any content 1
+            </Typography>
           </TabPanel>
           <TabPanel>
-            <h2>Any content 2</h2>
+            <Typography textAlign="center" variant="h2">
+              Any content 2
+            </Typography>
+          </TabPanel>
+          <TabPanel>
+            <Typography textAlign="center" variant="h2">
+              Any content 3
+            </Typography>
           </TabPanel>
         </Tabs>
       </Stack>
