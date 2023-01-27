@@ -51,7 +51,7 @@ const PopularCategories = () => {
             </CardContent>
           </CardActionArea>
         </Card>
-        <Card sx={{ maxWidth: 345, maxHeight: 480 }}>
+        <Card sx={{ maxWidth: 345, boxShadow: 0 }}>
           <CardActionArea>
             <CardMedia
               component="img"
@@ -75,7 +75,7 @@ const PopularCategories = () => {
             </CardContent>
           </CardActionArea>
         </Card>
-        <Card sx={{ maxWidth: 345 }}>
+        <Card sx={{ maxWidth: 345, boxShadow: 0 }}>
           <CardActionArea>
             <CardMedia
               component="img"
