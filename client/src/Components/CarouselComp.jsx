@@ -16,7 +16,7 @@ const CarouselComp = ({ items }) => {
         "&::before": {
           content: '""',
           width: "100%",
-          height: "30%",
+          height: "40%",
           position: "absolute",
           bottom: 0,
           left: 0,
@@ -51,7 +51,7 @@ const CarouselComp = ({ items }) => {
                 },
                 backgroundPosition: "top",
                 backgroundRepeat: "no-repeat",
-                backgroundSize: "45% 25rem",
+                backgroundSize: "40% 20rem",
                 backgroundImage: `url(${item.photoUrl})`,
               }}
             />
