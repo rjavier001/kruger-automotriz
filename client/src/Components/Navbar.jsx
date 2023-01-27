@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import {
   AppBar,
   Toolbar,
@@ -15,6 +16,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import DrawerComp from "./DrawerComp";
 import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
 import CarRepairIcon from "@mui/icons-material/CarRepair";
+import menuConfigs from "../Configs/menu.configs";
 const PAGES = ["Home", "Shop", "About Us", "Contact Us"];
 
 const Navbar = ({ children }) => {
@@ -96,8 +98,10 @@ const Navbar = ({ children }) => {
               </Search>
 
               <Stack direction="row" spacing={2}>
-                {PAGES.map((item) => (
-                  <Button color="inherit">{item}</Button>
+                {menuConfigs.main.map((item,index) => (
+                  <Button key={index} component={Link} to={item.path} color="inherit">
+                    {item.display}
+                  </Button>
                 ))}
                 <IconButton>
                   <ShoppingCartCheckoutIcon />
