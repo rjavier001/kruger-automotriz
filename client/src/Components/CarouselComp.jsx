@@ -22,7 +22,7 @@ const CarouselComp = ({ items }) => {
           left: 0,
           zIndex: 2,
           pointerEvents: "none",
-          ...uiConfigs.style.gradientBgImage[theme.palette.mode],
+          // ...uiConfigs.style.gradientBgImage[theme.palette.mode],
         },
         paddingTop: {
           xs: "2.5%",
@@ -51,7 +51,7 @@ const CarouselComp = ({ items }) => {
                 },
                 backgroundPosition: "top",
                 backgroundRepeat: "no-repeat",
-                backgroundSize: "40% 25rem",
+                backgroundSize: "45% 25rem",
                 backgroundImage: `url(${item.photoUrl})`,
               }}
             />
