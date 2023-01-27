@@ -51,8 +51,8 @@ const CarouselComp = ({items}) => {
                 },
                 backgroundPosition: "top",
                 backgroundRepeat:"no-repeat",
-                backgroundSize: "80% 30rem",
-                backgroundImage: `url(${item})`,
+                backgroundSize: "40% 25rem",
+                backgroundImage: `url(${item.photoUrl})`,
               }}
               />
             </SwiperSlide>
