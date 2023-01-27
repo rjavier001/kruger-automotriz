@@ -8,6 +8,7 @@ import "react-tabs/style/react-tabs.css";
 import { NavLink } from "react-router-dom";
 import HeroSlide from "../Components/common/HeroSlide";
 import PopularCategories from "../Components/common/PopularCategories";
+import Footer from "../Components/common/Footer";
 
 const SERVICES = ["Repuestos", "Manufactura", "Motor"];
 const Home = () => {
@@ -122,6 +123,7 @@ const Home = () => {
           </TabPanel>
         </Tabs>
       </Stack>
+      <Footer />
     </Stack>
   );
 };
