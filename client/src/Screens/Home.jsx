@@ -2,11 +2,18 @@ import { useSelector, useDispatch } from "react-redux";
 import { loadProducts } from "../redux/actions";
 import { useEffect } from "react";
 import HomeIcon from "../Assets/items.png";
+import Vehicle from "../Assets/Vehicle_engineering.jpg";
 import Image from "mui-image";
 import { Button, Stack, Typography } from "@mui/material";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import { NavLink } from "react-router-dom";
+import HeroSlide from "../Components/common/HeroSlide";
+import PopularCategories from "../Components/common/PopularCategories";
+import Footer from "../Components/common/Footer";
+import { Box } from "@mui/system";
+
+import Logo from "../Assets/LOGO_KRUGERMOTORS.png";
 
 const SERVICES = ["Repuestos", "Manufactura", "Motor"];
 const Home = () => {
@@ -62,14 +69,17 @@ const Home = () => {
           </NavLink>
         </Stack>
         <Image
-          src={HomeIcon}
+          src={Vehicle}
           height="60%"
           width="60%"
           fit="cover"
           sx={{ marginLeft: "auto", marginTop: 5 }}
         />
       </Stack>
+      <PopularCategories />
+
       <Typography
+        p={5}
         variant="h4"
         sx={{
           textAlign: "center",
@@ -77,6 +87,9 @@ const Home = () => {
       >
         Escoje tu servicio:
       </Typography>
+      <Stack alignItems="center">
+        <Image width="20%" src={Logo} />
+      </Stack>
       <Typography
         sx={{
           textAlign: "center",
@@ -87,6 +100,7 @@ const Home = () => {
         asperiores, deleniti ex, amet quam nihil natus odit assumenda aut nulla
         veritatis. Laborum eum animi cumque vero sapiente error odit aspernatur.
       </Typography>
+
       <Stack
         direction={{ sm: "row", xs: "column" }}
         spacing={{ xs: 1, sm: 2, md: 2 }}
@@ -120,13 +134,23 @@ const Home = () => {
           </TabList>
 
           <TabPanel>
-            <h2>Any content 1</h2>
+            <Typography textAlign="center" variant="h2">
+              Any content 1
+            </Typography>
           </TabPanel>
           <TabPanel>
-            <h2>Any content 2</h2>
+            <Typography textAlign="center" variant="h2">
+              Any content 2
+            </Typography>
+          </TabPanel>
+          <TabPanel>
+            <Typography textAlign="center" variant="h2">
+              Any content 3
+            </Typography>
           </TabPanel>
         </Tabs>
       </Stack>
+      <Footer />
     </Stack>
   );
 };
