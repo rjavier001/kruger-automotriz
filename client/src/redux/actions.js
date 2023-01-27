@@ -1,35 +1,35 @@
 import axios from "axios";
 import * as types from "./actionType";
 
-const getOrders = (orders) => ({
-  type: types.GET_ORDERS,
-  payload: orders,
+const getProducts = (products) => ({
+  type: types.GET_PRODUCTS,
+  payload: products,
 });
 
-const orderAdded = () => ({
-  type: types.ADD_ORDER,
+const productAdded = () => ({
+  type: types.ADD_PRODUCT,
 });
 
-const orderDeleted = () => ({
-  type: types.DELETE_ORDER,
+const productDeleted = () => ({
+  type: types.DELETE_PRODUCT,
 });
 
-const orderUpdated = () => ({
-  type: types.UPDATE_ORDER,
+const productUpdated = () => ({
+  type: types.UPDATE_PRODUCT,
 });
 
-const singleOrder = (order) => ({
-  type: types.GET_SINGLE_ORDER,
-  payload: order,
+const singleProduct = (product) => ({
+  type: types.GET_SINGLE_PRODUCT,
+  payload: product,
 });
 
-export const loadOrders = () => {
+export const loadProducts = () => {
   return function (dispatch) {
     axios
-      .get(`${process.env.REACT_APP_API}/38`)
+      .get(`${process.env.REACT_APP_PRODUCTS}`)
       .then((resp) => {
-        console.log("respeee", resp.data.id);
-        dispatch(getOrders(resp.data));
+        console.log("respeee", resp);
+        dispatch(getProducts(resp.data));
       })
       .catch((error) => console.log(error));
   };

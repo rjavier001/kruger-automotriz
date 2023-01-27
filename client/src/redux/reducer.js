@@ -1,22 +1,22 @@
 import * as types from "./actionType";
 
 const initialState = {
-  orders: [],
-  order: {},
+  products: [],
+  product: {},
   loading: true,
 };
 
-const ordersReducers = (state = initialState, action) => {
+const productsReducers = (state = initialState, action) => {
   switch (action.type) {
-    case types.GET_ORDERS:
+    case types.GET_PRODUCTS:
       return {
         ...state,
         loading: false,
-        orders: action.payload,
+        products: action.payload,
       };
     default:
       return state;
   }
 };
 
-export default ordersReducers;
+export default productsReducers;
