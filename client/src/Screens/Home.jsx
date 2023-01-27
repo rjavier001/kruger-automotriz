@@ -76,7 +76,9 @@ const Home = () => {
       >
         Escoje tu servicio:
       </Typography>
-
+      <Stack alignItems="center">
+        <Image width="20%" src={Logo} />
+      </Stack>
       <Typography
         sx={{
           textAlign: "center",
