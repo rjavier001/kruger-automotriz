@@ -8,12 +8,16 @@ import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import { BrowserRouter } from "react-router-dom";
 import Navbar from "./Components/Navbar";
+import { Provider } from "react-redux";
+import store from "./redux/store";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
-    <Navbar>
-      <App />
-    </Navbar>
+    <Provider store={store}>
+      <Navbar>
+        <App />
+      </Navbar>
+    </Provider>
   </BrowserRouter>
 );
