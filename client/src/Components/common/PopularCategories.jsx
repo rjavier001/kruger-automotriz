@@ -27,11 +27,11 @@ const PopularCategories = () => {
         justifyContent={"center"}
         alignItems={"center"}
       >
-        <Card sx={{ maxWidth: 345 }}>
+        <Card sx={{ maxWidth: 345, boxShadow: 0 }}>
           <CardActionArea>
             <CardMedia
+              fit="cover"
               component="img"
-              height="340"
               image={KitEmbrague2}
               alt="green iguana"
             />
@@ -51,11 +51,11 @@ const PopularCategories = () => {
             </CardContent>
           </CardActionArea>
         </Card>
-        <Card sx={{ maxWidth: 345 }}>
+        <Card sx={{ maxWidth: 345, maxHeight: 480 }}>
           <CardActionArea>
             <CardMedia
               component="img"
-              height="max-content"
+              fit="cover"
               image={Piston}
               alt="green iguana"
             />
@@ -79,7 +79,7 @@ const PopularCategories = () => {
           <CardActionArea>
             <CardMedia
               component="img"
-              height="max-content"
+              fit="cover"
               image={KitDist1}
               alt="green iguana"
             />
