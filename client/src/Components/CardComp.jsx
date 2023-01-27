@@ -1,11 +1,11 @@
-import { Button, Card, CardActions, CardContent, CardHeader, Grid, Typography } from '@mui/material'
+import { Button, Card, CardActions, CardContent, Typography } from '@mui/material'
 import React from 'react'
-import { Avatar, IconButton,CardMedia } from "@mui/material";
+import {CardMedia } from "@mui/material";
 import { Container } from '@mui/system';
 
 const CardComp = (props) => {
   
-  const { avatarUrl, title, subtitle, description, imageUrl } = props;
+  const {title, subtitle, imageUrl } = props;
   return (
     <Container>
       <Card sx={{ maxWidth: 345 }} >
