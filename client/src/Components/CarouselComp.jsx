@@ -1,6 +1,6 @@
 import { Box } from "@mui/system";
 import React from "react";
-import uiConfigs from "../Configs/ui.configs";
+import uiConfigs from "../configs/ui.configs";
 
 // import Carousel from 'react-material-ui-carousel'
 import { Swiper, SwiperSlide } from "swiper/react";
