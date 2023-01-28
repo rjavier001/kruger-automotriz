@@ -1,4 +1,4 @@
-package com.kruger.gatewayservice;
+package com.kruger.gatewayserver;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
