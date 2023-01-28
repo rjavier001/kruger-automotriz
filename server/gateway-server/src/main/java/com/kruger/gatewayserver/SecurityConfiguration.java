@@ -1,4 +1,4 @@
-package com.kruger.gatewayservice;
+package com.kruger.gatewayserver;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
