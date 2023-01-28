@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.order.msvorder.entity.Order;
 import com.order.msvorder.model.Product;
-import com.order.msvorder.model.ProductD;
 import com.order.msvorder.services.order.OrderServiceImpl;
 
 import javax.validation.Valid;

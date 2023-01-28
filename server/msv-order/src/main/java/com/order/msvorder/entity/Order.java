@@ -1,13 +1,10 @@
 package com.order.msvorder.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import javax.persistence.*;
-import javax.validation.Valid;
 
+import javax.persistence.*;
 import com.order.msvorder.model.Product;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.Date;
