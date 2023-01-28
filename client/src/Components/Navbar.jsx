@@ -1,5 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
+import WbSunnyOutlinedIcon from "@mui/icons-material/WbSunnyOutlined";
 import {
   AppBar,
   Toolbar,
@@ -17,9 +20,13 @@ import DrawerComp from "./DrawerComp";
 import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
 import CarRepairIcon from "@mui/icons-material/CarRepair";
 import menuConfigs from "../Configs/menu.configs";
-const PAGES = ["Home", "Shop", "About Us", "Contact Us"];
+import { themeModes } from "../Configs/theme.configs";
+import { setThemeMode } from "../redux/features/themeModeSlice";
 
 const Navbar = ({ children }) => {
+  const { themeMode } = useSelector((state) => state.themeMode);
+  const dispatch = useDispatch();
+
   const theme = useTheme();
   const isMatch = useMediaQuery(theme.breakpoints.down("md"));
 
@@ -64,6 +71,13 @@ const Navbar = ({ children }) => {
       },
     },
   }));
+
+  const onSwithTheme = () => {
+    const theme =
+      themeMode === themeModes.dark ? themeModes.light : themeModes.dark;
+    dispatch(setThemeMode(theme));
+  };
+
   return (
     <>
       <AppBar position="static" sx={{ background: "#ff910d" }}>
@@ -86,6 +100,11 @@ const Navbar = ({ children }) => {
               <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                 Kruger-Repuestos
               </Typography>
+              
+              <IconButton sx={{ color: "inherit" }} onClick={onSwithTheme}>
+                {themeMode === themeModes.dark && <DarkModeOutlinedIcon />}
+                {themeMode === themeModes.light && <WbSunnyOutlinedIcon />}
+              </IconButton>
 
               <Search>
                 <SearchIconWrapper>
@@ -98,8 +117,13 @@ const Navbar = ({ children }) => {
               </Search>
 
               <Stack direction="row" spacing={2}>
-                {menuConfigs.main.map((item,index) => (
-                  <Button key={index} component={Link} to={item.path} color="inherit">
+                {menuConfigs.main.map((item, index) => (
+                  <Button
+                    key={index}
+                    component={Link}
+                    to={item.path}
+                    color="inherit"
+                  >
                     {item.display}
                   </Button>
                 ))}
