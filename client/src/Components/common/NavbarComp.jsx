@@ -1,10 +1,15 @@
-import {cloneElement,useState} from "react";
+import { cloneElement, useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import MenuIcon from "@mui/icons-material/Menu";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import WbSunnyOutlinedIcon from "@mui/icons-material/WbSunnyOutlined";
+import SearchIcon from "@mui/icons-material/Search";
+import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
+import CarRepairIcon from "@mui/icons-material/CarRepair";
 import {
   AppBar,
+  Box,
   Toolbar,
   IconButton,
   Typography,
@@ -15,13 +20,10 @@ import {
   useTheme,
 } from "@mui/material";
 import { styled, alpha } from "@mui/material/styles";
-import SearchIcon from "@mui/icons-material/Search";
-
-import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
-import CarRepairIcon from "@mui/icons-material/CarRepair";
 import menuConfigs from "../../configs/menu.configs";
 import { themeModes } from "../../configs/theme.configs";
 import { setThemeMode } from "../../redux/features/themeModeSlice";
+import Sidebar from "./Sidebar";
 
 const ScrollAppBar = ({ children, window }) => {
   const { themeMode } = useSelector((state) => state.themeMode);
@@ -29,14 +31,22 @@ const ScrollAppBar = ({ children, window }) => {
   const trigger = useScrollTrigger({
     disableHysteresis: true,
     threshold: 50,
-    target: window ? window() : undefined
+    target: window ? window() : undefined,
   });
 
   return cloneElement(children, {
     sx: {
-      color: trigger ? "text.primary" : themeMode === themeModes.dark ? "primary.contrastText" : "text.primary",
-      backgroundColor: trigger ? "background.paper" : themeMode === themeModes.dark ? "transparent" : "background.paper"
-    }
+      color: trigger
+        ? "text.primary"
+        : themeMode === themeModes.dark
+        ? "primary.contrastText"
+        : "text.primary",
+      backgroundColor: trigger
+        ? "background.paper"
+        : themeMode === themeModes.dark
+        ? "transparent"
+        : "background.paper",
+    },
   });
 };
 
@@ -47,14 +57,13 @@ const Navbar = () => {
 
   const dispatch = useDispatch();
 
-  const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
-
   const onSwithTheme = () => {
     const theme =
       themeMode === themeModes.dark ? themeModes.light : themeModes.dark;
     dispatch(setThemeMode(theme));
   };
 
+  const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
   // const theme = useTheme();
 
   // const isMatch = useMediaQuery(theme.breakpoints.down("md"));
@@ -103,51 +112,65 @@ const Navbar = () => {
 
   return (
     <>
-    <Sidebar open={sidebarOpen} toggleSidebar={toggleSidebar} />
-      <AppBar elevation={0} sx={{ background: "#ff910d", height: 70,zIndex:9999}}>
-        <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="logo"
+      <Sidebar open={sidebarOpen} toggleSidebar={toggleSidebar} />
+      <ScrollAppBar>
+        <AppBar elevation={0} sx={{ zIndex: 9999 }}>
+          <Toolbar
+            sx={{ alignItems: "center", justifyContent: "space-between" }}
           >
-            <CarRepairIcon />
-          </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Kruger-Repuestos
-          </Typography>
-          <IconButton sx={{ color: "inherit" }} onClick={onSwithTheme}>
-            {themeMode === themeModes.dark && <DarkModeOutlinedIcon />}
-            {themeMode === themeModes.light && <WbSunnyOutlinedIcon />}
-          </IconButton>
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ "aria-label": "search" }}
-            />
-          </Search>
-          <Stack direction="row" spacing={2}>
-            {menuConfigs.main.map((item, index) => (
-              <Button
-                key={index}
-                component={Link}
-                to={item.path}
-                color="inherit"
-              >
-                {item.display}
-              </Button>
-            ))}
-            <IconButton>
-              <ShoppingCartCheckoutIcon />
+            <IconButton
+              color="inherit"
+              sx={{ mr: 2, display: { md: "none" } }}
+              onClick={toggleSidebar}
+            >
+              <MenuIcon />
             </IconButton>
-          </Stack>
-        </Toolbar>
-      </AppBar>
-
+            <IconButton color="inherit">
+              <CarRepairIcon />
+            </IconButton>
+            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+              Kruger-Repuestos
+            </Typography>
+            <Search>
+              <SearchIconWrapper>
+                <SearchIcon />
+              </SearchIconWrapper>
+              <StyledInputBase
+                placeholder="Search…"
+                inputProps={{ "aria-label": "search" }}
+              />
+            </Search>
+            <Stack
+              direction="row"
+              spacing={1}
+              alignItems="center"
+              display={{ xs: "none", md: "flex" }}
+            >
+              <IconButton sx={{ color: "inherit" }} onClick={onSwithTheme}>
+                {themeMode === themeModes.dark && <DarkModeOutlinedIcon />}
+                {themeMode === themeModes.light && <WbSunnyOutlinedIcon />}
+              </IconButton>
+              {menuConfigs.main.map((item, index) => (
+                <Button
+                  key={index}
+                  sx={{
+                    color: appState.includes(item.state) ? "primary.contrastText" : "inherit",
+                    mr: 2
+                  }}
+                  component={Link}
+                  to={item.path}
+                  variant={appState.includes(item.state) ? "contained" : "text"}
+                >
+                  {item.display}
+                </Button>
+              ))}
+              <IconButton>
+                <ShoppingCartCheckoutIcon />
+              </IconButton>
+            </Stack>
+          </Toolbar>
+        </AppBar>
+      </ScrollAppBar>
     </>
   );
 };
