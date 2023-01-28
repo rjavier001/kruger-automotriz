@@ -1,7 +1,6 @@
 package com.user.msvusers.service;
 
 import com.user.msvusers.model.entity.Company;
-import com.user.msvusers.model.entity.User;
 
 import java.util.List;
 import java.util.Optional;
