@@ -1,22 +1,18 @@
 // import { useSelector, useDispatch } from "react-redux";
 // import { loadProducts } from "../redux/actions";
 // import { useEffect } from "react";
-import HomeIcon from "../Assets/items.png";
-import Vehicle from "../Assets/Vehicle_engineering.jpg";
+import HomeIcon from "../assets/items.png";
+import Vehicle from "../assets/Vehicle_engineering.jpg";
 import Image from "mui-image";
 import { Button, Stack, Typography } from "@mui/material";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import { NavLink } from "react-router-dom";
-import HeroSlide from "../Components/common/HeroSlide";
-import PopularCategories from "../Components/common/PopularCategories";
-import Footer from "../Components/common/Footer";
-import { Box } from "@mui/system";
-
-import Logo from "../Assets/LOGO_KRUGERMOTORS.png";
+import PopularCategories from "../components/common/PopularCategories";
+import Logo from "../assets/LOGO_KRUGERMOTORS.png";
 
 const SERVICES = ["Repuestos", "Manufactura", "Motor"];
-const Home = () => {
+const HomePage = () => {
   // const { products } = useSelector((state) => state.data);
 
   // let dispatch = useDispatch();
@@ -150,9 +146,9 @@ const Home = () => {
           </TabPanel>
         </Tabs>
       </Stack>
-      <Footer />
     </Stack>
+
   );
 };
 
-export default Home;
+export default HomePage;

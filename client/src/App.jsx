@@ -1,23 +1,55 @@
 import { ThemeProvider } from "@mui/material/styles";
+import { useSelector } from "react-redux";
+import themeConfigs from "./configs/theme.configs";
 import CssBaseline from "@mui/material/CssBaseline";
 import "./App.css";
-import { useSelector } from "react-redux";
-import themeConfigs from "./Configs/theme.configs";
-import { Routes, Route } from "react-router-dom";
-import Home from "./Screens/Home";
-import Shop from "./Screens/Shop";
-import CheckOutPage from "./Screens/CheckOutPage";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import MainLayout from "./components/layout/MainLayout";
+import routes from "./routes/routes";
+import PageWrapper from "./components/common/PageWrapper";
 
 const App = () => {
   const { themeMode } = useSelector((state) => state.themeMode);
   return (
     <ThemeProvider theme={themeConfigs.custom({ mode: themeMode })}>
       <CssBaseline />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/shop" element={<Shop />} />
-        <Route path="/checkout" element={<CheckOutPage />} />
-      </Routes>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<MainLayout />}>
+            {routes.map((route, index) =>
+              route.index ? (
+                <Route
+                  index
+                  key={index}
+                  element={
+                    route.state ? (
+                      <PageWrapper state={route.state}>
+                        {route.element}
+                      </PageWrapper>
+                    ) : (
+                      route.element
+                    )
+                  }
+                />
+              ) : (
+                <Route
+                  path={route.path}
+                  key={index}
+                  element={
+                    route.state ? (
+                      <PageWrapper state={route.state}>
+                        {route.element}
+                      </PageWrapper>
+                    ) : (
+                      route.element
+                    )
+                  }
+                />
+              )
+            )}
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </ThemeProvider>
   );
 };

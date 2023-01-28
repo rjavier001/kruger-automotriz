@@ -12,14 +12,14 @@ import { useEffect } from "react";
 const CheckOutPage = () => {
   const [counter, setCounter] = useState(1);
 
-  const { products } = useSelector((state) => state.data);
+  // const { products } = useSelector((state) => state.data);
 
-  let dispatch = useDispatch();
+  // let dispatch = useDispatch();
 
-  //LOAD Products WITH REDUX DISPATCH
-  useEffect(() => {
-    dispatch(loadProducts());
-  }, []);
+  // //LOAD Products WITH REDUX DISPATCH
+  // useEffect(() => {
+  //   dispatch(loadProducts());
+  // }, []);
 
   return (
     <Stack
@@ -99,7 +99,7 @@ const CheckOutPage = () => {
         <Button
           variant="contained"
           sx={styles.btnPagar}
-          onClick={() => console.log(products)}
+          // onClick={() => console.log(products)}
         >
           Pagar
         </Button>

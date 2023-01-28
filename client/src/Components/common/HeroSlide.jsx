@@ -12,10 +12,10 @@ import {
 import { Link } from "react-router-dom";
 import { Autoplay } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
-import Vehicle from "../../Assets/Vehicle_engineering.jpg";
+import Vehicle from "../../assets/Vehicle_engineering.jpg";
 // import { toast } from "react-toastify";
 
-import themeConfigs from "../../Configs/theme.configs";
+import themeConfigs from "../../configs/theme.configs";
 
 const HeroSlide = () => {
   const autoOffersBanner = [
