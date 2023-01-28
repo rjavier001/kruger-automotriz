@@ -8,16 +8,38 @@ import CardComp from "../components/CardComp";
 import CarouselComp from "../components/CarouselComp";
 
 const Shop = () => {
-  // const { products } = useSelector((state) => state.data);
+  useEffect(() => {
+    const getMedias = async () => {
+      const { response, err } = await mediaApi.getList({
+        mediaType,
+        mediaCategory,
+        page: 1,
+      });
 
-  // let dispatch = useDispatch();
+      if (response) setMovies(response.results);
+      if (err) toast.error(err.message);
+      dispatch(setGlobalLoading(false));
+    };
 
-  // useEffect(() => {
-  //   dispatch(loadProducts());
-  // }, []);
+    const getGenres = async () => {
+      dispatch(setGlobalLoading(true));
+      const { response, err } = await genreApi.getList({ mediaType });
+
+      if (response) {
+        setGenres(response.genres);
+        getMedias();
+      }
+      if (err) {
+        toast.error(err.message);
+        setGlobalLoading(false);
+      }
+    };
+
+    getGenres();
+  }, [mediaType, mediaCategory, dispatch]);
   return (
     <>
-      {/* <CarouselComp items={products} />
+      <CarouselComp items={products} />
       <Container>
         <Grid item container spacing={2} marginTop="2px">
           {list.map((item, i) => (
@@ -38,8 +60,7 @@ const Shop = () => {
             </Grid>
           ))}
         </Grid>
-      </Container> */}
-      <div>shop</div>
+      </Container>      
     </>
   );
 };
