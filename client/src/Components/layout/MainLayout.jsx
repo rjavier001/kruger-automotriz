@@ -41,29 +41,21 @@ const MainLayout = () => {
 
   return (
     <>
-      {/* global loading */}
       {/* <GlobalLoading /> */}
-      {/* global loading */}
-
-      {/* login modal */}
       {/* <AuthModal /> */}
-      {/* login modal */}
-
       <Box display="flex" minHeight="100vh">
-        {/* header */}
         <NavbarComp />
-        {/* header */}
-
-        {/* main */}
-        <Box component="main" flexGrow={1} overflow="hidden" minHeight="100vh">
+        <Box
+          component="main"
+          flexGrow={1}
+          overflow="hidden"
+          minHeight="100vh"
+          paddingTop="50px"
+        >
           <Outlet />
         </Box>
-        {/* main */}
       </Box>
-
-      {/* footer */}
       <Footer />
-      {/* footer */}
     </>
   );
 };
