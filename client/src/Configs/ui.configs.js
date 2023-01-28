@@ -5,7 +5,7 @@ const uiConfigs = {
         backgroundImage: "linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0))"
       },
       light: {
-        backgroundImage: "linear-gradient(to top, #ff5000, rgba(0,0,0,0))"
+        backgroundImage: "linear-gradient(to top, rgba(245,245,245,1), rgba(0,0,0,0))"
       }
     },
     horizontalGradientBgImage: {
@@ -13,7 +13,7 @@ const uiConfigs = {
         backgroundImage: "linear-gradient(to right, rgba(0,0,0,1), rgba(0,0,0,0))"
       },
       light: {
-        backgroundImage: "linear-gradient(to right, #ff5000, rgba(0,0,0,0))"
+        backgroundImage: "linear-gradient(to right, rgba(245,245,245,1), rgba(0,0,0,0))"
       }
     },
     typoLines: (lines, textAlign) => ({
@@ -28,13 +28,13 @@ const uiConfigs = {
       margin: "auto",
       padding: 2
     },
-    backgroundImage: (imgPath) => ({
-      position: "relative",
-      backgroundSize: "cover",
-      backgroundPosition: "center",
-      backgroundColor: "darkgrey",
-      backgroundImage: `url(${imgPath})`
-    })
+    // backgroundImage: (imgPath) => ({
+    //   position: "relative",
+    //   backgroundSize: "cover",
+    //   backgroundPosition: "center",
+    //   backgroundColor: "darkgrey",
+    //   backgroundImage: `url(${imgPath})`
+    // })
   },
   size: {
     sidebarWith: "300px",
