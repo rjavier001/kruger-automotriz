@@ -1,7 +1,7 @@
 import axios from "axios";
 import queryString from "query-string";
 
-const baseURL = "https://kruger-movies-api.vercel.app/api/v1/";
+const baseURL = "http://localhost:8002/api/";
 
 const publicClient = axios.create({
   baseURL,
