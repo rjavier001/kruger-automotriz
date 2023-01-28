@@ -1,36 +1,31 @@
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
-import SlideshowOutlinedIcon from "@mui/icons-material/SlideshowOutlined";
-import LiveTvOutlinedIcon from "@mui/icons-material/LiveTvOutlined";
-import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
-import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
-import RateReviewOutlinedIcon from "@mui/icons-material/RateReviewOutlined";
-import LockResetOutlinedIcon from "@mui/icons-material/LockResetOutlined";
 import ContactsIcon from "@mui/icons-material/Contacts";
 import GroupsIcon from "@mui/icons-material/Groups";
+import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
 
 const main = [
   {
     display: "home",
     path: "/",
-    // icon: <HomeOutlinedIcon />,
+    icon: <HomeOutlinedIcon />,
     state: "home",
   },
   {
     display: "shop",
     path: "/shop",
-    // icon: <SlideshowOutlinedIcon />,
+    icon: <ShoppingCartCheckoutIcon />,
     state: "shop",
   },
   {
     display: "about us",
     path: "/about",
-    // icon: <LiveTvOutlinedIcon />,
+    icon: <GroupsIcon />,
     state: "about",
   },
   {
     display: "contact us",
     path: "/contact",
-    // icon: <SearchOutlinedIcon />,
+    icon: <ContactsIcon />,
     state: "contactus",
   },
 ];

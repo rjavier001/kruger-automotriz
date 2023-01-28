@@ -5,7 +5,7 @@ import appStateSlice from "./features/appStateSlice";
 const store = configureStore({
   reducer: {
     themeMode: themeModeSlice,
-    appState: appStateSlice,
+    appState: appStateSlice
   },
 });
 
