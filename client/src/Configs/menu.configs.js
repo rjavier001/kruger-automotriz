@@ -31,7 +31,7 @@ const main = [
     display: "contact us",
     path: "/contact",
     // icon: <SearchOutlinedIcon />,
-    state: "search",
+    state: "contactus",
   },
 ];
 
