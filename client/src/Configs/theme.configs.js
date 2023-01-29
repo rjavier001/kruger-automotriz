@@ -26,16 +26,20 @@ const themeConfigs = {
           }
         : {
             primary: {
-              main: "#ffb814",
-              contrastText: "#ffffff",
-            },
-            secondary: {
               main: "#ff910d",
               contrastText: "#ffffff",
             },
+            secondary: {
+              main: "#00b040",
+              contrastText: "#ffffff",
+            },
             background: {
-              // default: colors.grey["100"],
-              paper: "#ff910d",
+              default: colors.grey["50"],
+              // paper: "#ff910d",
+            },
+            text: {
+              primary: "#000",
+              secondary: "#6b778c",
             },
           };
 

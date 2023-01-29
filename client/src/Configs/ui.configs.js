@@ -2,18 +2,18 @@ const uiConfigs = {
   style: {
     gradientBgImage: {
       dark: {
-        backgroundImage: "linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0))"
+        backgroundImage: "linear-gradient(to top, #81bd00, rgba(0,0,0,0))"
       },
       light: {
-        backgroundImage: "linear-gradient(to top, rgba(245,245,245,1), rgba(0,0,0,0))"
+        backgroundImage: "linear-gradient(to top, #6b778c, rgba(0,0,0,0))"
       }
     },
     horizontalGradientBgImage: {
       dark: {
-        backgroundImage: "linear-gradient(to right, rgba(0,0,0,1), rgba(0,0,0,0))"
+        backgroundImage: "linear-gradient(to right,#81bd00, rgba(0,0,0,0))"
       },
       light: {
-        backgroundImage: "linear-gradient(to right, rgba(245,245,245,1), rgba(0,0,0,0))"
+        backgroundImage: "linear-gradient(to right, #6b778c, rgba(0,0,0,0))"
       }
     },
     typoLines: (lines, textAlign) => ({
@@ -27,14 +27,7 @@ const uiConfigs = {
       maxWidth: "1366px",
       margin: "auto",
       padding: 2
-    },
-    // backgroundImage: (imgPath) => ({
-    //   position: "relative",
-    //   backgroundSize: "cover",
-    //   backgroundPosition: "center",
-    //   backgroundColor: "darkgrey",
-    //   backgroundImage: `url(${imgPath})`
-    // })
+    }
   },
   size: {
     sidebarWith: "300px",

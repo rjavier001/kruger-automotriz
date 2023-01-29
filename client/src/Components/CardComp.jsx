@@ -9,29 +9,36 @@ import React from "react";
 import { CardMedia } from "@mui/material";
 import { Container } from "@mui/system";
 
-const CardComp = (props) => {
-  const { title, subtitle, imageUrl } = props;
+const CardComp = ({ props }) => {
+  const { name, price, photoUrl } = props;
   return (
     <Container>
-      <Card sx={{ maxWidth: 345 }}>
+      <Card
+        raised
+        sx={{
+          maxWidth: 345,
+          margin: "0 auto",
+          padding: "0.1em",
+        }}
+      >
         <CardMedia
           component="img"
-          fit="cover"
-          sx={{ height: 240 }}
-          image={imageUrl}
+          height="250"
+          sx={{ padding: "1em 1em 0 1em", objectFit: "contain" }}
+          image={photoUrl}
           title="product image"
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
-            {title}
+            {name}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            {subtitle}
+            Price: {price}$
           </Typography>
         </CardContent>
         <CardActions>
           <Button
-            sx={{ background: "#ff910d" }}
+            color="secondary"
             size="medium"
             variant="contained"
           >

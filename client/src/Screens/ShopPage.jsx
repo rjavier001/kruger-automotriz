@@ -1,48 +1,31 @@
 import { useSelector, useDispatch } from "react-redux";
-import { loadProducts } from "../redux/actions";
-import { useEffect } from "react";
+import { useEffect,useState } from "react";
 import { Box, Grid } from "@mui/material";
 import { Container } from "@mui/system";
 import React from "react";
 import CardComp from "../components/CardComp";
 import CarouselComp from "../components/CarouselComp";
+import productApi from "../api/modules/products.api";
 
 const Shop = () => {
+  const dispatch = useDispatch();
+  const [product, setProduct] = useState([]);
   useEffect(() => {
-    const getMedias = async () => {
-      const { response, err } = await mediaApi.getList({
-        mediaType,
-        mediaCategory,
-        page: 1,
-      });
-
-      if (response) setMovies(response.results);
-      if (err) toast.error(err.message);
-      dispatch(setGlobalLoading(false));
-    };
-
-    const getGenres = async () => {
-      dispatch(setGlobalLoading(true));
-      const { response, err } = await genreApi.getList({ mediaType });
-
-      if (response) {
-        setGenres(response.genres);
-        getMedias();
-      }
-      if (err) {
-        toast.error(err.message);
-        setGlobalLoading(false);
-      }
-    };
-
-    getGenres();
-  }, [mediaType, mediaCategory, dispatch]);
+    const getList = async () => {
+      const { response, err } = await productApi.getList();      
+      if (response) setProduct(response);
+      // if (err) toast.error(err.message);
+      // dispatch(setGlobalLoading(false));
+    };   
+    getList();
+    
+  }, [dispatch]);
   return (
     <>
-      <CarouselComp items={products} />
+      <CarouselComp items={product} />
       <Container>
         <Grid item container spacing={2} marginTop="2px">
-          {list.map((item, i) => (
+          {product.map((item, i) => (
             <Grid
               key={i}
               item
@@ -53,9 +36,7 @@ const Shop = () => {
               justify="center"
             >
               <CardComp
-                title={item.name}
-                subtitle={item.subtitulo}
-                imageUrl={item.image}                 
+               props={item}   
               />
             </Grid>
           ))}
