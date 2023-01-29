@@ -56,7 +56,6 @@ const Navbar = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const dispatch = useDispatch();
-
   const onSwithTheme = () => {
     const theme =
       themeMode === themeModes.dark ? themeModes.light : themeModes.dark;
@@ -114,8 +113,13 @@ const Navbar = () => {
     <>
       <Sidebar open={sidebarOpen} toggleSidebar={toggleSidebar} />
       <ScrollAppBar>
-        <AppBar elevation={0} sx={{ zIndex: 9999 }}>
-          <Toolbar
+        <AppBar     
+          color="primary"            
+          elevation={1}
+          sx={{
+            zIndex: 9999         
+          }}        >
+          <Toolbar           
             sx={{ alignItems: "center", justifyContent: "space-between" }}
           >
             <IconButton
@@ -154,8 +158,10 @@ const Navbar = () => {
                 <Button
                   key={index}
                   sx={{
-                    color: appState.includes(item.state) ? "primary.contrastText" : "inherit",
-                    mr: 2
+                    color: appState.includes(item.state)
+                      ? "primary.contrastText"
+                      : "inherit",
+                    mr: 2,
                   }}
                   component={Link}
                   to={item.path}

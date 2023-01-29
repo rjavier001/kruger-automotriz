@@ -1,7 +1,7 @@
 import privateClient from "../client/private.client";
 
 const productsEndpoints = {
-  list: "products/",
+  list: "products",
   add: "products/save",
   remove: ({ productId }) => `products/${productId}`,
 };

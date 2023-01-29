@@ -1,13 +1,13 @@
-import { Box } from "@mui/system";
+import { Box,useTheme } from "@mui/system";
 import React from "react";
 import uiConfigs from "../configs/ui.configs";
-
 // import Carousel from 'react-material-ui-carousel'
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper";
 import "swiper/css";
 
 const CarouselComp = ({ items }) => {
+  const theme = useTheme();  
   return (
     <Box
       sx={{
@@ -22,7 +22,7 @@ const CarouselComp = ({ items }) => {
           left: 0,
           zIndex: 2,
           pointerEvents: "none",
-          // ...uiConfigs.style.gradientBgImage[theme.palette.mode],
+          ...uiConfigs.style.gradientBgImage[theme.palette.mode],
         },
         paddingTop: {
           xs: "2.5%",
@@ -52,6 +52,7 @@ const CarouselComp = ({ items }) => {
                 backgroundPosition: "top",
                 backgroundRepeat: "no-repeat",
                 backgroundSize: "40% 20rem",
+                objectFit: "contain" ,
                 backgroundImage: `url(${item.photoUrl})`,
               }}
             />
