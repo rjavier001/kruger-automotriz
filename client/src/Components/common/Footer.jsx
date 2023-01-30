@@ -8,6 +8,7 @@ import TwitterIcon from "@mui/icons-material/Twitter";
 
 import Logo from "../../assets/LOGO_KRUGERMOTORS.png";
 
+
 const Footer = () => {
   return (
     <Stack
@@ -37,6 +38,7 @@ const Footer = () => {
           <TwitterIcon /> Twitter
         </IconButton>
       </Stack>
+
       <Image width="auto" src={Logo} />
     </Stack>
   );
