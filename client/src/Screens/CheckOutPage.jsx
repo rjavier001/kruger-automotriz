@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import Divider from "@mui/material/Divider";
 import Image from "mui-image";
 import AddIcon from "@mui/icons-material/Add";
+import RemoveIcon from "@mui/icons-material/Remove";
 import { useSelector, useDispatch } from "react-redux";
 import { loadProducts } from "../redux/actions";
 import { useEffect } from "react";
@@ -57,13 +58,57 @@ const CheckOutPage = () => {
             sx={styles.stackCounter}
           >
             <Typography variant="h6">255.30$</Typography>
-            <IconButton size="small" onClick={() => setCounter(counter + 1)}>
-              <AddIcon />
+            <Stack direction={"row"} sx={styles.add}>
+              <IconButton size="small" onClick={() => setCounter(counter - 1)}>
+                <RemoveIcon />
+              </IconButton>
               <Typography>{counter}</Typography>
-            </IconButton>
+              <IconButton size="small" onClick={() => setCounter(counter + 1)}>
+                <AddIcon />
+              </IconButton>
+            </Stack>
           </Stack>
         </Box>
-        ;
+        <Divider sx={{ marginY: 2 }} />
+        <Box>
+          Nombre
+          <Stack
+            direction={{ sm: "row", xs: "column" }}
+            spacing={{ xs: 1, sm: 2, md: 4 }}
+          >
+            <Image
+              alt="product"
+              showLoading={false}
+              errorIcon={true}
+              fit={"cover"}
+              bgColor={"red"}
+              height={100}
+              width={200}
+            />
+            <Typography>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea, at
+              molestias iusto ratione sunt deserunt libero veniam sequi ut
+              labore architecto optio fugiat obcaecati assumenda quos doloribus
+              numquam cum modi.
+            </Typography>
+          </Stack>
+          <Stack
+            direction={"row"}
+            spacing={{ xs: 1, sm: 2, md: 4 }}
+            sx={styles.stackCounter}
+          >
+            <Typography variant="h6">255.30$</Typography>
+            <Stack direction={"row"} sx={styles.add}>
+              <IconButton size="small" onClick={() => setCounter(counter - 1)}>
+                <RemoveIcon />
+              </IconButton>
+              <Typography>{counter}</Typography>
+              <IconButton size="small" onClick={() => setCounter(counter + 1)}>
+                <AddIcon />
+              </IconButton>
+            </Stack>
+          </Stack>
+        </Box>
       </Box>
 
       <Box sx={styles.boxRight}>
@@ -113,8 +158,7 @@ export default CheckOutPage;
 export const styles = {
   boxLeft: {
     width: "70%",
-    height: 350,
-    backgroundColor: "#ffffff",
+    minheight: 350,
     borderRadius: 5,
     padding: 5,
     boxShadow: "-13px 18px 8px -5px rgba(34, 60, 80, 0.2)",
@@ -122,7 +166,7 @@ export const styles = {
   boxRight: {
     width: 250,
     height: 350,
-    backgroundColor: "#ffffff",
+    /*  backgroundColor: "#ffffff", */
     borderRadius: 5,
     padding: 5,
     boxShadow: "-13px 18px 8px -5px rgba(34, 60, 80, 0.2)",
@@ -130,7 +174,7 @@ export const styles = {
   stackContainer: {
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#f2f2f2",
+    /* backgroundColor: "#f2f2f2", */
     padding: 5,
     height: "100%",
   },
@@ -150,6 +194,9 @@ export const styles = {
   btnPagar: { width: "100%", marginTop: 2 },
   stackCounter: {
     justifyContent: "space-between",
+    alignItems: "center",
+  },
+  add: {
     alignItems: "center",
   },
 };
