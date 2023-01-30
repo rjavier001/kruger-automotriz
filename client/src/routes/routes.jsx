@@ -1,27 +1,33 @@
 import HomePage from "../screens/HomePage";
 import Shop from "../screens/ShopPage";
 import CheckOutPage from "../screens/CheckOutPage";
+import ProductDetailPage from "../screens/ProductDetailPage";
 
 export const routesGen = {
-  home: "/"
+  home: "/",
 };
 
 const routes = [
   {
     index: true,
     element: <HomePage />,
-    state: "home"
+    state: "home",
   },
   {
     path: "/shop",
     element: <Shop />,
-    state:"shop"
-  } ,
+    state: "shop",
+  },
   {
     path: "/checkout",
     element: <CheckOutPage />,
-    state:"checkout"
-  } 
+    state: "checkout",
+  },
+  {
+    path: "/details",
+    element: <ProductDetailPage />,
+    state: "details",
+  },
 ];
 
 export default routes;
