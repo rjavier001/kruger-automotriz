@@ -1,0 +1,107 @@
+import {
+  Card,
+  CardActionArea,
+  CardContent,
+  CardMedia,
+  Stack,
+  Tab,
+  Tabs,
+  Typography,
+} from "@mui/material";
+import { TabList } from "react-tabs";
+import Piston from "../../assets/Pistons2.jpg";
+import KitDist1 from "../../assets/KitDist2.jpg";
+import KitEmbrague2 from "../../assets/kitEm2.jpg";
+import Vehicle from "../../assets/Vehicle_engineering.jpg";
+import Image from "mui-image";
+
+const PopularCategories = () => {
+  return (
+    <Stack>
+      <Typography textAlign="center" variant="h5" component="div">
+        <h3>Popular Categories</h3>
+      </Typography>
+      <Stack
+        direction={{ sm: "row", xs: "column" }}
+        spacing={{ xs: 1, sm: 2, md: 4 }}
+        justifyContent={"center"}
+        alignItems={"center"}
+      >
+        <Card sx={{ maxWidth: 345, boxShadow: 0 }}>
+          <CardActionArea>
+            <CardMedia
+              fit="cover"
+              component="img"
+              image={KitEmbrague2}
+              alt="green iguana"
+            />
+            <CardContent>
+              <Typography
+                textAlign="center"
+                gutterBottom
+                variant="h5"
+                component="div"
+              >
+                Kit de Embrague
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                Lizards are a widespread group of squamate reptiles, with over
+                6,000 species, ranging across all continents except Antarctica
+              </Typography>
+            </CardContent>
+          </CardActionArea>
+        </Card>
+        <Card sx={{ maxWidth: 345, boxShadow: 0 }}>
+          <CardActionArea>
+            <CardMedia
+              component="img"
+              fit="cover"
+              image={Piston}
+              alt="green iguana"
+            />
+            <CardContent>
+              <Typography
+                textAlign="center"
+                gutterBottom
+                variant="h5"
+                component="div"
+              >
+                Pistones
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                Lizards are a widespread group of squamate reptiles, with over
+                6,000 species, ranging across all continents except Antarctica
+              </Typography>
+            </CardContent>
+          </CardActionArea>
+        </Card>
+        <Card sx={{ maxWidth: 345, boxShadow: 0 }}>
+          <CardActionArea>
+            <CardMedia
+              component="img"
+              fit="cover"
+              image={KitDist1}
+              alt="green iguana"
+            />
+            <CardContent>
+              <Typography
+                textAlign="center"
+                gutterBottom
+                variant="h5"
+                component="div"
+              >
+                Kit de Dsitribucion
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                Lizards are a widespread group of squamate reptiles, with over
+                6,000 species, ranging across all continents except Antarctica
+              </Typography>
+            </CardContent>
+          </CardActionArea>
+        </Card>
+      </Stack>
+    </Stack>
+  );
+};
+
+export default PopularCategories;
