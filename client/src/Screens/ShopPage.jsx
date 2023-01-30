@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect,useState } from "react";
+import { useEffect, useState } from "react";
 import { Box, Grid, InputBase } from "@mui/material";
 import { alpha, Container } from "@mui/system";
 import React from "react";
@@ -14,13 +14,12 @@ const Shop = () => {
   const [product, setProduct] = useState([]);
   useEffect(() => {
     const getList = async () => {
-      const { response, err } = await productApi.getList();      
+      const { response, err } = await productApi.getList();
       if (response) setProduct(response);
       // if (err) toast.error(err.message);
       // dispatch(setGlobalLoading(false));
-    };   
+    };
     getList();
-    
   }, [dispatch]);
   return (
     <>
@@ -37,16 +36,13 @@ const Shop = () => {
               spacing={2}
               justify="center"
             >
-              <CardComp
-               props={item}   
-              />
+              <CardComp props={item} />
             </Grid>
           ))}
         </Grid>
-      </Container>      
+      </Container>
     </>
   );
 };
-
 
 export default Shop;
