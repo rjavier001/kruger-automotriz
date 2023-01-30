@@ -38,7 +38,6 @@ const Footer = () => {
           <TwitterIcon /> Twitter
         </IconButton>
       </Stack>
-
       <Image width="auto" src={Logo} />
     </Stack>
   );
