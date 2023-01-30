@@ -83,7 +83,7 @@ const ProductDetailPage = () => {
             </Stack>
           </Stack>
         </Grid>
-        CompanyBenefitsComp
+        <CompanyBenefitsComp />
       </Grid>
     </Container>
   );

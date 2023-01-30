@@ -20,8 +20,8 @@ import {
   useTheme,
 } from "@mui/material";
 import { styled, alpha } from "@mui/material/styles";
-import menuConfigs from "../../Configs/menu.configs";
-import { themeModes } from "../../Configs/theme.configs";
+import menuConfigs from "../../configs/menu.configs";
+import { themeModes } from "../../configs/theme.configs";
 import { setThemeMode } from "../../redux/features/themeModeSlice";
 import Sidebar from "./Sidebar";
 import { useLocation } from "react-router-dom";
@@ -111,7 +111,7 @@ const Navbar = () => {
   }));
 
   let location = useLocation();
-  
+
   return (
     <>
       <Sidebar open={sidebarOpen} toggleSidebar={toggleSidebar} />
@@ -140,22 +140,20 @@ const Navbar = () => {
               Kruger-Repuestos
             </Typography>
 
-            {
-                (location.pathname === '/shop')
-                ?
-                <Search>
-                  <SearchIconWrapper>
-                    <SearchIcon />
-                  </SearchIconWrapper>
-                  <StyledInputBase
-                    placeholder="Search…"
-                    inputProps={{ "aria-label": "search" }}
-                  />
-                </Search>
-                : 
-                ''
-            }
-            
+            {location.pathname === "/shop" ? (
+              <Search>
+                <SearchIconWrapper>
+                  <SearchIcon />
+                </SearchIconWrapper>
+                <StyledInputBase
+                  placeholder="Search…"
+                  inputProps={{ "aria-label": "search" }}
+                />
+              </Search>
+            ) : (
+              ""
+            )}
+
             <Stack
               direction="row"
               spacing={1}
