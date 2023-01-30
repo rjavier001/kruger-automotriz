@@ -182,6 +182,7 @@ const Navbar = () => {
               ))}
               <IconButton>
                 <ShoppingCartCheckoutIcon />
+                <Typography sx={styles.badge}>3</Typography>
               </IconButton>
             </Stack>
           </Toolbar>
@@ -192,3 +193,14 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+export const styles = {
+  badge: {
+    background: "yellow",
+    borderRadius: 25,
+    height: 25,
+    width: 25,
+    fontWeight: "700",
+    color: "black",
+  },
+};
