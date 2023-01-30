@@ -3,7 +3,8 @@ import privateClient from "../client/private.client";
 const productsEndpoints = {
   list: "products",
   add: "products/save",
-  remove: ({ productId }) => `products/${productId}`,
+  product:({ productId }) => `products/${productId}`,
+  remove:({ productId }) => `products/${productId}`,
 };
 
 const productsApi = {
@@ -21,6 +22,15 @@ const productsApi = {
       const response = await privateClient.delete(
         productsEndpoints.remove({ productId })
       );
+
+      return { response };
+    } catch (err) {
+      return { err };
+    }
+  },
+  getProductById: async (productId) => {
+    try {
+      const response = await privateClient.get(productsEndpoints.product({productId}));
 
       return { response };
     } catch (err) {

@@ -10,9 +10,12 @@ import React from "react";
 import { CardMedia } from "@mui/material";
 import { Container } from "@mui/system";
 import uiConfigs from "../configs/ui.configs";
+import { useNavigate } from "react-router";
+
 
 const CardComp = ({ props }) => {
-  const { name, price, photoUrl,stock,description } = props;
+  const navigate = useNavigate();
+  const { name, price, photoUrl,stock,description,id } = props;
   return (
     <Container>
       <Card
@@ -47,6 +50,7 @@ const CardComp = ({ props }) => {
             color="secondary"
             size="medium"
             variant="contained"
+            onClick={()=> navigate(`/shop/${id}`)}
           >
             View More
           </Button>

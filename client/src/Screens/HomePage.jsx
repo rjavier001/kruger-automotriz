@@ -106,8 +106,8 @@ const HomePage = () => {
       >
         <Tabs>
           <TabList>
-            {SERVICES.map((item) => (
-              <Tab>
+            {SERVICES.map((item,i) => (
+              <Tab key={i}>
                 <Button
                   sx={{
                     backgroundColor: "#ffb814",

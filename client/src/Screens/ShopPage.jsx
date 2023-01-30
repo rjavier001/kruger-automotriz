@@ -34,7 +34,7 @@ const Shop = () => {
               xs={12}
               md={4}
               sm={6}
-              spacing={2}
+              
               justify="center"
             >
               <CardComp
