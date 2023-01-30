@@ -7,7 +7,6 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import TwitterIcon from "@mui/icons-material/Twitter";
 
 import Logo from "../../assets/LOGO_KRUGERMOTORS.png";
-import { Box } from "@mui/system";
 
 const Footer = () => {
   return (
