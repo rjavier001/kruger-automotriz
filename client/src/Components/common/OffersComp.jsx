@@ -31,25 +31,28 @@ const OffersComp = () => {
               <Typography
                 textAlign="center"
                 gutterBottom
-                variant="h5"
+                variant="h4"
                 component="div"
                 color="primary"
+                sx={{ fontFamily: "Staatliches" }}
               >
                 10% Descuento
               </Typography>
-              <Typography variant="body2" color="text.secondary">
-                Lizards are a widespread group of squamate reptiles, with over
-                6,000 species, ranging across all continents except Antarctica
+              <Typography
+                variant="h5"
+                color="text.secondary"
+                textAlign="center"
+                sx={{ fontFamily: "Staatliches" }}
+              >
+                En Amortiguadores
               </Typography>
             </CardContent>
             <CardMedia
               component="img"
               height="350"
               sx={{
-                width: "auto",
                 position: "relative",
                 objectFit: "contain",
-                left: "40%",
               }}
               image={Offer_Amortiguadores}
               alt="green iguana"
@@ -62,16 +65,20 @@ const OffersComp = () => {
               <Typography
                 textAlign="center"
                 gutterBottom
-                variant="h5"
+                variant="h4"
                 component="div"
                 color="primary"
-                sx={{ fontFamily: "Monospace" }}
+                sx={{ fontFamily: "Staatliches" }}
               >
                 25% Descuento
               </Typography>
-              <Typography variant="body2" color="text.secondary">
-                Lizards are a widespread group of squamate reptiles, with over
-                6,000 species, ranging across all continents except Antarctica
+              <Typography
+                variant="h5"
+                color="text.secondary"
+                textAlign="center"
+                sx={{ fontFamily: "Staatliches" }}
+              >
+                En Faros
               </Typography>
             </CardContent>
             <CardMedia
@@ -92,15 +99,20 @@ const OffersComp = () => {
               <Typography
                 textAlign="center"
                 gutterBottom
-                variant="h5"
+                variant="h4"
                 component="div"
                 color="primary"
+                sx={{ fontFamily: "Staatliches" }}
               >
                 15% Descuento
               </Typography>
-              <Typography variant="body2" color="text.secondary">
-                Lizards are a widespread group of squamate reptiles, with over
-                6,000 species, ranging across all continents except Antarctica
+              <Typography
+                variant="h5"
+                color="text.secondary"
+                textAlign="center"
+                sx={{ fontFamily: "Staatliches" }}
+              >
+                En Pistones
               </Typography>
             </CardContent>
             <CardMedia
