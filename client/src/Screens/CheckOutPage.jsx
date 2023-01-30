@@ -141,11 +141,7 @@ const CheckOutPage = () => {
           <Typography variant="h8">155.99$</Typography>
         </Stack>
 
-        <Button
-          variant="contained"
-          sx={styles.btnPagar}
-          // onClick={() => console.log(products)}
-        >
+        <Button variant="contained" sx={styles.btnPagar}>
           Pagar
         </Button>
       </Box>
