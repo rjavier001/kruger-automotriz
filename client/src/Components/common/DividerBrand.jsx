@@ -18,18 +18,22 @@ import { Box } from "@mui/system";
 const DividerBrand = () => {
   return (
     <Stack
-      sx={{ marginTop: "40px", background: "#ff910d" }}
-      height={100}
+      sx={{
+        marginTop: "40px",
+        background: "#ff910d",
+        padding: "0.5em 0.5em 0.5em 0.5em",
+        objectFit: "contain",
+      }}
+      spacing={{ xs: 1, sm: 2, md: 4 }}
       direction="row"
-      spacing={10}
       alignItems="center"
       justifyContent="space-evenly"
     >
-      <Image width="auto" height={80} src={chevrolet_logo} />
-      <Image width="auto" src={fiat_logo} />
-      <Image width="auto" src={kia_logo} />
-      <Image width="auto" src={ford_logo} />
-      <Image width="auto" src={volkswagen_logo} />
+      <Image src={chevrolet_logo} />
+      <Image src={fiat_logo} />
+      <Image src={kia_logo} />
+      <Image src={ford_logo} />
+      <Image src={volkswagen_logo} />
     </Stack>
   );
 };
