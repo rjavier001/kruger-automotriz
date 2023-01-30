@@ -41,6 +41,8 @@ const Shop = () => {
   }, [dispatch]);
 
   let productsQuery= products.filter(productss => productss.description.toLowerCase().includes(name));
+
+
   return (
     <>
       <CarouselComp items={product} />
@@ -72,6 +74,11 @@ const Shop = () => {
           </>
           : 
           <>
+          {
+            productsQuery.length === 0
+            ?"No existen products" 
+            :
+          <>
           {productsQuery.map((items, i) => (
             <Grid
             key={i}
@@ -86,6 +93,8 @@ const Shop = () => {
                />
             </Grid>
           ))} 
+          </>
+          }
           </>
           }
         </Grid>
