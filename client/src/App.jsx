@@ -1,12 +1,12 @@
 import { ThemeProvider } from "@mui/material/styles";
 import { useSelector } from "react-redux";
-import themeConfigs from "./configs/theme.configs";
+import themeConfigs from "./Configs/theme.configs";
 import CssBaseline from "@mui/material/CssBaseline";
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import MainLayout from "./components/layout/MainLayout";
+import MainLayout from "./Components/layout/MainLayout";
 import routes from "./routes/routes";
-import PageWrapper from "./components/common/PageWrapper";
+import PageWrapper from "./Components/common/PageWrapper";
 
 const App = () => {
   const { themeMode } = useSelector((state) => state.themeMode);
