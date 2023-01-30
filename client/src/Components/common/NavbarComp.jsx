@@ -111,7 +111,7 @@ const Navbar = () => {
   }));
 
   let location = useLocation();
-  
+
   return (
     <>
       <Sidebar open={sidebarOpen} toggleSidebar={toggleSidebar} />
@@ -140,22 +140,20 @@ const Navbar = () => {
               Kruger-Repuestos
             </Typography>
 
-            {
-                (location.pathname === '/shop')
-                ?
-                <Search>
-                  <SearchIconWrapper>
-                    <SearchIcon />
-                  </SearchIconWrapper>
-                  <StyledInputBase
-                    placeholder="Search…"
-                    inputProps={{ "aria-label": "search" }}
-                  />
-                </Search>
-                : 
-                ''
-            }
-            
+            {location.pathname === "/shop" ? (
+              <Search>
+                <SearchIconWrapper>
+                  <SearchIcon />
+                </SearchIconWrapper>
+                <StyledInputBase
+                  placeholder="Search…"
+                  inputProps={{ "aria-label": "search" }}
+                />
+              </Search>
+            ) : (
+              ""
+            )}
+
             <Stack
               direction="row"
               spacing={1}

@@ -21,7 +21,7 @@ const DividerBrand = () => {
       sx={{
         marginTop: "40px",
         background: "#ff910d",
-        padding: "0.5em 0.5em 0.5em 0.5em",
+        padding: "0.5em 1.5em 0.5em 1.5em",
         objectFit: "contain",
       }}
       spacing={{ xs: 1, sm: 2, md: 4 }}
@@ -29,11 +29,11 @@ const DividerBrand = () => {
       alignItems="center"
       justifyContent="space-evenly"
     >
-      <Image src={chevrolet_logo} />
-      <Image src={fiat_logo} />
-      <Image src={kia_logo} />
-      <Image src={ford_logo} />
-      <Image src={volkswagen_logo} />
+      <Image width="20%" src={chevrolet_logo} />
+      <Image width="15%" src={fiat_logo} />
+      <Image width="18%" src={kia_logo} />
+      <Image width="20%" src={ford_logo} />
+      <Image width="20%" src={volkswagen_logo} />
     </Stack>
   );
 };

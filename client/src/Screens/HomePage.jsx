@@ -11,6 +11,7 @@ import { NavLink } from "react-router-dom";
 import PopularCategories from "../Components/common/PopularCategories";
 import Logo from "../Assets/LOGO_KRUGERMOTORS.png";
 import DividerBrand from "../Components/common/DividerBrand";
+import OffersComp from "../Components/common/OffersComp";
 
 const SERVICES = ["Repuestos", "Manufactura", "Motor"];
 const HomePage = () => {
@@ -68,14 +69,20 @@ const HomePage = () => {
         <Image
           src={Vehicle}
           height="60%"
-          width="60%"
-          fit="cover"
-          sx={{ marginLeft: "auto", marginTop: 5 }}
+          sx={{
+            marginLeft: "auto",
+            marginTop: 5,
+            padding: "1em 1em 0 1em",
+            objectFit: "contain",
+          }}
         />
       </Stack>
+
       <PopularCategories />
 
       <DividerBrand />
+
+      <OffersComp />
 
       <Typography
         p={5}
