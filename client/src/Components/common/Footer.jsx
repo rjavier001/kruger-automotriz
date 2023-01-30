@@ -8,7 +8,6 @@ import TwitterIcon from "@mui/icons-material/Twitter";
 
 import Logo from "../../Assets/LOGO_KRUGERMOTORS.png";
 import { Box } from "@mui/system";
-import Logo from "../../assets/LOGO_KRUGERMOTORS.png";
 
 const Footer = () => {
   return (
