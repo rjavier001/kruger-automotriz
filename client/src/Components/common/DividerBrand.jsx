@@ -29,11 +29,11 @@ const DividerBrand = () => {
       alignItems="center"
       justifyContent="space-evenly"
     >
-      <Image width="20%" src={chevrolet_logo} />
-      <Image width="15%" src={fiat_logo} />
-      <Image width="18%" src={kia_logo} />
+      <Image width="15%" src={chevrolet_logo} />
+      <Image width="10%" src={fiat_logo} />
+      <Image width="20%" src={kia_logo} />
       <Image width="20%" src={ford_logo} />
-      <Image width="20%" src={volkswagen_logo} />
+      <Image width="10%" src={volkswagen_logo} />
     </Stack>
   );
 };
