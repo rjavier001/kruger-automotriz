@@ -1,6 +1,6 @@
 import { Box, useTheme } from "@mui/system";
 import React from "react";
-import uiConfigs from "../Configs/ui.configs";
+import uiConfigs from "../configs/ui.configs";
 // import Carousel from 'react-material-ui-carousel'
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper";
@@ -78,24 +78,21 @@ const CarouselComp = ({ items }) => {
                   width: { sm: "unset", md: "30%", lg: "40%" },
                 }}
               >
-
-                <Stack spacing={0} direction="column"> 
-                  <Typography variant="h4"
+                <Stack spacing={0} direction="column">
+                  <Typography
+                    variant="h4"
                     fontSize={{ xs: "2rem", md: "2rem", lg: "4rem" }}
-                    fontWeight="700">
-                      {item.name}
+                    fontWeight="700"
+                  >
+                    {item.name}
                   </Typography>
                   <Typography variant="h5">
-                      Price: ${item.purchasePrice}
+                    Price: ${item.purchasePrice}
                   </Typography>
-                  <Typography variant="h5">
-                      Stock: {item.stock}
-                  </Typography>
+                  <Typography variant="h5">Stock: {item.stock}</Typography>
                 </Stack>
               </Box>
-
             </Box>
-
           </SwiperSlide>
         ))}
       </Swiper>
