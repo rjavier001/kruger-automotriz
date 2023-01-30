@@ -1,13 +1,13 @@
-import { Box,useTheme } from "@mui/system";
+import { Box, useTheme } from "@mui/system";
 import React from "react";
-import uiConfigs from "../configs/ui.configs";
+import uiConfigs from "../Configs/ui.configs";
 // import Carousel from 'react-material-ui-carousel'
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper";
 import "swiper/css";
 
 const CarouselComp = ({ items }) => {
-  const theme = useTheme();  
+  const theme = useTheme();
   return (
     <Box
       sx={{
@@ -52,7 +52,7 @@ const CarouselComp = ({ items }) => {
                 backgroundPosition: "top",
                 backgroundRepeat: "no-repeat",
                 backgroundSize: "40% 20rem",
-                objectFit: "contain" ,
+                objectFit: "contain",
                 backgroundImage: `url(${item.photoUrl})`,
               }}
             />
