@@ -1,4 +1,4 @@
-import { cloneElement, useState } from "react";
+import { cloneElement, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -18,6 +18,7 @@ import {
   InputBase,
   useScrollTrigger,
   useTheme,
+  Input,
 } from "@mui/material";
 import { styled, alpha } from "@mui/material/styles";
 import menuConfigs from "../../configs/menu.configs";
@@ -25,6 +26,10 @@ import { themeModes } from "../../configs/theme.configs";
 import { setThemeMode } from "../../redux/features/themeModeSlice";
 import Sidebar from "./Sidebar";
 import { useLocation } from "react-router-dom";
+import productsApi from "../../api/modules/products.api";
+import CardComp from "../CardComp";
+import Shop from "../../screens/ShopPage";
+
 
 const ScrollAppBar = ({ children, window }) => {
   const { themeMode } = useSelector((state) => state.themeMode);
@@ -111,7 +116,33 @@ const Navbar = () => {
   }));
 
   let location = useLocation();
+
+  const [name, setName] = useState("");
+  const [product, setProduct] = useState([]);
   
+  const handleSearch = e =>{
+    setName(e.target.value);
+  }
+
+  useEffect(() => {
+    const getList = async () => {
+      const { response } = await productsApi.search(name);   
+      if (response) setProduct(response);
+      
+    };   
+    getList();
+    handleView(productsQuery);
+  }, []);
+  
+  let productsQuery = product.filter(products => products.description.toLowerCase().includes(name))
+
+  const handleView =(productsQuery)=>{
+    return <Shop props={productsQuery}/>
+  }
+  
+  console.log(productsQuery)
+
+
   return (
     <>
       <Sidebar open={sidebarOpen} toggleSidebar={toggleSidebar} />
@@ -138,22 +169,19 @@ const Navbar = () => {
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               Kruger-Repuestos
             </Typography>
-
+{/* 
             {
                 (location.pathname === '/shop')
                 ?
-                <Search>
-                  <SearchIconWrapper>
-                    <SearchIcon />
-                  </SearchIconWrapper>
-                  <StyledInputBase
-                    placeholder="Search…"
-                    inputProps={{ "aria-label": "search" }}
-                  />
-                </Search>
+                <>
+                  <SearchIcon />
+                  <>
+                  <Input onChange={handleSearch}/>
+                  </>
+                </>
                 : 
                 ''
-            }
+            } */}
             
             <Stack
               direction="row"
