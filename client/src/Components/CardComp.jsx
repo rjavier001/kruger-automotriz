@@ -59,7 +59,11 @@ const CardComp = ({ props }) => {
           </Stack>
         </CardContent>
         <CardActions sx={uiConfigs.button}>
-          <NavLink to={"/details"} style={{ textDecoration: "none" }}>
+          <NavLink
+            to={{ pathname: "/details" }}
+            state={{ props }}
+            style={{ textDecoration: "none" }}
+          >
             <Button color="secondary" size="medium" variant="contained">
               View More
             </Button>
