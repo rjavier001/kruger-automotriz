@@ -30,8 +30,9 @@ const PopularCategories = () => {
         <Card sx={{ maxWidth: 345, boxShadow: 0 }}>
           <CardActionArea>
             <CardMedia
-              fit="cover"
               component="img"
+              height="350"
+              sx={{ padding: "1em 1em 0 1em", objectFit: "contain" }}
               image={KitEmbrague2}
               alt="green iguana"
             />
@@ -55,7 +56,8 @@ const PopularCategories = () => {
           <CardActionArea>
             <CardMedia
               component="img"
-              fit="cover"
+              height="350"
+              sx={{ padding: "1em 1em 0 1em", objectFit: "contain" }}
               image={Piston}
               alt="green iguana"
             />
@@ -79,7 +81,8 @@ const PopularCategories = () => {
           <CardActionArea>
             <CardMedia
               component="img"
-              fit="cover"
+              height="350"
+              sx={{ padding: "1em 1em 0 1em", objectFit: "contain" }}
               image={KitDist1}
               alt="green iguana"
             />
