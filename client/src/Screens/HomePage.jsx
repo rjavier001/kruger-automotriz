@@ -48,7 +48,7 @@ const HomePage = () => {
             Magni, consequuntur! Placeat esse sit, magni sequi pariatur corrupti
             perspiciatis officia illum fugiat omnis.
           </Typography>
-          <NavLink to={"/checkout"} className="navlink">
+          <NavLink to={"/checkout"} style={{ textDecoration: "none" }}>
             <Button
               variant="contained"
               sx={{
