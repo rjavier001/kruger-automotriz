@@ -9,10 +9,10 @@ import {
   Typography,
 } from "@mui/material";
 import { TabList } from "react-tabs";
-import Piston from "../../assets/Pistons2.jpg";
-import KitDist1 from "../../assets/KitDist2.jpg";
-import KitEmbrague2 from "../../assets/kitEm2.jpg";
-import Vehicle from "../../assets/Vehicle_engineering.jpg";
+import Piston from "../../Assets/Pistons2.jpg";
+import KitDist1 from "../../Assets/KitDist2.jpg";
+import KitEmbrague2 from "../../Assets/kitEm2.jpg";
+import Vehicle from "../../Assets/Vehicle_engineering.jpg";
 import Image from "mui-image";
 
 const PopularCategories = () => {
