@@ -59,7 +59,7 @@ const ProductDetailPage = () => {
           >
             <Typography variant="h6">Nombre de Parte</Typography>
             <Typography variant="h7">255.30$</Typography>
-            <Typography variant="h7">Nro de Parte: 1745646</Typography>
+            <Typography variant="h7">Nro de serie: 1745646</Typography>
             <Typography variant="h7">Stock: 25</Typography>
 
             <Stack direction={"row"} sx={styles.add}>
