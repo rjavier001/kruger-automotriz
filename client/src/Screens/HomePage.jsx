@@ -11,6 +11,7 @@ import { NavLink } from "react-router-dom";
 import PopularCategories from "../Components/common/PopularCategories";
 import Logo from "../Assets/LOGO_KRUGERMOTORS.png";
 import DividerBrand from "../Components/common/DividerBrand";
+import Logo from "../assets/LOGO_KRUGERMOTORS.png";
 
 const SERVICES = ["Repuestos", "Manufactura", "Motor"];
 const HomePage = () => {

@@ -24,6 +24,7 @@ import menuConfigs from "../../Configs/menu.configs";
 import { themeModes } from "../../Configs/theme.configs";
 import { setThemeMode } from "../../redux/features/themeModeSlice";
 import Sidebar from "./Sidebar";
+import { useLocation } from "react-router-dom";
 
 const ScrollAppBar = ({ children, window }) => {
   const { themeMode } = useSelector((state) => state.themeMode);
@@ -109,6 +110,8 @@ const Navbar = () => {
     },
   }));
 
+  let location = useLocation();
+  
   return (
     <>
       <Sidebar open={sidebarOpen} toggleSidebar={toggleSidebar} />
@@ -136,15 +139,23 @@ const Navbar = () => {
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               Kruger-Repuestos
             </Typography>
-            <Search>
-              <SearchIconWrapper>
-                <SearchIcon />
-              </SearchIconWrapper>
-              <StyledInputBase
-                placeholder="Search…"
-                inputProps={{ "aria-label": "search" }}
-              />
-            </Search>
+
+            {
+                (location.pathname === '/shop')
+                ?
+                <Search>
+                  <SearchIconWrapper>
+                    <SearchIcon />
+                  </SearchIconWrapper>
+                  <StyledInputBase
+                    placeholder="Search…"
+                    inputProps={{ "aria-label": "search" }}
+                  />
+                </Search>
+                : 
+                ''
+            }
+            
             <Stack
               direction="row"
               spacing={1}

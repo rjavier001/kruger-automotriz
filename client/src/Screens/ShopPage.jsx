@@ -1,11 +1,13 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
-import { Box, Grid } from "@mui/material";
-import { Container } from "@mui/system";
+import { Box, Grid, InputBase } from "@mui/material";
+import { alpha, Container } from "@mui/system";
 import React from "react";
 import CardComp from "../Components/CardComp";
 import CarouselComp from "../Components/CarouselComp";
 import productApi from "../api/modules/products.api";
+import SearchIcon from "@mui/icons-material/Search";
+import styled from "@emotion/styled";
 
 const Shop = () => {
   const dispatch = useDispatch();

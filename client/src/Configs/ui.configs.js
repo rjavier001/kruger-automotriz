@@ -32,6 +32,40 @@ const uiConfigs = {
   size: {
     sidebarWith: "300px",
     contentMaxWidth: "1366px"
+  },
+
+  //---------------------------------------------------------------------------//
+  /* Styles for the Card Component */
+  box:{
+    margin:'1m',
+    marginBottom: '1rem',
+    boxSizing:'border-box',
+    boxShadow: 'rgba(217,183,123,0.5) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px',
+    maxWidth: '345', 
+    minHeight: '500'
+  },
+  item:{
+    textAlign:'center'
+  },
+  text:{
+    fontWeight:'bold',
+    fontSize:'medium'
+  },
+  button:{
+    display: 'flex',
+    justifyContent: 'center',
+    marginBottom: '1rem'
+  },
+  card:{
+    marginTop:'1em'
+  },
+  img:{
+    with:'2rem',
+    height:'15rem'
+  },
+  cardMedia:{
+    margin:'auto',
+    objectFit:'contain'
   }
 };
 
