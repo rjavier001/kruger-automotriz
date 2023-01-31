@@ -13,18 +13,18 @@ const CarouselComp = ({ items }) => {
     <Box
       sx={{
         position: "relative",
-        color: "primary.contrastText",
-        "&::before": {
-          content: '""',
-          width: "100%",
-          height: "40%",
-          position: "absolute",
-          bottom: 0,
-          left: 0,
-          zIndex: 2,
-          pointerEvents: "none",
-          ...uiConfigs.style.gradientBgImage[theme.palette.mode],
-        },
+        // color: "primary.contrastText",
+        // "&::before": {
+        //   content: '""',
+        //   width: "100%",
+        //   height: "40%",
+        //   position: "absolute",
+        //   bottom: 0,
+        //   left: 0,
+        //   zIndex: 2,
+        //   pointerEvents: "none",
+        //   ...uiConfigs.style.gradientBgImage[theme.palette.mode],
+        // },
         paddingTop: {
           xs: "2.5%",
         },
@@ -52,13 +52,13 @@ const CarouselComp = ({ items }) => {
                 },
                 backgroundPosition: "top",
                 backgroundRepeat: "no-repeat",
-                backgroundSize: "40% 20rem",
+                backgroundSize: "80% 20rem",
                 objectFit: "contain",
                 backgroundImage: `url(${item.photoUrl})`,
               }}
             />
 
-            <Box
+            {/* <Box
               sx={{
                 width: "100%",
                 height: "100%",
@@ -94,8 +94,7 @@ const CarouselComp = ({ items }) => {
                 </Stack>
               </Box>
 
-            </Box>
-
+            </Box> */}
           </SwiperSlide>
         ))}
       </Swiper>

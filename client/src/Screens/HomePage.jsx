@@ -12,6 +12,7 @@ import PopularCategories from "../Components/common/PopularCategoriesComp";
 import Logo from "../Assets/LOGO_KRUGERMOTORS.png";
 import DividerBrand from "../Components/common/DividerBrandComp";
 import OffersComp from "../Components/common/OffersComp";
+import CarouselComp from "../Components/CarouselComp";
 
 const SERVICES = ["Repuestos", "Manufactura", "Motor"];
 const HomePage = () => {
@@ -24,9 +25,27 @@ const HomePage = () => {
   //   dispatch(loadProducts());
   // }, []);
 
+  const homeSlider = [
+    {
+      photoUrl:
+        "https://res.cloudinary.com/dhaklfydk/image/upload/v1675186357/kruger-products/KrugerHomeSlide_gtvkfr.png",
+    },
+    {
+      photoUrl:
+        "https://res.cloudinary.com/dhaklfydk/image/upload/v1675186527/kruger-products/KrugerHomeSlide2_jbfn2w.png",
+    },
+    {
+      photoUrl:
+        "https://res.cloudinary.com/dhaklfydk/image/upload/v1675186528/kruger-products/KrugerHomeSlide3_ngggny.png",
+    },
+  ];
+
   return (
     <Stack>
-      <Stack
+      <CarouselComp items={homeSlider} />
+
+      {/* MAIN INFO */}
+      {/* <Stack
         direction={{ sm: "row", xs: "column" }}
         spacing={{ xs: 1, sm: 2, md: 4 }}
         justifyContent={"center"}
@@ -69,7 +88,8 @@ const HomePage = () => {
             objectFit: "contain",
           }}
         />
-      </Stack>
+      </Stack> */}
+      {/* END  MAIN INFO */}
 
       <OffersComp />
 
