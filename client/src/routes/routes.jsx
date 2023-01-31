@@ -1,10 +1,9 @@
-
 import HomePage from "../screens/HomePage";
 import Shop from "../screens/ShopPage";
 import CheckOutPage from "../screens/CheckOutPage";
 import ProductDetailPage from "../screens/ProductDetailPage";
-
-
+import NotFoundPage from "../screens/NotFoundPage";
+import { Navigate } from "react-router-dom";
 
 export const routesGen = {
   home: "/",
@@ -32,8 +31,11 @@ const routes = [
     element: <ProductDetailPage />,
     state: "details",
   },
-
-
+  {
+    path: "/*",
+    element: <NotFoundPage />,
+    state: "not-found",
+  },
 ];
 
 export default routes;
