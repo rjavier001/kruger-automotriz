@@ -7,12 +7,15 @@
     "@emotion/styled": "^11.10.5",
     "@fontsource/roboto": "^4.5.8",
     "@mui/icons-material": "^5.11.0",
+    "@mui/lab": "^5.0.0-alpha.117",
     "@mui/material": "^5.11.6",
     "@reduxjs/toolkit": "^1.9.1",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "animate.css": "^4.1.1",
     "axios": "^1.2.3",
+    "formik": "^2.2.9",
     "mui-image": "^1.0.7",
     "query-string": "^8.1.0",
     "react": "^18.2.0",
@@ -27,7 +30,8 @@
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.4.2",
     "swiper": "^8.4.6",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "yup": "^0.32.11"
   },
   "scripts": {
     "start": "react-scripts start",

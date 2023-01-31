@@ -7,6 +7,7 @@ import CardComp from "../components/CardComp";
 import CarouselComp from "../components/CarouselComp";
 import SearchIcon from "@mui/icons-material/Search";
 import styled from "@emotion/styled";
+import { toast } from "react-toastify";
 import productsApi from "../api/modules/products.api";
 
 const Shop = () => {
@@ -25,7 +26,7 @@ const Shop = () => {
     const getList = async () => {
       const { response, err } = await productsApi.getList();
       if (response) setProduct(response);
-      // if (err) toast.error(err.message);
+      if (err) toast.error(err.message);
       // dispatch(setGlobalLoading(false));
     };
     getList();
@@ -56,29 +57,50 @@ const Shop = () => {
           </Box>
         </Container>
         <Grid item container spacing={2} marginTop="2px">
-          {name === "" ? (
-            <>
-              {product.map((item, i) => (
-                <Grid key={i} item xs={12} md={4} sm={6} justify="center">
-                  <CardComp props={item} />
-                </Grid>
-              ))}
-            </>
-          ) : (
-            <>
-              {productsQuery.length === 0 ? (
-                "No existen products"
-              ) : (
-                <>
-                  {productsQuery.map((items, i) => (
-                    <Grid key={i} item xs={12} md={4} sm={6} justify="center">
-                      <CardComp props={items} />
-                    </Grid>
-                  ))}
-                </>
-              )}
-            </>
-          )}
+        {name === '' 
+          ? 
+          <>
+          {product.map((item, i) => (
+            <Grid
+            key={i}
+            item
+            xs={12}
+            md={4}
+            sm={6}
+            justify="center"
+            >
+              <CardComp
+               props={item}   
+               />
+            </Grid>
+          ))} 
+          </>
+          : 
+          <>
+          {
+            productsQuery.length === 0
+            ?"No existen products" 
+            :
+          <>
+          {productsQuery.map((items, i) => (
+            <Grid
+            className="animate__animated animate__zoomInDown"
+            key={i}
+            item
+            xs={12}
+            md={4}
+            sm={6}
+            justify="center"
+            >
+              <CardComp              
+               props={items}   
+               />
+            </Grid>
+          ))} 
+          </>
+          }
+          </>
+          }
         </Grid>
       </Container>
     </>
