@@ -31,23 +31,16 @@ const HomePage = () => {
         spacing={{ xs: 1, sm: 2, md: 4 }}
         justifyContent={"center"}
         alignItems={"center"}
+        paddingX={20}
       >
         <Stack width={400}>
-          <Typography
-            sx={{
-              marginRight: "auto",
-            }}
-          >
-            Mejora el rendimiento de tu Auto
-          </Typography>
-          <Typography mt={2} variant="h3">
-            Para un mejor rendimiento de tu motor
+          <Typography mt={2} variant="h3" sx={{ fontWeight: "bold" }}>
+            KRUGER MOTORS
           </Typography>
           <Typography mt={2}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos
-            corrupti obcaecati dolores voluptatum ratione cupiditate numquam.
-            Magni, consequuntur! Placeat esse sit, magni sequi pariatur corrupti
-            perspiciatis officia illum fugiat omnis.
+            Te ofrecemos los mejores productos, 100% confiables y de excelente
+            calidad. Contamos con variedad de repuestos para tu vehículo, en un
+            solo lugar!
           </Typography>
           <NavLink to={"/checkout"} className="navlink">
             <Button
