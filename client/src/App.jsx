@@ -4,9 +4,9 @@ import themeConfigs from "./configs/theme.configs";
 import CssBaseline from "@mui/material/CssBaseline";
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import MainLayout from "./Components/layout/MainLayout";
+import MainLayout from "./components/layout/MainLayout";
 import routes from "./routes/routes";
-import PageWrapper from "./Components/common/PageWrapper";
+import PageWrapper from "./components/common/PageWrapper";
 
 const App = () => {
   const { themeMode } = useSelector((state) => state.themeMode);

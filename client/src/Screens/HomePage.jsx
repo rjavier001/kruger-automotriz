@@ -1,16 +1,16 @@
 // import { useSelector, useDispatch } from "react-redux";
 // import { loadProducts } from "../redux/actions";
 // import { useEffect } from "react";
-import HomeIcon from "../Assets/items.png";
-import Vehicle from "../Assets/Vehiculo_portada.png";
+import HomeIcon from "../assets/items.png";
+import Vehicle from "../assets/Vehiculo_portada.png";
 import Image from "mui-image";
 import { Button, Stack, Typography } from "@mui/material";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import { NavLink } from "react-router-dom";
-import PopularCategories from "../Components/common/PopularCategories";
-import Logo from "../Assets/LOGO_KRUGERMOTORS.png";
-import DividerBrand from "../Components/common/DividerBrand";
+import PopularCategories from "../components/common/PopularCategories";
+import Logo from "../assets/LOGO_KRUGERMOTORS.png";
+import DividerBrand from "../components/common/DividerBrand";
 
 const SERVICES = ["Repuestos", "Manufactura", "Motor"];
 const HomePage = () => {
