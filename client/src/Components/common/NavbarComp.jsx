@@ -1,5 +1,5 @@
 import { cloneElement, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import MenuIcon from "@mui/icons-material/Menu";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
@@ -9,24 +9,25 @@ import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
 import CarRepairIcon from "@mui/icons-material/CarRepair";
 import {
   AppBar,
-  Box,
   Toolbar,
   IconButton,
   Typography,
   Stack,
   Button,
   InputBase,
-  useScrollTrigger,
-  useTheme,
+  useScrollTrigger
 } from "@mui/material";
 import { styled, alpha } from "@mui/material/styles";
 import menuConfigs from "../../configs/menu.configs";
 import { themeModes } from "../../configs/theme.configs";
 import { setThemeMode } from "../../redux/features/themeModeSlice";
+import { setAuthModalOpen } from "../../redux/features/authModalSlice";
 import Sidebar from "./Sidebar";
-import { useLocation } from "react-router-dom";
+import UserMenu from "./UserMenu";
 
 const ScrollAppBar = ({ children, window }) => {
+  const { user } = useSelector((state) => state.user);
+  const { appState } = useSelector((state) => state.appState);
   const { themeMode } = useSelector((state) => state.themeMode);
 
   const trigger = useScrollTrigger({
@@ -185,6 +186,18 @@ const Navbar = () => {
                 <Typography sx={styles.badge}>3</Typography>
               </IconButton>
             </Stack>
+
+            {/* user menu */}
+            <Stack spacing={3} direction="row" alignItems="center">
+              {!user && <Button
+                variant="contained"
+                onClick={() => dispatch(setAuthModalOpen(true))}
+              >
+                sign in
+              </Button>}
+            </Stack>
+            {user && <UserMenu />}
+            {/* user menu */}
           </Toolbar>
         </AppBar>
       </ScrollAppBar>
