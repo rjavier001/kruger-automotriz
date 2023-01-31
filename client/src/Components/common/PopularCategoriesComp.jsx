@@ -18,8 +18,13 @@ import Image from "mui-image";
 const PopularCategories = () => {
   return (
     <Stack>
-      <Typography textAlign="center" variant="h5" component="div">
-        <h3>Popular Categories</h3>
+      <Typography
+        textAlign="center"
+        variant="h3"
+        component="div"
+        sx={{ paddingTop: "20px", fontFamily: "Staatliches" }}
+      >
+        Más Vendidos
       </Typography>
       <Stack
         direction={{ sm: "row", xs: "column" }}
@@ -30,9 +35,10 @@ const PopularCategories = () => {
         <Card sx={{ maxWidth: 345, boxShadow: 0 }}>
           <CardActionArea>
             <CardMedia
-              fit="cover"
               component="img"
-              image={KitEmbrague2}
+              height="350"
+              sx={{ padding: "1em 1em 0 1em", objectFit: "contain" }}
+              image="https://res.cloudinary.com/dhaklfydk/image/upload/v1674796014/kruger-products/dicofreno7_gtqw69.png"
               alt="green iguana"
             />
             <CardContent>
@@ -41,6 +47,8 @@ const PopularCategories = () => {
                 gutterBottom
                 variant="h5"
                 component="div"
+                color="primary"
+                sx={{ fontFamily: "Staatliches" }}
               >
                 Kit de Embrague
               </Typography>
@@ -55,8 +63,9 @@ const PopularCategories = () => {
           <CardActionArea>
             <CardMedia
               component="img"
-              fit="cover"
-              image={Piston}
+              height="350"
+              sx={{ padding: "1em 1em 0 1em", objectFit: "contain" }}
+              image="https://res.cloudinary.com/dhaklfydk/image/upload/v1674796027/kruger-products/discoembrague2_qwptfj.png"
               alt="green iguana"
             />
             <CardContent>
@@ -65,6 +74,8 @@ const PopularCategories = () => {
                 gutterBottom
                 variant="h5"
                 component="div"
+                color="primary"
+                sx={{ fontFamily: "Staatliches" }}
               >
                 Pistones
               </Typography>
@@ -79,8 +90,9 @@ const PopularCategories = () => {
           <CardActionArea>
             <CardMedia
               component="img"
-              fit="cover"
-              image={KitDist1}
+              height="350"
+              sx={{ padding: "1em 1em 0 1em", objectFit: "contain" }}
+              image="https://res.cloudinary.com/dhaklfydk/image/upload/v1674796026/kruger-products/bujia4_ceuhzd.png"
               alt="green iguana"
             />
             <CardContent>
@@ -89,6 +101,8 @@ const PopularCategories = () => {
                 gutterBottom
                 variant="h5"
                 component="div"
+                color="primary"
+                sx={{ fontFamily: "Staatliches" }}
               >
                 Kit de Dsitribucion
               </Typography>

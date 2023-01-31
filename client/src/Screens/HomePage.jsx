@@ -8,9 +8,11 @@ import { Button, Stack, Typography } from "@mui/material";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import { NavLink } from "react-router-dom";
-import PopularCategories from "../Components/common/PopularCategories";
+import PopularCategories from "../Components/common/PopularCategoriesComp";
 import Logo from "../assets/LOGO_KRUGERMOTORS.png";
-import DividerBrand from "../Components/common/DividerBrand";
+import DividerBrand from "../Components/common/DividerBrandComp";
+import OffersComp from "../Components/common/OffersComp";
+import CarouselComp from "../Components/CarouselComp";
 
 const SERVICES = ["Repuestos", "Manufactura", "Motor"];
 const HomePage = () => {
@@ -23,30 +25,41 @@ const HomePage = () => {
   //   dispatch(loadProducts());
   // }, []);
 
+  const homeSlider = [
+    {
+      photoUrl:
+        "https://res.cloudinary.com/dhaklfydk/image/upload/v1675186357/kruger-products/KrugerHomeSlide_gtvkfr.png",
+    },
+    {
+      photoUrl:
+        "https://res.cloudinary.com/dhaklfydk/image/upload/v1675186527/kruger-products/KrugerHomeSlide2_jbfn2w.png",
+    },
+    {
+      photoUrl:
+        "https://res.cloudinary.com/dhaklfydk/image/upload/v1675186528/kruger-products/KrugerHomeSlide3_ngggny.png",
+    },
+  ];
+
   return (
     <Stack>
-      <Stack
+      <CarouselComp items={homeSlider} />
+
+      {/* MAIN INFO */}
+      {/* <Stack
         direction={{ sm: "row", xs: "column" }}
         spacing={{ xs: 1, sm: 2, md: 4 }}
         justifyContent={"center"}
         alignItems={"center"}
+        paddingX={20}
       >
         <Stack width={400}>
-          <Typography
-            sx={{
-              marginRight: "auto",
-            }}
-          >
-            Mejora el rendimiento de tu Auto
-          </Typography>
-          <Typography mt={2} variant="h3">
-            Para un mejor rendimiento de tu motor
+          <Typography mt={2} variant="h3" sx={{ fontWeight: "bold" }}>
+            KRUGER MOTORS
           </Typography>
           <Typography mt={2}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos
-            corrupti obcaecati dolores voluptatum ratione cupiditate numquam.
-            Magni, consequuntur! Placeat esse sit, magni sequi pariatur corrupti
-            perspiciatis officia illum fugiat omnis.
+            Te ofrecemos los mejores productos, 100% confiables y de excelente
+            calidad. Contamos con variedad de repuestos para tu vehículo, en un
+            solo lugar!
           </Typography>
           <NavLink to={"/checkout"} style={{ textDecoration: "none" }}>
             <Button
@@ -68,14 +81,21 @@ const HomePage = () => {
         <Image
           src={Vehicle}
           height="60%"
-          width="60%"
-          fit="cover"
-          sx={{ marginLeft: "auto", marginTop: 5 }}
+          sx={{
+            marginLeft: "auto",
+            marginTop: 5,
+            padding: "1em 1em 0 1em",
+            objectFit: "contain",
+          }}
         />
-      </Stack>
-      <PopularCategories />
+      </Stack> */}
+      {/* END  MAIN INFO */}
+
+      <OffersComp />
 
       <DividerBrand />
+
+      <PopularCategories />
 
       <Typography
         p={5}
