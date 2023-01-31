@@ -2,6 +2,7 @@ import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import ContactsIcon from "@mui/icons-material/Contacts";
 import GroupsIcon from "@mui/icons-material/Groups";
 import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
+import LockResetOutlinedIcon from "@mui/icons-material/LockResetOutlined";
 
 const main = [
   {
@@ -30,27 +31,27 @@ const main = [
   },
 ];
 
-// const user = [
-//   {
-//     display: "favorites",
-//     path: "/favorites",
-//     icon: <FavoriteBorderOutlinedIcon />,
-//     state: "favorite",
-//   },
-//   {
-//     display: "reviews",
-//     path: "/reviews",
-//     icon: <RateReviewOutlinedIcon />,
-//     state: "reviews",
-//   },
-//   {
-//     display: "password update",
-//     path: "/password-update",
-//     icon: <LockResetOutlinedIcon />,
-//     state: "password.update",
-//   },
-// ];
+const user = [
+  {
+    display: "shop history",
+    path: "/history",
+    // icon: <FavoriteBorderOutlinedIcon />,
+    state: "history",
+  },
+  {
+    display: "in progress orders",
+    path: "/progressorders",
+    // icon: <RateReviewOutlinedIcon />,
+    state: "progressorders",
+  },
+  {
+    display: "password update",
+    path: "/password-update",
+    icon: <LockResetOutlinedIcon />,
+    state: "password.update",
+  },
+];
 
-const menuConfigs = { main };
+const menuConfigs = { main, user };
 
 export default menuConfigs;
