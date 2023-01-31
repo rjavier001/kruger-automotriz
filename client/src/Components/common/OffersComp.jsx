@@ -85,7 +85,7 @@ const OffersComp = () => {
               component="img"
               height="350"
               sx={{
-                marginLeft: "6em",
+                marginLeft: "3em",
                 padding: "2.5em 2.5em 0 2.5em",
               }}
               image={Offer_Faros}
