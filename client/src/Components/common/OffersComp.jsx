@@ -8,11 +8,11 @@ import {
   Typography,
 } from "@mui/material";
 
-import Piston from "../../Assets/Pistons2.png";
-import KitDist1 from "../../Assets/KitDist2.jpg";
-import KitEmbrague2 from "../../Assets/kitEm2.png";
-import Offer_Faros from "../../Assets/Offer_Faros.png";
-import Offer_Amortiguadores from "../../Assets/Offer_Amortiguadores.png";
+import Piston from "../../assets/Pistons2.png";
+import KitDist1 from "../../assets/KitDist2.jpg";
+import KitEmbrague2 from "../../assets/kitEm2.png";
+import Offer_Faros from "../../assets/Offer_Faros.png";
+import Offer_Amortiguadores from "../../assets/Offer_Amortiguadores.png";
 
 const OffersComp = () => {
   return (

@@ -9,7 +9,7 @@ import {
 import React from "react";
 import { CardMedia } from "@mui/material";
 import { Container } from "@mui/system";
-import uiConfigs from "../Configs/ui.configs";
+import uiConfigs from "../configs/ui.configs";
 
 const CardComp = ({ props }) => {
   const { name, price, photoUrl, stock, description } = props;
