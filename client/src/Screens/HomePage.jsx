@@ -8,9 +8,9 @@ import { Button, Stack, Typography } from "@mui/material";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import { NavLink } from "react-router-dom";
-import PopularCategories from "../Components/common/PopularCategories";
+import PopularCategories from "../Components/common/PopularCategoriesComp";
 import Logo from "../Assets/LOGO_KRUGERMOTORS.png";
-import DividerBrand from "../Components/common/DividerBrand";
+import DividerBrand from "../Components/common/DividerBrandComp";
 import OffersComp from "../Components/common/OffersComp";
 
 const SERVICES = ["Repuestos", "Manufactura", "Motor"];
