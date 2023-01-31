@@ -26,8 +26,6 @@ import Sidebar from "./Sidebar";
 import UserMenu from "./UserMenu";
 
 const ScrollAppBar = ({ children, window }) => {
-  const { user } = useSelector((state) => state.user);
-  const { appState } = useSelector((state) => state.appState);
   const { themeMode } = useSelector((state) => state.themeMode);
 
   const trigger = useScrollTrigger({
@@ -53,6 +51,7 @@ const ScrollAppBar = ({ children, window }) => {
 };
 
 const Navbar = () => {
+  const { user } = useSelector((state) => state.user);
   const { appState } = useSelector((state) => state.appState);
   const { themeMode } = useSelector((state) => state.themeMode);
   const [sidebarOpen, setSidebarOpen] = useState(false);
