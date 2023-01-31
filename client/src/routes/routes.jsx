@@ -1,10 +1,7 @@
-
 import HomePage from "../screens/HomePage";
 import Shop from "../screens/ShopPage";
 import CheckOutPage from "../screens/CheckOutPage";
 import ProductDetailPage from "../screens/ProductDetailPage";
-
-
 
 export const routesGen = {
   home: "/",
