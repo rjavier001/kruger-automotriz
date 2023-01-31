@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 import { Outlet } from "react-router-dom";
-import Footer from "../common/Footer";
+import FooterComp from "../common/FooterComp";
 // import GlobalLoading from "../common/GlobalLoading";
 import NavbarComp from "../common/NavbarComp";
 // import AuthModal from "../common/AuthModal";
@@ -55,7 +55,7 @@ const MainLayout = () => {
           <Outlet />
         </Box>
       </Box>
-      <Footer />
+      <FooterComp />
     </>
   );
 };
