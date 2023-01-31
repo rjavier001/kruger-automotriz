@@ -50,10 +50,14 @@ const DeliveryComp = () => {
               paddingRight={42}
               textAlign="justify"
             >
-              Realizamos envíos a nivel nacional por medio de la empresa Servi
-              Entrega o Larrcourier, si te encuentras en la ciudad de Quito
-              puedes retirar tu compra en nuestra empresa. <br /> Si tu compra
-              llega a más de 300 $ el envío es gratis!!
+              Nuestros <strong>rapi-krugeritos</strong> hacen entregas a
+              domicilio en la ciudad de Quito y a nivel nacional por medio de la
+              empresa Servientrega o si prefieres puedes retirar tu compra en
+              nuestra empresa.
+              <br /> <br />{" "}
+              <strong>
+                Si tu compra llega a más de 300 $ el envío es gratis!!
+              </strong>
             </Typography>
           </CardContent>
         </Card>
