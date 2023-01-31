@@ -78,11 +78,11 @@ const HomePage = () => {
         />
       </Stack>
 
-      <PopularCategories />
+      <OffersComp />
 
       <DividerBrand />
 
-      <OffersComp />
+      <PopularCategories />
 
       <Typography
         p={5}
