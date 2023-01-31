@@ -57,6 +57,7 @@ const ProductDetailPage = () => {
               height={450}
               width={"100%"}
               src={props.photoUrl}
+              duration={1000}
             />
             {/* RIGHT PANEL */}
           </Grid>

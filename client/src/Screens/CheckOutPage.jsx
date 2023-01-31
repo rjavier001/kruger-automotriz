@@ -97,6 +97,7 @@ const CheckOutPage = () => {
                     src={cartItem.photoUrl}
                     height={80}
                     width={80}
+                    duration={1000}
                   />
                 </Box>
                 <Box>
