@@ -51,7 +51,8 @@ const ScrollAppBar = ({ children, window }) => {
 };
 
 const Navbar = () => {
-  const { user } = useSelector((state) => state.user);
+  // const { user } = useSelector((state) => state.user);
+  const { user } = {};
   const { appState } = useSelector((state) => state.appState);
   const { themeMode } = useSelector((state) => state.themeMode);
   const [sidebarOpen, setSidebarOpen] = useState(false);
