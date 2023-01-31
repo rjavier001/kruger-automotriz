@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 import Footer from "../common/Footer";
 // import GlobalLoading from "../common/GlobalLoading";
 import NavbarComp from "../common/NavbarComp";
-// import AuthModal from "../common/AuthModal";
+import AuthModal from "../common/AuthModal";
 // import { useDispatch, useSelector } from "react-redux";
 // import { useEffect } from "react";
 // import { toast } from "react-toastify";
@@ -42,7 +42,7 @@ const MainLayout = () => {
   return (
     <>
       {/* <GlobalLoading /> */}
-      {/* <AuthModal /> */}
+      <AuthModal />
       <Box display="flex" minHeight="100vh">
         <NavbarComp />
         <Box
