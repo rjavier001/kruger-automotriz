@@ -4,14 +4,13 @@ import themeConfigs from "./configs/theme.configs";
 import CssBaseline from "@mui/material/CssBaseline";
 import "./App.css";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
-import MainLayout from "./Components/layout/MainLayout";
+import MainLayout from "./components/layout/MainLayout";
 import routes from "./routes/routes";
-import PageWrapper from "./Components/common/PageWrapper";
+import PageWrapper from "./components/common/PageWrapper";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import store from "./redux/store";
 import { getTotal } from "./redux/features/cartSlice";
-
 
 store.dispatch(getTotal());
 const App = () => {

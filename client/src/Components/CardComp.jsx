@@ -13,6 +13,7 @@ import uiConfigs from "../configs/ui.configs";
 import { NavLink } from "react-router-dom";
 
 const CardComp = ({ props }) => {
+  //Coment random
   const { name, price, photoUrl, stock, description } = props;
   return (
     <Container>

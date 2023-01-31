@@ -8,11 +8,11 @@ import { Button, Stack, Typography } from "@mui/material";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import { NavLink } from "react-router-dom";
-import PopularCategories from "../Components/common/PopularCategoriesComp";
+import PopularCategories from "../components/common/PopularCategoriesComp";
 import Logo from "../assets/LOGO_KRUGERMOTORS.png";
-import DividerBrand from "../Components/common/DividerBrandComp";
-import OffersComp from "../Components/common/OffersComp";
-import CarouselComp from "../Components/CarouselComp";
+import DividerBrand from "../components/common/DividerBrandComp";
+import OffersComp from "../components/common/OffersComp";
+import CarouselComp from "../components/CarouselComp";
 
 const SERVICES = ["Repuestos", "Manufactura", "Motor"];
 const HomePage = () => {
