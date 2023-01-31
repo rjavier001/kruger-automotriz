@@ -18,8 +18,13 @@ import Image from "mui-image";
 const PopularCategories = () => {
   return (
     <Stack>
-      <Typography textAlign="center" variant="h5" component="div">
-        <h3>Popular Categories</h3>
+      <Typography
+        textAlign="center"
+        variant="h3"
+        component="div"
+        sx={{ paddingTop: "20px", fontFamily: "Staatliches" }}
+      >
+        Popular Categories
       </Typography>
       <Stack
         direction={{ sm: "row", xs: "column" }}
@@ -42,6 +47,8 @@ const PopularCategories = () => {
                 gutterBottom
                 variant="h5"
                 component="div"
+                color="primary"
+                sx={{ fontFamily: "Staatliches" }}
               >
                 Kit de Embrague
               </Typography>
@@ -67,6 +74,8 @@ const PopularCategories = () => {
                 gutterBottom
                 variant="h5"
                 component="div"
+                color="primary"
+                sx={{ fontFamily: "Staatliches" }}
               >
                 Pistones
               </Typography>
@@ -92,6 +101,8 @@ const PopularCategories = () => {
                 gutterBottom
                 variant="h5"
                 component="div"
+                color="primary"
+                sx={{ fontFamily: "Staatliches" }}
               >
                 Kit de Dsitribucion
               </Typography>
