@@ -10,7 +10,7 @@ import React, { useState } from "react";
 import Image from "mui-image";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
-import CompanyBenefitsComp from "../Components/CompanyBenefitsComp";
+import CompanyBenefitsComp from "../components/CompanyBenefitsComp";
 import { NavLink } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
