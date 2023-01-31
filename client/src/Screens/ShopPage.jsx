@@ -7,6 +7,7 @@ import CardComp from "../components/CardComp";
 import CarouselComp from "../components/CarouselComp";
 import SearchIcon from "@mui/icons-material/Search";
 import styled from "@emotion/styled";
+import { toast } from "react-toastify";
 import productsApi from "../api/modules/products.api";
 
 const Shop = () => {
@@ -25,7 +26,7 @@ const Shop = () => {
     const getList = async () => {
       const { response, err } = await productsApi.getList();
       if (response) setProduct(response);
-      // if (err) toast.error(err.message);
+      if (err) toast.error(err.message);
       // dispatch(setGlobalLoading(false));
     };
     getList();
@@ -80,6 +81,7 @@ const Shop = () => {
           <>
           {productsQuery.map((items, i) => (
             <Grid
+            className="animate__animated animate__zoomInDown"
             key={i}
             item
             xs={12}
@@ -87,7 +89,7 @@ const Shop = () => {
             sm={6}
             justify="center"
             >
-              <CardComp
+              <CardComp              
                props={items}   
                />
             </Grid>
