@@ -9,7 +9,7 @@ import TwitterIcon from "@mui/icons-material/Twitter";
 import Logo from "../../Assets/LOGO_KRUGERMOTORS.png";
 import { Box } from "@mui/system";
 
-const Footer = () => {
+const FooterComp = () => {
   const Div = styled("div")(({ theme }) => ({
     ...theme.typography.button,
     textAlign: "end",
@@ -110,4 +110,4 @@ const Footer = () => {
   );
 };
 
-export default Footer;
+export default FooterComp;

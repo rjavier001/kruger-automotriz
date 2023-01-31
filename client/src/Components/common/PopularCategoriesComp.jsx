@@ -24,7 +24,7 @@ const PopularCategories = () => {
         component="div"
         sx={{ paddingTop: "20px", fontFamily: "Staatliches" }}
       >
-        Popular Categories
+        Más Vendidos
       </Typography>
       <Stack
         direction={{ sm: "row", xs: "column" }}
