@@ -3,6 +3,7 @@ import {
   CardActionArea,
   CardContent,
   CardMedia,
+  Divider,
   Stack,
   Typography,
 } from "@mui/material";
@@ -16,8 +17,14 @@ import Offer_Amortiguadores from "../../Assets/Offer_Amortiguadores.png";
 const OffersComp = () => {
   return (
     <Stack>
-      <Typography textAlign="center" variant="h5" component="div">
-        <h3>Ofertas</h3>
+      <Divider variant="middle" sx={{ paddingTop: "20px" }} />
+      <Typography
+        textAlign="center"
+        variant="h3"
+        component="div"
+        sx={{ paddingTop: "20px", fontFamily: "Staatliches" }}
+      >
+        Ofertas
       </Typography>
       <Stack
         direction={{ sm: "row", xs: "column" }}
