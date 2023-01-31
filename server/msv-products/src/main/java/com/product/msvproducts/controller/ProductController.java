@@ -65,6 +65,25 @@ public class ProductController {
         return  ResponseEntity.status(HttpStatus.OK).body("Successfully operation. ");
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<?> detail(@RequestParam(name="description", required=false) String description){
+        List<Product> products = new ArrayList<>();
+        if(description == null){
+            products = service.listAllProducts();
+            if(products.isEmpty()){
+                return ResponseEntity.noContent().build();
+            }
+        }
+        else {
+            products = service.findByDescription(description);
+            if(products.isEmpty()){
+                return ResponseEntity.noContent().build();
+            }
+        }
+        
+        return ResponseEntity.ok(products);
+    }
+
     @GetMapping("/products-by-order")
     public ResponseEntity<?> getAllProductsByOrder(@RequestParam List<Long> ids){
         return ResponseEntity.ok(service.listByIds(ids));

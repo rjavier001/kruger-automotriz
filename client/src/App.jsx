@@ -12,6 +12,7 @@ import "react-toastify/dist/ReactToastify.css";
 import store from "./redux/store";
 import { getTotal } from "./redux/features/cartSlice";
 
+
 store.dispatch(getTotal());
 const App = () => {
   const { themeMode } = useSelector((state) => state.themeMode);
