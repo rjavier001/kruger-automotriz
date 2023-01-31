@@ -65,4 +65,9 @@ public class ProductServiceImpl implements IProductService{
     public void deleteProduct(Long id) {
         repository.deleteById(id);
     }
+
+    @Override
+    public List<Product> findByDescription(String description) {
+        return repository.findByDescriptionContaining(description);
+    }
 }

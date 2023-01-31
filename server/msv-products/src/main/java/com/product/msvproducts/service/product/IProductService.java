@@ -16,4 +16,6 @@ public interface IProductService {
     public Product createProduct(Product product);
     public Product updateProduct(Product product);
     public void deleteProduct(Long id);
+
+    public List<Product> findByDescription(String description);
 }
