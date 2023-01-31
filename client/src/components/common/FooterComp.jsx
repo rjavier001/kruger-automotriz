@@ -26,7 +26,7 @@ const FooterComp = () => {
   return (
     <Stack>
       <Stack
-        sx={{ marginTop: "40px", background: "#ff910d" }}
+        sx={{ marginTop: "0px", background: "#ff910d" }}
         height={200}
         direction="row"
         spacing={12}

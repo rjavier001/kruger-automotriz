@@ -13,6 +13,7 @@ import Logo from "../assets/LOGO_KRUGERMOTORS.png";
 import DividerBrand from "../components/common/DividerBrandComp";
 import OffersComp from "../components/common/OffersComp";
 import CarouselComp from "../components/CarouselComp";
+import DeliveryComp from "../components/common/DeliveryComp";
 
 const SERVICES = ["Repuestos", "Manufactura", "Motor"];
 const HomePage = () => {
@@ -97,7 +98,9 @@ const HomePage = () => {
 
       <PopularCategories />
 
-      <Typography
+      <DeliveryComp />
+
+      {/* <Typography
         p={5}
         variant="h4"
         sx={{
@@ -168,7 +171,7 @@ const HomePage = () => {
             </Typography>
           </TabPanel>
         </Tabs>
-      </Stack>
+      </Stack> */}
     </Stack>
   );
 };
