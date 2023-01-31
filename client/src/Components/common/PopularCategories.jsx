@@ -33,7 +33,7 @@ const PopularCategories = () => {
               component="img"
               height="350"
               sx={{ padding: "1em 1em 0 1em", objectFit: "contain" }}
-              image={KitEmbrague2}
+              image="https://res.cloudinary.com/dhaklfydk/image/upload/v1674796014/kruger-products/dicofreno7_gtqw69.png"
               alt="green iguana"
             />
             <CardContent>
@@ -58,7 +58,7 @@ const PopularCategories = () => {
               component="img"
               height="350"
               sx={{ padding: "1em 1em 0 1em", objectFit: "contain" }}
-              image={Piston}
+              image="https://res.cloudinary.com/dhaklfydk/image/upload/v1674796027/kruger-products/discoembrague2_qwptfj.png"
               alt="green iguana"
             />
             <CardContent>
@@ -83,7 +83,7 @@ const PopularCategories = () => {
               component="img"
               height="350"
               sx={{ padding: "1em 1em 0 1em", objectFit: "contain" }}
-              image={KitDist1}
+              image="https://res.cloudinary.com/dhaklfydk/image/upload/v1674796026/kruger-products/bujia4_ceuhzd.png"
               alt="green iguana"
             />
             <CardContent>
