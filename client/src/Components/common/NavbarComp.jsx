@@ -7,6 +7,7 @@ import WbSunnyOutlinedIcon from "@mui/icons-material/WbSunnyOutlined";
 import SearchIcon from "@mui/icons-material/Search";
 import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
 import CarRepairIcon from "@mui/icons-material/CarRepair";
+import LoginIcon from '@mui/icons-material/Login';
 import {
   AppBar,
   Toolbar,
@@ -189,12 +190,7 @@ const Navbar = () => {
 
             {/* user menu */}
             <Stack spacing={3} direction="row" alignItems="center">
-              {!user && <Button
-                variant="contained"
-                onClick={() => dispatch(setAuthModalOpen(true))}
-              >
-                sign in
-              </Button>}
+            {!user && <LoginIcon  variant="contained" onClick={() => dispatch(setAuthModalOpen(true))}/>}              
             </Stack>
             {user && <UserMenu />}
             {/* user menu */}
