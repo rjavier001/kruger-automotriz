@@ -44,7 +44,7 @@ const OffersComp = () => {
                 textAlign="center"
                 sx={{ fontFamily: "Staatliches" }}
               >
-                En Amortiguadores
+                Amortiguadores
               </Typography>
             </CardContent>
             <CardMedia
@@ -78,7 +78,7 @@ const OffersComp = () => {
                 textAlign="center"
                 sx={{ fontFamily: "Staatliches" }}
               >
-                En Faros
+                Faros
               </Typography>
             </CardContent>
             <CardMedia
@@ -112,7 +112,7 @@ const OffersComp = () => {
                 textAlign="center"
                 sx={{ fontFamily: "Staatliches" }}
               >
-                En Pistones
+                Pistones
               </Typography>
             </CardContent>
             <CardMedia
