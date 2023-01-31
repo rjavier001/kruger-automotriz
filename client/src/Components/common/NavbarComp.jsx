@@ -20,8 +20,8 @@ import {
   useTheme,
 } from "@mui/material";
 import { styled, alpha } from "@mui/material/styles";
-import menuConfigs from "../../Configs/menu.configs";
-import { themeModes } from "../../Configs/theme.configs";
+import menuConfigs from "../../configs/menu.configs";
+import { themeModes } from "../../configs/theme.configs";
 import { setThemeMode } from "../../redux/features/themeModeSlice";
 import Sidebar from "./Sidebar";
 import { useLocation } from "react-router-dom";
