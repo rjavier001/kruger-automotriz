@@ -1,6 +1,6 @@
 import { ThemeProvider } from "@mui/material/styles";
 import { useSelector } from "react-redux";
-import themeConfigs from "./Configs/theme.configs";
+import themeConfigs from "./configs/theme.configs";
 import CssBaseline from "@mui/material/CssBaseline";
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";

@@ -1,6 +1,6 @@
-import HomePage from "../Screens/HomePage";
-import Shop from "../Screens/ShopPage";
-import CheckOutPage from "../Screens/CheckOutPage";
+import HomePage from "../screens/HomePage";
+import Shop from "../screens/ShopPage";
+import CheckOutPage from "../screens/CheckOutPage";
 
 export const routesGen = {
   home: "/",
