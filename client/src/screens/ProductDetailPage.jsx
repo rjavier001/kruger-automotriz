@@ -6,7 +6,7 @@ import {
   Button,
   IconButton,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "mui-image";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
@@ -14,29 +14,30 @@ import CompanyBenefitsComp from "../Components/CompanyBenefitsComp";
 import { NavLink } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { addToCart } from "../redux/features/cartSlice";
+import { addToCart, getTotal, decreaseCart } from "../redux/features/cartSlice";
 
 const ProductDetailPage = () => {
-  const [counter, setCounter] = useState(1);
+  const cart = useSelector((state) => state.cart);
+  const [quantity, setQuantity] = useState(1);
   let location = useLocation();
-  const { props } = location.state;
+  let { props } = location.state;
   const dispatch = useDispatch();
+
   const handleAddtoCart = (props) => {
+    props = { ...props, quantity };
     dispatch(addToCart(props));
   };
+  useEffect(() => {
+    dispatch(getTotal());
+  }, [cart, dispatch]);
 
   /* Control de counter no sea menor a 0 */
   const addCouter = () => {
-    if (props.stock > counter) {
-      setCounter(counter + 1);
-    }
-    console.log(location.state.props);
+    if (props.stock > quantity) setQuantity(quantity + 1);
   };
 
   const resCounter = () => {
-    if (counter > 0) {
-      setCounter(counter - 1);
-    }
+    if (quantity > 1) setQuantity(quantity - 1);
   };
   return (
     <>
@@ -52,10 +53,10 @@ const ProductDetailPage = () => {
               alt="product"
               showLoading={false}
               errorIcon={true}
-              fit={"cover"}
+              fit={"contain"}
               height={450}
               width={"100%"}
-              src={props.image}
+              src={props.photoUrl}
             />
             {/* RIGHT PANEL */}
           </Grid>
@@ -80,13 +81,14 @@ const ProductDetailPage = () => {
                 <IconButton size="small" onClick={() => resCounter()}>
                   <RemoveIcon />
                 </IconButton>
-                <Typography>{counter}</Typography>
+                <Typography>{quantity}</Typography>
                 <IconButton size="small" onClick={() => addCouter()}>
                   <AddIcon />
                 </IconButton>
               </Stack>
+
               <Stack
-                direction={{ md: "row", sx: "column" }}
+                direction={"row"}
                 spacing={2}
                 sx={{ justifyContent: "space-around" }}
               >
@@ -96,8 +98,13 @@ const ProductDetailPage = () => {
                 >
                   Agregar al carrito
                 </Button>
+
                 <NavLink to={"/checkout"} style={{ textDecoration: "none" }}>
-                  <Button variant="contained" color="secondary">
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    onClick={() => handleAddtoCart(props)}
+                  >
                     Comprar
                   </Button>
                 </NavLink>

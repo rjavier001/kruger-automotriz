@@ -26,7 +26,7 @@ const CompanyBenefitsComp = () => {
         <Stack sx={styles.boxes}>
           <CreditCardIcon sx={{ fontSize: 70 }} />
           <Typography variant="h6">Opciones de pago</Typography>
-          Zelle, Paypal, tarjetas de crédito extranjeras, transferencias
+          KrugerCoins, Paypal, tarjetas de crédito extranjeras, transferencias
           bancarias a cuentas en divisas, efectivo y transferencias a Bancos
           Nacionales
         </Stack>
