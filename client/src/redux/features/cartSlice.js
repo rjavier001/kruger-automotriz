@@ -23,7 +23,8 @@ export const cartSlice = createSlice({
       /*cuando ya hay un objeto del mismo ID soloincrementa la cantidad   */
       if (itemIndex >= 0) {
         if (
-          state.cartItems[itemIndex].stock > state.cartItems[itemIndex].quantity
+          state.cartItems[itemIndex].stock >
+          state.cartItems[itemIndex].cartQuantity
         ) {
           state.cartItems[itemIndex].cartQuantity += 1;
           toast.info("uno mas añadido", {
