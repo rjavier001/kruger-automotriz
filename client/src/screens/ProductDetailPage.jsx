@@ -15,6 +15,7 @@ import { NavLink } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { addToCart, getTotal, decreaseCart } from "../redux/features/cartSlice";
+import ReviewComp from "../components/common/ReviewComp";
 
 const ProductDetailPage = () => {
   const cart = useSelector((state) => state.cart);
@@ -114,6 +115,7 @@ const ProductDetailPage = () => {
           </Grid>
         </Grid>
       </Container>
+      <ReviewComp />
       <CompanyBenefitsComp />
     </>
   );
