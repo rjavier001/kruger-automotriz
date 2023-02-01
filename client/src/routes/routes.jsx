@@ -4,7 +4,11 @@ import CheckOutPage from "../screens/CheckOutPage";
 import ProductDetailPage from "../screens/ProductDetailPage";
 import NotFoundPage from "../screens/NotFoundPage";
 import PaymentPage from "../screens/PaymentPage";
-import { Navigate } from "react-router-dom";
+import Dashboard from "../components/admin/Dashboard";
+import Products from "../components/admin/Products";
+import CreateProduct from "../components/admin/CreateProduct";
+import { EditProduct } from "../components/admin/EditProduct";
+import EditCategory from "../components/admin/EditCategory";
 
 export const routesGen = {
   home: "/",
@@ -42,6 +46,31 @@ const routes = [
     element: <PaymentPage />,
     state: "payment",
   },
+  {
+    path: "/admin",
+    element: <Dashboard />,
+    state: "adminDashboard"
+  },
+  {
+    path: "/admin/products",
+    element: <Products />,
+    state: "products",
+  },
+  {
+    path: "/admin/products/create",
+    element: <CreateProduct />,
+    state: "create",
+  },
+  {
+    path: "/admin/products/edit/:id",
+    element: <EditProduct />,
+    state: "edit",
+  },
+  {
+    path: "/admin/products/category-edit",
+    element: <EditCategory />,
+    state: "edit-category",
+  }
 ];
 
 export default routes;
