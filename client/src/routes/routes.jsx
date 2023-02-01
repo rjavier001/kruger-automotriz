@@ -3,6 +3,7 @@ import Shop from "../screens/ShopPage";
 import CheckOutPage from "../screens/CheckOutPage";
 import ProductDetailPage from "../screens/ProductDetailPage";
 import NotFoundPage from "../screens/NotFoundPage";
+import PaymentPage from "../screens/PaymentPage";
 import { Navigate } from "react-router-dom";
 
 export const routesGen = {
@@ -35,6 +36,11 @@ const routes = [
     path: "/*",
     element: <NotFoundPage />,
     state: "not-found",
+  },
+  {
+    path: "/payment",
+    element: <PaymentPage />,
+    state: "payment",
   },
 ];
 

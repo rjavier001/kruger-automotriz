@@ -180,9 +180,11 @@ const CheckOutPage = () => {
           <Typography sx={styles.terms}>
             taxes and shipping calculated at chekout
           </Typography>
-          <Button variant="contained" sx={styles.btnPagar}>
-            Pagar
-          </Button>
+          <NavLink to={"/payment"} style={{ textDecoration: "none" }}>
+            <Button variant="contained" sx={styles.btnPagar}>
+              Pagar
+            </Button>
+          </NavLink>
         </Box>
       )}
     </Stack>
