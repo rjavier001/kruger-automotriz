@@ -10,6 +10,7 @@ import Swal from "sweetalert2";
 
 import productsApi from "../../../api/modules/products.api";
 import { useNavigate } from "react-router-dom";
+import uiConfigs from "../../../configs/ui.configs";
 
 
 const CreateCategory = () => {
@@ -64,8 +65,8 @@ const CreateCategory = () => {
 
 	//---------------------------------------------------------------------------------
 	return (
-		<div>
-			<Button sx={{my:4, mx:4, mb:-10}} color="primary" size="medium" variant="contained"  onClick={abrirCerrarModalInsertar}>Insertar</Button>
+		<Box sx={uiConfigs.item}>
+			<Button sx={{my:0, mx:4, mb:-1}} color="primary" size="medium" variant="contained"  onClick={abrirCerrarModalInsertar}>Insertar</Button>
 			<Modal
 				Modal
 				open={modalInsertar}
@@ -104,7 +105,7 @@ const CreateCategory = () => {
 					</div>
 				</Box>
 			</Modal>
-		</div>
+		</Box>
 	);
 };
 

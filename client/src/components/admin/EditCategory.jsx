@@ -5,6 +5,7 @@ import {
 	CardContent,
 	Grid,
 	Modal,
+	Stack,
 	Table,
 	TableBody,
 	TableCell,
@@ -36,7 +37,7 @@ const EditCategory = () => {
 	const [name, setName] = useState("");
 	const [description, setDescription] = useState("");
 	const [page, setPage] = useState(0);
-	const [rowsPerPage, setRowsPerPage] = useState(3);
+	const [rowsPerPage, setRowsPerPage] = useState(2);
 
     //---------------------------------------------------------------------------------
 	useEffect(() => {
@@ -108,9 +109,10 @@ const EditCategory = () => {
     //---------------------------------------------------------------------------------
 	return (
 		<div>
-			<Dashboard />
-			<Container>	
-				<TablePagination
+            <Box style={{ maxWidth: 910, marginLeft:'15rem', marginTop:65}} >
+			<Container>
+                
+                <TablePagination
 					rowsPerPageOptions={[5]}
 					component="div"
 					count={categories.length}
@@ -118,16 +120,16 @@ const EditCategory = () => {
 					page={page}
 					onPageChange={handleChangePage}
 				/>
-				<Card style={{ maxWidth: 950, margin: "0 auto" }}>
-                <CreateCategory/>
-					<Typography
+					<Stack>
+                    <Typography
 						gutterBottom
 						variant="h5"
 						component="div"
 						sx={uiConfigs.item}>
 						Categories
 					</Typography>
-
+                    <CreateCategory/>
+                    </Stack>
 					<Grid container my={0}>
 						<Box p={2}>
 							<CardContent>
@@ -197,8 +199,8 @@ const EditCategory = () => {
 							</CardContent>
 						</Box>
 					</Grid>
-				</Card>
 			</Container>
+		</Box>
 		</div>
 	);
 };
