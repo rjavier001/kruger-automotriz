@@ -1,5 +1,5 @@
 import { cloneElement, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import MenuIcon from "@mui/icons-material/Menu";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
@@ -57,6 +57,7 @@ const Navbar = () => {
   const { appState } = useSelector((state) => state.appState);
   const { themeMode } = useSelector((state) => state.themeMode);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const { cartTotalQuantity } = useSelector((state) => state.cart);
 
   const dispatch = useDispatch();
   const onSwithTheme = () => {
@@ -182,10 +183,12 @@ const Navbar = () => {
                   {item.display}
                 </Button>
               ))}
-              <IconButton>
-                <ShoppingCartCheckoutIcon />
-                <Typography sx={styles.badge}>3</Typography>
-              </IconButton>
+              <NavLink to={"/checkout"}>
+                <IconButton>
+                  <ShoppingCartCheckoutIcon />
+                  <Typography sx={styles.badge}>{cartTotalQuantity}</Typography>
+                </IconButton>
+              </NavLink>
             </Stack>
 
             {/* user menu */}
