@@ -136,7 +136,6 @@ export const EditProduct = () => {
 	return (
 		<div>
 			<Dashboard />
-
 			<Card style={{ maxWidth: 950, margin: "0 auto" }}>
 				<Typography
 					gutterBottom
