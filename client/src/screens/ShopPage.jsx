@@ -44,7 +44,6 @@ const Shop = () => {
 
   return (
     <>
-      <CarouselComp items={product} />
       <Container>
         <Container sx={cardHeaderStyles.wrapper}>
           <Box sx={{ display: "flex", alignItems: "center" }}>
