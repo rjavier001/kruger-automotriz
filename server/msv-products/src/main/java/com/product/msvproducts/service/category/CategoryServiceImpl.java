@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 @Service
 public class CategoryServiceImpl implements ICategoryService{
     @Autowired
@@ -44,6 +45,11 @@ public class CategoryServiceImpl implements ICategoryService{
     public void deleteCategory(Long id) {
         Category categoryDB = getCategory(id);
         repository.delete(categoryDB);
+    }
+
+    @Override
+    public Optional<Category> findById(Long id) {
+        return repository.findById(id);
     }
 
 }

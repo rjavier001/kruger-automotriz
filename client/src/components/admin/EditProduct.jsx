@@ -4,6 +4,7 @@ import {
 	Card,
 	CardContent,
 	Grid,
+	MenuItem,
 	TextField,
 	Typography,
 } from "@mui/material";
@@ -30,6 +31,7 @@ export const EditProduct = () => {
 	const [stock, setStock] = useState(0);
 	const [description, setDescription] = useState("");
 	const [productImg, setProductImg] = useState("");
+	const [categorySelect, setSelectCategory] = useState("");
 	const [saveImg, setSaveImg] = useState("");
 
     //---------------------------------------------------------------------------------
@@ -47,16 +49,24 @@ export const EditProduct = () => {
 		getListCategories();
 		setValues();
 		setProductImg(product.photoUrl);
-	}, [product.name, id]);
+		
+	}, [product.name,id]);
+
 
     //---------------------------------------------------------------------------------
+	let nameSelect;
 	const setValues = () => {
 		setName(product.name);
 		setDescription(product.description);
 		setStock(product.stock);
 		setPrice(product.price);
+		nameSelect = product.category?.name
+		setSelectCategory(product.category?.name);
 	};
 
+
+
+	console.log()
     //---------------------------------------------------------------------------------
 	const user = process.env.REACT_APP_CLOUDINARY;
 	const handleProductImageUpload = async (e) => {
@@ -84,6 +94,7 @@ export const EditProduct = () => {
 		if (response) setProduct(response);
 	};
 
+	//console.log(categorySelect)
     //---------------------------------------------------------------------------------
 	let dataView;
 	let dataProducts;
@@ -92,8 +103,14 @@ export const EditProduct = () => {
 		handleProductImageUpload();
 
         //---------------------------------------------------------------------------------
+		let productsCategory;
+		const allItems = categories;
+		const categoryItems = allItems.filter((item) => item.name === categorySelect);
+		productsCategory = categoryItems;
+
+		//---------------------------------------------------------------------------------
 		let categorys = {};
-		categorys.id = product.category.id;
+		categorys.id = productsCategory[0].id;
 		let category = categorys;
 
         //---------------------------------------------------------------------------------
@@ -106,7 +123,9 @@ export const EditProduct = () => {
 			purchasePrice: product.purchasePrice,
 			photoUrl: photoSave,
 			category,
+
 		};
+		console.log(dataProducts);
 
         //---------------------------------------------------------------------------------
 
@@ -195,6 +214,20 @@ export const EditProduct = () => {
 												/>
 											</Grid>
 											<Grid xs={12} item>
+											<TextField
+												fullWidth
+												select
+												label="Select Category"
+												value={categorySelect}
+												onChange={(e)=>setSelectCategory(e.target.value)}>
+												{categories.map((category, item) => (
+													<MenuItem key={item} value={category.name}>
+														{category.name}
+													</MenuItem>
+												))}
+											</TextField>
+											</Grid>
+											<Grid xs={12} item>
 												<input
 													id="imgUpload"
 													accept="image/*"
@@ -208,7 +241,7 @@ export const EditProduct = () => {
 													variant="contained"
 													color="primary"
 													fullWidth
-													onClick={(e) => handleChange(e)}>
+													onClick={ handleChange}>
 													Save
 												</Button>
 											</Grid>
