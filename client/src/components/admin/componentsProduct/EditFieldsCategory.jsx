@@ -7,7 +7,7 @@ import Swal from 'sweetalert2';
 import productsApi from '../../../api/modules/products.api';
 import uiConfigs from '../../../configs/ui.configs'
 
-export default function EditFieldsCategoty() {
+export default function EditFieldsCategory() {
 
     let {id} = useParams();
 
