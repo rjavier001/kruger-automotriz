@@ -17,13 +17,14 @@ import styled from "@emotion/styled";
 import { toast } from "react-toastify";
 import productsApi from "../api/modules/products.api";
 import Swal from "sweetalert2";
+import ProductSelected from "../components/common/ProductSelected";
 
 const Shop = () => {
 	//---------------------------------------------------------------------------------
 	const dispatch = useDispatch();
 	const [product, setProduct] = useState([]);
 	const [products, setProducts] = useState([]);
-	// const [productsCategory, setProductsCategory] = useState([]);
+
 	const [name, setName] = useState("");
 	const [categorySelect, setSelectCategory] = useState("");
 	const [categories, setCategories] = useState([]);
@@ -64,92 +65,13 @@ const Shop = () => {
 		productss.description.toLowerCase().includes(name)
 	);
 
-  return (
-    <>
-      {/* <CarouselComp items={product} /> */}
-      <Container>
-        <Container sx={cardHeaderStyles.wrapper}>
-          <Box sx={{ display: "flex", alignItems: "center" }}>
-            <Input
-              sx={{ width: "250px", fontSize: "1.1rem" }}
-              placeholder="Search product"
-              onChange={handleSearch}
-            />
-            <SearchIcon />
-          </Box>
-        </Container>
-        <Grid item container spacing={2} marginTop="2px">
-        {name === '' 
-          ? 
-          <>
-          {product.map((item, i) => (
-            <Grid
-            key={i}
-            item
-            xs={12}
-            md={4}
-            sm={6}
-            justify="center"
-            >
-              <CardComp              
-               props={item}   
-               />
-            </Grid>
-          ))} 
-          </>
-          : 
-          <>
-          {
-            productsQuery.length === 0
-            ?"No existen products" 
-            :
-          <>
-          {productsQuery.map((items, i) => (
-            <Grid
-            className="animate__animated animate__zoomInDown"
-            key={i}
-            item
-            xs={12}
-            md={4}
-            sm={6}
-            justify="center"
-            >
-              <CardComp              
-               props={items}   
-               />
-            </Grid>
-          ))} 
-          </>
-          }
-          </>
-          }
-        </Grid>
-      </Container>
-    </>
-  );
+  
 	//---------------------------------------------------------------------------------
-
-	const allItems = products;
-	const categoryItems = allItems.filter(
-		(item) => item.category.name === categorySelect
-	);
-	let productsCategory = categoryItems;
 
 	const handleCategory = (e) => {
 		setSelectCategory(e.target.value);
 	};
 
-	console.log(productsCategory);
-	console.log(productsCategory.length);
-
-	const productsName = () => {
-		Swal.fire({
-			icon: "error",
-			title: "Oops...",
-			text: "Something went wrong!",
-			footer: '<a href="">Why do I have this issue?</a>',
-		});
-	};
 
 	//---------------------------------------------------------------------------------
 	return (
@@ -172,7 +94,11 @@ const Shop = () => {
 							<SearchIcon />
 						</Box>
 					</Grid>
-					<Grid item xs={12} sm={6} direction="row"
+					<Grid
+						item
+						xs={12}
+						sm={6}
+						direction="row"
 						style={{ display: "flex", justifyContent: "center" }}
 						my={4}>
 						<Container>
@@ -193,47 +119,40 @@ const Shop = () => {
 				</Grid>
 
 				<Grid item container spacing={2} marginTop="2px">
-					{productsCategory.length !== 0 ? (
+					{name === "" && categorySelect === "" ? (
 						<>
-							{productsCategory.map((item, i) => (
+							{product.map((item, i) => (
 								<Grid key={i} item xs={12} md={4} sm={6} justify="center">
 									<CardComp props={item} />
 								</Grid>
 							))}
 						</>
+					) : categorySelect ? (
+						<ProductSelected
+							products={product}
+							categorySelect={categorySelect}
+						/>
+					) : name ? (
+						productsQuery.length === 0 ? (
+							"No data"
+						) : (
+							<>
+								{productsQuery.map((items, i) => (
+									<Grid
+										className="animate__animated animate__zoomInDown"
+										key={i}
+										item
+										xs={12}
+										md={4}
+										sm={6}
+										justify="center">
+										<CardComp props={items} />
+									</Grid>
+								))}
+							</>
+						)
 					) : (
-						<>
-							{name === "" ? (
-								<>
-									{product.map((item, i) => (
-										<Grid key={i} item xs={12} md={4} sm={6} justify="center">
-											<CardComp props={item} />
-										</Grid>
-									))}
-								</>
-							) : (
-								<>
-									{productsQuery.length === 0 ? (
-										"No existen products"
-									) : (
-										<>
-											{productsQuery.map((items, i) => (
-												<Grid
-													className="animate__animated animate__zoomInDown"
-													key={i}
-													item
-													xs={12}
-													md={4}
-													sm={6}
-													justify="center">
-													<CardComp props={items} />
-												</Grid>
-											))}
-										</>
-									)}
-								</>
-							)}
-						</>
+            ''
 					)}
 				</Grid>
 			</Container>
@@ -241,14 +160,6 @@ const Shop = () => {
 	);
 };
 
-const cardHeaderStyles = {
-	wrapper: {
-		marginTop: "1rem",
-		display: "flex",
-		justifyContent: "center",
-		alignItems: "center",
-		height: "65px",
-	},
-};
+
 
 export default Shop;
