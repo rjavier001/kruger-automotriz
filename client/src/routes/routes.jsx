@@ -8,7 +8,7 @@ import Dashboard from "../components/admin/Dashboard";
 import Products from "../components/admin/Products";
 import CreateProduct from "../components/admin/CreateProduct";
 import { EditProduct } from "../components/admin/EditProduct";
-import EditCategory from "../components/admin/EditCategory";
+import Category from "../components/admin/Category";
 import EditFieldsCategoty from "../components/admin/componentsProduct/EditFieldsCategoty";
 
 export const routesGen = {
@@ -69,7 +69,7 @@ const routes = [
   },
   {
     path: "/admin/products/category-edit",
-    element: <EditCategory />,
+    element: <Category />,
     state: "edit-category",
   },
   {
