@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/server/auth-server/auth-server.iml" filepath="$PROJECT_DIR$/server/auth-server/auth-server.iml" />
       <module fileurl="file://$PROJECT_DIR$/server/automotriz-krug.iml" filepath="$PROJECT_DIR$/server/automotriz-krug.iml" />
+      <module fileurl="file://$PROJECT_DIR$/server/config-server/config-server.iml" filepath="$PROJECT_DIR$/server/config-server/config-server.iml" />
       <module fileurl="file://$PROJECT_DIR$/server/discovery-server/discovery-server.iml" filepath="$PROJECT_DIR$/server/discovery-server/discovery-server.iml" />
       <module fileurl="file://$PROJECT_DIR$/server/gateway-server/gateway-server.iml" filepath="$PROJECT_DIR$/server/gateway-server/gateway-server.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/kruger-automotriz.iml" filepath="$PROJECT_DIR$/.idea/kruger-automotriz.iml" />
