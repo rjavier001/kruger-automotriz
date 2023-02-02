@@ -8,3 +8,12 @@
 # spring.jpa.database-platform=org.hibernate.dialect.PostgreSQLDialect
 # spring.jpa.generate-ddl=true
 # spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation=true
+
+spring:
+  application:
+    name: msv-users
+  cloud:
+    config:
+      uri: http://localhost:8888
+      profile: dev
+
