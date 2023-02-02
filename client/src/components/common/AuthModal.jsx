@@ -41,14 +41,15 @@ const AuthModal = () => {
           width: "100%",
           maxWidth: "600px",
           padding: 4,
-          outline: "none",
-        }}
+          outline: "none"       
+        }}        
       >
         <Box        
           sx={{
             padding: 4,
             boxShadow: 24,
             backgroundColor: "background.paper",
+            borderRadius: '16px'
           }}
         >
           <Box sx={{ textAlign: "center", marginBottom: "2rem" }}>
