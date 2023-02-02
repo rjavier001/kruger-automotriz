@@ -17,7 +17,7 @@ import productsApi from "../../api/modules/products.api";
 import uiConfigs from "../../configs/ui.configs";
 import CreateCategory from "./componentsProduct/CreateCategory";
 
-const EditCategory = () => {
+const Category = () => {
 	const navigate = useNavigate();
 
 	//---------------------------------------------------------------------------------
@@ -209,4 +209,4 @@ const EditCategory = () => {
 	);
 };
 
-export default EditCategory;
+export default Category;
