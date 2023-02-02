@@ -44,7 +44,7 @@ const Shop = () => {
 
   return (
     <>
-      <CarouselComp items={product} />
+      {/* <CarouselComp items={product} /> */}
       <Container>
         <Container sx={cardHeaderStyles.wrapper}>
           <Box sx={{ display: "flex", alignItems: "center" }}>
@@ -69,7 +69,7 @@ const Shop = () => {
             sm={6}
             justify="center"
             >
-              <CardComp
+              <CardComp              
                props={item}   
                />
             </Grid>

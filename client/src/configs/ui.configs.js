@@ -42,7 +42,8 @@ const uiConfigs = {
     boxSizing:'border-box',
     boxShadow: 'rgba(217,183,123,0.5) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px',
     maxWidth: '345', 
-    minHeight: '500'
+    minHeight: '500',
+    borderRadius:'16px'
   },
   item:{
     textAlign:'center'

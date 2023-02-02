@@ -17,7 +17,7 @@ import { addToCart, getTotal } from "../redux/features/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 const CardComp = ({ props }) => {
-  //Coment random
+  
   const { name, price, photoUrl, stock, description } = props;
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
