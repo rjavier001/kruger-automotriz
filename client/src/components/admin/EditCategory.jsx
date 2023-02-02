@@ -1,37 +1,28 @@
+/* eslint-disable no-unused-vars */
 import {
 	Box,
 	Button,
-	Card,
 	CardContent,
 	Grid,
-	Modal,
 	Stack,
-	Table,
-	TableBody,
-	TableCell,
-	TableHead,
 	TablePagination,
-	TableRow,
 	TextField,
 	Typography,
 } from "@mui/material";
-import { Container} from "@mui/system";
+import { Container } from "@mui/system";
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import productsApi from "../../api/modules/products.api";
-import Dashboard from "./Dashboard";
 import uiConfigs from "../../configs/ui.configs";
 import CreateCategory from "./componentsProduct/CreateCategory";
 
-
-
 const EditCategory = () => {
+	const navigate = useNavigate();
 
-    const navigate = useNavigate();
-
-    //---------------------------------------------------------------------------------
+	//---------------------------------------------------------------------------------
 	const [categories, setCategories] = useState([]);
+	const [product, setProduct] = useState([]);
 	const [categorysPost, setCategorysPost] = useState([]);
 	const [deleteCategory, setDeleteCategories] = useState([]);
 	const [name, setName] = useState("");
@@ -39,97 +30,114 @@ const EditCategory = () => {
 	const [page, setPage] = useState(0);
 	const [rowsPerPage, setRowsPerPage] = useState(2);
 
-    //---------------------------------------------------------------------------------
+	//---------------------------------------------------------------------------------
 	useEffect(() => {
 		const getListCategories = async () => {
 			const { response } = await productsApi.getListCategory();
 			if (response) setCategories(response);
 		};
 		getListCategories();
-		setValues();
+		
+
+		//--------------------------------------------------------
+		const getList = async () => {
+			const { response, err } = await productsApi.getList();
+			if (response) setProduct(response);
+		};
+		getList();
+
+		
 	}, []);
 
-    //---------------------------------------------------------------------------------
-	const setValues = () => {
-		setName(categories.name);
-		setDescription(categories.description);
+	//---------------------------------------------------------------------------------
+	
+
+	//---------------------------------------------------------------------------------
+
+	let dataProducts;
+	const handleChange = (idCategory) => {
+		console.log(idCategory);
+		navigate(`/admin/category/edit/${idCategory}`)
 	};
 
-    //---------------------------------------------------------------------------------
-	const handleChange = () => {
-		console.log("save");
-	};
 
-    //---------------------------------------------------------------------------------
+	//---------------------------------------------------------------------------------
 	const handleChangePage = (e, newPage) => {
 		setPage(newPage);
 	};
 
-
-    //---------------------------------------------------------------------------------
-	let category;
-	const postCategories = async () => {
-		const { response} = await productsApi.postCategory(category);
-		if (response) setCategorysPost(response);
-	};
-
-
-    //---------------------------------------------------------------------------------
+	//---------------------------------------------------------------------------------
 	const handleDelete = (idCategory) => {
 		const deleteCategories = async () => {
 			const { response } = await productsApi.deleteCategory(idCategory);
 			if (response) setDeleteCategories(response);
 		};
 
-         //---------------------------------------------------------------------------------
-		Swal.fire({
-			title: "Are you sure?",
-			text: "You won't be able to revert this!",
-			icon: "warning",
-			showCancelButton: true,
-			confirmButtonColor: "#3085d6",
-			cancelButtonColor: "#d33",
-			confirmButtonText: "Yes, delete it!",
-		}).then((result) => {
-			setTimeout(() => {
-				if (result.isConfirmed) {
-					Swal.fire("Deleted!", "Your product has been deleted.", "success");
-					deleteCategories(idCategory);
+		let productsCategory;
+		const allItems = product;
+		const categoryItems = allItems.filter(
+			(item) => item.category.id === idCategory
+		);
+		productsCategory = categoryItems;
+
+		console.log(productsCategory);
+
+		productsCategory.length !== 0
+			? Swal.fire({
+					icon: "error",
+					title: "Oops...",
+					text: "La categoria tiene productos, así que no se puede eliminar!",
+			  })
+			: Swal.fire({
+					title: "Are you sure?",
+					text: "You won't be able to revert this!",
+					icon: "warning",
+					showCancelButton: true,
+					confirmButtonColor: "#3085d6",
+					cancelButtonColor: "#d33",
+					confirmButtonText: "Yes, delete it!",
+			  }).then((result) => {
 					setTimeout(() => {
-						navigate("/admin");
+						if (result.isConfirmed) {
+							Swal.fire(
+								"Deleted!",
+								"Your product has been deleted.",
+								"success"
+							);
+							deleteCategories(idCategory);
+							setTimeout(() => {
+								navigate("/admin");
+							}, 10);
+						}
 					}, 10);
-				}
-			}, 10);
-		});
+			  });
 	};
 
 
-
-
-    //---------------------------------------------------------------------------------
+	
+	//---------------------------------------------------------------------------------
 	return (
 		<div>
-            <Box style={{ maxWidth: 910, marginLeft:'15rem', marginTop:65}} >
-			<Container>
-                
-                <TablePagination
-					rowsPerPageOptions={[5]}
-					component="div"
-					count={categories.length}
-					rowsPerPage={rowsPerPage}
-					page={page}
-					onPageChange={handleChangePage}
-				/>
-					<Stack>
-                    <Typography
-						gutterBottom
-						variant="h5"
+			<Box style={{ maxWidth: 910, marginLeft: "15rem", marginTop: 65 }}>
+				<Container>
+					<TablePagination
+						rowsPerPageOptions={[5]}
 						component="div"
-						sx={uiConfigs.item}>
-						Categories
-					</Typography>
-                    <CreateCategory/>
-                    </Stack>
+						count={categories.length}
+						rowsPerPage={rowsPerPage}
+						page={page}
+						onPageChange={handleChangePage}
+					/>
+					<Stack>
+						<Typography
+							gutterBottom
+							variant="h5"
+							component="div"
+							sx={uiConfigs.item}>
+							Categories
+						</Typography>
+						<CreateCategory />
+					</Stack>
 					<Grid container my={0}>
 						<Box p={2}>
 							<CardContent>
@@ -173,14 +181,10 @@ const EditCategory = () => {
 																onChange={(e) => setDescription(e.target.value)}
 															/>
 															<div align="right">
-																<Button
-																	color="primary"
-																	size="medium"
-																	variant="contained"
-																	sx={{ margin: "1rem 1rem" }}
-																	onClick={(e) => handleChange(e)}>
-																	Save
+																<Button  color="primary" size="medium" variant="contained" onClick={() => handleChange(category.id)}>
+																	Edit
 																</Button>
+																
 																<Button
 																	color="primary"
 																	size="medium"
@@ -199,11 +203,10 @@ const EditCategory = () => {
 							</CardContent>
 						</Box>
 					</Grid>
-			</Container>
-		</Box>
+				</Container>
+			</Box>
 		</div>
 	);
 };
-
 
 export default EditCategory;

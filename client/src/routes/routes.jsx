@@ -9,6 +9,7 @@ import Products from "../components/admin/Products";
 import CreateProduct from "../components/admin/CreateProduct";
 import { EditProduct } from "../components/admin/EditProduct";
 import EditCategory from "../components/admin/EditCategory";
+import EditFieldsCategoty from "../components/admin/componentsProduct/EditFieldsCategoty";
 
 export const routesGen = {
   home: "/",
@@ -70,6 +71,11 @@ const routes = [
     path: "/admin/products/category-edit",
     element: <EditCategory />,
     state: "edit-category",
+  },
+  {
+    path: "/admin/category/edit/:id",
+    element: <EditFieldsCategoty />,
+    state: "category-fields",
   }
 ];
 
