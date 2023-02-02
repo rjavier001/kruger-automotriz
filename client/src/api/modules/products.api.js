@@ -11,6 +11,8 @@ const productsEndpoints = {
   listCategory: "categories",
   addCategory: "categories/save",
   deleteCategory:({ id }) => `categories/${id}`,
+  editCategory:({ id }) => `categories/${id}`,
+  categoryById:({ id }) => `categories/${id}`,
 };
 
 const productsApi = {
@@ -123,6 +125,29 @@ const productsApi = {
       return { err };
     }
   },
+
+  //---------------------------------------------------------------------------------
+  putCategoryById: async (id,data) => {
+    try {
+      const response = await privateClient.put(productsEndpoints.editCategory({id}),data);
+
+      return { response };
+    } catch (err) {
+      return { err };
+    }
+  },
+
+  //---------------------------------------------------------------------------------
+  getCategoryById: async (id) => {
+    try {
+      const response = await privateClient.get(productsEndpoints.categoryById({id}));
+
+      return { response };
+    } catch (err) {
+      return { err };
+    }
+  },
+
 };
 
 export default productsApi;

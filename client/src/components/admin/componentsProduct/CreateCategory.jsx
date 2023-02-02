@@ -55,7 +55,7 @@ const CreateCategory = () => {
 					postCategories(category);
 					setTimeout(() => {
 						window.location.reload();
-					}, 850);
+					}, 1000);
 				} else if (result.isDenied) {
 					Swal.fire("Changes are not saved", "", "info");
 				}
