@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "formik": "^2.2.9",
-    "sweetalert2": "^11.7.1"
-  }
-}
