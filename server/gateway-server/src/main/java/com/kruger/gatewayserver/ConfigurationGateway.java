@@ -1,4 +1,4 @@
-//package com.kruger.gatewayservice;
+//package com.kruger.gatewayserver;
 //
 //
 //import org.springframework.cloud.gateway.route.RouteLocator;
@@ -8,11 +8,10 @@
 //
 //@Configuration
 //public class ConfigurationGateway {
-//  @Bean
-//  public RouteLocator configureRoute(RouteLocatorBuilder builder) {
-//    return builder.routes()
-//        .route("course", r->r.path("/api/course/**").uri("lb://MSVC-COURSE"))
-//        .route("user", r->r.path("/api/user/**").uri("lb://MSVC-USER"))
-//        .build();
-//  }
+// @Bean
+// public RouteLocator configureRoute(RouteLocatorBuilder builder) {
+//   return builder.routes()
+//       .route("users", r->r.path("/api/users/**").uri("lb://msv-users"))
+//       .build();
+// }
 //}
