@@ -13,7 +13,9 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("api/featured")
 public class FeaturedController {
@@ -57,6 +59,15 @@ public class FeaturedController {
     public ResponseEntity<?> deleteDestacados(@PathVariable(name="id") Long id){
         service.deleteDestacados(id);
         return  ResponseEntity.status(HttpStatus.NOT_FOUND).body("Successfully operation. ");
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> detail(@PathVariable Long id){
+        Optional<FeaturedEntity> productOptional = service.findById(id);
+        if(productOptional.isPresent()){
+            return ResponseEntity.ok(productOptional.get());
+        }
+        return ResponseEntity.notFound().build();
     }
 
 }

@@ -119,7 +119,7 @@ const Category = () => {
 	//---------------------------------------------------------------------------------
 	return (
 		<div>
-			<Box style={{ maxWidth: 910, marginLeft: "15rem", marginTop: 65 }}>
+			<Box style={{ maxWidth: 850, margin:'0 auto'}}>
 				<Container>
 					<TablePagination
 						rowsPerPageOptions={[5]}
