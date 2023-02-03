@@ -1,31 +1,15 @@
-import { Button, Container, Grid, Typography } from "@mui/material";
+import {Container, Grid} from "@mui/material";
 import { Box, Stack } from "@mui/system";
-import React, { useEffect, useState } from "react";
 import { NavLink, Outlet, useLocation } from "react-router-dom";
-import productsApi from "../../api/modules/products.api";
 import CardComp from "../CardComp";
+import { useApi } from "./hooks/useApi";
 
 const Dashboard = () => {
 	let location = useLocation();
 
-	const [product, setProduct] = useState([]);
-	const [categories, setCategories] = useState([]);
 
 	//--------------------------------------------------------------
-	/* A hook that is called after every render. */
-	useEffect(() => {
-		const getList = async () => {
-			const { response, err } = await productsApi.getList();
-			if (response) setProduct(response);
-		};
-		getList();
-
-		const getListCategories = async () => {
-			const { response, err } = await productsApi.getListCategory();
-			if (response) setCategories(response);
-		};
-		getListCategories();
-	}, []);
+	const { product } = useApi();
 
 	//--------------------------------------------------------------
 	/**

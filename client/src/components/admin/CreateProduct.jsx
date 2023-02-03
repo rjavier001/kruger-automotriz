@@ -11,7 +11,6 @@ import FormCreateProduct from "./componentsProduct/FormCreateProduct";
 
 const CreateProduct = () => {
 
-
     //----------------------------------------------------------------------
 	return (
 		<Stack>
