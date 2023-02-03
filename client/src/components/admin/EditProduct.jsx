@@ -145,7 +145,7 @@ export const EditProduct = () => {
 			purchasePrice: product.purchasePrice,
 			photoUrl: photoSave,
 			category,
-			discountId: selectDiscount[0].id,
+			discountId: selectDiscount[0]?.id,
 
 		};
 		console.log(dataProducts);
@@ -273,13 +273,22 @@ export const EditProduct = () => {
 													onChange={handleProductImageUpload}
 												/>
 											</Grid>
-											<Grid xs={12} item>
+											<Grid xs={6} item>
 												<Button
 													variant="contained"
 													color="primary"
 													fullWidth
 													onClick={ handleChange}>
 													Save
+												</Button>
+											</Grid>
+											<Grid xs={6} item>
+												<Button
+													variant="contained"
+													color="secondary"
+													fullWidth
+													onClick={()=>navigate('/admin')}>
+													Exit
 												</Button>
 											</Grid>
 										</Grid>

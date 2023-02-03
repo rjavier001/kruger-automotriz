@@ -56,7 +56,7 @@ export default function Discounts() {
 			? Swal.fire({
 					icon: "error",
 					title: "Oops...",
-					text: "La categoria tiene productos, así que no se puede eliminar!",
+					text: "El duescuento tiene productos, así que no se puede eliminar!",
 			  })
 			: Swal.fire({
 					title: "Are you sure?",

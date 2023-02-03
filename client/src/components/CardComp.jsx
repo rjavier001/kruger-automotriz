@@ -102,6 +102,26 @@ const CardComp = ({ props }) => {
 		<Container>
 			{discountId === null ? (
 				<Card raised sx={uiConfigs.box}>
+					<CardHeader
+						avatar={
+							<Avatar
+								sx={{
+									bgcolor: "primary.light",
+									marginLeft: 27,
+									width: 60,
+									height: 60,
+									alignContent: "center",
+									justifyContent: "center",
+									display: "flex",
+									justifyItems: "center",
+									color: "primary",
+								}}>
+								{`${selectDiscount[0]?.price}%`
+									? "0%"
+									: `${selectDiscount[0]?.price}%`}
+							</Avatar>
+						}
+					/>
 					<CardMedia
 						component="img"
 						height="250"
@@ -187,7 +207,22 @@ const CardComp = ({ props }) => {
 				</Card>
 			) : (
 				<Card raised sx={uiConfigs.box}>
-					<CardHeader avatar={ <Avatar sx={{ bgcolor:'primary.light', marginLeft:27 ,width: 60, height: 60, alignContent:'center', justifyContent:'center', display:'flex', justifyItems:'center', color:"primary"}}>{`${selectDiscount[0]?.price}%`}</Avatar>} />
+					<CardHeader
+						avatar={
+							<Avatar
+								sx={{
+									bgcolor: "primary.light",
+									marginLeft: 27,
+									width: 60,
+									height: 60,
+									alignContent: "center",
+									justifyContent: "center",
+									display: "flex",
+									justifyItems: "center",
+									color: "primary",
+								}}>{`${selectDiscount[0]?.price}%`}</Avatar>
+						}
+					/>
 					<CardMedia
 						component="img"
 						height="250"

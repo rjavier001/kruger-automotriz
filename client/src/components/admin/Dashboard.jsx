@@ -71,7 +71,7 @@ const Dashboard = () => {
         <Container>
             <Grid item container spacing={2} marginTop="2px">
                 {product.map((item, i) => (
-                    <Grid key={i} item xs={12} md={4} sm={6} justify="center">
+                    <Grid key={i} item xs={12} md={4} sm={6}  justify="center">
                         <CardComp props={item} />
                     </Grid>
                 ))}
