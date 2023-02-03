@@ -25,6 +25,7 @@ const CardComp = ({ props }) => {
 	const navigate = useNavigate();
 	const location = useLocation();
 	const [discounts, setDiscounts] = useState([]);
+	const [featured, setFeatured] = useState([]);
 
 	//---------------------------------------------------------------------------------
 	const {
@@ -36,11 +37,11 @@ const CardComp = ({ props }) => {
 		id,
 		category,
 		discountId,
+		featuredId
 	} = props;
 	const dispatch = useDispatch();
 	const cart = useSelector((state) => state.cart);
 
-	console.log(discountId === null);
 	//---------------------------------------------------------------------------------
 	useEffect(() => {
 		dispatch(getTotal());
@@ -51,7 +52,18 @@ const CardComp = ({ props }) => {
 			if (response) setDiscounts(response);
 		};
 		getListDiscounts();
+
+
+		const getFeaturedLis = async () => {
+			const { response } = await productsApi.getFeaturedList();
+			if (response) setFeatured(response);
+		};
+		getFeaturedLis();
+
+		
+
 	}, [cart, dispatch]);
+
 
 	//---------------------------------------------------------------------------------
 	const handleAddtoCart = (props) => {
@@ -88,6 +100,7 @@ const CardComp = ({ props }) => {
 		});
 	};
 
+	//---------------------------------------------------------------------------------
 	let selectDiscount;
 	const allItemsDiscount = discounts;
 	const discountsItems = allItemsDiscount.filter(
@@ -95,7 +108,14 @@ const CardComp = ({ props }) => {
 	);
 	selectDiscount = discountsItems;
 
-	console.log(selectDiscount[0]?.price);
+	let selectFeatured;
+	const allItemsFeatured = featured;
+	const FeaturedItems = allItemsFeatured.filter(
+		(item) => item.id === featuredId
+	);
+	selectFeatured = FeaturedItems;
+
+
 
 	//---------------------------------------------------------------------------------
 	return (
@@ -163,6 +183,12 @@ const CardComp = ({ props }) => {
 							color="text.secondary"
 							sx={uiConfigs.text}>
 							Category: {category.name ? category.name : "Actualizar categoria"}
+						</Typography>
+						<Typography
+							variant="body2"
+							color="text.secondary"
+							sx={uiConfigs.text}>
+							Time Featured: {selectFeatured[0]?.featuredTime ? selectFeatured[0]?.featuredTime : "0"}
 						</Typography>
 					</CardContent>
 					<CardActions sx={uiConfigs.button}>
@@ -264,6 +290,12 @@ const CardComp = ({ props }) => {
 							color="text.secondary"
 							sx={uiConfigs.text}>
 							Category: {category.name ? category.name : "Actualizar categoria"}
+						</Typography>
+						<Typography
+							variant="body2"
+							color="text.secondary"
+							sx={uiConfigs.text}>
+							Time Featured: {selectFeatured[0]?.featuredTime ? selectFeatured[0]?.featuredTime : "0"}
 						</Typography>
 					</CardContent>
 					<CardActions sx={uiConfigs.button}>

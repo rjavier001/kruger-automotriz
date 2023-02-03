@@ -19,18 +19,15 @@ import productsApi from "../../../api/modules/products.api";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 
-export default function EditDiscount({ id }) {
+export default function EditFeatured({ id }) {
 
-    console.log(id)
 	const navigate = useNavigate();
 
 	//---------------------------------------------------------------------------------
 	const [name, setName] = useState("");
-	const [offerTime, setOfferTime] = useState("");
-	const [price, setPrice] = useState("");
-	const [discount, setDiscount] = useState("");
-	const [discountUpdated, setDiscountUpdated] = useState("");
 	const [modalInsertar, setModalInsertar] = useState(false);
+	const [featured, setFeatured] = useState([]);
+	const [featuredModal, setFeaturedModal] = useState([]);
 
 	//---------------------------------------------------------------------------------
 	const abrirCerrarModalInsertar = () => {
@@ -40,36 +37,34 @@ export default function EditDiscount({ id }) {
 	// ---------------------------------------------------------------------------------
 	useEffect(() => {
 		const getList = async () => {
-			const { response } = await productsApi.getDiscountById(id);
-			if (response) setDiscount(response);
+			const { response } = await productsApi.getFeaturedById(id);
+			if (response) setFeatured(response);
 		};
 		getList();
 		setValues();
-	}, [discount?.name, id]);
+	}, [featured?.featuredTime]);
 
 	//---------------------------------------------------------------------------------
 	const setValues = () => {
-		setName(discount?.name);
-		setPrice(discount?.price);
-		setOfferTime(discount?.offerTime);
+		setName(featured?.featuredTime);
 	};
 
+    
 	//---------------------------------------------------------------------------------
-	let dataDiscount;
+	let dataFeatured;
 	const saveDiscount = () => {
 		//-------------------------------------------------------------------
 		// Save data edit
-		const editDiscount = async () => {
-			const { response } = await productsApi.putDiscountById(id, dataDiscount);
-			if (response) setDiscountUpdated(response);
+		/* A function that is not being called. */
+        const editfeatured = async () => {
+			const { response } = await productsApi.putFeaturedById(id, dataFeatured);
+			if (response) setFeaturedModal(response);
 		};
 
 		//----------------------------------------------------------------------
 
-		dataDiscount = {
-			name,
-			price,
-			offerTime,
+		dataFeatured = {
+			featuredTime:name
 		};
 
 		setModalInsertar(false);
@@ -81,12 +76,12 @@ export default function EditDiscount({ id }) {
 		}).then((result) => {
 			/* Read more about isConfirmed, isDenied below */
 			if (result.isConfirmed) {
-                Swal.fire({
-                    icon: "success",
+				Swal.fire({
+					icon: "success",
 					title: "Your work has been saved",
 					showConfirmButton: false,
 				});
-                editDiscount(id, dataDiscount);
+				editfeatured(id, dataFeatured);
 				setTimeout(() => {
 					window.location.reload();
 				}, 850);
@@ -94,7 +89,7 @@ export default function EditDiscount({ id }) {
 				setModalInsertar(true);
 			}
 		});
-
+        console.log(dataFeatured)
 	};
 
 	return (
@@ -114,7 +109,7 @@ export default function EditDiscount({ id }) {
 				aria-describedby="modal-modal-description">
 				<Box sx={styleCategory.modal}>
 					<Typography align="center" gutterBottom variant="h5" my={2}>
-						Edit Discount
+						Edit Featured
 					</Typography>
 					<Grid container my={4}>
 						<Grid item xs={12} sm={12} md={12}>
@@ -130,37 +125,23 @@ export default function EditDiscount({ id }) {
 											onChange={(e) => setName(e.target.value)}
 										/>
 									</Grid>
-									<Grid xs={12} item>
-										<TextField
-											id="DiscountPrice"
-											label="DiscountPrice"
-											fullWidth
-											name="discountPrice"
-											value={price}
-											inputProps={{ type: "number" }}
-											onChange={(e) => setPrice(e.target.value)}
-										/>
+									<Grid xs={6} item>
+										<Button
+											onClick={(e) => saveDiscount(e)}
+											variant="contained"
+											color="primary"
+											fullWidth>
+											Save
+										</Button>
 									</Grid>
-									<Grid xs={12} item>
-										<TextField
-											id="offerTime"
-											fullWidth
-											label="OfferTime"
-											name="OfferTime"
-											value={offerTime}
-											onChange={(e) => setOfferTime(e.target.value)}
-										/>
-									</Grid>
-									<Grid xs={12} item>
-										<Grid xs={12} item>
-											<Button
-												onClick={(e) => saveDiscount(e)}
-												variant="contained"
-												color="primary"
-												fullWidth>
-												Save
-											</Button>
-										</Grid>
+									<Grid xs={5} item>
+										<Button
+											onClick={abrirCerrarModalInsertar}
+											variant="contained"
+											color="secondary"
+											fullWidth>
+											Cancel
+										</Button>
 									</Grid>
 								</Grid>
 							</Box>
@@ -178,7 +159,7 @@ const styleCategory = {
 		top: "50%",
 		left: "50%",
 		transform: "translate(-50%, -50%)",
-		width: 300,
+		width: 400,
 		bgcolor: "background.paper",
 		border: "1px solid #000",
 		boxShadow: 24,

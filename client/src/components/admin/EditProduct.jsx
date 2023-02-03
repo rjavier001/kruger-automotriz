@@ -33,8 +33,10 @@ export const EditProduct = () => {
 	const [productImg, setProductImg] = useState("");
 	const [categorySelect, setSelectCategory] = useState("");
 	const [descuentoSelect, setDescuentoSelect] = useState("");
+	const [featuredSelect, setFeaturedSelect] = useState("");
 	const [saveImg, setSaveImg] = useState("");
 	const [discounts, setDiscounts] = useState([]);
+	const [featured, setFeatured] = useState([]);
 
     //---------------------------------------------------------------------------------
 	useEffect(() => {
@@ -44,6 +46,7 @@ export const EditProduct = () => {
 		};
 		getList();
 
+		//----------------------------------
 		const getListCategories = async () => {
 			const { response } = await productsApi.getListCategory();
 			if (response) setCategories(response);
@@ -58,14 +61,15 @@ export const EditProduct = () => {
 			if (response) setDiscounts(response);
 		};
 		getListDiscounts();
+
+		//----------------------------------
+		const getFeaturedLis = async () => {
+			const { response } = await productsApi.getFeaturedList();
+			if (response) setFeatured(response);
+		};
+		getFeaturedLis();
 		
 	}, [product.name,id]);
-
-
-
-
-	console.log(descuentoSelect)
-	console.log(discounts)
 
 
     //---------------------------------------------------------------------------------
@@ -78,11 +82,9 @@ export const EditProduct = () => {
 		nameSelect = product.category?.name
 		setSelectCategory(product.category?.name);
 		setDescuentoSelect(product.discountId?.price);
+		setFeaturedSelect(product.featuredId?.featuredTime)
 	};
 
-
-
-	console.log()
     //---------------------------------------------------------------------------------
 	const user = process.env.REACT_APP_CLOUDINARY;
 	const handleProductImageUpload = async (e) => {
@@ -110,7 +112,7 @@ export const EditProduct = () => {
 		if (response) setProduct(response);
 	};
 
-	//console.log(categorySelect)
+
     //---------------------------------------------------------------------------------
 	let dataView;
 	let dataProducts;
@@ -119,10 +121,19 @@ export const EditProduct = () => {
 		handleProductImageUpload();
 
 		//---------------------------------------------------------------------------------
+
 		let selectDiscount;
 		const allItemsDiscount = discounts;
 		const discountsItems = allItemsDiscount.filter((item) => item.name === descuentoSelect);
 		selectDiscount = discountsItems;
+
+
+		//---------------------------------------------------------------------------------
+		let selectFeatured;
+		const allItemsFeatured = featured;
+		const featuredItems = allItemsFeatured.filter((item) => item.featuredTime === featuredSelect);
+		selectFeatured = featuredItems;
+
 
         //---------------------------------------------------------------------------------
 		let productsCategory;
@@ -146,6 +157,7 @@ export const EditProduct = () => {
 			photoUrl: photoSave,
 			category,
 			discountId: selectDiscount[0]?.id,
+			featuredId: selectFeatured[0]?.id,
 
 		};
 		console.log(dataProducts);
@@ -186,7 +198,7 @@ export const EditProduct = () => {
 					sx={uiConfigs.item}>
 					EditProduct
 				</Typography>
-				<Grid container my={4}>
+				<Grid container my={1}>
 					<Grid item xs={12} sm={12} md={6}>
 						<Box p={2}>
 							<Card style={{ maxWidth: 650, margin: "0 auto" }}>
@@ -250,7 +262,7 @@ export const EditProduct = () => {
 												))}
 											</TextField>
 											</Grid>
-											<Grid xs={12} item>
+											<Grid xs={6} item>
 											<TextField
 												fullWidth
 												select
@@ -260,6 +272,20 @@ export const EditProduct = () => {
 												{discounts.map((discount, item) => (
 													<MenuItem key={item} value={discount.name}>
 														{discount.price}
+													</MenuItem>
+												))}
+											</TextField>
+											</Grid>
+											<Grid xs={6} item>
+											<TextField
+												fullWidth
+												select
+												label="Select Featured"
+												value={featuredSelect}
+												onChange={(e)=>setFeaturedSelect(e.target.value)}>
+												{featured.map((featuredData, item) => (
+													<MenuItem key={item} value={featuredData.featuredTime}>
+														{featuredData.featuredTime}
 													</MenuItem>
 												))}
 											</TextField>

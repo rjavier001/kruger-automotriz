@@ -21,6 +21,12 @@ const productsEndpoints = {
   deleteDiscount: ({ id }) => `discounts/${id}`,
   editDiscount: ({ id }) => `discounts/${id}`,
   discountById: ({ id }) => `discounts/${id}`,
+
+  listFeatured: "featured",
+  featuredById: ({ id }) => `featured/${id}`,
+  addFeatured: "featured",
+  editFeatured: ({ id }) => `featured/${id}`,
+  deleteFeatured: ({ id }) => `featured/${id}`
 };
 
 const productsApi = {
@@ -205,6 +211,60 @@ const productsApi = {
     try {
       const response = await privateClient.get(productsEndpoints.discountById({ id }));
 
+      return { response };
+    } catch (err) {
+      return { err };
+    }
+  },
+
+  //---------------------------------------------------------------------------------
+  getFeaturedList: async () => {
+    try {
+      const response = await privateClient.get(productsEndpoints.listFeatured);
+
+      return { response };
+    } catch (err) {
+      return { err };
+    }
+  },
+
+  //---------------------------------------------------------------------------------
+  getFeaturedById: async (id) => {
+    try {
+      const response = await privateClient.get(productsEndpoints.featuredById({ id }));
+
+      return { response };
+    } catch (err) {
+      return { err };
+    }
+  },
+
+   //---------------------------------------------------------------------------------
+   postFeatured: async (data) => {
+    try {
+      const response = await privateClient.post(productsEndpoints.addFeatured, data);
+
+      return { response };
+    } catch (err) {
+      return { err };
+    }
+  },
+
+  //---------------------------------------------------------------------------------
+  putFeaturedById: async (id, data) => {
+    try {
+      const response = await privateClient.put(productsEndpoints.editFeatured({ id }), data);
+
+      return { response };
+    } catch (err) {
+      return { err };
+    }
+  },
+
+  //---------------------------------------------------------------------------------
+  deleteFaturedById: async (id) => {
+    try {
+      const response = await privateClient.delete(productsEndpoints.deleteFeatured({ id }));
       return { response };
     } catch (err) {
       return { err };
