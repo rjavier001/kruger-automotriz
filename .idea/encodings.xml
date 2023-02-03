@@ -3,6 +3,7 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/server/auth-server/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/server/auth-server/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/server/config-server/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/server/discovery-server/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/server/gateway-server/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/server/msv-order/src/main/java" charset="UTF-8" />
