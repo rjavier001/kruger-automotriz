@@ -26,7 +26,6 @@ const CreateProduct = () => {
 				</Typography>
 
                 <FormCreateProduct/>
-				{/*  */}
 			</Card>
 			<Container></Container>
 		</Stack>
