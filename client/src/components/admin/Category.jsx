@@ -2,6 +2,7 @@
 import {
 	Box,
 	Button,
+	Card,
 	CardContent,
 	Grid,
 	Stack,
@@ -138,11 +139,11 @@ const Category = () => {
 						</Typography>
 						<CreateCategory />
 					</Stack>
-					<Grid container my={0}>
+					<Grid container>
 						<Box p={2}>
 							<CardContent>
 								<form>
-									<Grid container spacing={1}>
+									<Grid container spacing={5}>
 										{categories
 											.slice(
 												page * rowsPerPage,
@@ -150,16 +151,9 @@ const Category = () => {
 											)
 											.map((category, i) => (
 												<>
-													<Grid item xs={12} sm={12} md={6}>
-														<Box
-															p={2}
-															sx={{
-																boxSizing: "border-box",
-																margin: 2,
-																borderRadius: "1rem",
-																boxShadow:
-																	"rgba(217,183,123,0.5) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px",
-															}}>
+													<Grid item xs={12} sm={12} md={6} mx={0}>
+														<Card sx={uiConfigs.box} >
+														<CardContent>
 															<TextField
 																id="name"
 																label="Name"
@@ -179,14 +173,14 @@ const Category = () => {
 																margin="normal"
 																value={category.description}
 																onChange={(e) => setDescription(e.target.value)}
-															/>
+																/>
 															<div align="right">
 																<Button  color="primary" size="medium" variant="contained" onClick={() => handleChange(category.id)}>
 																	Edit
 																</Button>
 																
 																<Button
-																	color="primary"
+																	color="secondary"
 																	size="medium"
 																	variant="contained"
 																	sx={{ margin: "1rem 1rem" }}
@@ -194,7 +188,8 @@ const Category = () => {
 																	Delete
 																</Button>
 															</div>
-														</Box>
+														</CardContent>
+														</Card>
 													</Grid>
 												</>
 											))}
