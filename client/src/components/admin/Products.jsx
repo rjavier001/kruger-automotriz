@@ -25,6 +25,7 @@ const Products = () => {
 							<TableRow>
 								<TableCell>Products</TableCell>
 								<TableCell>Category</TableCell>
+								<TableCell>Discounts</TableCell>
 							</TableRow>
 						</TableHead>
 						<TableBody>
@@ -41,6 +42,15 @@ const Products = () => {
 								<TableCell>
 									<Button
 										onClick={() => navigate("/admin/products/category-edit")}
+										color="primary"
+										size="medium"
+										variant="contained">
+										Create
+									</Button>
+								</TableCell>
+								<TableCell>
+									<Button
+										onClick={() => navigate("/admin/products/discounts")}
 										color="primary"
 										size="medium"
 										variant="contained">

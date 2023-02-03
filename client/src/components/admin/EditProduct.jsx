@@ -32,7 +32,9 @@ export const EditProduct = () => {
 	const [description, setDescription] = useState("");
 	const [productImg, setProductImg] = useState("");
 	const [categorySelect, setSelectCategory] = useState("");
+	const [descuentoSelect, setDescuentoSelect] = useState("");
 	const [saveImg, setSaveImg] = useState("");
+	const [discounts, setDiscounts] = useState([]);
 
     //---------------------------------------------------------------------------------
 	useEffect(() => {
@@ -49,8 +51,21 @@ export const EditProduct = () => {
 		getListCategories();
 		setValues();
 		setProductImg(product.photoUrl);
+
+		//----------------------------------
+		const getListDiscounts = async () => {
+			const { response } = await productsApi.getListDiscounts();
+			if (response) setDiscounts(response);
+		};
+		getListDiscounts();
 		
 	}, [product.name,id]);
+
+
+
+
+	console.log(descuentoSelect)
+	console.log(discounts)
 
 
     //---------------------------------------------------------------------------------
@@ -62,6 +77,7 @@ export const EditProduct = () => {
 		setPrice(product.price);
 		nameSelect = product.category?.name
 		setSelectCategory(product.category?.name);
+		setDescuentoSelect(product.discountId?.price);
 	};
 
 
@@ -102,6 +118,12 @@ export const EditProduct = () => {
 	const handleChange = () => {
 		handleProductImageUpload();
 
+		//---------------------------------------------------------------------------------
+		let selectDiscount;
+		const allItemsDiscount = discounts;
+		const discountsItems = allItemsDiscount.filter((item) => item.name === descuentoSelect);
+		selectDiscount = discountsItems;
+
         //---------------------------------------------------------------------------------
 		let productsCategory;
 		const allItems = categories;
@@ -123,6 +145,7 @@ export const EditProduct = () => {
 			purchasePrice: product.purchasePrice,
 			photoUrl: photoSave,
 			category,
+			discountId: selectDiscount[0].id,
 
 		};
 		console.log(dataProducts);
@@ -223,6 +246,20 @@ export const EditProduct = () => {
 												{categories.map((category, item) => (
 													<MenuItem key={item} value={category.name}>
 														{category.name}
+													</MenuItem>
+												))}
+											</TextField>
+											</Grid>
+											<Grid xs={12} item>
+											<TextField
+												fullWidth
+												select
+												label="Select Discount"
+												value={descuentoSelect}
+												onChange={(e)=>setDescuentoSelect(e.target.value)}>
+												{discounts.map((discount, item) => (
+													<MenuItem key={item} value={discount.name}>
+														{discount.price}
 													</MenuItem>
 												))}
 											</TextField>

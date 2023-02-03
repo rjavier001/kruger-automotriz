@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DescuentosServiceImpl implements IDescuentosService{
@@ -31,11 +32,15 @@ public class DescuentosServiceImpl implements IDescuentosService{
     }
 
     @Override
-    public Discounts updateDescuentos(Discounts descuentos) {
-        Discounts descuentosUpdate = getDescuentos(descuentos.getId());
+    public Discounts updateDescuentos(Discounts discounts) {
+        Discounts descuentosUpdate = getDescuentos(discounts.getId());
         if(descuentosUpdate == null){
             return null;
         }
+        descuentosUpdate.setPrice(discounts.getPrice());
+        descuentosUpdate.setName(discounts.getName());
+        descuentosUpdate.setDescription(discounts.getDescription());
+        descuentosUpdate.setOfferTime(discounts.getOfferTime());
         return repository.save(descuentosUpdate);
     }
 
@@ -43,5 +48,10 @@ public class DescuentosServiceImpl implements IDescuentosService{
     public void deleteDescuentos(Long id) {
         Discounts descuentosDelete = getDescuentos(id);
         repository.delete(descuentosDelete);
+    }
+
+    @Override
+    public Optional<Discounts> findById(Long id) {
+        return repository.findById(id);
     }
 }
