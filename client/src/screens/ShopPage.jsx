@@ -1,22 +1,18 @@
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import {
 	Box,
 	Grid,
 	Input,
-	InputBase,
 	MenuItem,
 	TextField,
 } from "@mui/material";
-import { alpha, Container } from "@mui/system";
+import { Container } from "@mui/system";
 import React from "react";
 import CardComp from "../components/CardComp";
-import CarouselComp from "../components/CarouselComp";
 import SearchIcon from "@mui/icons-material/Search";
-import styled from "@emotion/styled";
 import { toast } from "react-toastify";
 import productsApi from "../api/modules/products.api";
-import Swal from "sweetalert2";
 import ProductSelected from "../components/common/ProductSelected";
 
 const Shop = () => {

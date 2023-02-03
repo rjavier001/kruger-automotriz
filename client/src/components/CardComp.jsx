@@ -6,6 +6,8 @@ import {
 	Stack,
 	Typography,
 	IconButton,
+	CardHeader,
+	Avatar,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { CardMedia } from "@mui/material";
@@ -21,17 +23,47 @@ import Swal from "sweetalert2";
 const CardComp = ({ props }) => {
 	const [product, setProduct] = useState([]);
 	const navigate = useNavigate();
-  const location = useLocation();
+	const location = useLocation();
+	const [discounts, setDiscounts] = useState([]);
+	const [featured, setFeatured] = useState([]);
 
 	//---------------------------------------------------------------------------------
-	const { name, price, photoUrl, stock, description,id,category } = props;
+	const {
+		name,
+		price,
+		photoUrl,
+		stock,
+		description,
+		id,
+		category,
+		discountId,
+		featuredId
+	} = props;
 	const dispatch = useDispatch();
 	const cart = useSelector((state) => state.cart);
 
 	//---------------------------------------------------------------------------------
 	useEffect(() => {
 		dispatch(getTotal());
+
+		//----------------------------------
+		const getListDiscounts = async () => {
+			const { response } = await productsApi.getListDiscounts();
+			if (response) setDiscounts(response);
+		};
+		getListDiscounts();
+
+
+		const getFeaturedLis = async () => {
+			const { response } = await productsApi.getFeaturedList();
+			if (response) setFeatured(response);
+		};
+		getFeaturedLis();
+
+		
+
 	}, [cart, dispatch]);
+
 
 	//---------------------------------------------------------------------------------
 	const handleAddtoCart = (props) => {
@@ -68,95 +100,245 @@ const CardComp = ({ props }) => {
 		});
 	};
 
-  //---------------------------------------------------------------------------------
+	//---------------------------------------------------------------------------------
+	let selectDiscount;
+	const allItemsDiscount = discounts;
+	const discountsItems = allItemsDiscount.filter(
+		(item) => item.id === discountId
+	);
+	selectDiscount = discountsItems;
+
+	let selectFeatured;
+	const allItemsFeatured = featured;
+	const FeaturedItems = allItemsFeatured.filter(
+		(item) => item.id === featuredId
+	);
+	selectFeatured = FeaturedItems;
+
+
+
+	//---------------------------------------------------------------------------------
 	return (
 		<Container>
-			<Card raised sx={uiConfigs.box}>
-				<CardMedia
-					component="img"
-					height="250"
-					sx={{ padding: "1em 1em 0 1em", objectFit: "contain" }}
-					image={photoUrl}
-					title="product image"
-				/>
-				<CardContent>
-					<Typography
-						gutterBottom
-						variant="h5"
-						component="div"
-						sx={uiConfigs.item}>
-						{name}
-					</Typography>
-					<Typography variant="body2" color="text.secondary">
-						{description}
-					</Typography>
-					<Stack
-						direction="row"
-						spacing={15}
-						alignItems="center"
-						sx={uiConfigs.card}>
+			{discountId === null ? (
+				<Card raised sx={uiConfigs.box}>
+					<CardHeader
+						avatar={
+							<Avatar
+								sx={{
+									bgcolor: "primary.light",
+									marginLeft: 27,
+									width: 60,
+									height: 60,
+									alignContent: "center",
+									justifyContent: "center",
+									display: "flex",
+									justifyItems: "center",
+									color: "primary",
+								}}>
+								{`${selectDiscount[0]?.price}%`
+									? "0%"
+									: `${selectDiscount[0]?.price}%`}
+							</Avatar>
+						}
+					/>
+					<CardMedia
+						component="img"
+						height="250"
+						sx={{ padding: "1em 1em 0 1em", objectFit: "contain" }}
+						image={photoUrl}
+						title="product image"
+					/>
+					<CardContent>
+						<Typography
+							gutterBottom
+							variant="h5"
+							component="div"
+							sx={uiConfigs.item}>
+							{name}
+						</Typography>
+						<Typography variant="body2" color="text.secondary">
+							{description}
+						</Typography>
+						<Stack
+							direction="row"
+							spacing={15}
+							alignItems="center"
+							sx={uiConfigs.card}>
+							<Typography
+								variant="body2"
+								color="text.secondary"
+								sx={uiConfigs.text}>
+								Price: ${price}
+							</Typography>
+							<Typography
+								variant="body2"
+								color="text.secondary"
+								sx={uiConfigs.text}>
+								Stock: {stock}
+							</Typography>
+						</Stack>
 						<Typography
 							variant="body2"
 							color="text.secondary"
 							sx={uiConfigs.text}>
-							Price: ${price}
+							Category: {category.name ? category.name : "Actualizar categoria"}
 						</Typography>
 						<Typography
 							variant="body2"
 							color="text.secondary"
 							sx={uiConfigs.text}>
-							Stock: {stock}
+							Time Featured: {selectFeatured[0]?.featuredTime ? selectFeatured[0]?.featuredTime : "0"}
 						</Typography>
-            
-					</Stack>
-          <Typography
-              variant="body2"
-              color="text.secondary"
-              sx={uiConfigs.text}
-            >
-              Category: {category.name ? category.name : 'Actualizar categoria'}
-            </Typography>
-				</CardContent>
-				<CardActions sx={uiConfigs.button}>
-					<Stack direction={"row"} spacing={12}>
-						{location.pathname === "/admin" ? (
-							<>
-								<NavLink
-									to={{ pathname: `/admin/products/edit/${id}` }}
-									state={{ props }}
-									style={{ textDecoration: "none" }}>
-									<Button color="primary" size="medium" variant="contained">
-										Edit
+					</CardContent>
+					<CardActions sx={uiConfigs.button}>
+						<Stack direction={"row"} spacing={12}>
+							{location.pathname === "/admin" ? (
+								<>
+									<NavLink
+										to={{ pathname: `/admin/products/edit/${id}` }}
+										state={{ props }}
+										style={{ textDecoration: "none" }}>
+										<Button color="primary" size="medium" variant="contained">
+											Edit
+										</Button>
+									</NavLink>
+									<Button
+										onClick={() => handleDeleteProduct(id)}
+										color="secondary"
+										size="medium">
+										Delete
 									</Button>
-								</NavLink>
-								<Button
-									onClick={() => handleDeleteProduct(id)}
-									color="secondary"
-									size="medium">
-									Delete
-								</Button>
-							</>
-						) : (
-							<>
-								<NavLink
-									to={{ pathname: "/details" }}
-									state={{ props }}
-									style={{ textDecoration: "none" }}>
-									<Button color="secondary" size="medium" variant="contained">
-										View More
+								</>
+							) : (
+								<>
+									<NavLink
+										to={{ pathname: "/details" }}
+										state={{ props }}
+										style={{ textDecoration: "none" }}>
+										<Button color="secondary" size="medium" variant="contained">
+											View More
+										</Button>
+									</NavLink>
+									<IconButton
+										color="primary"
+										variant="contained"
+										onClick={() => handleAddtoCart(props)}>
+										<ShoppingCartCheckoutIcon />
+									</IconButton>
+								</>
+							)}
+						</Stack>
+					</CardActions>
+				</Card>
+			) : (
+				<Card raised sx={uiConfigs.box}>
+					<CardHeader
+						avatar={
+							<Avatar
+								sx={{
+									bgcolor: "primary.light",
+									marginLeft: 27,
+									width: 60,
+									height: 60,
+									alignContent: "center",
+									justifyContent: "center",
+									display: "flex",
+									justifyItems: "center",
+									color: "primary",
+								}}>{`${selectDiscount[0]?.price}%`}</Avatar>
+						}
+					/>
+					<CardMedia
+						component="img"
+						height="250"
+						sx={{ padding: "1em 1em 0 1em", objectFit: "contain" }}
+						image={photoUrl}
+						title="product image"
+					/>
+					<CardContent>
+						<Typography
+							gutterBottom
+							variant="h5"
+							component="div"
+							sx={uiConfigs.item}>
+							{name}
+						</Typography>
+						<Typography variant="body2" color="text.secondary">
+							{description}
+						</Typography>
+						<Stack
+							direction="row"
+							spacing={15}
+							alignItems="center"
+							sx={uiConfigs.card}>
+							<Typography
+								variant="body2"
+								color="text.secondary"
+								sx={uiConfigs.text}>
+								Price: ${price}
+							</Typography>
+							<Typography
+								variant="body2"
+								color="text.secondary"
+								sx={uiConfigs.text}>
+								Stock: {stock}
+							</Typography>
+						</Stack>
+						<Typography
+							variant="body2"
+							color="text.secondary"
+							sx={uiConfigs.text}>
+							Category: {category.name ? category.name : "Actualizar categoria"}
+						</Typography>
+						<Typography
+							variant="body2"
+							color="text.secondary"
+							sx={uiConfigs.text}>
+							Time Featured: {selectFeatured[0]?.featuredTime ? selectFeatured[0]?.featuredTime : "0"}
+						</Typography>
+					</CardContent>
+					<CardActions sx={uiConfigs.button}>
+						<Stack direction={"row"} spacing={12}>
+							{location.pathname === "/admin" ? (
+								<>
+									<NavLink
+										to={{ pathname: `/admin/products/edit/${id}` }}
+										state={{ props }}
+										style={{ textDecoration: "none" }}>
+										<Button color="primary" size="medium" variant="contained">
+											Edit
+										</Button>
+									</NavLink>
+									<Button
+										onClick={() => handleDeleteProduct(id)}
+										color="secondary"
+										size="medium">
+										Delete
 									</Button>
-								</NavLink>
-								<IconButton
-									color="primary"
-									variant="contained"
-									onClick={() => handleAddtoCart(props)}>
-									<ShoppingCartCheckoutIcon />
-								</IconButton>
-							</>
-						)}
-					</Stack>
-				</CardActions>
-			</Card>
+								</>
+							) : (
+								<>
+									<NavLink
+										to={{ pathname: "/details" }}
+										state={{ props }}
+										style={{ textDecoration: "none" }}>
+										<Button color="secondary" size="medium" variant="contained">
+											View More
+										</Button>
+									</NavLink>
+									<IconButton
+										color="primary"
+										variant="contained"
+										onClick={() => handleAddtoCart(props)}>
+										<ShoppingCartCheckoutIcon />
+									</IconButton>
+								</>
+							)}
+						</Stack>
+					</CardActions>
+				</Card>
+			)}
 		</Container>
 	);
 };
