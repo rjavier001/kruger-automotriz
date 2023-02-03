@@ -121,7 +121,6 @@ export const EditProduct = () => {
 		handleProductImageUpload();
 
 		//---------------------------------------------------------------------------------
-
 		let selectDiscount;
 		const allItemsDiscount = discounts;
 		const discountsItems = allItemsDiscount.filter((item) => item.name === descuentoSelect);

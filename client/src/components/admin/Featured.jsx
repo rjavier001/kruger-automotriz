@@ -59,7 +59,7 @@ export default function Featured() {
 			? Swal.fire({
 					icon: "error",
 					title: "Oops...",
-					text: "El duescuento tiene productos, así que no se puede eliminar!",
+					text: "El descuento tiene productos, así que no se puede eliminar!",
 			  })
 			: Swal.fire({
 					title: "Are you sure?",

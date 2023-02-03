@@ -2,19 +2,12 @@ import { useEffect, useState } from "react";
 import {
 	Box,
 	Button,
-	Card,
-	CardContent,
 	Grid,
 	Modal,
 	TextField,
 	Typography,
 } from "@mui/material";
 
-import uiConfigs from "../../../configs/ui.configs";
-import { Controller, useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import ErrorIcon from "@mui/icons-material/Error";
 import productsApi from "../../../api/modules/products.api";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";

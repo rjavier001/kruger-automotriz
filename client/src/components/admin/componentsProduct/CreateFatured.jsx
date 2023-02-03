@@ -11,7 +11,6 @@ import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 
 export default function CreateFeatured() {
-	const navigate = useNavigate();
 
 	//---------------------------------------------------------------------------------
 	const [featured, setFeatured] = useState("");
