@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 @Service
 public class DestacadosServiceImpl implements IDestacadosService{
 
@@ -35,6 +36,7 @@ public class DestacadosServiceImpl implements IDestacadosService{
         if(destacadosUpdate == null){
             return null;
         }
+        destacadosUpdate.setFeaturedTime(destacados.getFeaturedTime());
         return repository.save(destacadosUpdate);
     }
 
@@ -42,5 +44,10 @@ public class DestacadosServiceImpl implements IDestacadosService{
     public void deleteDestacados(Long id) {
         FeaturedEntity destacadosDelete = getDestacados(id);
         repository.delete(destacadosDelete);
+    }
+
+    @Override
+    public Optional<FeaturedEntity> findById(Long id) {
+        return repository.findById(id);
     }
 }

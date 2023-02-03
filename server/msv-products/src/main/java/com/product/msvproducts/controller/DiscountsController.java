@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("api/discounts")
 public class DiscountsController {
@@ -36,15 +38,14 @@ public class DiscountsController {
         return ResponseEntity.status(HttpStatus.CREATED).body(createdDescuentos);
     }
 
-    @PutMapping(value = "/{id}")
-    public ResponseEntity<Discounts> updateDescuentos(@PathVariable(name = "id") Long id,
-            @RequestBody Discounts descuentos) {
-        descuentos.setId(id);
-        Discounts descuentosUpdate = service.updateDescuentos(descuentos);
-        if (descuentosUpdate == null) {
+    @PutMapping(value="/{id}")
+    public ResponseEntity<Discounts> updateDescuentos(@PathVariable(name="id") Long id, @RequestBody Discounts discounts){
+        discounts.setId(id);
+        Discounts productDB = service.updateDescuentos(discounts);
+        if(productDB == null){
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(descuentosUpdate);
+        return ResponseEntity.ok(productDB);
     }
 
     @DeleteMapping(value = "/{id}")
@@ -52,6 +53,15 @@ public class DiscountsController {
         service.deleteDescuentos(id);
 
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Successfully operation. ");
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> detail(@PathVariable Long id){
+        Optional<Discounts> productOptional = service.findById(id);
+        if(productOptional.isPresent()){
+            return ResponseEntity.ok(productOptional.get());
+        }
+        return ResponseEntity.notFound().build();
     }
 
 }
