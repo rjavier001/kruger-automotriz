@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import { Container, Stack } from "@mui/system";
 import React from "react";
-import {useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Dashboard from "./Dashboard";
 
 const Products = () => {

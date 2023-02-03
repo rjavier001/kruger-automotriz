@@ -16,6 +16,7 @@ import { Image } from "cloudinary-react";
 import axios from "axios";
 import Swal from "sweetalert2";
 import uiConfigs from "../../configs/ui.configs";
+import { useApi } from "./hooks/useApi";
 
 
 export const EditProduct = () => {
@@ -24,8 +25,6 @@ export const EditProduct = () => {
 
     //---------------------------------------------------------------------------------
 	const [product, setProduct] = useState([]);
-	const [saveProduct, setSaveProduct] = useState([]);
-	const [categories, setCategories] = useState([]);
 	const [name, setName] = useState([]);
 	const [price, setPrice] = useState(0);
 	const [stock, setStock] = useState(0);
@@ -35,8 +34,10 @@ export const EditProduct = () => {
 	const [descuentoSelect, setDescuentoSelect] = useState("");
 	const [featuredSelect, setFeaturedSelect] = useState("");
 	const [saveImg, setSaveImg] = useState("");
-	const [discounts, setDiscounts] = useState([]);
-	const [featured, setFeatured] = useState([]);
+
+	//---------------------------------------------------------------------------------
+	const { discounts,featured,categories } = useApi();
+
 
     //---------------------------------------------------------------------------------
 	useEffect(() => {
@@ -46,30 +47,10 @@ export const EditProduct = () => {
 		};
 		getList();
 
-		//----------------------------------
-		const getListCategories = async () => {
-			const { response } = await productsApi.getListCategory();
-			if (response) setCategories(response);
-		};
-		getListCategories();
 		setValues();
 		setProductImg(product.photoUrl);
-
-		//----------------------------------
-		const getListDiscounts = async () => {
-			const { response } = await productsApi.getListDiscounts();
-			if (response) setDiscounts(response);
-		};
-		getListDiscounts();
-
-		//----------------------------------
-		const getFeaturedLis = async () => {
-			const { response } = await productsApi.getFeaturedList();
-			if (response) setFeatured(response);
-		};
-		getFeaturedLis();
-		
-	}, [product.name,id]);
+	
+	}, [product.name,product.photoUrl,id]);
 
 
     //---------------------------------------------------------------------------------
@@ -105,7 +86,7 @@ export const EditProduct = () => {
 	//-------------------------------------------------------------------
 	// Save data edit
 	const editProducts = async () => {
-		const { response, err } = await productsApi.putProductById(
+		const { response } = await productsApi.putProductById(
 			id,
 			dataProducts
 		);
@@ -303,7 +284,7 @@ export const EditProduct = () => {
 													variant="contained"
 													color="primary"
 													fullWidth
-													onClick={ handleChange}>
+													onClick={handleChange}>
 													Save
 												</Button>
 											</Grid>

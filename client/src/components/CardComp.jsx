@@ -19,13 +19,12 @@ import { addToCart, getTotal } from "../redux/features/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import productsApi from "../api/modules/products.api";
 import Swal from "sweetalert2";
+import { useApi } from "./admin/hooks/useApi";
 
 const CardComp = ({ props }) => {
 	const [product, setProduct] = useState([]);
 	const navigate = useNavigate();
 	const location = useLocation();
-	const [discounts, setDiscounts] = useState([]);
-	const [featured, setFeatured] = useState([]);
 
 	//---------------------------------------------------------------------------------
 	const {
@@ -37,7 +36,7 @@ const CardComp = ({ props }) => {
 		id,
 		category,
 		discountId,
-		featuredId
+		featuredId,
 	} = props;
 	const dispatch = useDispatch();
 	const cart = useSelector((state) => state.cart);
@@ -45,25 +44,9 @@ const CardComp = ({ props }) => {
 	//---------------------------------------------------------------------------------
 	useEffect(() => {
 		dispatch(getTotal());
-
-		//----------------------------------
-		const getListDiscounts = async () => {
-			const { response } = await productsApi.getListDiscounts();
-			if (response) setDiscounts(response);
-		};
-		getListDiscounts();
-
-
-		const getFeaturedLis = async () => {
-			const { response } = await productsApi.getFeaturedList();
-			if (response) setFeatured(response);
-		};
-		getFeaturedLis();
-
-		
-
 	}, [cart, dispatch]);
 
+	const { discounts, featured } = useApi();
 
 	//---------------------------------------------------------------------------------
 	const handleAddtoCart = (props) => {
@@ -73,7 +56,7 @@ const CardComp = ({ props }) => {
 
 	//---------------------------------------------------------------------------------
 	const deletProduct = async () => {
-		const { response, err } = await productsApi.deleteProductById(id);
+		const { response } = await productsApi.deleteProductById(id);
 		if (response) setProduct(response);
 	};
 
@@ -115,8 +98,6 @@ const CardComp = ({ props }) => {
 	);
 	selectFeatured = FeaturedItems;
 
-
-
 	//---------------------------------------------------------------------------------
 	return (
 		<Container>
@@ -144,7 +125,7 @@ const CardComp = ({ props }) => {
 					/>
 					<CardMedia
 						component="img"
-						height="250"
+						height="150"
 						sx={{ padding: "1em 1em 0 1em", objectFit: "contain" }}
 						image={photoUrl}
 						title="product image"
@@ -188,7 +169,10 @@ const CardComp = ({ props }) => {
 							variant="body2"
 							color="text.secondary"
 							sx={uiConfigs.text}>
-							Time Featured: {selectFeatured[0]?.featuredTime ? selectFeatured[0]?.featuredTime : "0"}
+							Time Featured:{" "}
+							{selectFeatured[0]?.featuredTime
+								? selectFeatured[0]?.featuredTime
+								: "0"}
 						</Typography>
 					</CardContent>
 					<CardActions sx={uiConfigs.button}>
@@ -295,7 +279,10 @@ const CardComp = ({ props }) => {
 							variant="body2"
 							color="text.secondary"
 							sx={uiConfigs.text}>
-							Time Featured: {selectFeatured[0]?.featuredTime ? selectFeatured[0]?.featuredTime : "0"}
+							Time Featured:{" "}
+							{selectFeatured[0]?.featuredTime
+								? selectFeatured[0]?.featuredTime
+								: "0"}
 						</Typography>
 					</CardContent>
 					<CardActions sx={uiConfigs.button}>

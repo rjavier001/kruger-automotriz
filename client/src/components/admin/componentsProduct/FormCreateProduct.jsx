@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import {
 	Box,
 	Button,
@@ -24,8 +25,7 @@ export default function FormCreateProduct() {
 
 	const navigate = useNavigate();
 
-
-    //----------------------------------------------------------------------
+	//----------------------------------------------------------------------
 	const {
 		register,
 		handleSubmit,
@@ -62,7 +62,6 @@ export default function FormCreateProduct() {
 	//----------------------------------------------------------------------
 	let dataView;
 	let dataProducts;
-
 
 	//----------------------------------------------------------------------
 	const saveProduct = () => {
@@ -111,7 +110,6 @@ export default function FormCreateProduct() {
 					postProducts(dataProducts);
 					setTimeout(() => {
 						navigate("/admin");
-						
 					}, 850);
 				} else if (result.isDenied) {
 					Swal.fire("Changes are not saved", "", "info");
@@ -136,8 +134,7 @@ export default function FormCreateProduct() {
 			});
 	};
 
-
-    //----------------------------------------------------------------------
+	//----------------------------------------------------------------------
 	return (
 		<Stack>
 			<Grid container my={4}>
