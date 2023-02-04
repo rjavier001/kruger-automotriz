@@ -115,7 +115,7 @@ const ProductDetailPage = () => {
           </Grid>
         </Grid>
       </Container>
-      <ReviewComp />
+      <ReviewComp props={props} />
       <CompanyBenefitsComp />
     </>
   );
