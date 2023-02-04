@@ -23,7 +23,7 @@ const ReviewComp = ({ props }) => {
 
     setFrontReviews([...frontReviews, rating]);
     setRating({ stars: 0, description: "" });
-    toast.info("Gracias por tu opinión", {
+    toast.success("Gracias por tu opinión", {
       position: "bottom-left",
     });
   };
