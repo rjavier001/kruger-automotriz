@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 
 
 @Entity
@@ -63,4 +64,12 @@ public class Product {
     @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
     private Category category;
 
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "review_id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
+    private List<Reviews> review;
+
+    public void addReview(Reviews reviews){
+        review.add(reviews);
+    }
 }
