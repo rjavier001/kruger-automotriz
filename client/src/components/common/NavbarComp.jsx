@@ -136,7 +136,12 @@ const Navbar = () => {
                 </IconButton>
                 <Stack>
                   <IconButton color="inherit">
-                    <Image src={Logo} width={130} />
+                    <Image
+                      src={Logo}
+                      width={130}
+                      duration={100}
+                      easing={"linear"}
+                    />
                   </IconButton>
                   <Typography
                     variant="h6"
