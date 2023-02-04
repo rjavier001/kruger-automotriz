@@ -43,7 +43,7 @@ const MainLayout = () => {
     <>
       {/* <GlobalLoading /> */}
       <AuthModal />
-      <Box display="flex" minHeight="100vh">
+      <Box display="flex" minHeight="100vh" pt={{ xs: 25, sm: 25, md: 20 }}>
         <NavbarComp />
         <Box
           component="main"

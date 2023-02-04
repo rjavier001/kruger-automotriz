@@ -1,5 +1,4 @@
-import { Divider, IconButton, Stack, styled, Typography } from "@mui/material";
-
+import { IconButton, Stack, styled, Typography } from "@mui/material";
 import Image from "mui-image";
 
 import FacebookIcon from "@mui/icons-material/Facebook";
@@ -7,7 +6,6 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import TwitterIcon from "@mui/icons-material/Twitter";
 
 import Logo from "../../assets/LOGO_KRUGERMOTORS.png";
-import { Box } from "@mui/system";
 
 const FooterComp = () => {
   const Div = styled("div")(({ theme }) => ({
@@ -15,24 +13,16 @@ const FooterComp = () => {
     textAlign: "end",
   }));
 
-  const Img = styled("img")(({ theme }) => ({
-    width: "60%",
-    position: "relative",
-    objectFit: "contain",
-    top: "-100%",
-    left: "22%",
-  }));
-
   return (
     <Stack>
       <Stack
         sx={{ marginTop: "0px", background: "#ff910d" }}
-        height={200}
-        direction="row"
+        /* height={200} */
+        direction={{ md: "row", xs: "column" }}
         spacing={12}
         justifyContent="space-evenly"
       >
-        <Stack direction="column" spacing={0}>
+        <Stack direction="column" spacing={0} alignItems={"center"}>
           <Stack direction="row" spacing={0}>
             <Stack
               sx={{
@@ -62,7 +52,8 @@ const FooterComp = () => {
             Sab: 08:00 AM - 12:00 PM
           </Div>
         </Stack>
-        <Stack height={180} alignItems={"flex-start"}>
+
+        <Stack height={180} alignItems={"center"}>
           <Typography
             sx={{ paddingLeft: "10px", paddingTop: "10px" }}
             variant="h4"
@@ -80,28 +71,9 @@ const FooterComp = () => {
           </IconButton>
         </Stack>
 
-        <Stack width="auto" direction="column" spacing={0}>
-          <Img src={Logo} alt="krugermotors" />
-          {/* <Image
-            src={Logo}
-            sx={{
-              width: "20px",
-              position: "relative",
-              objectFit: "contain",
-              top: "-70%",
-            }}
-          /> */}
-          <Typography
-            variant="button"
-            sx={{
-              textAlign: "center",
-              width: "60%",
-              position: "relative",
-              objectFit: "contain",
-              top: "-100%",
-              left: "22%",
-            }}
-          >
+        <Stack justifyContent={"center"} alignItems={"center"}>
+          <Image src={Logo} alt="krugermotors" height={200} fit={"contain"} />
+          <Typography variant="button" sx={styles.subtitle}>
             Repuestos 100% confiables
           </Typography>
         </Stack>
@@ -111,3 +83,7 @@ const FooterComp = () => {
 };
 
 export default FooterComp;
+
+export const styles = {
+  subtitle: { textAlign: "center", fontWeight: "bold", fontSize: 16 },
+};
