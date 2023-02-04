@@ -9,7 +9,6 @@ const productsEndpoints = {
   editProduct: ({ id }) => `products/${id}`,
   deleteProduct: ({ id }) => `products/${id}`,
 
-
   listCategory: "categories",
   addCategory: "categories/save",
   deleteCategory: ({ id }) => `categories/${id}`,
@@ -26,7 +25,9 @@ const productsEndpoints = {
   featuredById: ({ id }) => `featured/${id}`,
   addFeatured: "featured",
   editFeatured: ({ id }) => `featured/${id}`,
-  deleteFeatured: ({ id }) => `featured/${id}`
+  deleteFeatured: ({ id }) => `featured/${id}`,
+
+  addReview: ({ productId }) => `/products/assign-review/${productId}`,
 };
 
 const productsApi = {
@@ -67,7 +68,9 @@ const productsApi = {
   //---------------------------------------------------------------------------------
   search: async (query) => {
     try {
-      const response = await privateClient.get(productsEndpoints.search({ query }));
+      const response = await privateClient.get(
+        productsEndpoints.search({ query })
+      );
       return { response };
     } catch (err) {
       return { err };
@@ -88,7 +91,10 @@ const productsApi = {
   //---------------------------------------------------------------------------------
   postCategory: async (data) => {
     try {
-      const response = await privateClient.post(productsEndpoints.addCategory, data);
+      const response = await privateClient.post(
+        productsEndpoints.addCategory,
+        data
+      );
 
       return { response };
     } catch (err) {
@@ -99,7 +105,9 @@ const productsApi = {
   //---------------------------------------------------------------------------------
   getProductById: async (id) => {
     try {
-      const response = await privateClient.get(productsEndpoints.productById({ id }));
+      const response = await privateClient.get(
+        productsEndpoints.productById({ id })
+      );
 
       return { response };
     } catch (err) {
@@ -110,7 +118,10 @@ const productsApi = {
   //---------------------------------------------------------------------------------
   putProductById: async (id, data) => {
     try {
-      const response = await privateClient.put(productsEndpoints.editProduct({ id }), data);
+      const response = await privateClient.put(
+        productsEndpoints.editProduct({ id }),
+        data
+      );
 
       return { response };
     } catch (err) {
@@ -121,7 +132,9 @@ const productsApi = {
   //---------------------------------------------------------------------------------
   deleteProductById: async (id) => {
     try {
-      const response = await privateClient.delete(productsEndpoints.deleteProduct({ id }));
+      const response = await privateClient.delete(
+        productsEndpoints.deleteProduct({ id })
+      );
 
       return { response };
     } catch (err) {
@@ -132,7 +145,9 @@ const productsApi = {
   //---------------------------------------------------------------------------------
   deleteCategory: async (id) => {
     try {
-      const response = await privateClient.delete(productsEndpoints.deleteCategory({ id }));
+      const response = await privateClient.delete(
+        productsEndpoints.deleteCategory({ id })
+      );
 
       return { response };
     } catch (err) {
@@ -143,7 +158,10 @@ const productsApi = {
   //---------------------------------------------------------------------------------
   putCategoryById: async (id, data) => {
     try {
-      const response = await privateClient.put(productsEndpoints.editCategory({ id }), data);
+      const response = await privateClient.put(
+        productsEndpoints.editCategory({ id }),
+        data
+      );
 
       return { response };
     } catch (err) {
@@ -154,7 +172,9 @@ const productsApi = {
   //---------------------------------------------------------------------------------
   getCategoryById: async (id) => {
     try {
-      const response = await privateClient.get(productsEndpoints.categoryById({ id }));
+      const response = await privateClient.get(
+        productsEndpoints.categoryById({ id })
+      );
 
       return { response };
     } catch (err) {
@@ -176,7 +196,10 @@ const productsApi = {
   //---------------------------------------------------------------------------------
   postDiscount: async (data) => {
     try {
-      const response = await privateClient.post(productsEndpoints.postDiscount, data);
+      const response = await privateClient.post(
+        productsEndpoints.postDiscount,
+        data
+      );
 
       return { response };
     } catch (err) {
@@ -187,7 +210,9 @@ const productsApi = {
   //---------------------------------------------------------------------------------
   deleteDiscountById: async (id) => {
     try {
-      const response = await privateClient.delete(productsEndpoints.deleteDiscount({ id }));
+      const response = await privateClient.delete(
+        productsEndpoints.deleteDiscount({ id })
+      );
       return { response };
     } catch (err) {
       return { err };
@@ -196,9 +221,12 @@ const productsApi = {
 
   //---------------------------------------------------------------------------------
   putDiscountById: async (id, data) => {
-    console.log(id,data)
+    console.log(id, data);
     try {
-      const response = await privateClient.put(productsEndpoints.editDiscount({ id }), data);
+      const response = await privateClient.put(
+        productsEndpoints.editDiscount({ id }),
+        data
+      );
 
       return { response };
     } catch (err) {
@@ -209,7 +237,9 @@ const productsApi = {
   //---------------------------------------------------------------------------------
   getDiscountById: async (id) => {
     try {
-      const response = await privateClient.get(productsEndpoints.discountById({ id }));
+      const response = await privateClient.get(
+        productsEndpoints.discountById({ id })
+      );
 
       return { response };
     } catch (err) {
@@ -231,7 +261,9 @@ const productsApi = {
   //---------------------------------------------------------------------------------
   getFeaturedById: async (id) => {
     try {
-      const response = await privateClient.get(productsEndpoints.featuredById({ id }));
+      const response = await privateClient.get(
+        productsEndpoints.featuredById({ id })
+      );
 
       return { response };
     } catch (err) {
@@ -239,10 +271,13 @@ const productsApi = {
     }
   },
 
-   //---------------------------------------------------------------------------------
-   postFeatured: async (data) => {
+  //---------------------------------------------------------------------------------
+  postFeatured: async (data) => {
     try {
-      const response = await privateClient.post(productsEndpoints.addFeatured, data);
+      const response = await privateClient.post(
+        productsEndpoints.addFeatured,
+        data
+      );
 
       return { response };
     } catch (err) {
@@ -253,7 +288,10 @@ const productsApi = {
   //---------------------------------------------------------------------------------
   putFeaturedById: async (id, data) => {
     try {
-      const response = await privateClient.put(productsEndpoints.editFeatured({ id }), data);
+      const response = await privateClient.put(
+        productsEndpoints.editFeatured({ id }),
+        data
+      );
 
       return { response };
     } catch (err) {
@@ -264,15 +302,26 @@ const productsApi = {
   //---------------------------------------------------------------------------------
   deleteFaturedById: async (id) => {
     try {
-      const response = await privateClient.delete(productsEndpoints.deleteFeatured({ id }));
+      const response = await privateClient.delete(
+        productsEndpoints.deleteFeatured({ id })
+      );
       return { response };
     } catch (err) {
       return { err };
     }
   },
-
+  //---------------------------------------------------------------------------------
+  putReview: async (productId, data) => {
+    try {
+      const response = await privateClient.put(
+        productsEndpoints.addReview({ productId }),
+        data
+      );
+      return { response };
+    } catch (err) {
+      return { err };
+    }
+  },
 };
-
-
 
 export default productsApi;

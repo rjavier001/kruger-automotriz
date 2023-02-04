@@ -8,26 +8,31 @@ import Button from "@mui/material/Button";
 import { Container, Stack } from "@mui/system";
 import ModalPaymentsComp from "./ModalPaymentsComp";
 import axios from "axios";
+import productsApi from "../../api/modules/products.api";
+import { toast } from "react-toastify";
 
 const ReviewComp = ({ props }) => {
-  const [value, setValue] = useState();
-  const [rating, setRating] = useState();
-
+  const [rating, setRating] = useState({ stars: 0, description: "" });
+  const [frontReviews, setFrontReviews] = useState(props.review);
   const onImputChange = (e) => {
     setRating({ ...rating, [e.target.name]: e.target.value });
   };
 
-  const handleReview = async (e) => {
-    e.preventDefault();
-    /* await axios.post("http://localhost:8080/province", provinces); */
-    /*   navigate("/"); */
+  const postReview = async () => {
+    const { response } = await productsApi.putReview(props.id, rating);
+
+    setFrontReviews([...frontReviews, rating]);
+    setRating({ stars: 0, description: "" });
+    toast.info("Gracias por tu opinión", {
+      position: "bottom-left",
+    });
   };
 
   return (
     <Container>
       <Stack
         sx={{
-          marginTop: 2,
+          marginY: 2,
         }}
         direction={"column"}
         spacing={2}
@@ -38,16 +43,16 @@ const ReviewComp = ({ props }) => {
         {props.review.length === 0 && (
           <Typography component="legend">Aun no hay Calificaciones </Typography>
         )}
-        {props.review.map((reviews) => (
-          <>
+        {frontReviews.map((reviews) => (
+          <div class="animate__animated animate__fadeIn">
             <Rating name="read-only" value={reviews.stars} readOnly />
             <Typography>{reviews.description}</Typography>
             <Divider sx={{ marginY: 2 }} />
-          </>
+          </div>
         ))}
         <Typography variant="h6">Dejanos tu opinion: </Typography>
         <Rating
-          value={value}
+          value={rating.stars}
           name={"stars"}
           onChange={(e) => {
             onImputChange(e);
@@ -57,6 +62,7 @@ const ReviewComp = ({ props }) => {
           id="outlined-multiline-flexible"
           label="Tu opninion nos interesa"
           name="description"
+          value={rating.description}
           multiline
           maxRows={4}
           onChange={(e) => onImputChange(e)}
@@ -64,7 +70,7 @@ const ReviewComp = ({ props }) => {
         <Button
           variant="contained"
           sx={{ width: 30 }}
-          onClick={() => console.log(rating)}
+          onClick={() => postReview()}
         >
           Enviar
         </Button>
