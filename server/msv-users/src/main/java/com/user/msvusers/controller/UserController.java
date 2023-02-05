@@ -1,9 +1,11 @@
 package com.user.msvusers.controller;
 
+import com.user.msvusers.configuration.CircuitBreaker.FallBackMethods;
 import com.user.msvusers.model.Order;
 import com.user.msvusers.model.entity.User;
 import com.user.msvusers.service.IUserService;
 import feign.FeignException;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +17,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/users")
-public class UserController {
+public class UserController extends FallBackMethods {
 
   @Autowired
   private IUserService service;
@@ -67,6 +69,8 @@ public class UserController {
     return new ResponseEntity<>(null,HttpStatus.NOT_FOUND);
   }
 
+
+  @CircuitBreaker(name="ordersCB", fallbackMethod = "fallBackAssignOrder")
   @PutMapping("/assign-order/{userId}")
   public ResponseEntity<?> assignOrder(@RequestBody Order order, @PathVariable Long userId){
     Optional<Order> o;
@@ -81,6 +85,7 @@ public class UserController {
     return  ResponseEntity.notFound().build();
   }
 
+  @CircuitBreaker(name="ordersCB", fallbackMethod = "fallBackCreateOrder")
   @PostMapping("/create-order/{userId}")
   public ResponseEntity<?> createOrder(@RequestBody Order order, @PathVariable Long userId){
     Optional<Order> o;
@@ -96,6 +101,7 @@ public class UserController {
     return  ResponseEntity.notFound().build();
   }
 
+  @CircuitBreaker(name="ordersCB", fallbackMethod = "fallBackDeleteOrder")
   @DeleteMapping("/delete-order/{userId}")
   public ResponseEntity<?> deleteOrder(@RequestBody Order order, @PathVariable Long userId){
     Optional<Order> o;
@@ -110,6 +116,7 @@ public class UserController {
     return  ResponseEntity.notFound().build();
   }
 
+  @CircuitBreaker(name="ordersCB", fallbackMethod = "fallBackDeleteOrderById")
   @DeleteMapping("/delete-user-order/{id}")
   public ResponseEntity<?> deleteUserOrderById(@PathVariable Long id){
     service.deleteUserOrderById(id);
