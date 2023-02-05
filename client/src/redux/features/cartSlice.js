@@ -8,6 +8,7 @@ const initialState = {
     : [],
   cartTotalQuantity: 0,
   cartTotalAmount: 0,
+  cartTotalWeight: 0,
 };
 
 export const cartSlice = createSlice({
@@ -27,6 +28,7 @@ export const cartSlice = createSlice({
           state.cartItems[itemIndex].cartQuantity
         ) {
           state.cartItems[itemIndex].cartQuantity += 1;
+          state.cartItems[itemIndex].cartWeight += action.payload.weight;
           toast.info("uno mas añadido", {
             position: "bottom-left",
           });
@@ -39,6 +41,7 @@ export const cartSlice = createSlice({
         const tempProduct = {
           ...action.payload,
           cartQuantity: action.payload.quantity,
+          cartWeight: action.payload.weight,
         };
         state.cartItems.push(tempProduct);
         toast.success(`${action.payload.name} anadido al carrito`, {
@@ -47,6 +50,8 @@ export const cartSlice = createSlice({
       }
       /* GUARDA EN LOCAL STORAGE EL ITEM ANADIDO AL CARRITO */
       localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
+      /*  state.cartTotalWeight =
+        state.cartTotalWeight + state.cartItems[itemIndex].weight; */
     },
     /* FUNCION REMOVER DEL CARRO */
     removeFromCart(state, action) {
@@ -94,23 +99,26 @@ export const cartSlice = createSlice({
     },
     /* FUNCTION CALCULATE TOTAL */
     getTotal(state, action) {
-      let { total, quantity } = state.cartItems.reduce(
+      let { total, quantity, weight } = state.cartItems.reduce(
         (cartTotal, cartItem) => {
-          const { price, cartQuantity } = cartItem;
+          const { price, cartQuantity, cartWeight } = cartItem;
           const itemTotal = price * cartQuantity;
           cartTotal.total += itemTotal;
           cartTotal.quantity += cartQuantity;
+          cartTotal.weight += cartWeight;
 
           return cartTotal;
         },
         {
           total: 0,
           quantity: 0,
+          weight: 0,
         }
       );
       /* Actualizamos el state */
       state.cartTotalQuantity = quantity;
       state.cartTotalAmount = total;
+      state.cartTotalWeight = weight;
     },
   },
 });
