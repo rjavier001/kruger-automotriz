@@ -95,6 +95,12 @@ const PaymentPage = () => {
           <Stack sx={styles.stackRoot}>
             <Typography sx={styles.headers}>Total:</Typography>
             <Typography sx={styles.headers}>{cart.cartTotalAmount}$</Typography>
+            <Typography sx={styles.headers}>
+              Peso Total a precio de envio:
+            </Typography>
+            <Typography sx={styles.headers}>
+              {cart.cartTotalWeight / 200}
+            </Typography>
           </Stack>
         </Grid>
 
@@ -184,7 +190,7 @@ export default PaymentPage;
 
 export const styles = {
   container: {
-    marginTop: 10,
+    marginY: 10,
   },
   headers: {
     fontWeight: "bold",
@@ -196,5 +202,11 @@ export const styles = {
   },
   price: {
     textAlign: "center",
+  },
+  stackRoot: {
+    borderWidth: 1,
+    borderColor: "black",
+    borderStyle: "solid",
+    borderRadius: 20,
   },
 };
