@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: msv-order
+  cloud:
+    config:
+      uri: http://localhost:8888
+      profile: dev
+
+
+
