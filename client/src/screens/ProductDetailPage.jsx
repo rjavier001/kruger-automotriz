@@ -27,6 +27,7 @@ const ProductDetailPage = () => {
   const handleAddtoCart = (props) => {
     props = { ...props, quantity };
     dispatch(addToCart(props));
+    console.log(props);
   };
   useEffect(() => {
     dispatch(getTotal());
@@ -115,7 +116,7 @@ const ProductDetailPage = () => {
           </Grid>
         </Grid>
       </Container>
-      <ReviewComp />
+      <ReviewComp props={props} />
       <CompanyBenefitsComp />
     </>
   );

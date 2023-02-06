@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 
-@FeignClient(name = "msv-products", url = "localhost:8002")
+@FeignClient(name = "msv-products")
 public interface ProductsClientRest {
 
     @GetMapping

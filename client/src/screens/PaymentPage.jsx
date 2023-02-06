@@ -32,15 +32,18 @@ const PaymentPage = () => {
       email: "",
       address: "",
     },
-    onSubmit: (values) => {
+    onSubmit: (values, { resetForm }) => {
       alert(JSON.stringify(values, null, 2));
+      resetForm();
     },
   });
   return (
     <Container sx={styles.container}>
       <Grid container spacing={2}>
         <Grid item xs={12} md={6}>
-          <Typography variant="h6">1.-Confirma tu orden:</Typography>
+          <Typography variant="h6" sx={styles.numberHeaders}>
+            1.-Confirma tu orden:
+          </Typography>
           <Grid container spacing={2}>
             <Grid item xs={12} md={6}>
               <Typography sx={styles.headers}>Repuesto:</Typography>
@@ -92,12 +95,20 @@ const PaymentPage = () => {
           <Stack sx={styles.stackRoot}>
             <Typography sx={styles.headers}>Total:</Typography>
             <Typography sx={styles.headers}>{cart.cartTotalAmount}$</Typography>
+            <Typography sx={styles.headers}>
+              Peso Total a precio de envio:
+            </Typography>
+            <Typography sx={styles.headers}>
+              {cart.cartTotalWeight / 200}
+            </Typography>
           </Stack>
         </Grid>
 
         <Grid container item xs={12} md={6}>
           <Grid item xs={12} md={6}>
-            <Typography variant="h6">2.-Escoge un metodo de pago:</Typography>
+            <Typography variant="h6" sx={styles.numberHeaders}>
+              2.-Escoge un metodo de pago:
+            </Typography>
 
             <TextField
               id="outlined-select-currency"
@@ -113,7 +124,7 @@ const PaymentPage = () => {
               ))}
             </TextField>
           </Grid>
-          <Typography variant="h6">
+          <Typography variant="h6" sx={styles.numberHeaders}>
             3.-Ingresa tu informacion de pago:
           </Typography>
           <form onSubmit={formik.handleSubmit}>
@@ -179,14 +190,23 @@ export default PaymentPage;
 
 export const styles = {
   container: {
-    marginTop: 2,
+    marginY: 10,
   },
   headers: {
     fontWeight: "bold",
     fontSize: "15px",
     textAlign: "center",
   },
+  numberHeaders: {
+    marginBottom: 2,
+  },
   price: {
     textAlign: "center",
+  },
+  stackRoot: {
+    borderWidth: 1,
+    borderColor: "black",
+    borderStyle: "solid",
+    borderRadius: 20,
   },
 };

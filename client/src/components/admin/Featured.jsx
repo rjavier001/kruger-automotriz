@@ -7,33 +7,23 @@ import {
 	Typography,
 } from "@mui/material";
 import { Box, Container } from "@mui/system";
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import Swal from "sweetalert2";
 import productsApi from "../../api/modules/products.api";
 import uiConfigs from "../../configs/ui.configs";
-import CreateDiscount from "./componentsProduct/CreateDiscount";
 import CreateFeatured from "./componentsProduct/CreateFatured";
-import EditDiscount from "./componentsProduct/EditDiscount";
 import EditFeatured from "./componentsProduct/EditFeatured";
-import Dashboard from "./Dashboard";
+import { useApi } from "./hooks/useApi";
 
 export default function Featured() {
 	//---------------------------------------------------------------------------------
 	const [page, setPage] = useState(0);
 	const [rowsPerPage, setRowsPerPage] = useState(4);
-	const [featured, setFeatured] = useState([]);
 	const [featuredDelete, setFeaturedDelete] = useState([]);
 
-	//---------------------------------------------------------------------------------
-	useEffect(() => {
-		const getFeaturedLis = async () => {
-			const { response } = await productsApi.getFeaturedList();
-			if (response) setFeatured(response);
-		};
-		getFeaturedLis();
-	}, []);
 
-	console.log(featured);
+	//---------------------------------------------------------------------------------
+	const { featured } = useApi();
 
 	//---------------------------------------------------------------------------------
 	const handleChangePage = (e, newPage) => {
