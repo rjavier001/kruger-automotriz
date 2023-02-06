@@ -17,7 +17,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/users")
-public class UserController extends FallBackMethods {
+public class UserController extends FallBackMethods{
 
   @Autowired
   private IUserService service;
@@ -89,6 +89,7 @@ public class UserController extends FallBackMethods {
   @PostMapping("/create-order/{userId}")
   public ResponseEntity<?> createOrder(@RequestBody Order order, @PathVariable Long userId){
     Optional<Order> o;
+    //if u want use fallback methods disable try-catch
     try{
       o = service.createOrder(order, userId);
     } catch (FeignException e){
@@ -122,5 +123,4 @@ public class UserController extends FallBackMethods {
     service.deleteUserOrderById(id);
     return ResponseEntity.noContent().build();
   }
-
 }
