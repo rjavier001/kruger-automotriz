@@ -57,6 +57,8 @@ public class ProductServiceImpl implements IProductService{
         productUpdate.setName(product.getName());
         productUpdate.setDescription(product.getDescription());
         productUpdate.setPrice(product.getPrice());
+        productUpdate.setWeight(product.getWeight());
+        productUpdate.setSize(product.getSize());
         productUpdate.setStock(product.getStock());
         productUpdate.setPurchasePrice(product.getPurchasePrice());
         productUpdate.setSalePrice(product.getSalePrice());

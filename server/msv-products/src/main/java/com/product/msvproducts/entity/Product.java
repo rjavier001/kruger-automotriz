@@ -31,6 +31,10 @@ public class Product {
     @Max(1000)
     private Double price;
 
+    private Double size;
+
+    private Double weight;
+
     @NotNull(message = "Stock should not be empty")
     @Min(3)
     @Max(1000)
