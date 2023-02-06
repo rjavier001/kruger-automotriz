@@ -7,16 +7,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
 public class FallBackMethods {
-  private ResponseEntity<?> fallBackAssignOrder(@RequestBody Order order, @PathVariable Long userId){
+  private ResponseEntity<?> fallBackAssignOrder(@RequestBody Order order, @PathVariable Long userId,RuntimeException e){
     return new ResponseEntity("msv-order response fail", HttpStatus.OK);
   }
-  private ResponseEntity<?> fallBackCreateOrder(@RequestBody Order order, @PathVariable Long userId){
+  private ResponseEntity<?> fallBackCreateOrder(@RequestBody Order order, @PathVariable Long userId,RuntimeException e){
     return new ResponseEntity("msv-order response fail", HttpStatus.OK);
   }
-  public ResponseEntity<?> fallBackDeleteOrder(@RequestBody Order order, @PathVariable Long userId){
+  public ResponseEntity<?> fallBackDeleteOrder(@RequestBody Order order, @PathVariable Long userId,RuntimeException e){
     return new ResponseEntity("msv-order response fail", HttpStatus.OK);
   }
-  public ResponseEntity<?> fallBackDeleteOrderById(@PathVariable Long id){
+  public ResponseEntity<?> fallBackDeleteOrderById(@PathVariable Long id,RuntimeException e){
     return new ResponseEntity("msv-order response fail", HttpStatus.OK);
   }
 }
