@@ -1,24 +1,14 @@
-package com.user.msvusers.clients;
+package com.kruger.authserver.clients;
 
-import com.user.msvusers.model.Order;
+import com.kruger.authserver.entity.User;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
-@FeignClient(name = "msv-order")
-public interface OrderClientRest {
+@FeignClient(name = "msv-users")
+public interface UserClientRest {
 
-    @GetMapping(value = "/{id}")
-    Order getOrder(@PathVariable("id") long id);
-
-    @PostMapping(value= "/user/{id}")
-    Order createOrder(@RequestBody Order order, @PathVariable("id") long customerId);
-
-    @PostMapping("/")
-    Order createO(@RequestBody Order order);
-
-    @GetMapping("/orders-by-user")
-    List<Order> getAllOrdersByUser(@RequestParam Iterable<Long> ids);
+    @PostMapping(value= "/api/users/save")
+    User createAuthUser(@RequestBody User user);
 
 }

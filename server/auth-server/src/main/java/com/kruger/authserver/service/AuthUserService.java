@@ -1,9 +1,11 @@
 package com.kruger.authserver.service;
 
 
+import com.kruger.authserver.clients.UserClientRest;
 import com.kruger.authserver.dto.AuthUserDto;
 import com.kruger.authserver.dto.TokenDto;
 import com.kruger.authserver.entity.AuthUser;
+import com.kruger.authserver.entity.User;
 import com.kruger.authserver.repository.AuthUserRepository;
 import com.kruger.authserver.security.JwtProvider;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,9 @@ public class AuthUserService {
 
   @Autowired
   AuthUserRepository authUserRepository;
+
+  @Autowired
+  UserClientRest client;
 
   @Autowired
   PasswordEncoder passwordEncoder;
@@ -34,6 +39,13 @@ public class AuthUserService {
         .password(password)
         .build();
     return authUserRepository.save(authUser);
+  }
+  public User saveUser(User user, String userName) {
+    Optional<AuthUser> userAuth = authUserRepository.findByUserName(userName);
+    if(userAuth.isPresent()){
+      user.setUser_id(userAuth.get().getId());
+    }
+    return client.createAuthUser(user);
   }
 
   public TokenDto login(AuthUserDto dto) {

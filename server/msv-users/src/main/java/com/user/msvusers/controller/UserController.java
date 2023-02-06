@@ -22,7 +22,7 @@ public class UserController extends FallBackMethods{
   @Autowired
   private IUserService service;
 
-  @GetMapping("/all")
+  @GetMapping
   public List<User> getAllUser(){
     return service.findAll();
   }
@@ -52,8 +52,8 @@ public class UserController extends FallBackMethods{
       userDB.setAge(req.getAge());
       userDB.setPhone(req.getPhone());
       userDB.setEmail(req.getEmail());
-      userDB.setPassword(req.getPassword());
-      userDB.setRole(req.getRole());
+//      userDB.setPassword(req.getPassword());
+//      userDB.setRole(req.getRole());
       return new ResponseEntity<>(service.save(userDB),HttpStatus.CREATED);
     }
     return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
