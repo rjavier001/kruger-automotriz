@@ -17,42 +17,23 @@ import Swal from "sweetalert2";
 import productsApi from "../../api/modules/products.api";
 import uiConfigs from "../../configs/ui.configs";
 import CreateCategory from "./componentsProduct/CreateCategory";
+import { useApi } from "./hooks/useApi";
 
 const Category = () => {
 	const navigate = useNavigate();
 
 	//---------------------------------------------------------------------------------
-	const [categories, setCategories] = useState([]);
-	const [product, setProduct] = useState([]);
-	const [categorysPost, setCategorysPost] = useState([]);
 	const [deleteCategory, setDeleteCategories] = useState([]);
 	const [name, setName] = useState("");
 	const [description, setDescription] = useState("");
 	const [page, setPage] = useState(0);
 	const [rowsPerPage, setRowsPerPage] = useState(2);
 
-	//---------------------------------------------------------------------------------
-	useEffect(() => {
-		const getListCategories = async () => {
-			const { response } = await productsApi.getListCategory();
-			if (response) setCategories(response);
-		};
-		getListCategories();
-		
-
-		//--------------------------------------------------------
-		const getList = async () => {
-			const { response, err } = await productsApi.getList();
-			if (response) setProduct(response);
-		};
-		getList();
-
-		
-	}, []);
 
 	//---------------------------------------------------------------------------------
+	const { categories, product } = useApi();
+
 	
-
 	//---------------------------------------------------------------------------------
 
 	let dataProducts;
@@ -115,7 +96,6 @@ const Category = () => {
 	};
 
 
-	
 	//---------------------------------------------------------------------------------
 	return (
 		<div>

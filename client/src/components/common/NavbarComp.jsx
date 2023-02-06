@@ -25,17 +25,26 @@ import { setThemeMode } from "../../redux/features/themeModeSlice";
 import { setAuthModalOpen } from "../../redux/features/authModalSlice";
 import Sidebar from "./Sidebar";
 import UserMenu from "./UserMenu";
+import Image from "mui-image";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import TwitterIcon from "@mui/icons-material/Twitter";
+import Logo from "../../assets/LOGO_KRUGERMOTORS.png";
+import Slide from "@mui/material/Slide";
 
-const ScrollAppBar = ({ children, window }) => {
+function HideOnScroll(props) {
   const { themeMode } = useSelector((state) => state.themeMode);
-
+  const { children, window } = props;
+  // Note that you normally won't need to set the window ref as useScrollTrigger
+  // will default to window.
+  // This is only being set here because the demo is in an iframe.
   const trigger = useScrollTrigger({
     disableHysteresis: true,
-    threshold: 50,
+    threshold: 100,
     target: window ? window() : undefined,
   });
 
-  return cloneElement(children, {
+  /*   return cloneElement(children, {
     sx: {
       color: trigger
         ? "text.primary"
@@ -48,8 +57,30 @@ const ScrollAppBar = ({ children, window }) => {
         ? "transparent"
         : "background.paper",
     },
-  });
-};
+  }); */
+
+  return (
+    <Slide
+      appear={false}
+      direction="down"
+      in={!trigger}
+      sx={{
+        color: trigger
+          ? "text.primary"
+          : themeMode === themeModes.dark
+          ? "primary.contrastText"
+          : "text.primary",
+        backgroundColor: trigger
+          ? "background.paper"
+          : themeMode === themeModes.dark
+          ? "transparent"
+          : "background.paper",
+      }}
+    >
+      {children}
+    </Slide>
+  );
+}
 
 const Navbar = () => {
   // const { user } = useSelector((state) => state.user);
@@ -71,55 +102,14 @@ const Navbar = () => {
 
   // const isMatch = useMediaQuery(theme.breakpoints.down("md"));
 
-  const Search = styled("div")(({ theme }) => ({
-    position: "relative",
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: alpha(theme.palette.common.white, 0.15),
-    "&:hover": {
-      backgroundColor: alpha(theme.palette.common.white, 0.25),
-    },
-    marginLeft: 0,
-    width: "100%",
-    [theme.breakpoints.up("sm")]: {
-      marginLeft: theme.spacing(1),
-      width: "auto",
-    },
-  }));
-
-  const SearchIconWrapper = styled("div")(({ theme }) => ({
-    padding: theme.spacing(0, 2),
-    height: "100%",
-    position: "absolute",
-    pointerEvents: "none",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  }));
-
-  const StyledInputBase = styled(InputBase)(({ theme }) => ({
-    color: "inherit",
-    "& .MuiInputBase-input": {
-      padding: theme.spacing(1, 1, 1, 0),
-      // vertical padding + font size from searchIcon
-      paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-      transition: theme.transitions.create("width"),
-      width: "100%",
-      [theme.breakpoints.up("sm")]: {
-        width: "12ch",
-        "&:focus": {
-          width: "20ch",
-        },
-      },
-    },
-  }));
-
   let location = useLocation();
 
   return (
     <>
       <Sidebar open={sidebarOpen} toggleSidebar={toggleSidebar} />
-      <ScrollAppBar>
+      <HideOnScroll>
         <AppBar
+          position="fixed"
           color="primary"
           elevation={1}
           sx={{
@@ -127,71 +117,118 @@ const Navbar = () => {
           }}
         >
           <Toolbar
-            sx={{ alignItems: "center", justifyContent: "space-between" }}
+            sx={{
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}
           >
-            <IconButton
-              color="inherit"
-              sx={{ mr: 2, display: { md: "none" } }}
-              onClick={toggleSidebar}
-            >
-              <MenuIcon />
-            </IconButton>
-            <IconButton color="inherit">
-              <CarRepairIcon />
-            </IconButton>
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              Kruger-Repuestos
-            </Typography>
-
-
-            <Stack
-              direction="row"
-              spacing={1}
-              alignItems="center"
-              display={{ xs: "none", md: "flex" }}
-            >
-              <IconButton sx={{ color: "inherit" }} onClick={onSwithTheme}>
-                {themeMode === themeModes.dark && <DarkModeOutlinedIcon />}
-                {themeMode === themeModes.light && <WbSunnyOutlinedIcon />}
-              </IconButton>
-              {menuConfigs.main.map((item, index) => (
-                <Button
-                  key={index}
-                  sx={{
-                    color: appState.includes(item.state)
-                      ? "primary.contrastText"
-                      : "inherit",
-                    mr: 2,
-                  }}
-                  component={Link}
-                  to={item.path}
-                  variant={appState.includes(item.state) ? "contained" : "text"}
+            <Stack sx={{ width: "100%" }}>
+              <Stack
+                direction={{ md: "row", xs: "column" }}
+                alignItems={"center"}
+              >
+                <IconButton
+                  color="inherit"
+                  sx={{ mr: 2, display: { md: "none" } }}
+                  onClick={toggleSidebar}
                 >
-                  {item.display}
-                </Button>
-              ))}
-              <NavLink to={"/checkout"}>
-                <IconButton>
-                  <ShoppingCartCheckoutIcon />
-                  <Typography sx={styles.badge}>{cartTotalQuantity}</Typography>
+                  <MenuIcon />
                 </IconButton>
-              </NavLink>
-            </Stack>
+                <Stack>
+                  <IconButton color="inherit">
+                    <Image
+                      src={Logo}
+                      width={130}
+                      duration={100}
+                      easing={"linear"}
+                    />
+                  </IconButton>
+                  <Typography
+                    variant="h6"
+                    component="div"
+                    sx={{ textAlign: "center" }}
+                  >
+                    Kruger Motors
+                  </Typography>
+                </Stack>
 
-            {/* user menu */}
-            <Stack spacing={3} direction="row" alignItems="center">
-              {!user && (
-                <LoginIcon
-                  variant="contained"
-                  onClick={() => dispatch(setAuthModalOpen(true))}
-                />
-              )}
+                <Typography
+                  variant="h4"
+                  fontSize={{ xs: 0, sm: 25, md: 35 }}
+                  sx={{
+                    width: "100%",
+                    textAlign: "center",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Sabemos lo que tu auto significa para ti!
+                </Typography>
+                <Stack direction={"row"}>
+                  <IconButton>
+                    <FacebookIcon />
+                  </IconButton>
+                  <IconButton>
+                    <InstagramIcon />
+                  </IconButton>
+                  <IconButton>
+                    <TwitterIcon />
+                  </IconButton>
+                </Stack>
+              </Stack>
+
+              <Stack
+                direction="row"
+                alignItems="center"
+                display={{ xs: "none", md: "flex" }}
+                justifyContent={"space-between"}
+              >
+                <IconButton sx={{ color: "inherit" }} onClick={onSwithTheme}>
+                  {themeMode === themeModes.dark && <DarkModeOutlinedIcon />}
+                  {themeMode === themeModes.light && <WbSunnyOutlinedIcon />}
+                </IconButton>
+                {menuConfigs.main.map((item, index) => (
+                  <Button
+                    key={index}
+                    sx={{
+                      color: appState.includes(item.state)
+                        ? "primary.contrastText"
+                        : "inherit",
+                      mr: 2,
+                      width: "100%",
+                    }}
+                    component={Link}
+                    to={item.path}
+                    variant={
+                      appState.includes(item.state) ? "contained" : "text"
+                    }
+                  >
+                    {item.display}
+                  </Button>
+                ))}
+                <NavLink to={"/checkout"}>
+                  <IconButton>
+                    <ShoppingCartCheckoutIcon />
+                    <Typography sx={styles.badge}>
+                      {cartTotalQuantity}
+                    </Typography>
+                  </IconButton>
+                </NavLink>
+                {/* user menu */}
+                <Stack spacing={3} direction="row" alignItems="center">
+                  {!user && (
+                    <LoginIcon
+                      variant="contained"
+                      onClick={() => dispatch(setAuthModalOpen(true))}
+                    />
+                  )}
+                </Stack>
+                {user && <UserMenu />}
+                {/* user menu */}
+              </Stack>
             </Stack>
-            {user && <UserMenu />}
-            {/* user menu */}
           </Toolbar>
         </AppBar>
-      </ScrollAppBar>
+      </HideOnScroll>
     </>
   );
 };
