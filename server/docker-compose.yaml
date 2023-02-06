@@ -1,0 +1,67 @@
+version: "3.9"
+services:
+  postgres14:
+    container_name: postgres14
+    image: postgres:14-alpine
+    ports:
+      - "5532:5432"
+    environment:
+      POSTGRES_PASSWORD: sa.1
+      POSTGRES_DB: postgres
+    volumes:
+      - data-postgres:/var/lib/postgresql/data
+    restart: always
+    networks:
+      - km_net
+
+  msv-users:
+    container_name: msv-users
+    build:
+      context: ./
+      dockerfile: ./msv-users/Dockerfile
+    ports:
+      - "8001:8001"
+    env_file: ./msv-users/.env
+    networks:
+      - km_net
+    depends_on:
+      - postgres14
+      - msv-order
+    restart: always
+
+  msv-order:
+    container_name: msv-order
+    build:
+      context: ./
+      dockerfile: ./msv-order/Dockerfile
+    ports:
+      - "8003:8003"
+    env_file: ./msv-order/.env
+    networks:
+      - km_net
+    depends_on:
+      - postgres14
+      - msv-products
+    restart: always
+
+  msv-products:
+    container_name: msv-products
+    build:
+      context: ./
+      dockerfile: ./msv-products/Dockerfile
+    ports:
+      - "8002:8002"
+    env_file: ./msv-products/.env
+    networks:
+      - km_net
+    depends_on:
+      - postgres14
+    restart: always
+
+volumes:
+  data-postgres:
+    name: data-postgres
+
+networks:
+  km_net:
+    name: km_net
