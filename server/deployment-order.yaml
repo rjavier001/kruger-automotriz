@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: msv-order
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: msv-order
+  template:
+    metadata:
+      labels:
+        app: msv-order
+    spec:
+      containers:
+        - name: msv-order
+          image: sathell/msv-order:latest
+          ports:
+            - containerPort: 8003
+          env:
+            - name: POSTGRES_PASSWORD
+              value: sa.1
+            - name: POSTGRES_DB
+              value: postgres
