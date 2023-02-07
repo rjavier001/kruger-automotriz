@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: msv-users
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: msv-users
+  template:
+    metadata:
+      labels:
+        app: msv-users
+    spec:
+      containers:
+        - name: msv-users
+          image: sathell/msv-users:latest
+          ports:
+            - containerPort: 8001
+          env:
+            - name: POSTGRES_PASSWORD
+              value: sa.1
+            - name: POSTGRES_DB
+              value: postgres
