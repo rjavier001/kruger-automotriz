@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: msv-products
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: msv-products
+  template:
+    metadata:
+      labels:
+        app: msv-products
+    spec:
+      containers:
+        - name: msv-products
+          image: sathell/msv-products:latest
+          ports:
+            - containerPort: 8002
+          env:
+            - name: POSTGRES_PASSWORD
+              value: sa.1
+            - name: POSTGRES_DB
+              value: postgres
