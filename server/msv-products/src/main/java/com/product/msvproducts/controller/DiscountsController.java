@@ -14,9 +14,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin(origins = "http://localhost:3000")
+
 @RestController
-@RequestMapping("api/discounts")
+@RequestMapping("/api/discounts")
 public class DiscountsController {
 
     @Autowired

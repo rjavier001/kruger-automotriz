@@ -16,7 +16,7 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 
-@CrossOrigin(origins = "http://localhost:3000")
+
 @RestController
 @RequestMapping("/api/categories")
 public class CategoryController {
