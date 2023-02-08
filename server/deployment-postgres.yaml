@@ -20,7 +20,7 @@ spec:
         env:
           - name: POSTGRES_PASSWORD
             valueFrom:
-              configMapKeyref:
+              configMapKeyRef:
                 name: msv-users
                 key: password
           - name: POSTGRES_DB
