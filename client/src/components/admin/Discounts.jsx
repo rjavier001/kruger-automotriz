@@ -36,13 +36,13 @@ export default function Discounts() {
 			if (response) setDiscountsDelete(response);
 		};
 
+		//---------------------------------------------------------------------------------
 		let discountProductsId;
 		const allItems = discounts;
 		const discountIdProduct = allItems.filter((item) => item.id === idDiscount);
 		discountProductsId = discountIdProduct;
 
-		console.log(discountProductsId[0].products.length === 0);
-
+		//---------------------------------------------------------------------------------
 		/* A ternary operator. */
 		discountProductsId[0].products.length !== 0
 			? Swal.fire({
@@ -92,7 +92,12 @@ export default function Discounts() {
 						/>
 						<Grid container>
 							<Grid container spacing={5}>
-								{discounts
+								{
+									discounts.status === 204 
+									? <p>No data</p>
+									:
+									<>
+									{discounts
 									.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
 									.map((discount, i) => (
 										<Grid item xs={12} sm={12} md={6} spacing={5}>
@@ -145,6 +150,9 @@ export default function Discounts() {
 											</Card>
 										</Grid>
 									))}
+									</>
+								}
+								
 							</Grid>
 						</Grid>
 					</Box>
