@@ -6,14 +6,24 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="msv-products" />
         <module name="msv-users" />
+        <module name="config-server" />
+        <module name="discovery-server" />
+        <module name="msv-order" />
         <module name="msv-orders" />
+        <module name="auth-server" />
+        <module name="gateway-server" />
+        <module name="msv-products" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="auth-server" options="-parameters" />
+      <module name="config-server" options="-parameters" />
+      <module name="discovery-server" options="-parameters" />
+      <module name="gateway-server" options="-parameters" />
+      <module name="msv-order" options="-parameters" />
       <module name="msv-orders" options="-parameters" />
       <module name="msv-products" options="-parameters" />
       <module name="msv-users" options="-parameters" />
