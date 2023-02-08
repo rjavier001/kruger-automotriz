@@ -85,18 +85,35 @@ const CardComp = ({ props }) => {
 
 	//---------------------------------------------------------------------------------
 	let selectDiscount;
-	const allItemsDiscount = discounts;
-	const discountsItems = allItemsDiscount.filter(
+	const allItemsDiscount = discounts?.status === 204 ? null : discounts;
+	const discountsItems = allItemsDiscount?.filter(
 		(item) => item.id === discountId
 	);
 	selectDiscount = discountsItems;
 
+	const selectDiscountInCard = selectDiscount?.map((select) => select.price);
+	let discountSave =
+		selectDiscountInCard === undefined ? "0" : selectDiscountInCard[0];
+	const selectDiscountIdGet =
+		selectDiscount === undefined ? "0" : discountSave;
+
+	//---------------------------------------------------------------------------------
 	let selectFeatured;
-	const allItemsFeatured = featured;
-	const FeaturedItems = allItemsFeatured.filter(
+	const allItemsFeatured = featured?.status === 204 ? null : featured;
+	const FeaturedItems = allItemsFeatured?.filter(
 		(item) => item.id === featuredId
 	);
 	selectFeatured = FeaturedItems;
+
+	const selectFeaturedInForm = selectFeatured?.map(
+		(featured) => featured.featuredTime
+	);
+	let featuredSave =
+		selectFeaturedInForm === undefined ? "0" : selectFeaturedInForm[0];
+	const selectFeaturedIdGet =
+		selectFeatured === undefined ? "0" : featuredSave;
+
+
 
 	//---------------------------------------------------------------------------------
 	return (
@@ -117,9 +134,7 @@ const CardComp = ({ props }) => {
 									justifyItems: "center",
 									color: "primary",
 								}}>
-								{`${selectDiscount[0]?.price}%`
-									? "0%"
-									: `${selectDiscount[0]?.price}%`}
+								{`${selectDiscountIdGet}%` ? "0%" : `${selectDiscountIdGet}%`}
 							</Avatar>
 						}
 					/>
@@ -170,9 +185,7 @@ const CardComp = ({ props }) => {
 							color="text.secondary"
 							sx={uiConfigs.text}>
 							Time Featured:{" "}
-							{selectFeatured[0]?.featuredTime
-								? selectFeatured[0]?.featuredTime
-								: "0"}
+							{selectFeaturedIdGet ? selectFeaturedIdGet : "0"}
 						</Typography>
 					</CardContent>
 					<CardActions sx={uiConfigs.button}>
@@ -230,7 +243,7 @@ const CardComp = ({ props }) => {
 									display: "flex",
 									justifyItems: "center",
 									color: "primary",
-								}}>{`${selectDiscount[0]?.price}%`}</Avatar>
+								}}>{`${selectDiscountIdGet}%`}</Avatar>
 						}
 					/>
 					<CardMedia
@@ -280,9 +293,7 @@ const CardComp = ({ props }) => {
 							color="text.secondary"
 							sx={uiConfigs.text}>
 							Time Featured:{" "}
-							{selectFeatured[0]?.featuredTime
-								? selectFeatured[0]?.featuredTime
-								: "0"}
+							{selectFeaturedIdGet ? selectFeaturedIdGet : "0"}
 						</Typography>
 					</CardContent>
 					<CardActions sx={uiConfigs.button}>
