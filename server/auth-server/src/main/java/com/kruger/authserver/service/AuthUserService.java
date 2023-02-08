@@ -54,7 +54,7 @@ public class AuthUserService {
     if(!user.isPresent())
       return null;
     if(passwordEncoder.matches(dto.getPassword(), user.get().getPassword()))
-      return new TokenDto(jwtProvider.createToken(user.get()));
+      return new TokenDto(jwtProvider.createToken(user.get()), client.getUserByAuthId(user.get().getId()));
     return null;
   }
 
@@ -64,6 +64,6 @@ public class AuthUserService {
     String username = jwtProvider.getUserNameFromToken(token);
     if(!authUserRepository.findByUserName(username).isPresent())
       return null;
-    return new TokenDto(token);
+    return new TokenDto(token,null);
   }
 }

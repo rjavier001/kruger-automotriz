@@ -44,7 +44,7 @@ function HideOnScroll(props) {
     target: window ? window() : undefined,
   });
 
-  /*   return cloneElement(children, {
+  return cloneElement(children, {
     sx: {
       color: trigger
         ? "text.primary"
@@ -57,40 +57,64 @@ function HideOnScroll(props) {
         ? "transparent"
         : "background.paper",
     },
-  }); */
+  });
 
-  return (
-    <Slide
-      appear={false}
-      direction="down"
-      in={!trigger}
-      sx={{
-        color: trigger
-          ? "text.primary"
-          : themeMode === themeModes.dark
-          ? "primary.contrastText"
-          : "text.primary",
-        backgroundColor: trigger
-          ? "background.paper"
-          : themeMode === themeModes.dark
-          ? "transparent"
-          : "background.paper",
-      }}
-    >
-      {children}
-    </Slide>
-  );
+  // return (
+  //   <Slide
+  //     appear={false}
+  //     direction="down"
+  //     in={!trigger}
+  //     sx={{
+  //       color: trigger
+  //         ? "text.primary"
+  //         : themeMode === themeModes.dark
+  //         ? "primary.contrastText"
+  //         : "text.primary",
+  //       backgroundColor: trigger
+  //         ? "background.paper"
+  //         : themeMode === themeModes.dark
+  //         ? "transparent"
+  //         : "background.paper",
+  //     }}
+  //   >
+  //     {children}
+  //   </Slide>
+  // );
 }
+const ScrollAppBar = ({ children, window }) => {
+  const { themeMode } = useSelector((state) => state.themeMode);
+
+  const trigger = useScrollTrigger({
+    disableHysteresis: true,
+    threshold: 50,
+    target: window ? window() : undefined,
+  });
+
+  return cloneElement(children, {
+    sx: {
+      color: trigger
+        ? "text.primary"
+        : themeMode === themeModes.dark
+        ? "primary.contrastText"
+        : "text.primary",
+      backgroundColor: trigger
+        ? "background.paper"
+        : themeMode === themeModes.dark
+        ? "transparent"
+        : "background.paper",
+    },
+  });
+};
 
 const Navbar = () => {
-  // const { user } = useSelector((state) => state.user);
-  const { user } = {};
+  const { user } = useSelector((state) => state.user);
   const { appState } = useSelector((state) => state.appState);
   const { themeMode } = useSelector((state) => state.themeMode);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const { cartTotalQuantity } = useSelector((state) => state.cart);
 
   const dispatch = useDispatch();
+
   const onSwithTheme = () => {
     const theme =
       themeMode === themeModes.dark ? themeModes.light : themeModes.dark;
@@ -98,9 +122,6 @@ const Navbar = () => {
   };
 
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
-  // const theme = useTheme();
-
-  // const isMatch = useMediaQuery(theme.breakpoints.down("md"));
 
   let location = useLocation();
 
@@ -108,6 +129,7 @@ const Navbar = () => {
     <>
       <Sidebar open={sidebarOpen} toggleSidebar={toggleSidebar} />
       <HideOnScroll>
+      {/* <ScrollAppBar> */}
         <AppBar
           position="fixed"
           color="primary"
@@ -228,7 +250,8 @@ const Navbar = () => {
             </Stack>
           </Toolbar>
         </AppBar>
-      </HideOnScroll>
+        </HideOnScroll>
+      {/* </ScrollAppBar> */}
     </>
   );
 };
