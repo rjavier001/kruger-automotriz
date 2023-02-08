@@ -55,15 +55,41 @@ const Category = () => {
 			if (response) setDeleteCategories(response);
 		};
 
+		//---------------------------------------------------------------------------------
 		let productsCategory;
-		const allItems = product;
-		const categoryItems = allItems.filter(
+		const allItems = product.status === 204 ? null : product;
+		const categoryItems = allItems?.filter(
 			(item) => item.category.id === idCategory
 		);
 		productsCategory = categoryItems;
 
-		console.log(productsCategory);
 
+		//---------------------------------------------------------------------------------
+		productsCategory === undefined
+		? Swal.fire({
+			title: "Are you sure?",
+			text: "You won't be able to revert this!",
+			icon: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#3085d6",
+			cancelButtonColor: "#d33",
+			confirmButtonText: "Yes, delete it!",
+	  }).then((result) => {
+			setTimeout(() => {
+				if (result.isConfirmed) {
+					Swal.fire(
+						"Deleted!",
+						"Your product has been deleted.",
+						"success"
+					);
+					deleteCategories(idCategory);
+					setTimeout(() => {
+						navigate("/admin");
+					}, 10);
+				}
+			}, 10);
+	  })
+	  :
 		productsCategory.length !== 0
 			? Swal.fire({
 					icon: "error",
@@ -124,7 +150,12 @@ const Category = () => {
 							<CardContent>
 								<form>
 									<Grid container spacing={5}>
-										{categories
+										{
+											categories?.status === 204 
+											? <p>no data</p>
+											:
+											<>
+											{categories
 											.slice(
 												page * rowsPerPage,
 												page * rowsPerPage + rowsPerPage
@@ -173,6 +204,9 @@ const Category = () => {
 													</Grid>
 												</>
 											))}
+											</>
+										}
+										
 									</Grid>
 								</form>
 							</CardContent>

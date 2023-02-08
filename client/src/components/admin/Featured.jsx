@@ -31,8 +31,8 @@ export default function Featured() {
 	};
 
 	//---------------------------------------------------------------------------------
-	const handleDeleteDiscount = (idfeaturedData) => {
-		const deleteDiscount = async () => {
+	const handleDeleteFeatured = (idfeaturedData) => {
+		const deleteFeatured = async () => {
 			const { response } = await productsApi.deleteFaturedById(idfeaturedData);
 			if (response) setFeaturedDelete(response);
 		};
@@ -66,7 +66,7 @@ export default function Featured() {
 							title: "Your discount has been deleted.",
 							showConfirmButton: false,
 						});
-						deleteDiscount(idfeaturedData);
+						deleteFeatured(idfeaturedData);
 						setTimeout(() => {
 							window.location.reload();
 						}, 500);
@@ -92,10 +92,15 @@ export default function Featured() {
 						/>
 						<Grid container>
 							<Grid container spacing={5}>
-								{featured
+								{
+									featured?.status === 204 
+									? <p>No data</p>
+									:
+									<>
+									{featured
 									.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
 									.map((featuredData, i) => (
-										<Grid item xs={12} sm={12} md={6} spacing={5}>
+										<Grid key={i} item xs={12} sm={12} md={6} spacing={5}>
 											<Card sx={uiConfigs.box}>
 												<CardContent>
 													<Box key={i}>
@@ -110,16 +115,16 @@ export default function Featured() {
 																container
 																justifyContent="center"
 																alignItems="center">
-																<Button>
+																
 																	<EditFeatured id={featuredData.id} />
-																</Button>
+																
 																<Button
 																	color="secondary"
 																	size="medium"
 																	variant="contained"
 																	sx={{ margin: "1rem 1rem" }}
 																	onClick={() =>
-																		handleDeleteDiscount(featuredData.id)
+																		handleDeleteFeatured(featuredData.id)
 																	}>
 																	Delete
 																</Button>
@@ -130,6 +135,9 @@ export default function Featured() {
 											</Card>
 										</Grid>
 									))}
+									</>
+								}
+								
 							</Grid>
 						</Grid>
 					</Box>

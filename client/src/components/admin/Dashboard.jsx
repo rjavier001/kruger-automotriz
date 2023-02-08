@@ -65,11 +65,21 @@ const Dashboard = () => {
 
 					<Container>
 						<Grid item container spacing={2} marginTop="2px">
+						<>
+						{
+							product?.status === 204
+							? <p>No data</p> 
+							:
+							<> 
 							{product.map((item, i) => (
 								<Grid key={i} item xs={12} md={4} sm={6} justify="center">
 									<CardComp props={item} />
 								</Grid>
 							))}
+							</>
+						}
+							
+						</>
 						</Grid>
 					</Container>
 				</Stack>

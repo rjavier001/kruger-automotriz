@@ -94,6 +94,19 @@ export const EditProduct = () => {
 	};
 
 
+	//---------------------------------------------------------------------------------
+	let selectDiscount;
+	const allItemsDiscount = discounts.status === 204 ? null : discounts;
+	const discountsItems = allItemsDiscount?.filter((item) => item.name === descuentoSelect);
+	selectDiscount = discountsItems;
+
+	//---------------------------------------------------------------------------------
+	let selectFeatured;
+	const allItemsFeatured = featured.status === 204 ? null : featured;
+	const featuredItems = allItemsFeatured?.filter((item) => item.featuredTime === featuredSelect);
+	selectFeatured = featuredItems;
+
+
     //---------------------------------------------------------------------------------
 	let dataView;
 	let dataProducts;
@@ -102,18 +115,14 @@ export const EditProduct = () => {
 		handleProductImageUpload();
 
 		//---------------------------------------------------------------------------------
-		let selectDiscount;
-		const allItemsDiscount = discounts;
-		const discountsItems = allItemsDiscount.filter((item) => item.name === descuentoSelect);
-		selectDiscount = discountsItems;
-
-
+		const discountIdInForm = selectDiscount?.map((discount)=>discount.id)
+		let discountSave = discountIdInForm === undefined ? 'null' :discountIdInForm[0];
+		const discountIdGet = selectDiscount === undefined ? 'null' : discountSave
+		
 		//---------------------------------------------------------------------------------
-		let selectFeatured;
-		const allItemsFeatured = featured;
-		const featuredItems = allItemsFeatured.filter((item) => item.featuredTime === featuredSelect);
-		selectFeatured = featuredItems;
-
+		const selectFeaturedInForm = selectFeatured?.map((featured)=>featured.id)
+		let featuredSave = selectFeaturedInForm === undefined ? 'null' : selectFeaturedInForm[0];
+		const selectFeaturedIdGet = selectFeatured === undefined ? 'null' : featuredSave
 
         //---------------------------------------------------------------------------------
 		let productsCategory;
@@ -136,8 +145,8 @@ export const EditProduct = () => {
 			purchasePrice: product.purchasePrice,
 			photoUrl: photoSave,
 			category,
-			discountId: selectDiscount[0]?.id,
-			featuredId: selectFeatured[0]?.id,
+			discountId: discountIdGet,
+			featuredId: selectFeaturedIdGet
 
 		};
 		console.log(dataProducts);
@@ -243,32 +252,44 @@ export const EditProduct = () => {
 											</TextField>
 											</Grid>
 											<Grid xs={6} item>
+												{
+													discounts.status === 204
+													? <p>Create a discount</p>
+													:
 											<TextField
 												fullWidth
 												select
 												label="Select Discount"
 												value={descuentoSelect}
 												onChange={(e)=>setDescuentoSelect(e.target.value)}>
-												{discounts.map((discount, item) => (
+														{discounts.map((discount, item) => (
 													<MenuItem key={item} value={discount.name}>
 														{discount.price}
 													</MenuItem>
 												))}
+												
 											</TextField>
+													}
 											</Grid>
 											<Grid xs={6} item>
+												{
+													featured.status === 204 
+													? <p>Create a Featured</p>
+													:
 											<TextField
 												fullWidth
 												select
 												label="Select Featured"
 												value={featuredSelect}
 												onChange={(e)=>setFeaturedSelect(e.target.value)}>
-												{featured.map((featuredData, item) => (
+														{featured.map((featuredData, item) => (
 													<MenuItem key={item} value={featuredData.featuredTime}>
 														{featuredData.featuredTime}
 													</MenuItem>
 												))}
+												
 											</TextField>
+													}
 											</Grid>
 											<Grid xs={12} item>
 												<input
