@@ -15,7 +15,7 @@ export const userSlice = createSlice({
           localStorage.setItem("actkn", action.payload.token);
       }
 
-      state.user = action.payload;
+      state.user = action.payload;      
     },
     setlistHistory: (state, action) => {
       state.listHistory = action.payload;

@@ -18,20 +18,20 @@ const SigninForm = ({ switchAuthState }) => {
   const signinForm = useFormik({
     initialValues: {
       password: "",
-      username: "",
+      userName: "",
     },
     validationSchema: Yup.object({
-      username: Yup.string()
-        .min(8, "username minimum 8 characters")
+      userName: Yup.string()
+        .min(4, "username minimum 4 characters")
         .required("username is required"),
       password: Yup.string()
-        .min(8, "password minimum 8 characters")
+        .min(4, "password minimum 4 characters")
         .required("password is required"),
     }),
     onSubmit: async (values) => {
       setErrorMessage(undefined);
       setIsLoginRequest(true);
-      const { response, err } = await userApi.signin(values);
+      const { response, err } = await userApi.signin(values);      
       setIsLoginRequest(false);
 
       if (response) {
@@ -55,16 +55,16 @@ const SigninForm = ({ switchAuthState }) => {
         <TextField
           type="text"
           placeholder="username"
-          name="username"
+          name="userName"
           fullWidth
-          value={signinForm.values.username}
+          value={signinForm.values.userName}
           onChange={signinForm.handleChange}
           color="success"
           error={
-            signinForm.touched.username &&
-            signinForm.errors.username !== undefined
+            signinForm.touched.userName &&
+            signinForm.errors.userName !== undefined
           }
-          helperText={signinForm.touched.username && signinForm.errors.username}
+          helperText={signinForm.touched.userName && signinForm.errors.userName}
         />
         <TextField
           type="password"
