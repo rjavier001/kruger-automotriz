@@ -18,7 +18,28 @@ spec:
           ports:
             - containerPort: 8001
           env:
+            - name: PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: msv-users
+                  key: port
+            - name: DB_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: msv-users
+                  key: db_host
             - name: POSTGRES_PASSWORD
-              value: sa.1
+              valueFrom:
+                configMapKeyRef:
+                  name: msv-users
+                  key: password
             - name: POSTGRES_DB
-              value: postgres
+              valueFrom:
+                configMapKeyRef:
+                  name: msv-users
+                  key: database
+            - name: ORDER_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: msv-users
+                  key: order_url
