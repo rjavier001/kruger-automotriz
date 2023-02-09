@@ -25,49 +25,28 @@ services:
       - km_net
     restart: always
 
-  msv-users:
-    container_name: msv-users
+  discovery-server:
+    container_name: discovery-server
     build:
       context: ./
-      dockerfile: ./msv-users/Dockerfile
+      dockerfile: ./discovery-server/Dockerfile
     ports:
-      - "8001:8001"
-    env_file: ./msv-users/.env
+      - "8761:8761"
     networks:
       - km_net
-    depends_on:
-      - postgres14
-      - msv-order
     restart: always
 
-  msv-order:
-    container_name: msv-order
+  gateway-server:
+    container_name: gateway-server
     build:
       context: ./
-      dockerfile: ./msv-order/Dockerfile
+      dockerfile: ./gateway-server/Dockerfile
     ports:
-      - "8003:8003"
-    env_file: ./msv-order/.env
+      - "8080:8080"
     networks:
       - km_net
-    depends_on:
-      - postgres14
-      - msv-products
     restart: always
 
-  msv-products:
-    container_name: msv-products
-    build:
-      context: ./
-      dockerfile: ./msv-products/Dockerfile
-    ports:
-      - "8002:8002"
-    env_file: ./msv-products/.env
-    networks:
-      - km_net
-    depends_on:
-      - postgres14
-    restart: always
 
 volumes:
   data-postgres:
