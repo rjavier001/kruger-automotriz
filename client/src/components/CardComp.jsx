@@ -26,7 +26,7 @@ const CardComp = ({ props }) => {
   const [product, setProduct] = useState([]);
   const navigate = useNavigate();
   const location = useLocation();
-
+  const { user } = useSelector((state) => state.user);
   //---------------------------------------------------------------------------------
   const {
     name,
@@ -51,9 +51,10 @@ const CardComp = ({ props }) => {
 
   //---------------------------------------------------------------------------------
   const handleAddtoCart = (props) => {
-    dispatch(setAuthModalOpen(true));
-    /* props = { ...props, quantity: 1 };
-		dispatch(addToCart(props)); */
+    if (user) {
+      props = { ...props, quantity: 1 };
+      dispatch(addToCart(props));
+    } else dispatch(setAuthModalOpen(true));
   };
 
   //---------------------------------------------------------------------------------

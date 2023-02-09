@@ -12,23 +12,29 @@ import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import CompanyBenefitsComp from "../components/CompanyBenefitsComp";
 import { NavLink } from "react-router-dom";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { addToCart, getTotal, decreaseCart } from "../redux/features/cartSlice";
 import ReviewComp from "../components/common/ReviewComp";
+import { setAuthModalOpen } from "../redux/features/authModalSlice";
 
 const ProductDetailPage = () => {
   const cart = useSelector((state) => state.cart);
+  const { user } = useSelector((state) => state.user);
+  const navigate = useNavigate();
   const [quantity, setQuantity] = useState(1);
   let location = useLocation();
   let { props } = location.state;
   const dispatch = useDispatch();
 
   const handleAddtoCart = (props) => {
-    props = { ...props, quantity };
-    dispatch(addToCart(props));
-    console.log(props);
+    if (user) {
+      props = { ...props, quantity };
+      dispatch(addToCart(props));
+      navigate("/checkout");
+    } else dispatch(setAuthModalOpen(true));
   };
+
   useEffect(() => {
     dispatch(getTotal());
   }, [cart, dispatch]);
@@ -102,15 +108,13 @@ const ProductDetailPage = () => {
                   Agregar al carrito
                 </Button>
 
-                <NavLink to={"/checkout"} style={{ textDecoration: "none" }}>
-                  <Button
-                    variant="contained"
-                    color="secondary"
-                    onClick={() => handleAddtoCart(props)}
-                  >
-                    Comprar
-                  </Button>
-                </NavLink>
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  onClick={() => handleAddtoCart(props)}
+                >
+                  Comprar
+                </Button>
               </Stack>
             </Stack>
           </Grid>
