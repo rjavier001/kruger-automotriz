@@ -47,6 +47,20 @@ services:
       - km_net
     restart: always
 
+  msv-users:
+    container_name: msv-users
+    build:
+      context: ./
+      dockerfile: ./msv-users/Dockerfile
+    ports:
+      - "8001:8001"
+    env_file: ./msv-users/.env
+    networks:
+      - km_net
+    depends_on:
+      - postgres14
+    restart: always
+
 
 volumes:
   data-postgres:
