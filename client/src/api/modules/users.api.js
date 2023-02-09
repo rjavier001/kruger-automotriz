@@ -35,8 +35,7 @@ const userApi = {
   },
   getInfo: async (id) => {    
     try {
-      const response = await privateClient.get(userEndpoints.getInfo({ id }));
-      console.log('response', response)
+      const response = await privateClient.get(userEndpoints.getInfo({ id }));      
       return { response };
     } catch (err) {
       return { err };
