@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: msv-order
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: msv-order
+  template:
+    metadata:
+      labels:
+        app: msv-order
+    spec:
+      containers:
+        - name: msv-order
+          image: sathell/msv-order:latest
+          ports:
+            - containerPort: 8003
+          env:
+            - name: PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: msv-order
+                  key: port
+            - name: DB_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: msv-order
+                  key: db_host
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  name: msv-order
+                  key: password
+            - name: POSTGRES_DB
+              valueFrom:
+                configMapKeyRef:
+                  name: msv-order
+                  key: database
+            - name: USERS_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: msv-order
+                  key: users_url
+            - name: PRODUCTS_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: msv-order
+                  key: products_url

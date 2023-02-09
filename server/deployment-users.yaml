@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: msv-users
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: msv-users
+  template:
+    metadata:
+      labels:
+        app: msv-users
+    spec:
+      containers:
+        - name: msv-users
+          image: sathell/msv-users:v1
+          ports:
+            - containerPort: 8001
+          env:
+            - name: PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: msv-users
+                  key: port
+            - name: DB_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: msv-users
+                  key: db_host
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  name: msv-users
+                  key: password
+            - name: POSTGRES_DB
+              valueFrom:
+                configMapKeyRef:
+                  name: msv-users
+                  key: database
+            - name: ORDER_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: msv-users
+                  key: order_url
