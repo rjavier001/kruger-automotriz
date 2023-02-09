@@ -37,9 +37,6 @@ public class UserServiceImpl implements IUserService {
   @Override
   @Transactional
   public User save(User user) {
-    // BCryptPasswordEncoder bCryptPasswordEncoder=new BCryptPasswordEncoder();
-    // String encryptedPwd= bCryptPasswordEncoder.encode(user.getPassword());
-    // user.setPassword(encryptedPwd);
     return repository.save(user);
   }
 
@@ -55,16 +52,16 @@ public class UserServiceImpl implements IUserService {
     repository.deleteUserOrderById(id);
   }
 
-//  @Override
-  @Transactional(readOnly = true)
-  public Optional<User> findByAuthId(int id) {
-    Optional<User> o = repository.findByAuthId(id);
-    if (o.isPresent()) {
-
-      return o;
-    }
-    return Optional.empty();
-  }
+////  @Override
+//  @Transactional(readOnly = true)
+//  public Optional<User> findByAuthId(int id) {
+//    Optional<User> o = repository.findByAuthId(id);
+//    if (o.isPresent()) {
+//
+//      return o;
+//    }
+//    return Optional.empty();
+//  }
 
 
   @Override

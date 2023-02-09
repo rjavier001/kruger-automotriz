@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-@CrossOrigin(origins = "http://localhost:3000")
+
 @RestController
 @RequestMapping("/api/users")
 public class UserController extends FallBackMethods{
@@ -36,15 +36,15 @@ public class UserController extends FallBackMethods{
     }
     return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
   }
-  @GetMapping("/users-auth")
-  public ResponseEntity<?> getUserByAuthId(@RequestParam(name="user_id",required = false) int id){
-    Optional<User> optionalUser=service.findByAuthId(id); //service.findById(id);
-    if(optionalUser.isPresent()){
-//      return ResponseEntity.ok(optionalUser.get());
-      return new ResponseEntity<>(optionalUser.get(), HttpStatus.OK);
-    }
-    return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
-  }
+//  @GetMapping("/users-auth")
+//  public ResponseEntity<?> getUserByAuthId(@RequestParam(name="auth_id",required = false) int id){
+//    Optional<User> optionalUser=service.findByAuthId(id); //service.findById(id);
+//    if(optionalUser.isPresent()){
+////      return ResponseEntity.ok(optionalUser.get());
+//      return new ResponseEntity<>(optionalUser.get(), HttpStatus.OK);
+//    }
+//    return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+//  }
 
   @PostMapping("/save")
   public ResponseEntity<?> createUser(@RequestBody User user){

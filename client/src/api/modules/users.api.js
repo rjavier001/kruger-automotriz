@@ -4,8 +4,8 @@ import publicClient from "../client/public.client";
 const userEndpoints = {
   signin: "auth/sign-in",
   signup: "auth/sign-up",
-  getInfo: "users/info",
-  passwordUpdate: "user/update-password",
+  getInfo: ({ id }) => `users/${id}`,  
+  passwordUpdate: "users/update-password",
 };
 
 const userApi = {
@@ -33,10 +33,10 @@ const userApi = {
       return { err };
     }
   },
-  getInfo: async () => {
+  getInfo: async (id) => {    
     try {
-      const response = await privateClient.get(userEndpoints.getInfo);
-
+      const response = await privateClient.get(userEndpoints.getInfo({ id }));
+      console.log('response', response)
       return { response };
     } catch (err) {
       return { err };

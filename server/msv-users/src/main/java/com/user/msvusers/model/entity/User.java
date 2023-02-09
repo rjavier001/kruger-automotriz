@@ -26,7 +26,6 @@ public class User {
   @NotNull(message = "Name should not be null")
   private String name;
 
-
   @NotEmpty(message = "LastName should not be empty")
   @NotNull(message = "LastName should not be null")
   private String lastName;
@@ -35,28 +34,16 @@ public class User {
   @NotNull(message = "Age should not be null")
   private String age;
 
-
   @NotEmpty(message = "Email should not be empty")
   @NotNull(message = "Email should not be null")
   @Column(unique = true)
   private String email;
 
-//  @NotEmpty(message = "Password should not be empty")
-//  @NotNull(message = "Password should not be null")
-//  private String password;
-
   @NotEmpty(message = "Phone should not be empty")
   @NotNull(message = "Phone should not be null")
   private String phone;
 
-
-//  @NotEmpty(message = "Role should not be empty")
-//  @NotNull(message = "Role should not be null")
-//  private String role;
-//
-//  @OneToOne(cascade = CascadeType.ALL)
-//  @JoinColumn(name = "user_id", referencedColumnName = "id")
-  private int user_id;
+  private String address;
 
   @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
   @JoinColumn(name = "user_id")
