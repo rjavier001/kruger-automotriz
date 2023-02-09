@@ -31,6 +31,7 @@ public class UserServiceImpl implements IUserService {
   @Override
   @Transactional(readOnly = true)
   public Optional<User> findById(Long id) {
+
     return repository.findById(id);
   }
 
@@ -83,18 +84,19 @@ public class UserServiceImpl implements IUserService {
 
   @Override
   @Transactional
-  public Optional<Order> assignOrder(Order order, Long userId) {
+  public Optional<User> assignOrder(UserOrder userOrder, Long userId) {
     Optional<User> o = repository.findById(userId);
     if (o.isPresent()) {
-      Order orderMsv = client.getOrder(order.getId());
+//      Order orderMsv = client.getOrder(order.getId());
 
       User user = o.get();
-      UserOrder userOrder = new UserOrder();
-      userOrder.setOrderId(orderMsv.getId());
-
       user.addUserOrder(userOrder);
+//      UserOrder userOrder = new UserOrder();
+//      userOrder.setOrderId(orderMsv.getId());
+//
+//      user.addUserOrder(userOrder);
       repository.save(user);
-      return Optional.of(orderMsv);
+      return Optional.of(user);
     }
     return Optional.empty();
   }

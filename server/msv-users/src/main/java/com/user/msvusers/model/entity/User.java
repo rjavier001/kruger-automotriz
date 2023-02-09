@@ -45,6 +45,7 @@ public class User {
 
   private String address;
 
+
   @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
   @JoinColumn(name = "user_id")
   private List<UserOrder> userOrders;
