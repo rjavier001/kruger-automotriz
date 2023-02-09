@@ -14,6 +14,17 @@ services:
     networks:
       - km_net
 
+  config-server:
+    container_name: config-server
+    build:
+      context: ./
+      dockerfile: ./config-server/Dockerfile
+    ports:
+      - "8888:8888"
+    networks:
+      - km_net
+    restart: always
+
   msv-users:
     container_name: msv-users
     build:
