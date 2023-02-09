@@ -13,7 +13,6 @@
         <module name="msv-order" />
         <module name="auth-server" />
         <module name="gateway-server" />
-        <module name="msv-products" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
