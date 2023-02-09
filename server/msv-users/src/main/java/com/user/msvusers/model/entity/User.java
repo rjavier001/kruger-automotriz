@@ -58,8 +58,9 @@ public class User {
 //  @JoinColumn(name = "user_id", referencedColumnName = "id")
   private int user_id;
 
+
   @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-  @JoinColumn(name = "user_id")
+  @JoinColumn(name = "order_id")
   private List<UserOrder> userOrders;
 
   public void addUserOrder(UserOrder userOrder){
