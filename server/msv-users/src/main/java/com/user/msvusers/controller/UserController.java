@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-@CrossOrigin(origins = "http://localhost:3000")
+
 @RestController
 @RequestMapping("/api/users")
 public class UserController extends FallBackMethods{
@@ -66,6 +66,7 @@ public class UserController extends FallBackMethods{
       userDB.setAge(req.getAge());
       userDB.setPhone(req.getPhone());
       userDB.setEmail(req.getEmail());
+      userDB.setUserOrders(req.getUserOrders());
       return new ResponseEntity<>(service.save(userDB),HttpStatus.CREATED);
     }
     return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
@@ -82,8 +83,8 @@ public class UserController extends FallBackMethods{
   }
 
 
-  @CircuitBreaker(name="ordersCB", fallbackMethod = "fallBackAssignOrder")
-  @PutMapping("/assign-order/{userId}")
+//  @CircuitBreaker(name="ordersCB", fallbackMethod = "fallBackAssignOrder")
+    @PutMapping("/assign-order/{userId}")
   public ResponseEntity<?> assignOrder(@RequestBody UserOrder userOrder, @PathVariable Long userId){
     Optional<User> o;
     try{

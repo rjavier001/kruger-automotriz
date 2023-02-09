@@ -60,7 +60,7 @@ public class User {
 
 
   @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-  @JoinColumn(name = "order_id")
+  @JoinColumn(name = "user_id")
   private List<UserOrder> userOrders;
 
   public void addUserOrder(UserOrder userOrder){
