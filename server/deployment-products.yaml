@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: msv-products
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: msv-products
+  template:
+    metadata:
+      labels:
+        app: msv-products
+    spec:
+      containers:
+        - name: msv-products
+          image: sathell/msv-products:latest
+          ports:
+            - containerPort: 8002
+          env:
+            - name: PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: msv-products
+                  key: port
+            - name: DB_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: msv-products
+                  key: db_host
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  name: msv-products
+                  key: password
+            - name: POSTGRES_DB
+              valueFrom:
+                configMapKeyRef:
+                  name: msv-products
+                  key: database
