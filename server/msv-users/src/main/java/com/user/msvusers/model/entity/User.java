@@ -30,8 +30,6 @@ public class User {
   @NotNull(message = "LastName should not be null")
   private String lastName;
 
-  @NotEmpty(message = "Age should not be empty")
-  @NotNull(message = "Age should not be null")
   private String age;
 
   @NotEmpty(message = "Email should not be empty")
@@ -39,12 +37,9 @@ public class User {
   @Column(unique = true)
   private String email;
 
-  @NotEmpty(message = "Phone should not be empty")
-  @NotNull(message = "Phone should not be null")
   private String phone;
 
   private String address;
-
 
   @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
   @JoinColumn(name = "user_id")
