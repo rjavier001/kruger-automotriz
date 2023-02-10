@@ -20,6 +20,7 @@ target/
 *.ipr
 
 #enviroment
+/client/.env
 .env
 *.env
 
