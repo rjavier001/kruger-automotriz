@@ -1,73 +1,109 @@
+import { HeartBroken, Twitter } from "@mui/icons-material";
 import {
+	Avatar,
+	Box,
 	Button,
+	Card,
+	CardContent,
+	Grid,
 	Table,
 	TableBody,
 	TableCell,
 	TableContainer,
 	TableHead,
 	TableRow,
+	Typography,
 } from "@mui/material";
 import { Container, Stack } from "@mui/system";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useApi } from "../hooks/useApi";
 import Dashboard from "./Dashboard";
+// ** MUI Imports
+import Tab from "@mui/material/Tab";
+import TabList from "@mui/lab/TabList";
+import TabPanel from "@mui/lab/TabPanel";
+import TabContext from "@mui/lab/TabContext";
+import { useState } from "react";
 
+import AddBusinessIcon from "@mui/icons-material/AddBusiness";
+import CategoryIcon from "@mui/icons-material/Category";
+import DiscountIcon from "@mui/icons-material/Discount";
+import FilterNoneIcon from "@mui/icons-material/FilterNone";
 
 const Products = () => {
-
 	//---------------------------------------------------------------------------------
 	const { categories } = useApi();
 
 	//---------------------------------------------------------------------------------
 	const navigate = useNavigate();
 
+	// ** State
+	const [value, setValue] = useState("1");
+
+	const handleChange = (event, newValue) => {
+		setValue(newValue);
+	};
+
 	//---------------------------------------------------------------------------------
 	return (
 		<Stack>
 			<Dashboard />
 			<Container>
-				<h3>Products</h3>
-				{
-					categories.status === 204 || categories.length === 0
-					? 
-						<TableContainer>
-						<Table aria-label="simple table">
-							<TableHead>
-								<TableRow>
-									<TableCell>Category</TableCell>
-								</TableRow>
-							</TableHead>
-							<TableBody>
-								<TableRow>
-									<TableCell>
-										<Button
-											onClick={() => navigate("/admin/products/category-edit")}
-											color="primary"
-											size="medium"
-											variant="contained">
-											Create
-										</Button>
-									</TableCell>
-								</TableRow>
-								<TableRow></TableRow>
-							</TableBody>
-						</Table>
-						</TableContainer>
-					:
-						<TableContainer>
-						<Table aria-label="simple table">
-							<TableHead>
-								<TableRow>
-									<TableCell>Products</TableCell>
-									<TableCell>Category</TableCell>
-									<TableCell>Discounts</TableCell>
-									<TableCell>Feature</TableCell>
-								</TableRow>
-							</TableHead>
-							<TableBody>
-								<TableRow>
-									<TableCell>
+				<Container sx={{ display: "flex", justifyContent: "center" }}>
+					<h3>CRUD</h3>
+				</Container>
+				{categories.status === 204 || categories.length === 0 ? (
+					<Container sx={{ display: "flex", justifyContent: "center" }}>
+					<Card sx={{ width: "25rem" }}>
+						<TabContext value={value}>
+							<TabList
+								onChange={handleChange}
+								aria-label="card navigation example">
+								<Tab value="2" label={<CategoryIcon />} />
+							</TabList>
+							<CardContent>
+								<TabPanel value="2" sx={{ p: 0 }}>
+									<Typography variant="h6" sx={{ marginBottom: 2 }}>
+										Category
+									</Typography>
+									<Typography variant="body2" sx={{ marginBottom: 4 }}>
+										Add a category for your products
+									</Typography>
+									<Button
+										onClick={() => navigate("/admin/products/category-edit")}
+										color="primary"
+										size="medium"
+										variant="contained">
+										Create
+									</Button>
+								</TabPanel>
+							</CardContent>
+						</TabContext>
+					</Card>
+				</Container>
+				) : (
+					<Container sx={{ display: "flex", justifyContent: "center" }}>
+						<Card sx={{ width: "25rem" }}>
+							<TabContext value={value}>
+								<TabList
+									onChange={handleChange}
+									aria-label="card navigation example">
+									<Tab value="1" label={<AddBusinessIcon />} />
+									<Tab value="2" label={<CategoryIcon />} />
+									<Tab value="3" label={<DiscountIcon />} />
+									<Tab value="4" label={<FilterNoneIcon />} />
+								</TabList>
+								<CardContent>
+									<TabPanel value="1" sx={{ p: 0 }}>
+										<Typography variant="h6" sx={{ marginBottom: 2 }}>
+											Products
+										</Typography>
+										<Grid container xs={12}>
+											<Typography variant="body2" sx={{ marginBottom: 4 }}>
+												Create products and share them with your customers.
+											</Typography>
+										</Grid>
 										<Button
 											onClick={() => navigate("/admin/products/create")}
 											color="primary"
@@ -75,8 +111,14 @@ const Products = () => {
 											variant="contained">
 											Create
 										</Button>
-									</TableCell>
-									<TableCell>
+									</TabPanel>
+									<TabPanel value="2" sx={{ p: 0 }}>
+										<Typography variant="h6" sx={{ marginBottom: 2 }}>
+											Category
+										</Typography>
+										<Typography variant="body2" sx={{ marginBottom: 4 }}>
+											Add a category for your products
+										</Typography>
 										<Button
 											onClick={() => navigate("/admin/products/category-edit")}
 											color="primary"
@@ -84,8 +126,14 @@ const Products = () => {
 											variant="contained">
 											Create
 										</Button>
-									</TableCell>
-									<TableCell>
+									</TabPanel>
+									<TabPanel value="3" sx={{ p: 0 }}>
+										<Typography variant="h6" sx={{ marginBottom: 2 }}>
+											Discount
+										</Typography>
+										<Typography variant="body2" sx={{ marginBottom: 4 }}>
+											Manage the discounts of each of your products
+										</Typography>
 										<Button
 											onClick={() => navigate("/admin/products/discounts")}
 											color="primary"
@@ -93,8 +141,14 @@ const Products = () => {
 											variant="contained">
 											Create
 										</Button>
-									</TableCell>
-									<TableCell>
+									</TabPanel>
+									<TabPanel value="4" sx={{ p: 0 }}>
+										<Typography variant="h6" sx={{ marginBottom: 2 }}>
+											Featured
+										</Typography>
+										<Typography variant="body2" sx={{ marginBottom: 4 }}>
+											Manage your featured products
+										</Typography>
 										<Button
 											onClick={() => navigate("/admin/products/featured")}
 											color="primary"
@@ -102,13 +156,12 @@ const Products = () => {
 											variant="contained">
 											Create
 										</Button>
-									</TableCell>
-								</TableRow>
-								<TableRow></TableRow>
-							</TableBody>
-						</Table>
-						</TableContainer>
-				}
+									</TabPanel>
+								</CardContent>
+							</TabContext>
+						</Card>
+					</Container>
+				)}
 			</Container>
 		</Stack>
 	);
