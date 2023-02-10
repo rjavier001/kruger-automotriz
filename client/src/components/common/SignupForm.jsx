@@ -61,6 +61,7 @@ const SignupForm = ({ switchAuthState }) => {
           userName: response.userName,
           authId: response.authId,
           userId: response.user.userId,
+          token: response.token,
         };
         signinForm.resetForm();
         dispatch(setUser(responseData));
