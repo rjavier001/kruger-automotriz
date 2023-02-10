@@ -60,7 +60,7 @@ const SignupForm = ({ switchAuthState }) => {
         const responseData = {
           userName: response.userName,
           authId: response.authId,
-          userId: response.user.userId,
+          userId: response.userId,
           token: response.token,
         };
         signinForm.resetForm();
