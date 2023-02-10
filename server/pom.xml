@@ -17,6 +17,8 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>auth-server</module>
+        <module>config-server</module>
         <module>discovery-server</module>
         <module>gateway-server</module>
         <module>msv-users</module>

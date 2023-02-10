@@ -4,7 +4,9 @@ export const userSlice = createSlice({
   name: "User",
   initialState: {
     user: null,
+    userData: {},
     listHistory: [],
+    userOrderId: null,
   },
   reducers: {
     setUser: (state, action) => {
@@ -14,8 +16,10 @@ export const userSlice = createSlice({
         if (action.payload.token)
           localStorage.setItem("actkn", action.payload.token);
       }
-
       state.user = action.payload;
+    },
+    setUserData: (state, action) => {
+      state.userData = action.payload;
     },
     setlistHistory: (state, action) => {
       state.listHistory = action.payload;
@@ -29,10 +33,19 @@ export const userSlice = createSlice({
     addHistory: (state, action) => {
       state.listHistory = [action.payload, ...state.listHistory];
     },
+    setOrderId: (state, action) => {
+      state.userOrderId = action.payload;
+    },
   },
 });
 
-export const { setUser, setlistHistory, addHistory, removeHistory } =
-  userSlice.actions;
+export const {
+  setUser,
+  setUserData,
+  setlistHistory,
+  addHistory,
+  removeHistory,
+  setOrderId,
+} = userSlice.actions;
 
 export default userSlice.reducer;

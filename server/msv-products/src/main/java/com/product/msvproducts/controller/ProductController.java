@@ -1,11 +1,14 @@
 package com.product.msvproducts.controller;
 
 import com.product.msvproducts.entity.Product;
+import com.product.msvproducts.entity.Reviews;
 import com.product.msvproducts.service.product.IProductService;
 
 
 import javax.validation.Valid;
 
+import com.product.msvproducts.service.reviews.ReviewServiceImpl;
+import feign.FeignException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,16 +16,19 @@ import org.springframework.web.bind.annotation.*;
 
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@RequestMapping("api/products")
+@RequestMapping("/api/products")
 public class ProductController {
 
     @Autowired
     IProductService service;
+
+    @Autowired
+    ReviewServiceImpl reviewService;
 
     @GetMapping
     public ResponseEntity<List<Product>> listCategories(){
@@ -88,5 +94,21 @@ public class ProductController {
     public ResponseEntity<?> getAllProductsByOrder(@RequestParam List<Long> ids){
         return ResponseEntity.ok(service.listByIds(ids));
     }
+
+    @PutMapping("/assign-review/{productId}")
+    public ResponseEntity<?> assignReview(@RequestBody Reviews review, @PathVariable Long productId){
+        Optional<Reviews> o;
+        try{
+            o = service.assignReview(review, productId);
+        } catch (FeignException e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Collections.singletonMap("mensaje","No existe el producto por el id o no se logro la comunicación"+ e.getMessage()));
+        }
+
+        if(o.isPresent()){
+            return ResponseEntity.status(HttpStatus.CREATED).body(o.get());
+        }
+        return ResponseEntity.notFound().build();
+    }
+
 
 }

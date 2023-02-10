@@ -1,7 +1,9 @@
 package com.product.msvproducts.service.product;
 
 import com.product.msvproducts.entity.Product;
+import com.product.msvproducts.entity.Reviews;
 import com.product.msvproducts.repository.ProductRepository;
+import com.product.msvproducts.repository.ReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,6 +17,9 @@ public class ProductServiceImpl implements IProductService{
 
     @Autowired
     private ProductRepository repository;
+
+    @Autowired
+    private ReviewRepository reviewRepository;
     @Override
     public List<Product> listAllProducts() {
         return repository.findAll();
@@ -52,6 +57,8 @@ public class ProductServiceImpl implements IProductService{
         productUpdate.setName(product.getName());
         productUpdate.setDescription(product.getDescription());
         productUpdate.setPrice(product.getPrice());
+        productUpdate.setWeight(product.getWeight());
+        productUpdate.setSize(product.getSize());
         productUpdate.setStock(product.getStock());
         productUpdate.setPurchasePrice(product.getPurchasePrice());
         productUpdate.setSalePrice(product.getSalePrice());
@@ -70,4 +77,23 @@ public class ProductServiceImpl implements IProductService{
     public List<Product> findByDescription(String description) {
         return repository.findByDescriptionContaining(description);
     }
+
+    @Override
+    @Transactional
+    public Optional<Reviews> assignReview(Reviews review, Long productId) {
+        Optional<Product> o= repository.findById(productId);
+        if(o.isPresent()){
+            review.setCreationDate(new Date());
+            review.setDescription(review.getDescription());
+            review.setStars(review.getStars());
+            Product product = o.get();
+            product.addReview(review);
+            repository.save(product);
+            return Optional.of(review);
+        }
+
+        return Optional.empty();
+    }
+
+
 }

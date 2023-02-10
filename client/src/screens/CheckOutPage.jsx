@@ -10,6 +10,7 @@ import DiscountIcon from "@mui/icons-material/Discount";
 import TextField from "@mui/material/TextField";
 import React, { useState, useEffect } from "react";
 import Divider from "@mui/material/Divider";
+import { useLocation, useNavigate } from "react-router-dom";
 import Image from "mui-image";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
@@ -25,10 +26,14 @@ import {
 } from "../redux/features/cartSlice";
 import { NavLink } from "react-router-dom";
 import { Container } from "@mui/system";
+import userApi from "../api/modules/users.api";
 
 const CheckOutPage = () => {
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { user } = useSelector((state) => state.user);
+  const { userOrderId } = useSelector((state) => state.user);
 
   useEffect(() => {
     dispatch(getTotal());
@@ -45,6 +50,18 @@ const CheckOutPage = () => {
   };
   const handleClearCart = () => {
     dispatch(clearCart());
+  };
+
+  const assignOrd = async () => {
+    const { response } = await userApi.assignOrder(user.user.id, {
+      orderId: 37,
+    });
+    console.log("Order assigned", user.user.id);
+  };
+
+  const handleonPay = () => {
+    navigate("/payment");
+    assignOrd();
   };
 
   return (
@@ -180,11 +197,14 @@ const CheckOutPage = () => {
           <Typography sx={styles.terms}>
             taxes and shipping calculated at chekout
           </Typography>
-          <NavLink to={"/payment"} style={{ textDecoration: "none" }}>
-            <Button variant="contained" sx={styles.btnPagar}>
-              Pagar
-            </Button>
-          </NavLink>
+
+          <Button
+            variant="contained"
+            sx={styles.btnPagar}
+            onClick={() => handleonPay()}
+          >
+            Pagar
+          </Button>
         </Box>
       )}
     </Stack>

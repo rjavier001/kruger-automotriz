@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -30,6 +31,14 @@ public class CategoryController {
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.ok(categories);
+    }
+    @GetMapping("/{id}")
+    public ResponseEntity<?> detail(@PathVariable Long id){
+        Optional<Category> productOptional = service.findById(id);
+        if(productOptional.isPresent()){
+            return ResponseEntity.ok(productOptional.get());
+        }
+        return ResponseEntity.notFound().build();
     }
 
     @PostMapping("/save")

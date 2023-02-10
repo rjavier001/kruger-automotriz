@@ -2,6 +2,7 @@ package com.user.msvusers.service;
 
 import com.user.msvusers.model.Order;
 import com.user.msvusers.model.entity.User;
+import com.user.msvusers.model.entity.UserOrder;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,6 +13,7 @@ import java.util.Optional;
 public interface IUserService {
   List<User> findAll();
   Optional<User> findById(Long id);
+//  Optional<User> findByAuthId(int id);
   User save(User user);
   void delete(Long id);
 
@@ -21,13 +23,11 @@ public interface IUserService {
   //Optional<Product> asignarProducts
   Optional<User> findByIdWithOrders(Long id);
   //Recibe la orden y el ID del usuario, asigna a un usuario ya existente en BDD
-  Optional<Order> assignOrder(Order order, Long userId);
+  Optional<User> assignOrder(UserOrder userOrder, Long userId);
   //Recibe la orden y el ID del usuario, es para un usuario que todabia no existe en BDD
   Optional<Order> createOrder(Order order, Long userId);
   //Se elimina la orden del usuario mas no de BDD
   Optional<Order> deleteOrder(Order order, Long userId);
-
-
 
 
 }

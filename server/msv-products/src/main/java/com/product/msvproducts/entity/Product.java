@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 
 
 @Entity
@@ -29,6 +30,10 @@ public class Product {
     @Min(3)
     @Max(1000)
     private Double price;
+
+    private Double size;
+
+    private Double weight;
 
     @NotNull(message = "Stock should not be empty")
     @Min(3)
@@ -63,4 +68,12 @@ public class Product {
     @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
     private Category category;
 
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "review_id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
+    private List<Reviews> review;
+
+    public void addReview(Reviews reviews){
+        review.add(reviews);
+    }
 }

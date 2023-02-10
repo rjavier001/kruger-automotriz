@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import * as Yup from "yup";
 import userApi from "../../api/modules/users.api";
 import { setAuthModalOpen } from "../../redux/features/authModalSlice";
-import { setUser } from "../../redux/features/userSlice";
+import { setUser, setUserData } from "../../redux/features/userSlice";
 
 const SigninForm = ({ switchAuthState }) => {
   const dispatch = useDispatch();
@@ -18,14 +18,14 @@ const SigninForm = ({ switchAuthState }) => {
   const signinForm = useFormik({
     initialValues: {
       password: "",
-      username: "",
+      userName: "",
     },
     validationSchema: Yup.object({
-      username: Yup.string()
-        .min(8, "username minimum 8 characters")
+      userName: Yup.string()
+        .min(4, "username minimum 4 characters")
         .required("username is required"),
       password: Yup.string()
-        .min(8, "password minimum 8 characters")
+        .min(4, "password minimum 4 characters")
         .required("password is required"),
     }),
     onSubmit: async (values) => {
@@ -37,6 +37,10 @@ const SigninForm = ({ switchAuthState }) => {
       if (response) {
         signinForm.resetForm();
         dispatch(setUser(response));
+
+        const userData = await userApi.getInfo(response.userId);
+        console.log(userData.response);
+        dispatch(setUserData(userData.response));
         dispatch(setAuthModalOpen(false));
         toast.success("Sign in success");
       }
@@ -51,24 +55,28 @@ const SigninForm = ({ switchAuthState }) => {
       component="form"
       onSubmit={signinForm.handleSubmit}
     >
-      <Stack spacing={3}>
+      <Stack spacing={2}>
         <TextField
+          id="outlined-basic"
+          label="User Name"
+          variant="outlined"
           type="text"
-          placeholder="username"
-          name="username"
+          name="userName"
           fullWidth
-          value={signinForm.values.username}
+          value={signinForm.values.userName}
           onChange={signinForm.handleChange}
           color="success"
           error={
-            signinForm.touched.username &&
-            signinForm.errors.username !== undefined
+            signinForm.touched.userName &&
+            signinForm.errors.userName !== undefined
           }
-          helperText={signinForm.touched.username && signinForm.errors.username}
+          helperText={signinForm.touched.userName && signinForm.errors.userName}
         />
         <TextField
+          id="outlined-basic"
+          label="Password"
+          variant="outlined"
           type="password"
-          placeholder="password"
           name="password"
           fullWidth
           value={signinForm.values.password}
