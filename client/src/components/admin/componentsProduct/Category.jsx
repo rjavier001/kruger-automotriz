@@ -14,10 +14,10 @@ import { Container } from "@mui/system";
 import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import productsApi from "../../api/modules/products.api";
-import uiConfigs from "../../configs/ui.configs";
-import CreateCategory from "./componentsProduct/CreateCategory";
-import { useApi } from "./hooks/useApi";
+import productsApi from "../../../api/modules/products.api";
+import uiConfigs from "../../../configs/ui.configs";
+import CreateCategory from "./CreateCategory";
+import { useApi } from "../hooks/useApi";
 
 const Category = () => {
 	const navigate = useNavigate();

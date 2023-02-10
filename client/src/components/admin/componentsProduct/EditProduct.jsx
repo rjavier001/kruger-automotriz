@@ -10,13 +10,15 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import productsApi from "../../api/modules/products.api";
+
 import Dashboard from "./Dashboard";
 import { Image } from "cloudinary-react";
 import axios from "axios";
 import Swal from "sweetalert2";
-import uiConfigs from "../../configs/ui.configs";
-import { useApi } from "./hooks/useApi";
+
+import productsApi from "../../../api/modules/products.api";
+import { useApi } from "../hooks/useApi";
+import uiConfigs from "../../../configs/ui.configs";
 
 
 export const EditProduct = () => {
@@ -147,7 +149,6 @@ export const EditProduct = () => {
 			category,
 			discountId: discountIdGet,
 			featuredId: selectFeaturedIdGet
-
 		};
 		console.log(dataProducts);
 
