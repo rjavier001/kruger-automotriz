@@ -35,11 +35,11 @@ public class AuthUserController {
   }
 
   @PostMapping("/sign-up")
-  public ResponseEntity<AuthUser> create(@RequestBody AuthUserDto dto){
-    AuthUser authUser = authUserService.save(dto);
-    if(authUser == null)
+  public ResponseEntity<TokenDto> create(@RequestBody AuthUserDto dto){
+    TokenDto tokenDto = authUserService.save(dto);
+    if(tokenDto == null)
       return ResponseEntity.badRequest().build();
-    return ResponseEntity.ok(authUser);
+    return ResponseEntity.ok(tokenDto);
   }
 //  @PostMapping("/create-user/{userName}")
 //  public ResponseEntity<?> createUser(@RequestBody User user, @PathVariable String userName){

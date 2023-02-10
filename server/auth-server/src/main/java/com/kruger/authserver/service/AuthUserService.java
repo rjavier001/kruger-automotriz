@@ -30,7 +30,7 @@ public class AuthUserService {
   @Autowired
   JwtProvider jwtProvider;
 
-  public AuthUser save(AuthUserDto dto) {
+  public TokenDto save(AuthUserDto dto) {
     Optional<AuthUser> user = authUserRepository.findByUserName(dto.getUserName());
     if(user.isPresent())
       return null;
@@ -41,9 +41,9 @@ public class AuthUserService {
         .role(dto.getRole())
         .user(dto.getUser())
         .build();
-    userRepository.save(dto.getUser());
-
-    return authUserRepository.save(authUser);
+    authUserRepository.save(authUser);
+    Optional<AuthUser> userLogin = authUserRepository.findByUserName(dto.getUserName());
+    return new TokenDto(jwtProvider.createToken(userLogin.get()),userLogin.get().getUserName(),userLogin.get().getId(),userLogin.get().getUser().getId());
   }
 //  public User saveUser(User user, String userName) {
 //    Optional<AuthUser> userAuth = authUserRepository.findByUserName(userName);
