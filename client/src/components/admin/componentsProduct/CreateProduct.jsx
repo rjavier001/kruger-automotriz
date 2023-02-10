@@ -6,8 +6,8 @@ import {
 import { Stack } from "@mui/system";
 import React from "react";
 import Dashboard from "./Dashboard";
-import uiConfigs from "../../configs/ui.configs";
-import FormCreateProduct from "./componentsProduct/FormCreateProduct";
+import FormCreateProduct from "./FormCreateProduct";
+import uiConfigs from "../../../configs/ui.configs";
 
 const CreateProduct = () => {
 

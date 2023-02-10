@@ -66,7 +66,7 @@ public class UserController extends FallBackMethods{
       userDB.setAge(req.getAge());
       userDB.setPhone(req.getPhone());
       userDB.setEmail(req.getEmail());
-      userDB.setUserOrders(req.getUserOrders());
+      userDB.setAddress(req.getAddress());
       return new ResponseEntity<>(service.save(userDB),HttpStatus.CREATED);
     }
     return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);

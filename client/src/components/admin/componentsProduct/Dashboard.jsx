@@ -1,8 +1,10 @@
 import {Container, Grid} from "@mui/material";
 import { Box, Stack } from "@mui/system";
 import { NavLink, Outlet, useLocation } from "react-router-dom";
-import CardComp from "../CardComp";
-import { useApi } from "./hooks/useApi";
+import CardComp from "../../CardComp";
+import { useApi } from "../hooks/useApi";
+
+
 
 const Dashboard = () => {
 	let location = useLocation();

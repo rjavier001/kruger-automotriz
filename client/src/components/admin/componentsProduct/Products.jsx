@@ -10,8 +10,9 @@ import {
 import { Container, Stack } from "@mui/system";
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useApi } from "../hooks/useApi";
 import Dashboard from "./Dashboard";
-import { useApi } from "./hooks/useApi";
+
 
 const Products = () => {
 
