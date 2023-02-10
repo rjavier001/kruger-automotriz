@@ -20,15 +20,10 @@ const userApi = {
       return { err };
     }
   },
-  signup: async ({ userName, password, confirmPassword, displayName }) => {
+  signup: async (data) => {
     try {
-      const response = await publicClient.post(userEndpoints.signup, {
-        userName,
-        password,
-        confirmPassword,
-        displayName,
-      });
-
+      console.log(data)
+      const response = await publicClient.post(userEndpoints.signup, data);
       return { response };
     } catch (err) {
       return { err };
