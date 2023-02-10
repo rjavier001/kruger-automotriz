@@ -1,9 +1,6 @@
 package com.kruger.authserver.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -18,8 +15,15 @@ public class AuthUser {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name="id")
   private int id;
+  @Column(unique = true)
   private String userName;
   private String password;
   private String role;
+
+
+  @OneToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name = "user_id", referencedColumnName = "id")
+  private User user;
 }

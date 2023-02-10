@@ -41,9 +41,9 @@ public class AuthUserController {
       return ResponseEntity.badRequest().build();
     return ResponseEntity.ok(authUser);
   }
-  @PostMapping("/create-user/{userName}")
-  public ResponseEntity<?> createUser(@RequestBody User user, @PathVariable String userName){
-    authUserService.saveUser(user,userName);
-    return new ResponseEntity<>(null, HttpStatus.CREATED);
-  }
+//  @PostMapping("/create-user/{userName}")
+//  public ResponseEntity<?> createUser(@RequestBody User user, @PathVariable String userName){
+//    authUserService.saveUser(user,userName);
+//    return new ResponseEntity<>(null, HttpStatus.CREATED);
+//  }
 }

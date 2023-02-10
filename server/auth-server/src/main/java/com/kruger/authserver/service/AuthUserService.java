@@ -7,6 +7,7 @@ import com.kruger.authserver.dto.TokenDto;
 import com.kruger.authserver.entity.AuthUser;
 import com.kruger.authserver.entity.User;
 import com.kruger.authserver.repository.AuthUserRepository;
+import com.kruger.authserver.repository.UserRepository;
 import com.kruger.authserver.security.JwtProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -21,7 +22,7 @@ public class AuthUserService {
   AuthUserRepository authUserRepository;
 
   @Autowired
-  UserClientRest client;
+  UserRepository userRepository;
 
   @Autowired
   PasswordEncoder passwordEncoder;
@@ -38,23 +39,26 @@ public class AuthUserService {
         .userName(dto.getUserName())
         .password(password)
         .role(dto.getRole())
+        .user(dto.getUser())
         .build();
+    userRepository.save(dto.getUser());
+
     return authUserRepository.save(authUser);
   }
-  public User saveUser(User user, String userName) {
-    Optional<AuthUser> userAuth = authUserRepository.findByUserName(userName);
-    if(userAuth.isPresent()){
-      user.setUser_id(userAuth.get().getId());
-    }
-    return client.createAuthUser(user);
-  }
+//  public User saveUser(User user, String userName) {
+//    Optional<AuthUser> userAuth = authUserRepository.findByUserName(userName);
+//    if(userAuth.isPresent()){
+//      user.set(userAuth.get().getId());
+//    }
+//    return client.createAuthUser(user);
+//  }
 
   public TokenDto login(AuthUserDto dto) {
     Optional<AuthUser> user = authUserRepository.findByUserName(dto.getUserName());
     if(!user.isPresent())
       return null;
     if(passwordEncoder.matches(dto.getPassword(), user.get().getPassword()))
-      return new TokenDto(jwtProvider.createToken(user.get()), client.getUserByAuthId(user.get().getId()));
+      return new TokenDto(jwtProvider.createToken(user.get()),user.get().getUserName(),user.get().getId(),user.get().getUser().getId());
     return null;
   }
 
@@ -64,6 +68,6 @@ public class AuthUserService {
     String username = jwtProvider.getUserNameFromToken(token);
     if(!authUserRepository.findByUserName(username).isPresent())
       return null;
-    return new TokenDto(token,null);
+    return new TokenDto(token,"",0, 0L);
   }
 }

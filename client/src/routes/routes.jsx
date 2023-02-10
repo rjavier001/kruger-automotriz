@@ -12,6 +12,7 @@ import Category from "../components/admin/Category";
 import EditFieldsCategory from "../components/admin/componentsProduct/EditFieldsCategory";
 import Discounts from "../components/admin/Discounts";
 import Featured from "../components/admin/Featured";
+import UserDashboard from "../components/admin/usersAdmin/UserDashboard";
 
 export const routesGen = {
   home: "/",
@@ -88,6 +89,11 @@ const routes = [
     path: "/admin/products/featured",
     element: <Featured />,
     state: "featured",
+  },
+  {
+    path: "/admin/users",
+    element: <UserDashboard />,
+    state: "users",
   }
   
 ];
