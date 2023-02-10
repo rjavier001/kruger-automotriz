@@ -15,21 +15,44 @@ import { NavLink } from "react-router-dom";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { addToCart, getTotal, decreaseCart } from "../redux/features/cartSlice";
+import { setOrderId } from "../redux/features/userSlice";
 import ReviewComp from "../components/common/ReviewComp";
 import { setAuthModalOpen } from "../redux/features/authModalSlice";
+import ordersApi from "../api/modules/orders.api";
 
 const ProductDetailPage = () => {
   const cart = useSelector((state) => state.cart);
+  const [order, setOrder] = useState({ status: "front22", totalPrice: 47 });
+
   const { user } = useSelector((state) => state.user);
+  const { userOrderId } = useSelector((state) => state.user);
   const navigate = useNavigate();
   const [quantity, setQuantity] = useState(1);
   let location = useLocation();
   let { props } = location.state;
   const dispatch = useDispatch();
+  const userOrder = { productId: 27 };
+
+  const createOrder = async () => {
+    const { response } = await ordersApi.postOrders(order);
+    console.log("order created", userOrderId);
+    dispatch(setOrderId(response.id));
+  };
+
+  const assignProd = async () => {
+    const { response } = await ordersApi.assignProdToOrder(userOrderId, {
+      productId: props.id,
+    });
+    console.log("Prod assigned", userOrderId);
+  };
 
   const handleAddtoCart = (props) => {
+    console.log(props);
     if (user) {
       props = { ...props, quantity };
+      if (!userOrderId) createOrder();
+      else assignProd();
+
       dispatch(addToCart(props));
       navigate("/checkout");
     } else dispatch(setAuthModalOpen(true));
