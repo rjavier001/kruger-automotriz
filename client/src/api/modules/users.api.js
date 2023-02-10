@@ -7,10 +7,14 @@ const userEndpoints = {
   getInfo: ({ id }) => `users/${id}`,
   passwordUpdate: "users/update-password",
 
+
   listUsers: "users",
   usersById: ({ id }) => `users/${id}`,
   updateUserById: ({ id }) => `users/${id}`,
-  deleteUserById: ({ id }) => `users/${id}`
+  deleteUserById: ({ id }) => `users/${id}`,
+
+  assignOrder: ({ id }) => `users/assign-order/${id}`,
+
 };
 
 const userApi = {
@@ -59,15 +63,16 @@ const userApi = {
       return { err };
     }
   },
+
   listUsers: async () => {
     try {
       const response = await privateClient.get(userEndpoints.listUsers);
-
       return { response };
     } catch (err) {
       return { err };
     }
   },
+
   usersById: async (id) => {
     try {
       const response = await privateClient.get(userEndpoints.usersById({ id }));
@@ -94,7 +99,20 @@ const userApi = {
     } catch (err) {
       return { err };
     }
-  }
+  },
+  assignOrder: async (id, data) => {
+    try {
+      const response = await privateClient.put(
+        userEndpoints.assignOrder({ id }),
+        data
+      );
+
+      return { response };
+    } catch (err) {
+      return { err };
+    }
+  },
+
 };
 
 export default userApi;
