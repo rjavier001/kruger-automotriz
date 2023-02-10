@@ -1,7 +1,7 @@
 import axios from "axios";
 import queryString from "query-string";
 
-const baseURL = "http://localhost:8080/api/";
+const baseURL = process.env.REACT_APP_BACK;
 
 const privateClient = axios.create({
   baseURL,
@@ -10,12 +10,12 @@ const privateClient = axios.create({
   },
 });
 
-privateClient.interceptors.request.use(async (config) => {  
+privateClient.interceptors.request.use(async (config) => {
   return {
     ...config,
     headers: {
       "Content-Type": "application/json",
-      "Authorization": `Bearer ${localStorage.getItem("actkn")}`,
+      Authorization: `Bearer ${localStorage.getItem("actkn")}`,
     },
   };
 });
