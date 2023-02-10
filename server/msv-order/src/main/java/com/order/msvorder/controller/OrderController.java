@@ -20,120 +20,125 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.*;
 import java.util.stream.Collectors;
 
-
-@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/api/orders")
 public class OrderController {
 
-
     @Autowired
     private OrderServiceImpl orderService;
 
-    // -------------------Retrieve All Orders--------------------------------------------
+    // -------------------Retrieve All
+    // Orders--------------------------------------------
     @GetMapping
     public ResponseEntity<List<Order>> listAllOrders() {
         List<Order> Orders = orderService.findAllOrders();
         if (Orders.isEmpty()) {
-            return  ResponseEntity.noContent().build();
+            return ResponseEntity.noContent().build();
         }
-        return  ResponseEntity.ok(Orders);
+        return ResponseEntity.ok(Orders);
     }
 
-    // -------------------Retrieve Single Order------------------------------------------
+    // -------------------Retrieve Single
+    // Order------------------------------------------
     @GetMapping(value = "/{id}")
     public ResponseEntity<Order> getOrder(@PathVariable("id") long id) {
-        //Order Order  = orderService.findByIdWithProducts(id) //orderService.getOrder(id);
-        Optional<Order>  o = orderService.findByIdWithProducts(id); //orderService.getOrder(id);
+        // Order Order = orderService.findByIdWithProducts(id)
+        // //orderService.getOrder(id);
+        Optional<Order> o = orderService.findByIdWithProducts(id); // orderService.getOrder(id);
 
         if (!o.isPresent()) {
-            return  ResponseEntity.notFound().build();
+            return ResponseEntity.notFound().build();
         }
-        return  ResponseEntity.ok(o.get());
+        return ResponseEntity.ok(o.get());
     }
 
-    //Aqui debo recibir el ID del customer ya que lo necesitare para crear el cart en un futuro
+    // Aqui debo recibir el ID del customer ya que lo necesitare para crear el cart
+    // en un futuro
     // -------------------Create a Order-------------------------------------------
-    @PostMapping(value= "/user/{id}")
-    public ResponseEntity<Order> createOrder(@Valid @RequestBody Order Order, BindingResult result, @PathVariable("id") long customerId) {
-        if (result.hasErrors()){
+    @PostMapping(value = "/user/{id}")
+    public ResponseEntity<Order> createOrder(@Valid @RequestBody Order Order, BindingResult result,
+            @PathVariable("id") long customerId) {
+        if (result.hasErrors()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, this.formatMessage(result));
         }
-        Order OrderDB = orderService.createOrder (Order, customerId);
+        Order OrderDB = orderService.createOrder(Order, customerId);
 
-        return  ResponseEntity.status( HttpStatus.CREATED).body(OrderDB);
+        return ResponseEntity.status(HttpStatus.CREATED).body(OrderDB);
     }
 
     //
     @PostMapping
     public ResponseEntity<Order> createO(@Valid @RequestBody Order order, BindingResult result) {
-        if (result.hasErrors()){
+        if (result.hasErrors()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, this.formatMessage(result));
         }
         Order OrderDB = orderService.createOrder2(order);
 
-        return  ResponseEntity.status( HttpStatus.CREATED).body(OrderDB);
+        return ResponseEntity.status(HttpStatus.CREATED).body(OrderDB);
     }
 
-    // ------------------- Update a Order ------------------------------------------------
+    // ------------------- Update a Order
+    // ------------------------------------------------
     @PutMapping(value = "/{id}")
-    public ResponseEntity<?> updateOrder(@PathVariable(name="id") Long id, @RequestBody Order Order) {
+    public ResponseEntity<?> updateOrder(@PathVariable(name = "id") Long id, @RequestBody Order Order) {
 
         Order.setId(id);
-        Order currentOrder=orderService.updateOrder(Order);
+        Order currentOrder = orderService.updateOrder(Order);
 
         if (currentOrder == null) {
-            return  ResponseEntity.notFound().build();
+            return ResponseEntity.notFound().build();
         }
-        return  ResponseEntity.ok(currentOrder);
+        return ResponseEntity.ok(currentOrder);
     }
 
     // ------------------- Delete a Order-----------------------------------------
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<?> deleteOrder(@PathVariable("id") long id) {
         orderService.deleteOrder(id);
-        return  ResponseEntity.status(HttpStatus.OK).body("Successfully operation. ");
+        return ResponseEntity.status(HttpStatus.OK).body("Successfully operation. ");
     }
 
     @GetMapping("/orders-by-user")
-    public ResponseEntity<?> getAllOrdersByUser(@RequestParam List<Long> ids){
+    public ResponseEntity<?> getAllOrdersByUser(@RequestParam List<Long> ids) {
         return ResponseEntity.ok(orderService.listByIds(ids));
     }
 
     @PutMapping("/assign-product/{orderId}")
-    public ResponseEntity<?> assignProduct(@RequestBody OrderProduct orderProduct, @PathVariable Long orderId){
+    public ResponseEntity<?> assignProduct(@RequestBody OrderProduct orderProduct, @PathVariable Long orderId) {
         Optional<Order> o;
-        try{
+        try {
             o = orderService.assignProduct(orderProduct, orderId);
-        } catch (FeignException e){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Collections.singletonMap("mensaje","No existe el producto por el id o no se logro la comunicación"+ e.getMessage()));
+        } catch (FeignException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Collections.singletonMap("mensaje",
+                    "No existe el producto por el id o no se logro la comunicación" + e.getMessage()));
         }
 
-        if(o.isPresent()){
+        if (o.isPresent()) {
             return ResponseEntity.status(HttpStatus.CREATED).body(o.get());
         }
         return ResponseEntity.notFound().build();
     }
 
     @DeleteMapping("/delete-product/{orderId}")
-    public ResponseEntity<?> deleteProduct(@RequestBody Product product, @PathVariable Long orderId){
+    public ResponseEntity<?> deleteProduct(@RequestBody Product product, @PathVariable Long orderId) {
         Optional<Product> o;
-        try{
+        try {
             o = orderService.deleteProduct(product, orderId);
-        } catch (FeignException e){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Collections.singletonMap("mensaje","No existe el producto por el id o no se logro la comunicación"+ e.getMessage()));
+        } catch (FeignException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Collections.singletonMap("mensaje",
+                    "No existe el producto por el id o no se logro la comunicación" + e.getMessage()));
         }
 
-        if(o.isPresent()){
+        if (o.isPresent()) {
             return ResponseEntity.status(HttpStatus.OK).body(o.get());
         }
         return ResponseEntity.notFound().build();
     }
 
-    private String formatMessage( BindingResult result){
-        List<Map<String,String>> errors = result.getFieldErrors().stream()
-                .map(err ->{
-                    Map<String,String> error =  new HashMap<>();
+    private String formatMessage(BindingResult result) {
+        List<Map<String, String>> errors = result.getFieldErrors().stream()
+                .map(err -> {
+                    Map<String, String> error = new HashMap<>();
                     error.put(err.getField(), err.getDefaultMessage());
                     return error;
 
@@ -142,7 +147,7 @@ public class OrderController {
                 .code("01")
                 .messages(errors).build();
         ObjectMapper mapper = new ObjectMapper();
-        String jsonString="";
+        String jsonString = "";
         try {
             jsonString = mapper.writeValueAsString(errorMessage);
         } catch (JsonProcessingException e) {
