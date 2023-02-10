@@ -22,7 +22,7 @@ import ordersApi from "../api/modules/orders.api";
 
 const ProductDetailPage = () => {
   const cart = useSelector((state) => state.cart);
-  const [order, setOrder] = useState({ status: "front22", totalPrice: 47 });
+  const [order, setOrder] = useState({ status: "Created", totalPrice: 0 });
 
   const { user } = useSelector((state) => state.user);
   const { userOrderId } = useSelector((state) => state.user);
