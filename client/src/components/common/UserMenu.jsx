@@ -10,11 +10,10 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import menuConfigs from "../../configs/menu.configs";
-import { setUser } from "../../redux/features/userSlice";
+import { setUser, setUserData } from "../../redux/features/userSlice";
 
 const UserMenu = () => {
   const { user } = useSelector((state) => state.user);
-  console.log("user", user);
 
   const dispatch = useDispatch();
 
@@ -30,7 +29,9 @@ const UserMenu = () => {
             variant="h6"
             sx={{ cursor: "pointer", userSelect: "none" }}
             onClick={toggleMenu}
-          >{user.user.name}</Typography>
+          >
+            {user.userName}
+          </Typography>
           <Menu
             open={Boolean(anchorEl)}
             anchorEl={anchorEl}

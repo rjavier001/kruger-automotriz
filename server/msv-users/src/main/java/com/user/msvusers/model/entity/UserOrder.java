@@ -16,7 +16,6 @@ public class UserOrder {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "order_id", unique = true)
     private Long orderId;
 
     @Override
