@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 public class TokenDto {
   private String token;
   private String userName;
+  private String role;
   private int authId;
   private Long userId;
 }

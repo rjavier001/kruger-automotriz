@@ -43,7 +43,7 @@ public class AuthUserService {
         .build();
     authUserRepository.save(authUser);
     Optional<AuthUser> userLogin = authUserRepository.findByUserName(dto.getUserName());
-    return new TokenDto(jwtProvider.createToken(userLogin.get()),userLogin.get().getUserName(),userLogin.get().getId(),userLogin.get().getUser().getId());
+    return new TokenDto(jwtProvider.createToken(userLogin.get()),userLogin.get().getUserName(),userLogin.get().getRole(),userLogin.get().getId(),userLogin.get().getUser().getId());
   }
 //  public User saveUser(User user, String userName) {
 //    Optional<AuthUser> userAuth = authUserRepository.findByUserName(userName);
@@ -58,7 +58,7 @@ public class AuthUserService {
     if(!user.isPresent())
       return null;
     if(passwordEncoder.matches(dto.getPassword(), user.get().getPassword()))
-      return new TokenDto(jwtProvider.createToken(user.get()),user.get().getUserName(),user.get().getId(),user.get().getUser().getId());
+      return new TokenDto(jwtProvider.createToken(user.get()),user.get().getUserName(),user.get().getRole(),user.get().getId(),user.get().getUser().getId());
     return null;
   }
 
@@ -68,6 +68,6 @@ public class AuthUserService {
     String username = jwtProvider.getUserNameFromToken(token);
     if(!authUserRepository.findByUserName(username).isPresent())
       return null;
-    return new TokenDto(token,"",0, 0L);
+    return new TokenDto(token,"","",0, 0L);
   }
 }
