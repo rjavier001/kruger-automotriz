@@ -57,14 +57,8 @@ const SignupForm = ({ switchAuthState }) => {
       setIsLoginRequest(false);
 
       if (response) {
-        const responseData = {
-          userName: response.userName,
-          authId: response.authId,
-          userId: response.user.userId,
-          token: response.token,
-        };
         signinForm.resetForm();
-        dispatch(setUser(responseData));
+        dispatch(setUser(response));
         dispatch(setAuthModalOpen(false));
         toast.success("Sign in success");
       }
