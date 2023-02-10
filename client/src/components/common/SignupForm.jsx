@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import * as Yup from "yup";
 import userApi from "../../api/modules/users.api";
 import { setAuthModalOpen } from "../../redux/features/authModalSlice";
-import { setUser } from "../../redux/features/userSlice";
+import { setUser,setUserData } from "../../redux/features/userSlice";
 
 const SignupForm = ({ switchAuthState }) => {
   const dispatch = useDispatch();
@@ -59,6 +59,8 @@ const SignupForm = ({ switchAuthState }) => {
       if (response) {
         signinForm.resetForm();
         dispatch(setUser(response));
+        const userData = await userApi.getInfo(response.userId);
+        dispatch(setUserData(userData.response));
         dispatch(setAuthModalOpen(false));
         toast.success("Sign in success");
       }
@@ -76,7 +78,7 @@ const SignupForm = ({ switchAuthState }) => {
       <Stack spacing={3}>
         <Stack direction="row" spacing={1}>
           <TextField
-            id="outlined-basic"
+            id="outlined-basic-1"
             label="User Name"
             variant="outlined"
             size="small"
@@ -95,7 +97,7 @@ const SignupForm = ({ switchAuthState }) => {
             }
           />
           <TextField
-            id="outlined-basic"
+            id="outlined-basic-2"
             label="Email"
             variant="outlined"
             size="small"
@@ -114,7 +116,7 @@ const SignupForm = ({ switchAuthState }) => {
 
         <Stack direction="row" spacing={1}>
           <TextField
-            d="outlined-basic"
+            d="outlined-basic-3"
             label="Password"
             variant="outlined"
             size="small"
@@ -133,7 +135,7 @@ const SignupForm = ({ switchAuthState }) => {
             }
           />
           <TextField
-            id="outlined-basic"
+            id="outlined-basic-4"
             label="Confirm Password"
             variant="outlined"
             size="small"
@@ -155,7 +157,7 @@ const SignupForm = ({ switchAuthState }) => {
         </Stack>
         <Stack direction="row" spacing={1}>
           <TextField
-            id="outlined-basic"
+            id="outlined-basic-5"
             label="Firts Name"
             variant="outlined"
             size="small"
@@ -171,7 +173,7 @@ const SignupForm = ({ switchAuthState }) => {
             helperText={signinForm.touched.name && signinForm.errors.name}
           />
           <TextField
-            id="outlined-basic"
+            id="outlined-basic-6"
             label="Last Name"
             variant="outlined"
             size="small"

@@ -21,6 +21,11 @@ const UserMenu = () => {
 
   const toggleMenu = (e) => setAnchorEl(e.currentTarget);
 
+  const handdleLogut = () => {
+    dispatch(setUserData(null));
+    dispatch(setUser(null));
+  };
+
   return (
     <>
       {user && (
@@ -58,7 +63,7 @@ const UserMenu = () => {
             ))}
             <ListItemButton
               sx={{ borderRadius: "10px" }}
-              onClick={() => dispatch(setUser(null))}
+              onClick={handdleLogut}
             >
               <ListItemIcon>
                 <LogoutOutlinedIcon />

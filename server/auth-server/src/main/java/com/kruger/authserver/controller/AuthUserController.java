@@ -11,6 +11,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/api/auth")
 public class AuthUserController {
@@ -18,6 +21,17 @@ public class AuthUserController {
   @Autowired
   AuthUserService authUserService;
 
+  @GetMapping()
+  public ResponseEntity<TokenDto> validateAuthUser(HttpServletRequest request){
+    String jwt = request.getHeader("Authorization").replace("Bearer ", "");
+    if(jwt==null){
+      return ResponseEntity.badRequest().build();
+    }
+    TokenDto tokenDto = authUserService.validateAuthUser(jwt);
+    if (tokenDto == null)
+      return ResponseEntity.badRequest().build();
+    return ResponseEntity.ok(tokenDto);
+  }
   @PostMapping("/sign-in")
   public ResponseEntity<TokenDto> login(@RequestBody AuthUserDto dto){
     TokenDto tokenDto = authUserService.login(dto);
@@ -41,9 +55,4 @@ public class AuthUserController {
       return ResponseEntity.badRequest().build();
     return ResponseEntity.ok(tokenDto);
   }
-//  @PostMapping("/create-user/{userName}")
-//  public ResponseEntity<?> createUser(@RequestBody User user, @PathVariable String userName){
-//    authUserService.saveUser(user,userName);
-//    return new ResponseEntity<>(null, HttpStatus.CREATED);
-//  }
 }

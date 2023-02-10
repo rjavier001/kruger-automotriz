@@ -4,7 +4,7 @@ export const userSlice = createSlice({
   name: "User",
   initialState: {
     user: null,
-    userData: {},
+    userData: null,
     listHistory: [],
     userOrderId: null,
   },

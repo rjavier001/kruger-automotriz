@@ -4,28 +4,26 @@ import FooterComp from "../common/FooterComp";
 // import GlobalLoading from "../common/GlobalLoading";
 import NavbarComp from "../common/NavbarComp";
 import AuthModal from "../common/AuthModal";
-// import { useDispatch, useSelector } from "react-redux";
-// import { useEffect } from "react";
-// import { toast } from "react-toastify";
-// import userApi from "../../api/modules/user.api";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { toast } from "react-toastify";
+import userApi from "../../api/modules/users.api";
 // import favoriteApi from "../../api/modules/favorite.api";
-// import { setListFavorites, setUser } from "../../redux/features/userSlice";
+import { setUser } from "../../redux/features/userSlice";
 
 const MainLayout = () => {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-  // const { user } = useSelector((state) => state.user);
+  const { user } = useSelector((state) => state.user);
 
-  // useEffect(() => {
-  //   const authUser = async () => {
-  //     const { response, err } = await userApi.getInfo();
-
-  //     if (response) dispatch(setUser(response));
-  //     if (err) dispatch(setUser(null));
-  //   };
-
-  //   authUser();
-  // }, [dispatch]);
+  useEffect(() => {
+    const authUser = async () => {
+      const { response, err } = await userApi.validateAuth();
+      if (response) dispatch(setUser(response));
+      if (err) dispatch(setUser(null));
+    };
+    authUser();
+  }, [dispatch]);
 
   // useEffect(() => {
   //   const getFavorites = async () => {
@@ -45,13 +43,7 @@ const MainLayout = () => {
       <AuthModal />
       <Box display="flex" minHeight="100vh" pt={{ xs: 25, sm: 25, md: 20 }}>
         <NavbarComp />
-        <Box
-          component="main"
-          flexGrow={1}
-          overflow="hidden"
-          minHeight="100vh"
-          paddingTop="50px"
-        >
+        <Box component="main" flexGrow={1} overflow="hidden" minHeight="100vh">
           <Outlet />
         </Box>
       </Box>
