@@ -3,6 +3,9 @@ import ContactsIcon from "@mui/icons-material/Contacts";
 import GroupsIcon from "@mui/icons-material/Groups";
 import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
 import LockResetOutlinedIcon from "@mui/icons-material/LockResetOutlined";
+import SettingsSuggestIcon from "@mui/icons-material/SettingsSuggest";
+import HistoryIcon from "@mui/icons-material/History";
+import ProductionQuantityLimitsIcon from "@mui/icons-material/ProductionQuantityLimits";
 
 const main = [
   {
@@ -33,15 +36,21 @@ const main = [
 
 const user = [
   {
+    display: "admin dashboard",
+    path: "/admin",
+    icon: <SettingsSuggestIcon />,
+    state: "favorite",
+  },
+  {
     display: "shop history",
     path: "/history",
-    // icon: <FavoriteBorderOutlinedIcon />,
+    icon: <HistoryIcon />,
     state: "history",
   },
   {
     display: "in progress orders",
     path: "/progressorders",
-    // icon: <RateReviewOutlinedIcon />,
+    icon: <ProductionQuantityLimitsIcon />,
     state: "progressorders",
   },
   {

@@ -4,17 +4,15 @@ import publicClient from "../client/public.client";
 const userEndpoints = {
   signin: "auth/sign-in",
   signup: "auth/sign-up",
+  validateAuth: "auth",
   getInfo: ({ id }) => `users/${id}`,
   passwordUpdate: "users/update-password",
-
 
   listUsers: "users",
   usersById: ({ id }) => `users/${id}`,
   updateUserById: ({ id }) => `users/${id}`,
   deleteUserById: ({ id }) => `users/${id}`,
-
   assignOrder: ({ id }) => `users/assign-order/${id}`,
-
 };
 
 const userApi = {
@@ -30,8 +28,16 @@ const userApi = {
   },
   signup: async (data) => {
     try {
-      console.log(data)
+      console.log(data);
       const response = await publicClient.post(userEndpoints.signup, data);
+      return { response };
+    } catch (err) {
+      return { err };
+    }
+  },
+  validateAuth: async () => {
+    try {
+      const response = await privateClient.get(userEndpoints.validateAuth);
       return { response };
     } catch (err) {
       return { err };
@@ -77,19 +83,24 @@ const userApi = {
     }
   },
   updateUserById: async (id, data) => {
-    console.log('usersApi', id, data)
+    console.log("usersApi", id, data);
     console.log(localStorage.getItem("actkn"));
     try {
-      const response = await privateClient.put(userEndpoints.updateUserById({ id }),data);
+      const response = await privateClient.put(
+        userEndpoints.updateUserById({ id }),
+        data
+      );
       return { response };
     } catch (err) {
       return { err };
     }
   },
   deleteUserById: async (id) => {
-    console.log('usersApi', id)
+    console.log("usersApi", id);
     try {
-      const response = await privateClient.delete(userEndpoints.deleteUserById({ id }));
+      const response = await privateClient.delete(
+        userEndpoints.deleteUserById({ id })
+      );
       return { response };
     } catch (err) {
       return { err };
@@ -107,7 +118,6 @@ const userApi = {
       return { err };
     }
   },
-
 };
 
 export default userApi;
