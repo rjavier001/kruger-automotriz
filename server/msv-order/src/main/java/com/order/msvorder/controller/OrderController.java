@@ -3,6 +3,7 @@ package com.order.msvorder.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.order.msvorder.entity.Order;
+import com.order.msvorder.entity.OrderProduct;
 import com.order.msvorder.model.Product;
 import com.order.msvorder.services.order.OrderServiceImpl;
 
@@ -20,7 +21,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 
-@CrossOrigin(origins = "http://localhost:3000")
+
 @RestController
 @RequestMapping("/api/orders")
 public class OrderController {
@@ -100,10 +101,10 @@ public class OrderController {
     }
 
     @PutMapping("/assign-product/{orderId}")
-    public ResponseEntity<?> assignProduct(@RequestBody Product product, @PathVariable Long orderId){
-        Optional<Product> o;
+    public ResponseEntity<?> assignProduct(@RequestBody OrderProduct orderProduct, @PathVariable Long orderId){
+        Optional<OrderProduct> o;
         try{
-            o = orderService.assignProduct(product, orderId);
+            o = orderService.assignProduct(orderProduct, orderId);
         } catch (FeignException e){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Collections.singletonMap("mensaje","No existe el producto por el id o no se logro la comunicación"+ e.getMessage()));
         }

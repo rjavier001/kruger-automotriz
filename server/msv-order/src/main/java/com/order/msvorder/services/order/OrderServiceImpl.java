@@ -101,18 +101,18 @@ public class OrderServiceImpl implements IOrderService{
 
     @Override
     @Transactional
-    public Optional<Product> assignProduct(Product product, Long orderId) {
+    public Optional<OrderProduct> assignProduct(OrderProduct orderProduct, Long orderId) {
         Optional<Order> o= orderRepository.findById(orderId);
         if(o.isPresent()){
-            Product productMsv = clientProduct.detail(product.getId());
+//            Product productMsv = clientProduct.detail(product.getId());
 
             Order order = o.get();
-            OrderProduct orderProduct = new OrderProduct();
-            orderProduct.setProductId(productMsv.getId());
+//            OrderProduct orderProduct2 = new OrderProduct();
+//            orderProduct2.setProductId(orderProduct.getProductId());
 
             order.addOrderProduct(orderProduct);
             orderRepository.save(order);
-            return Optional.of(productMsv);
+            return Optional.of(orderProduct);
         }
 
         return Optional.empty();
