@@ -1,0 +1,71 @@
+version: "3.9"
+services:
+  postgres14:
+    container_name: postgres14
+    image: postgres:14-alpine
+    ports:
+      - "5532:5432"
+    environment:
+      POSTGRES_PASSWORD: sa.1
+      POSTGRES_DB: postgres
+    volumes:
+      - data-postgres:/var/lib/postgresql/data
+    restart: always
+    networks:
+      - km_net
+
+  config-server:
+    container_name: config-server
+    build:
+      context: ./
+      dockerfile: ./config-server/Dockerfile
+    ports:
+      - "8888:8888"
+    networks:
+      - km_net
+    restart: always
+
+  discovery-server:
+    container_name: discovery-server
+    build:
+      context: ./
+      dockerfile: ./discovery-server/Dockerfile
+    ports:
+      - "8761:8761"
+    networks:
+      - km_net
+    restart: always
+
+  gateway-server:
+    container_name: gateway-server
+    build:
+      context: ./
+      dockerfile: ./gateway-server/Dockerfile
+    ports:
+      - "8080:8080"
+    networks:
+      - km_net
+    restart: always
+
+  msv-users:
+    container_name: msv-users
+    build:
+      context: ./
+      dockerfile: ./msv-users/Dockerfile
+    ports:
+      - "8001:8001"
+    env_file: ./msv-users/.env
+    networks:
+      - km_net
+    depends_on:
+      - postgres14
+    restart: always
+
+
+volumes:
+  data-postgres:
+    name: data-postgres
+
+networks:
+  km_net:
+    name: km_net

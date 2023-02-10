@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: msv-users
+data:
+  port: "8001"
+  db_host: postgres14:5432
+  database: postgres
+  username: postgres
+  password: sa.1
+  order_url: msv-order:8003
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: msv-order
+data:
+  port: "8003"
+  db_host: postgres14:5432
+  database: postgres
+  username: postgres
+  password: sa.1
+  users_url: msv-users:8001
+  products_url: msv-products:8002
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: msv-products
+data:
+  port: "8002"
+  db_host: postgres14:5432
+  database: postgres
+  username: postgres
+  password: sa.1
+
+

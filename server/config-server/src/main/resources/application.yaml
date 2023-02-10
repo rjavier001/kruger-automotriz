@@ -7,7 +7,7 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/rjavier001/service-configuration
+          uri: https://github.com/eddyjav/service-configuration-1
           default-label: master
           clone-on-start: true
 
