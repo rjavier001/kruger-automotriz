@@ -55,10 +55,12 @@ const SigninForm = ({ switchAuthState }) => {
       component="form"
       onSubmit={signinForm.handleSubmit}
     >
-      <Stack spacing={3}>
+      <Stack spacing={2}>
         <TextField
+          id="outlined-basic"
+          label="User Name"
+          variant="outlined"
           type="text"
-          placeholder="username"
           name="userName"
           fullWidth
           value={signinForm.values.userName}
@@ -71,8 +73,10 @@ const SigninForm = ({ switchAuthState }) => {
           helperText={signinForm.touched.userName && signinForm.errors.userName}
         />
         <TextField
+          id="outlined-basic"
+          label="Password"
+          variant="outlined"
           type="password"
-          placeholder="password"
           name="password"
           fullWidth
           value={signinForm.values.password}
