@@ -8,9 +8,10 @@ import {
 	Typography,
 } from "@mui/material";
 
-import productsApi from "../../../api/modules/products.api";
+
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import productsApi from "../../../api/modules/products.api";
 
 export default function EditDiscount({ id }) {
 

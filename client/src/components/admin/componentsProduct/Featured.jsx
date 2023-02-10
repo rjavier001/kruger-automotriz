@@ -9,20 +9,23 @@ import {
 import { Box, Container } from "@mui/system";
 import { useState } from "react";
 import Swal from "sweetalert2";
-import productsApi from "../../api/modules/products.api";
-import uiConfigs from "../../configs/ui.configs";
-import CreateDiscount from "./componentsProduct/CreateDiscount";
-import EditDiscount from "./componentsProduct/EditDiscount";
-import { useApi } from "./hooks/useApi";
 
-export default function Discounts() {
+import CreateFeatured from "./CreateFatured";
+import EditFeatured from "./EditFeatured";
+import { useApi } from "../hooks/useApi";
+import productsApi from "../../../api/modules/products.api";
+import uiConfigs from "../../../configs/ui.configs";
+
+
+export default function Featured() {
 	//---------------------------------------------------------------------------------
-	const [discountsDelete, setDiscountsDelete] = useState([]);
 	const [page, setPage] = useState(0);
 	const [rowsPerPage, setRowsPerPage] = useState(4);
+	const [featuredDelete, setFeaturedDelete] = useState([]);
+
 
 	//---------------------------------------------------------------------------------
-	const {discounts } = useApi();
+	const { featured } = useApi();
 
 	//---------------------------------------------------------------------------------
 	const handleChangePage = (e, newPage) => {
@@ -30,25 +33,25 @@ export default function Discounts() {
 	};
 
 	//---------------------------------------------------------------------------------
-	const handleDeleteDiscount = (idDiscount) => {
-		const deleteDiscount = async () => {
-			const { response } = await productsApi.deleteDiscountById(idDiscount);
-			if (response) setDiscountsDelete(response);
+	const handleDeleteFeatured = (idfeaturedData) => {
+		const deleteFeatured = async () => {
+			const { response } = await productsApi.deleteFaturedById(idfeaturedData);
+			if (response) setFeaturedDelete(response);
 		};
 
-		//---------------------------------------------------------------------------------
-		let discountProductsId;
-		const allItems = discounts;
-		const discountIdProduct = allItems.filter((item) => item.id === idDiscount);
-		discountProductsId = discountIdProduct;
+		let featuredId;
+		const allItems = featured;
+		const featuredIdProduct = allItems.filter(
+			(item) => item.id === idfeaturedData
+		);
+		featuredId = featuredIdProduct;
 
-		//---------------------------------------------------------------------------------
 		/* A ternary operator. */
-		discountProductsId[0].products.length !== 0
+		featuredId[0].products.length !== 0
 			? Swal.fire({
 					icon: "error",
 					title: "Oops...",
-					text: "El duescuento tiene productos, así que no se puede eliminar!",
+					text: "El descuento tiene productos, así que no se puede eliminar!",
 			  })
 			: Swal.fire({
 					title: "Are you sure?",
@@ -65,7 +68,7 @@ export default function Discounts() {
 							title: "Your discount has been deleted.",
 							showConfirmButton: false,
 						});
-						deleteDiscount(idDiscount);
+						deleteFeatured(idfeaturedData);
 						setTimeout(() => {
 							window.location.reload();
 						}, 500);
@@ -74,18 +77,17 @@ export default function Discounts() {
 	};
 
 	//---------------------------------------------------------------------------------
-	console.log(discounts);
 
 	return (
 		<Container>
 			<Grid container my={4} spacing={4}>
 				<Grid item xs={12}>
-					<CreateDiscount />
+					<CreateFeatured />
 					<Box sx={{ maxWidth: 550, margin: "0 auto" }}>
 						<TablePagination
 							rowsPerPageOptions={[5]}
 							component="div"
-							count={discounts.length}
+							count={featured.length}
 							rowsPerPage={rowsPerPage}
 							page={page}
 							onPageChange={handleChangePage}
@@ -93,14 +95,14 @@ export default function Discounts() {
 						<Grid container>
 							<Grid container spacing={5}>
 								{
-									discounts.status === 204 
+									featured?.status === 204 
 									? <p>No data</p>
 									:
 									<>
-									{discounts
+									{featured
 									.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-									.map((discount, i) => (
-										<Grid item xs={12} sm={12} md={6} spacing={5}>
+									.map((featuredData, i) => (
+										<Grid key={i} item xs={12} sm={12} md={6} spacing={5}>
 											<Card sx={uiConfigs.box}>
 												<CardContent>
 													<Box key={i}>
@@ -108,38 +110,23 @@ export default function Discounts() {
 															gutterBottom
 															variant="h4"
 															align="center">
-															{discount.name.charAt(0).toUpperCase() +
-																discount.name.slice(1)}
+															{featuredData.featuredTime}
 														</Typography>
-														<Grid item xs={12} sm={12}>
-															<Typography
-																variant="subtitle1"
-																color="text.secondary"
-																align="center">
-																Discount: {discount.price}%
-															</Typography>
-														</Grid>
-														<Grid item xs={12} sm={12}>
-															<Typography
-																variant="subtitle1"
-																color="text.secondary"
-																align="center">
-																Time: {discount.offerTime}
-															</Typography>
-														</Grid>
 														<div align="center">
 															<Grid
 																container
 																justifyContent="center"
 																alignItems="center">
-																<EditDiscount id={discount.id} />
+																
+																	<EditFeatured id={featuredData.id} />
+																
 																<Button
 																	color="secondary"
 																	size="medium"
 																	variant="contained"
 																	sx={{ margin: "1rem 1rem" }}
 																	onClick={() =>
-																		handleDeleteDiscount(discount.id)
+																		handleDeleteFeatured(featuredData.id)
 																	}>
 																	Delete
 																</Button>

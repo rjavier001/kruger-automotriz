@@ -25,7 +25,7 @@ public interface IOrderService {
 
     //Metodos remotos
     //Recibe el objeto dle producto y el id de la orden
-    Optional<OrderProduct> assignProduct(OrderProduct orderProduct, Long orderId);
+    Optional<Order> assignProduct(OrderProduct orderProduct, Long orderId);
     //Este metodo no se lo voy  a implementar , crea un producto nuevo
     //Optional<Product> createProduct(Product product, Long orderId);
     //Elimina el producto de la orden no de la BDD

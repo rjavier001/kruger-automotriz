@@ -102,9 +102,9 @@ public class OrderController {
 
     @PutMapping("/assign-product/{orderId}")
     public ResponseEntity<?> assignProduct(@RequestBody OrderProduct orderProduct, @PathVariable Long orderId){
-        Optional<OrderProduct> o;
+        Optional<Order> o;
         try{
-            o = orderService.assignProduct(orderProduct, orderId);
+            o = orderService.assignProduct(product, orderId);
         } catch (FeignException e){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Collections.singletonMap("mensaje","No existe el producto por el id o no se logro la comunicación"+ e.getMessage()));
         }

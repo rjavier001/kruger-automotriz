@@ -1,50 +1,39 @@
-import styled from "@emotion/styled";
 import {
-	Box,
-	Divider,
 	Grid,
 	Paper,
 	Table,
 	TableBody,
 	TableCell,
-	tableCellClasses,
 	TableContainer,
 	TableHead,
 	TablePagination,
 	TableRow,
 } from "@mui/material";
-import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import { Container } from "@mui/system";
 import React from "react";
 import { useState } from "react";
 import EditUser from "./EditUser";
-
-function createData(name, code, population, size) {
-	const density = population / size;
-
-	return { name, code, population, size, density };
-}
-
-const rows = [
-	createData("India", "IN", 1324171354, 3287263),
-	createData("China", "CN", 1403500365, 9596961),
-	createData("Italy", "IT", 60483973, 301340),
-	createData("United States", "US", 327167434, 9833520),
-	createData("Canada", "CA", 37602103, 9984670),
-	createData("Australia", "AU", 25475400, 7692024),
-	createData("Germany", "DE", 83019200, 357578),
-	createData("Ireland", "IE", 4857000, 70273),
-	createData("Mexico", "MX", 126577691, 1972550),
-	createData("Japan", "JP", 126317000, 377973),
-	createData("France", "FR", 67022000, 640679),
-	createData("United Kingdom", "GB", 67545757, 242495),
-	createData("Russia", "RU", 146793744, 17098246),
-	createData("Nigeria", "NG", 200962417, 923768),
-	createData("Brazil", "BR", 210147125, 8515767),
-];
+import { useEffect } from "react";
+import userApi from "../../../api/modules/users.api";
+import Swal from "sweetalert2";
 
 export default function UserDashboard() {
+	const [usersList, setUsersList] = useState([]);
+	const [usersDelete, setUsersDelete] = useState([]);
+
+	//---------------------------------------------------------------------------------
+	useEffect(() => {
+		//----------------------------------
+		const getListUsers = async () => {
+			const { response, err } = await userApi.listUsers();
+			if (response) setUsersList(response);
+		};
+		getListUsers();
+	}, []);
+
+	console.log(usersList);
+
 	// ** States
 	const [page, setPage] = useState(0);
 	const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -58,9 +47,35 @@ export default function UserDashboard() {
 		setPage(0);
 	};
 
-	const handleDeleteUser = () => {
-        console.log('delete');
-    };
+	const handleDeleteUser = (idUser) => {
+		const deleteUsers = async () => {
+			const { response } = await userApi.deleteUserById(idUser);
+			if (response) setUsersDelete(response);
+		};
+
+		Swal.fire({
+			title: "Are you sure?",
+			text: "You won't be able to revert this!",
+			icon: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#3085d6",
+			cancelButtonColor: "#d33",
+			confirmButtonText: "Yes, delete it!",
+	  }).then((result) => {
+			if (result.isConfirmed) {
+				Swal.fire({
+					icon: "success",
+					title: "Your discount has been deleted.",
+					showConfirmButton: false,
+				});
+				deleteUsers(idUser);
+				setTimeout(() => {
+					// window.location.reload();
+				}, 500);
+			}
+	  });
+		console.log("delete", idUser);
+	};
 
 	return (
 		<Container sx={{ marginTop: "3rem" }}>
@@ -70,31 +85,28 @@ export default function UserDashboard() {
 						<TableHead>
 							<TableRow>
 								<TableCell>Name</TableCell>
-								<TableCell>Name</TableCell>
-								<TableCell>Name</TableCell>
-								<TableCell>Name</TableCell>
+								<TableCell>LastName</TableCell>
+								<TableCell>Age</TableCell>
+								<TableCell>Phone</TableCell>
+								<TableCell>Actions</TableCell>
 							</TableRow>
 						</TableHead>
 						<TableBody>
-							{rows
+							{usersList
 								.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-								.map((row) => {
+								.map((users, i) => {
 									return (
-										<TableRow
-											hover
-											role="checkbox"
-											tabIndex={-1}
-											key={row.code}>
-											<TableCell>{row.name}</TableCell>
-											<TableCell>{row.name}</TableCell>
-											<TableCell>{row.name}</TableCell>
+										<TableRow hover role="checkbox" tabIndex={-1} key={i}>
+											<TableCell>{users.name}</TableCell>
+											<TableCell>{users.lastName}</TableCell>
+											<TableCell>{users.age} years</TableCell>
+											<TableCell>{users.phone}</TableCell>
 											<TableCell justifyContent="center" alignItems="center">
 												<Grid
 													container
 													justifyContent="flex-start"
 													alignItems="center">
-													<EditUser />
-													<DeleteOutlineOutlinedIcon sx={{cursor:'pointer'}} onClick={handleDeleteUser}/>
+													<EditUser id={users.id} />
 												</Grid>
 											</TableCell>
 										</TableRow>
@@ -106,7 +118,7 @@ export default function UserDashboard() {
 				<TablePagination
 					rowsPerPageOptions={[10, 25, 100]}
 					component="div"
-					count={rows.length}
+					count={usersList.length}
 					rowsPerPage={rowsPerPage}
 					page={page}
 					onPageChange={handleChangePage}

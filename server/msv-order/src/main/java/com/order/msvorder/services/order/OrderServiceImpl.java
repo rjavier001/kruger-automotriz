@@ -55,7 +55,7 @@ public class OrderServiceImpl implements IOrderService{
     public Order createOrder2(Order order){
         //crear un payment por defecto al crearse una orden
         Payment payment = new Payment("CREATED", UUID.randomUUID(), new Date());
-
+        order.setOrderProducts(order.getOrderProducts());
         order.setCreated(new Date());
         order.setShipmentDate(new Date());
         order.setPayment(payment);
@@ -101,18 +101,18 @@ public class OrderServiceImpl implements IOrderService{
 
     @Override
     @Transactional
-    public Optional<OrderProduct> assignProduct(OrderProduct orderProduct, Long orderId) {
+    public Optional<Order> assignProduct(OrderProduct orderProduct, Long orderId) {
         Optional<Order> o= orderRepository.findById(orderId);
         if(o.isPresent()){
 //            Product productMsv = clientProduct.detail(product.getId());
 
             Order order = o.get();
-//            OrderProduct orderProduct2 = new OrderProduct();
-//            orderProduct2.setProductId(orderProduct.getProductId());
+//            OrderProduct orderProduct = new OrderProduct();
+//            orderProduct.setProductId(productMsv.getId());
 
             order.addOrderProduct(orderProduct);
             orderRepository.save(order);
-            return Optional.of(orderProduct);
+            return Optional.of(order);
         }
 
         return Optional.empty();
