@@ -4,15 +4,15 @@ import CheckOutPage from "../screens/CheckOutPage";
 import ProductDetailPage from "../screens/ProductDetailPage";
 import NotFoundPage from "../screens/NotFoundPage";
 import PaymentPage from "../screens/PaymentPage";
-import Dashboard from "../components/admin/Dashboard";
-import Products from "../components/admin/Products";
-import CreateProduct from "../components/admin/CreateProduct";
-import { EditProduct } from "../components/admin/EditProduct";
-import Category from "../components/admin/Category";
+import CreateProduct from "../components/admin/componentsProduct/CreateProduct";
 import EditFieldsCategory from "../components/admin/componentsProduct/EditFieldsCategory";
-import Discounts from "../components/admin/Discounts";
-import Featured from "../components/admin/Featured";
 import UserDashboard from "../components/admin/usersAdmin/UserDashboard";
+import Dashboard from "../components/admin/componentsProduct/Dashboard";
+import Category from "../components/admin/componentsProduct/Category";
+import Discounts from "../components/admin/componentsProduct/Discounts";
+import Products from "../components/admin/componentsProduct/Products";
+import { EditProduct } from "../components/admin/componentsProduct/EditProduct";
+import Featured from "../components/admin/componentsProduct/Featured";
 
 export const routesGen = {
   home: "/",

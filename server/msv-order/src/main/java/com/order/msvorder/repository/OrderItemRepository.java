@@ -1,7 +1,6 @@
 package com.order.msvorder.repository;
 
 
-import com.order.msvorder.entity.OrderItem;
 import com.order.msvorder.entity.OrderProduct;
 import org.springframework.data.jpa.repository.JpaRepository;
 
