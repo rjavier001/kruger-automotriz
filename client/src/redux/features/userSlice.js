@@ -4,8 +4,9 @@ export const userSlice = createSlice({
   name: "User",
   initialState: {
     user: null,
-    userData:{},
+    userData: {},
     listHistory: [],
+    userOrderId: null,
   },
   reducers: {
     setUser: (state, action) => {
@@ -32,6 +33,9 @@ export const userSlice = createSlice({
     addHistory: (state, action) => {
       state.listHistory = [action.payload, ...state.listHistory];
     },
+    setOrderId: (state, action) => {
+      state.userOrderId = action.payload;
+    },
   },
 });
 
@@ -41,6 +45,7 @@ export const {
   setlistHistory,
   addHistory,
   removeHistory,
+  setOrderId,
 } = userSlice.actions;
 
 export default userSlice.reducer;

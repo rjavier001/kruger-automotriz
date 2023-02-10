@@ -4,8 +4,9 @@ import publicClient from "../client/public.client";
 const userEndpoints = {
   signin: "auth/sign-in",
   signup: "auth/sign-up",
-  getInfo: ({ id }) => `users/${id}`,  
+  getInfo: ({ id }) => `users/${id}`,
   passwordUpdate: "users/update-password",
+  assignOrder: ({ id }) => `users/assign-order/${id}`,
 };
 
 const userApi = {
@@ -33,9 +34,9 @@ const userApi = {
       return { err };
     }
   },
-  getInfo: async (id) => {    
+  getInfo: async (id) => {
     try {
-      const response = await privateClient.get(userEndpoints.getInfo({ id }));      
+      const response = await privateClient.get(userEndpoints.getInfo({ id }));
       return { response };
     } catch (err) {
       return { err };
@@ -48,6 +49,18 @@ const userApi = {
         newPassword,
         confirmNewPassword,
       });
+
+      return { response };
+    } catch (err) {
+      return { err };
+    }
+  },
+  assignOrder: async (id, data) => {
+    try {
+      const response = await privateClient.put(
+        userEndpoints.assignOrder({ id }),
+        data
+      );
 
       return { response };
     } catch (err) {
