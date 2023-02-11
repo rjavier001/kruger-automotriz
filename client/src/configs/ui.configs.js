@@ -69,5 +69,4 @@ const uiConfigs = {
     objectFit:'contain'
   }
 };
-
 export default uiConfigs;

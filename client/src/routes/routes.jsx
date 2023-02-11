@@ -7,7 +7,7 @@ import PaymentPage from "../screens/PaymentPage";
 import CreateProduct from "../components/admin/componentsProduct/CreateProduct";
 import EditFieldsCategory from "../components/admin/componentsProduct/EditFieldsCategory";
 import UserDashboard from "../components/admin/usersAdmin/UserDashboard";
-import Dashboard from "../components/admin/componentsProduct/Dashboard";
+import AdminPage from "../screens/AdminPage";
 import Category from "../components/admin/componentsProduct/Category";
 import Discounts from "../components/admin/componentsProduct/Discounts";
 import Products from "../components/admin/componentsProduct/Products";
@@ -18,42 +18,11 @@ export const routesGen = {
   home: "/",
 };
 
-const routes = [
+export const routesAdmin = [
   {
     index: true,
-    element: <HomePage />,
-    state: "home",
-  },
-  {
-    path: "/shop",
-    element: <Shop />,
-    state: "shop",
-  },
-  {
-    path: "/checkout",
-    element: <CheckOutPage />,
-    state: "checkout",
-  },
-
-  {
-    path: "/details",
-    element: <ProductDetailPage />,
-    state: "details",
-  },
-  {
-    path: "/*",
-    element: <NotFoundPage />,
-    state: "not-found",
-  },
-  {
-    path: "/payment",
-    element: <PaymentPage />,
-    state: "payment",
-  },
-  {
-    path: "/admin",
-    element: <Dashboard />,
-    state: "adminDashboard"
+    element: <AdminPage />,
+    state: "admin",
   },
   {
     path: "/admin/products",
@@ -95,7 +64,41 @@ const routes = [
     element: <UserDashboard />,
     state: "users",
   }
-  
+];
+
+
+const routes = [
+  {
+    index: true,
+    element: <HomePage />,
+    state: "home",
+  },
+  {
+    path: "/shop",
+    element: <Shop />,
+    state: "shop",
+  },
+  {
+    path: "/checkout",
+    element: <CheckOutPage />,
+    state: "checkout",
+  },
+
+  {
+    path: "/details",
+    element: <ProductDetailPage />,
+    state: "details",
+  },
+  {
+    path: "/*",
+    element: <NotFoundPage />,
+    state: "not-found",
+  },
+  {
+    path: "/payment",
+    element: <PaymentPage />,
+    state: "payment",
+  } 
 ];
 
 export default routes;

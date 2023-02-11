@@ -7,6 +7,14 @@ import SettingsSuggestIcon from "@mui/icons-material/SettingsSuggest";
 import HistoryIcon from "@mui/icons-material/History";
 import ProductionQuantityLimitsIcon from "@mui/icons-material/ProductionQuantityLimits";
 
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import GroupIcon from "@mui/icons-material/Group";
+import InventoryIcon from "@mui/icons-material/Inventory";
+import ContactMailIcon from "@mui/icons-material/ContactMail";
+import NotificationsActiveIcon from "@mui/icons-material/NotificationsActive";
+import LineAxisIcon from "@mui/icons-material/LineAxis";
+import SettingsIcon from "@mui/icons-material/Settings";
+
 const main = [
   {
     display: "home",
@@ -61,6 +69,51 @@ const user = [
   },
 ];
 
-const menuConfigs = { main, user };
+const admin = [
+  {
+    display: "dashboard",
+    path: "/",
+    icon: <DashboardIcon />,
+    state: "dashboard",
+  },
+  {
+    display: "users",
+    path: "/admin/users",
+    icon: <GroupIcon />,
+    state: "users",
+  },
+  {
+    display: "products",
+    path: "/admin/products",
+    icon: <InventoryIcon />,
+    state: "products",
+  },
+  {
+    display: "mailing",
+    path: "/",
+    icon: <ContactMailIcon />,
+    state: "mailing",
+  },
+  {
+    display: "notification",
+    path: "/",
+    icon: <NotificationsActiveIcon />,
+    state: "notification",
+  },
+  {
+    display: "analitycs",
+    path: "/",
+    icon: <LineAxisIcon />,
+    state: "analitycs",
+  },
+  {
+    display: "settings",
+    path: "/",
+    icon: <SettingsIcon />,
+    state: "settings",
+  },
+];
+
+const menuConfigs = { main, user, admin };
 
 export default menuConfigs;
