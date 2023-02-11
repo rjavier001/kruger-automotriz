@@ -5,6 +5,7 @@ export const userSlice = createSlice({
   initialState: {
     user: null,
     userData: null,
+    userRole: 'invite',
     listHistory: [],
     userOrderId: null,
   },
@@ -20,6 +21,9 @@ export const userSlice = createSlice({
     },
     setUserData: (state, action) => {
       state.userData = action.payload;
+    },
+    setUserRole: (state, action) => {
+      state.userRole = action.payload;
     },
     setlistHistory: (state, action) => {
       state.listHistory = action.payload;
@@ -42,6 +46,7 @@ export const userSlice = createSlice({
 export const {
   setUser,
   setUserData,
+  setUserRole,
   setlistHistory,
   addHistory,
   removeHistory,

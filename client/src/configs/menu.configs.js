@@ -72,7 +72,7 @@ const user = [
 const admin = [
   {
     display: "dashboard",
-    path: "/",
+    path: "/admin",
     icon: <DashboardIcon />,
     state: "dashboard",
   },
@@ -111,7 +111,7 @@ const admin = [
     path: "/",
     icon: <SettingsIcon />,
     state: "settings",
-  },
+  }
 ];
 
 const menuConfigs = { main, user, admin };

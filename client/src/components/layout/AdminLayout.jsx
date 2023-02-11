@@ -9,7 +9,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
 import userApi from "../../api/modules/users.api";
-import { setUser } from "../../redux/features/userSlice";
+import {
+  setUser,
+  setUserData,
+  setUserRole,
+} from "../../redux/features/userSlice";
 
 import Toolbar from "@mui/material/Toolbar";
 import List from "@mui/material/List";
@@ -24,6 +28,7 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
+import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 
 import menuConfigs from "../../configs/menu.configs";
 import {
@@ -38,6 +43,12 @@ const AdminLayout = () => {
 
   const { user } = useSelector((state) => state.user);
 
+  const handdleLogut = () => {
+    dispatch(setUserData(null));
+    dispatch(setUser(null));
+    dispatch(setUserRole("invite"));
+  };
+
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -51,7 +62,10 @@ const AdminLayout = () => {
   useEffect(() => {
     const authUser = async () => {
       const { response, err } = await userApi.validateAuth();
-      if (response) dispatch(setUser(response));
+      if (response) {
+        dispatch(setUserRole(response.role));
+        dispatch(setUser(response));
+      }
       if (err) dispatch(setUser(null));
     };
     authUser();
@@ -138,6 +152,24 @@ const AdminLayout = () => {
                     </ListItemButton>
                   </ListItem>
                 ))}
+                <ListItemButton
+                 component={Link}
+                 to="/"
+                  sx={{ borderRadius: "10px" }}
+                  onClick={handdleLogut}
+                >
+                  <ListItemIcon>
+                    <LogoutOutlinedIcon />
+                  </ListItemIcon>
+                  <ListItemText
+                    disableTypography
+                    primary={
+                      <Typography textTransform="capitalize">
+                        sign out
+                      </Typography>
+                    }
+                  />
+                </ListItemButton>
               </List>
             </Drawer>
             <Box component="main" sx={{ flexGrow: 1, p: 3 }}>

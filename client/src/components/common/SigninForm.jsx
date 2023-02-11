@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import * as Yup from "yup";
 import userApi from "../../api/modules/users.api";
 import { setAuthModalOpen } from "../../redux/features/authModalSlice";
-import { setUser, setUserData } from "../../redux/features/userSlice";
+import { setUser, setUserData,setUserRole } from "../../redux/features/userSlice";
 
 const SigninForm = ({ switchAuthState }) => {
   const dispatch = useDispatch();
@@ -36,6 +36,7 @@ const SigninForm = ({ switchAuthState }) => {
 
       if (response) {
         signinForm.resetForm();
+        dispatch(setUserRole(response.role));
         dispatch(setUser(response));
 
         const userData = await userApi.getInfo(response.userId);
