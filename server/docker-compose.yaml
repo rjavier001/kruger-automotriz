@@ -73,8 +73,9 @@ services:
     networks:
       - km_net
     depends_on:
-      - postgres14
+      - discovery-server
       - gateway-server
+      - postgres14
       - msv-order
     restart: always
 
