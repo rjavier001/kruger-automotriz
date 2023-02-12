@@ -166,7 +166,7 @@ export const EditProduct = () => {
 					Swal.fire("Saved!", "", "success");
 					editProducts(id, dataProducts);
 					setTimeout(() => {
-						navigate("/admin");
+						navigate("/");
 					}, 850);
 				} else if (result.isDenied) {
 					Swal.fire("Changes are not saved", "", "info");
@@ -178,9 +178,8 @@ export const EditProduct = () => {
 
     //---------------------------------------------------------------------------------
 	return (
-		<div>
-			<Dashboard />
-			<Card style={{ maxWidth: 950, margin: "0 auto" }}>
+		<>
+			<Card sx={drawerWidth}>
 				<Typography
 					gutterBottom
 					variant="h5"
@@ -191,7 +190,7 @@ export const EditProduct = () => {
 				<Grid container my={1}>
 					<Grid item xs={12} sm={12} md={6}>
 						<Box p={2}>
-							<Card style={{ maxWidth: 650, margin: "0 auto" }}>
+							<Card style={{ maxWidth: 650}}>
 								<CardContent>
 									<form>
 										<Grid container spacing={1}>
@@ -315,7 +314,7 @@ export const EditProduct = () => {
 													variant="contained"
 													color="secondary"
 													fullWidth
-													onClick={()=>navigate('/admin')}>
+													onClick={()=>navigate('/')}>
 													Exit
 												</Button>
 											</Grid>
@@ -325,14 +324,14 @@ export const EditProduct = () => {
 							</Card>
 						</Box>
 					</Grid>
-					<Grid item xs={12} sm={12} md={6}>
+					<Grid item xs={12} sm={12} md={6} sx={{display:"flex", justifyContent:'center'}}>
 						<Box p={2}>
 								{productImg ? (
 									<Image
 										cloudName={`${user}`}
 										publicId={`${photoSave}`}
-										height="330"
-										width="400"
+										height="150"
+										width="150"
 									/>
 								) : (
 									<p>Product image upload preview will appear here!</p>
@@ -342,6 +341,17 @@ export const EditProduct = () => {
 				</Grid>
 			</Card>
 			{/* Discount: {product.discount ? product.discount : 'This product no have discount'} */}
-		</div>
+		</>
 	);
 };
+
+const drawerWidth = {
+	maxWidth: '90%',
+	margin:"0 auto",
+	padding:1,
+	"@media (max-width: 650px)" : {
+	  maxWidth: '90%',
+	  padding:0,
+	}
+  }
+

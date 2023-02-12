@@ -76,6 +76,8 @@ export default function Featured() {
 			  });
 	};
 
+	const number = featured.length === undefined ? 0 : featured.length
+
 	//---------------------------------------------------------------------------------
 
 	return (
@@ -87,13 +89,13 @@ export default function Featured() {
 						<TablePagination
 							rowsPerPageOptions={[5]}
 							component="div"
-							count={featured.length}
+							count={number}
 							rowsPerPage={rowsPerPage}
 							page={page}
 							onPageChange={handleChangePage}
 						/>
 						<Grid container>
-							<Grid container spacing={5}>
+							<Grid container>
 								{
 									featured?.status === 204 
 									? <p>No data</p>

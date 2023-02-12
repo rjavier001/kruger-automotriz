@@ -74,25 +74,26 @@ export default function Discounts() {
 			  });
 	};
 
+
 	//---------------------------------------------------------------------------------
-	console.log(discounts);
+	const number = discounts.length === undefined ? 0 : discounts.length
 
 	return (
 		<Container>
-			<Grid container my={4} spacing={4}>
+			<Grid container spacing={4}>
 				<Grid item xs={12}>
 					<CreateDiscount />
 					<Box sx={{ maxWidth: 550, margin: "0 auto" }}>
 						<TablePagination
 							rowsPerPageOptions={[5]}
 							component="div"
-							count={discounts.length}
+							count={number}
 							rowsPerPage={rowsPerPage}
 							page={page}
 							onPageChange={handleChangePage}
 						/>
 						<Grid container>
-							<Grid container spacing={5}>
+							<Grid container>
 								{
 									discounts.status === 204 
 									? <p>No data</p>

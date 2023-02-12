@@ -51,7 +51,8 @@ const CreateCategory = () => {
 			setTimeout(() => {
 				if (result.isConfirmed) {
 					setModalInsertar(false);
-					Swal.fire("Saved!", "", "success");
+					Swal.fire({icon: 'success',
+					title: 'Your work has been saved', showConfirmButton: false});
 					postCategories(category);
 					setTimeout(() => {
 						window.location.reload();

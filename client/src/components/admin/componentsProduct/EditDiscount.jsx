@@ -15,7 +15,6 @@ import productsApi from "../../../api/modules/products.api";
 
 export default function EditDiscount({ id }) {
 
-    console.log(id)
 	const navigate = useNavigate();
 
 	//---------------------------------------------------------------------------------

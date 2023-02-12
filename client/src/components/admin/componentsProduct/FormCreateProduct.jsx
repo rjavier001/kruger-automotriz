@@ -109,7 +109,7 @@ export default function FormCreateProduct() {
 					Swal.fire("Saved!", "", "success");
 					postProducts(dataProducts);
 					setTimeout(() => {
-						navigate("/admin");
+						navigate("/");
 					}, 850);
 				} else if (result.isDenied) {
 					Swal.fire("Changes are not saved", "", "info");
@@ -139,6 +139,9 @@ export default function FormCreateProduct() {
 		<Stack>
 			<Grid container my={4}>
 				<Grid item xs={12} sm={12} md={6}>
+					<Box p={2}>
+
+					
 					<form onSubmit={handleSubmit(onSubmit)}>
 						<Grid container spacing={1}>
 							<Grid xs={12} sm={6} item>
@@ -292,6 +295,7 @@ export default function FormCreateProduct() {
 							</Grid>
 						</Grid>
 					</form>
+					</Box>
 				</Grid>
 				<Grid item xs={12} sm={12} md={6}>
 					<Box p={2}>
