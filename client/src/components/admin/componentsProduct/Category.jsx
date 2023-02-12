@@ -84,7 +84,7 @@ const Category = () => {
 					);
 					deleteCategories(idCategory);
 					setTimeout(() => {
-						navigate("/admin");
+						navigate("/");
 					}, 10);
 				}
 			}, 10);
@@ -104,6 +104,8 @@ const Category = () => {
 					confirmButtonColor: "#3085d6",
 					cancelButtonColor: "#d33",
 					confirmButtonText: "Yes, delete it!",
+					width: '20rem',
+					position: 'center'
 			  }).then((result) => {
 					setTimeout(() => {
 						if (result.isConfirmed) {
@@ -114,13 +116,14 @@ const Category = () => {
 							);
 							deleteCategories(idCategory);
 							setTimeout(() => {
-								navigate("/admin");
+								navigate("/");
 							}, 10);
 						}
 					}, 10);
 			  });
 	};
 
+	const number = categories.length === undefined ? 0 : categories.length
 
 	//---------------------------------------------------------------------------------
 	return (
@@ -130,7 +133,7 @@ const Category = () => {
 					<TablePagination
 						rowsPerPageOptions={[5]}
 						component="div"
-						count={categories.length}
+						count={number}
 						rowsPerPage={rowsPerPage}
 						page={page}
 						onPageChange={handleChangePage}
@@ -149,7 +152,7 @@ const Category = () => {
 						<Box p={2}>
 							<CardContent>
 								<form>
-									<Grid container spacing={5}>
+									<Grid container>
 										{
 											categories?.status === 204 
 											? <p>no data</p>

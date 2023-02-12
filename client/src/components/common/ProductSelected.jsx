@@ -24,7 +24,7 @@ export default function ProductSelected({ products, categorySelect }) {
                 There is no information, the page will be updated.<strong>!</strong>
               </Alert>
               {setTimeout(() => {
-                    window.location.reload();
+                    window.location.assign(window.location.href)
                 }, 1000)}
                 </Container>
 

@@ -74,7 +74,7 @@ const AdminLayout = () => {
     <>
       {/* <GlobalLoading /> */}
       <AuthModal />
-      <Box display="flex" minHeight="100vh" pt={{ xs: 25, sm: 25, md: 20 }}>
+      <Box display="flex" minHeight="100vh" pt={{ xs: 10, sm: 25, md: 20 }}>
         <Box component="main" flexGrow={1} overflow="hidden" minHeight="100vh">
           <Box sx={{ display: "flex" }}>
             <CssBaseline />

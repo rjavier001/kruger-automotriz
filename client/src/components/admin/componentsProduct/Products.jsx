@@ -47,166 +47,148 @@ const Products = () => {
 
 	//---------------------------------------------------------------------------------
 	return (
-		<Stack>
-			<Dashboard />
-			<Container>
-				<Container sx={{ display: "flex", justifyContent: "center" }} xs={12}>
-					<h3>CRUD</h3>
-				</Container>
-				{categories.status === 204 || categories.length === 0 ? (
-					<Container sx={{ display: "flex", justifyContent: "center" }}>
-						<Card sx={{ width: "25rem" }}>
-							<TabContext value={value}>
-								<TabList
-									onChange={handleChange}
-									aria-label="card navigation example">
-									<Tab value="1" label={<CategoryIcon />} />
-								</TabList>
-								<CardContent>
-									<TabPanel value="1" sx={{ p: 0 }}>
-										<Typography variant="h6" sx={{ marginBottom: 2 }}>
-											Category
-										</Typography>
+		<Box>
+			<>
+				<h3>CRUD</h3>
+			</>
+			{categories.status === 204 || categories.length === 0 ? (
+				<Card sx={{ width: "20rem" }}>
+					<TabContext value={value}>
+						<TabList
+							onChange={handleChange}
+							aria-label="card navigation example">
+							<Tab value="1" label={<CategoryIcon />} />
+						</TabList>
+						<CardContent>
+							<TabPanel value="1" sx={{ p: 0 }}>
+								<Typography variant="h6" sx={{ marginBottom: 2 }}>
+									Category
+								</Typography>
+								<Typography variant="body2" sx={{ marginBottom: 4 }}>
+									Add a category for your products
+								</Typography>
+								<Button
+									onClick={() => navigate("/admin/products/category-edit")}
+									color="primary"
+									size="medium"
+									variant="contained">
+									Create
+								</Button>
+							</TabPanel>
+						</CardContent>
+					</TabContext>
+				</Card>
+			) : (
+				<Grid container xs={12} sx={{ display: "flex", justifyContent:'center',gap: 4 }}>
+					<Card sx={{ width: "20rem" }}>
+						<TabContext value={value}>
+							<TabList
+								onChange={handleChange}
+								aria-label="card navigation example">
+								<Tab value="1" label={<AddBusinessIcon />} />
+							</TabList>
+							<CardContent>
+								<TabPanel value="1" sx={{ p: 0 }}>
+									<Typography variant="h6" sx={{ marginBottom: 2 }}>
+										Products
+									</Typography>
+									<Grid container xs={12}>
 										<Typography variant="body2" sx={{ marginBottom: 4 }}>
-											Add a category for your products
+											Create products and share them with your customers.
 										</Typography>
-										<Button
-											onClick={() => navigate("/admin/products/category-edit")}
-											color="primary"
-											size="medium"
-											variant="contained">
-											Create
-										</Button>
-									</TabPanel>
-								</CardContent>
-							</TabContext>
-						</Card>
-					</Container>
-				) : (
-					<Grid
-						container xs={12} sx={{ display: "flex", justifyContent: "center", gap: 4 }}>
-							<Card sx={{ width: "25rem" }}>
-								<TabContext value={value}>
-									<TabList
-										onChange={handleChange}
-										aria-label="card navigation example">
-										<Tab value="1" label={<AddBusinessIcon />} />
-										
-									</TabList>
-									<CardContent>
-										<TabPanel value="1" sx={{ p: 0 }}>
-											<Typography variant="h6" sx={{ marginBottom: 2 }}>
-												Products
-											</Typography>
-											<Grid container xs={12}>
-												<Typography variant="body2" sx={{ marginBottom: 4 }}>
-													Create products and share them with your customers.
-												</Typography>
-											</Grid>
-											<Button
-												onClick={() => navigate("/admin/products/create")}
-												color="primary"
-												size="medium"
-												variant="contained">
-												Create
-											</Button>
-										</TabPanel>
-									</CardContent>
-								</TabContext>
-							</Card>
-							<Card sx={{ width: "25rem" }}>
-								<TabContext value={value}>
-									<TabList
-										onChange={handleChange}
-										aria-label="card navigation example">
-										<Tab value="1" label={<CategoryIcon />} />
-									</TabList>
-									<CardContent>
-										
-
-										<TabPanel value="1" sx={{ p: 0 }}>
-											<Typography variant="h6" sx={{ marginBottom: 2 }}>
-												Category
-											</Typography>
-											<Typography variant="body2" sx={{ marginBottom: 4 }}>
-												Add a category for your products
-											</Typography>
-											<Button
-												onClick={() =>
-													navigate("/admin/products/category-edit")
-												}
-												color="primary"
-												size="medium"
-												variant="contained">
-												Create
-											</Button>
-										</TabPanel>
-										
-									</CardContent>
-								</TabContext>
-							</Card>
-							<Card sx={{ width: "25rem" }}>
-								<TabContext value={value}>
-									<TabList
-										onChange={handleChange}
-										aria-label="card navigation example">
-										
-										<Tab value="1" label={<DiscountIcon />} />
-							
-									</TabList>
-									<CardContent>
-									
-										<TabPanel value="1" sx={{ p: 0 }}>
-											<Typography variant="h6" sx={{ marginBottom: 2 }}>
-												Discount
-											</Typography>
-											<Typography variant="body2" sx={{ marginBottom: 4 }}>
-												Manage the discounts of each of your products
-											</Typography>
-											<Button
-												onClick={() => navigate("/admin/products/discounts")}
-												color="primary"
-												size="medium"
-												variant="contained">
-												Create
-											</Button>
-										</TabPanel>
-										
-									</CardContent>
-								</TabContext>
-							</Card>
-							<Card sx={{ width: "25rem" }}>
-								<TabContext value={value}>
-									<TabList
-										onChange={handleChange}
-										aria-label="card navigation example">
-										
-										<Tab value="1" label={<FilterNoneIcon />} />
-									</TabList>
-									<CardContent>
-										
-										<TabPanel value="1" sx={{ p: 0 }}>
-											<Typography variant="h6" sx={{ marginBottom: 2 }}>
-												Featured
-											</Typography>
-											<Typography variant="body2" sx={{ marginBottom: 4 }}>
-												Manage your featured products
-											</Typography>
-											<Button
-												onClick={() => navigate("/admin/products/featured")}
-												color="primary"
-												size="medium"
-												variant="contained">
-												Create
-											</Button>
-										</TabPanel>
-									</CardContent>
-								</TabContext>
-							</Card>
-					</Grid>
-				)}
-			</Container>
-		</Stack>
+									</Grid>
+									<Button
+										onClick={() => navigate("/admin/products/create")}
+										color="primary"
+										size="medium"
+										variant="contained">
+										Create
+									</Button>
+								</TabPanel>
+							</CardContent>
+						</TabContext>
+					</Card>
+					<Card sx={{ width: "20rem" }}>
+						<TabContext value={value}>
+							<TabList
+								onChange={handleChange}
+								aria-label="card navigation example">
+								<Tab value="1" label={<CategoryIcon />} />
+							</TabList>
+							<CardContent>
+								<TabPanel value="1" sx={{ p: 0 }}>
+									<Typography variant="h6" sx={{ marginBottom: 2 }}>
+										Category
+									</Typography>
+									<Typography variant="body2" sx={{ marginBottom: 4 }}>
+										Add a category for your products
+									</Typography>
+									<Button
+										onClick={() => navigate("/admin/products/category-edit")}
+										color="primary"
+										size="medium"
+										variant="contained">
+										Create
+									</Button>
+								</TabPanel>
+							</CardContent>
+						</TabContext>
+					</Card>
+					<Card sx={{ width: "20rem" }}>
+						<TabContext value={value}>
+							<TabList
+								onChange={handleChange}
+								aria-label="card navigation example">
+								<Tab value="1" label={<DiscountIcon />} />
+							</TabList>
+							<CardContent>
+								<TabPanel value="1" sx={{ p: 0 }}>
+									<Typography variant="h6" sx={{ marginBottom: 2 }}>
+										Discount
+									</Typography>
+									<Typography variant="body2" sx={{ marginBottom: 4 }}>
+										Manage the discounts of each of your products
+									</Typography>
+									<Button
+										onClick={() => navigate("/admin/products/discounts")}
+										color="primary"
+										size="medium"
+										variant="contained">
+										Create
+									</Button>
+								</TabPanel>
+							</CardContent>
+						</TabContext>
+					</Card>
+					<Card sx={{ width: "20rem" }}>
+						<TabContext value={value}>
+							<TabList
+								onChange={handleChange}
+								aria-label="card navigation example">
+								<Tab value="1" label={<FilterNoneIcon />} />
+							</TabList>
+							<CardContent>
+								<TabPanel value="1" sx={{ p: 0 }}>
+									<Typography variant="h6" sx={{ marginBottom: 2 }}>
+										Featured
+									</Typography>
+									<Typography variant="body2" sx={{ marginBottom: 4 }}>
+										Manage your featured products
+									</Typography>
+									<Button
+										onClick={() => navigate("/admin/products/featured")}
+										color="primary"
+										size="medium"
+										variant="contained">
+										Create
+									</Button>
+								</TabPanel>
+							</CardContent>
+						</TabContext>
+					</Card>
+				</Grid>
+			)}
+		</Box>
 	);
 };
 
