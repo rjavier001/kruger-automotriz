@@ -15,6 +15,7 @@ import Discounts from "../components/admin/componentsProduct/Discounts";
 import Products from "../components/admin/componentsProduct/Products";
 import { EditProduct } from "../components/admin/componentsProduct/EditProduct";
 import Featured from "../components/admin/componentsProduct/Featured";
+import ContactPage from "../screens/ContactPage";
 
 export const routesGen = {
   home: "/",
@@ -40,6 +41,11 @@ const routes = [
     path: "/details",
     element: <ProductDetailPage />,
     state: "details",
+  },
+  {
+    path: "/contact",
+    element: <ContactPage />,
+    state: "not-found",
   },
   {
     path: "/*",
