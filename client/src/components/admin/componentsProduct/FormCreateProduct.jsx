@@ -12,9 +12,11 @@ import axios from "axios";
 import { Image } from "cloudinary-react";
 import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import productsApi from "../../../api/modules/products.api";
+import { setSaveData } from "../../../redux/features/productsSlice";
 
 export default function FormCreateProduct() {
 	const [datas, setDatas] = useState([]);
@@ -23,7 +25,13 @@ export default function FormCreateProduct() {
 	const [productImg, setProductImg] = useState("");
 	const [saveImg, setSaveImg] = useState("");
 
+	//----------------------------------------------------------------------
+
 	const navigate = useNavigate();
+
+	//----------------------------------------------------------------------
+	const dispatch = useDispatch();
+  	const { saveData } = useSelector((state) => state.products);
 
 	//----------------------------------------------------------------------
 	const {
@@ -49,7 +57,8 @@ export default function FormCreateProduct() {
 
 	const postProducts = async () => {
 		const { response } = await productsApi.postProducts(dataProducts);
-		if (response) setProducts(response);
+		if (response) {setProducts(response)
+			dispatch(setSaveData(!saveData))};
 	};
 	//----------------------------------------------------------------------
 
@@ -108,9 +117,7 @@ export default function FormCreateProduct() {
 				if (result.isConfirmed) {
 					Swal.fire("Saved!", "", "success");
 					postProducts(dataProducts);
-					setTimeout(() => {
 						navigate("/");
-					}, 850);
 				} else if (result.isDenied) {
 					Swal.fire("Changes are not saved", "", "info");
 				}

@@ -9,12 +9,17 @@ import ErrorIcon from '@mui/icons-material/Error';
 import productsApi from "../../../api/modules/products.api";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { setSaveData, setSaveDiscount } from "../../../redux/features/productsSlice";
 
 
 export default function CreateDiscount() {
 
 
     const navigate = useNavigate();
+
+	const dispatch = useDispatch();
+  	const { saveData } = useSelector((state) => state.products);
 
 
 	//---------------------------------------------------------------------------------
@@ -31,7 +36,8 @@ export default function CreateDiscount() {
      //----------------------------------------------------------------------
      const postDiscount = async () => {
         const { response } = await productsApi.postDiscount(dataDiscount);
-        if (response) setDiscount(response);
+        if (response) {setDiscount(response)
+			dispatch(setSaveData(!saveData))};
       };
 
 
@@ -80,7 +86,7 @@ export default function CreateDiscount() {
               title: 'Your work has been saved',showConfirmButton: false})
               postDiscount(dataDiscount);
               setTimeout(() => {
-                window.location.reload();
+                //window.location.reload();
             }, 500);
             } else if (result.isDenied) {
                 setModalInsertar(true);

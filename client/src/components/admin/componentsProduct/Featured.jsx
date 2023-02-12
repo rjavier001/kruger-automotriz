@@ -15,6 +15,8 @@ import EditFeatured from "./EditFeatured";
 import { useApi } from "../hooks/useApi";
 import productsApi from "../../../api/modules/products.api";
 import uiConfigs from "../../../configs/ui.configs";
+import { useDispatch, useSelector } from "react-redux";
+import { setSaveData } from "../../../redux/features/productsSlice";
 
 
 export default function Featured() {
@@ -23,9 +25,11 @@ export default function Featured() {
 	const [rowsPerPage, setRowsPerPage] = useState(4);
 	const [featuredDelete, setFeaturedDelete] = useState([]);
 
-
 	//---------------------------------------------------------------------------------
 	const { featured } = useApi();
+
+	const dispatch = useDispatch();
+  	const { saveData } = useSelector((state) => state.products);
 
 	//---------------------------------------------------------------------------------
 	const handleChangePage = (e, newPage) => {
@@ -35,8 +39,9 @@ export default function Featured() {
 	//---------------------------------------------------------------------------------
 	const handleDeleteFeatured = (idfeaturedData) => {
 		const deleteFeatured = async () => {
-			const { response } = await productsApi.deleteFaturedById(idfeaturedData);
-			if (response) setFeaturedDelete(response);
+			const { response } = await productsApi.deleteFeaturedById(idfeaturedData);
+			if (response) {setFeaturedDelete(response)
+				dispatch(setSaveData(!saveData))};
 		};
 
 		let featuredId;
@@ -62,17 +67,17 @@ export default function Featured() {
 					cancelButtonColor: "#d33",
 					confirmButtonText: "Yes, delete it!",
 			  }).then((result) => {
+				setTimeout(() => {
+
 					if (result.isConfirmed) {
-						Swal.fire({
-							icon: "success",
-							title: "Your discount has been deleted.",
-							showConfirmButton: false,
-						});
+						Swal.fire(
+							"Deleted!",
+							"Your product has been deleted.",
+							"success"
+						);
 						deleteFeatured(idfeaturedData);
-						setTimeout(() => {
-							window.location.reload();
-						}, 500);
 					}
+				},10)
 			  });
 	};
 
