@@ -34,6 +34,7 @@ const uiConfigs = {
     contentMaxWidth: "1366px"
   },
 
+export default uiConfigs;
   //---------------------------------------------------------------------------//
   /* Styles for the Card Component */
   box:{
@@ -69,5 +70,4 @@ const uiConfigs = {
     objectFit:'contain'
   }
 };
-
 export default uiConfigs;

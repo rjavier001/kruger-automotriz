@@ -233,7 +233,7 @@ const CardComp = ({ props }) => {
         </CardContent>
         <CardActions sx={uiConfigs.button}>
           <Stack direction={"row"} spacing={12}>
-            {location.pathname === "/admin" ? (
+            {location.pathname === "/" ? (
               <>
                 <NavLink
                   to={{ pathname: `/admin/products/edit/${id}` }}

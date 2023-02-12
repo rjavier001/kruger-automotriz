@@ -10,7 +10,11 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import menuConfigs from "../../configs/menu.configs";
-import { setUser, setUserData } from "../../redux/features/userSlice";
+import {
+  setUser,
+  setUserData,
+  setUserRole,
+} from "../../redux/features/userSlice";
 
 const UserMenu = () => {
   const { user } = useSelector((state) => state.user);
@@ -24,6 +28,7 @@ const UserMenu = () => {
   const handdleLogut = () => {
     dispatch(setUserData(null));
     dispatch(setUser(null));
+    dispatch(setUserRole("invite"));
   };
 
   return (
@@ -62,6 +67,8 @@ const UserMenu = () => {
               </ListItemButton>
             ))}
             <ListItemButton
+              component={Link}
+              to="/"
               sx={{ borderRadius: "10px" }}
               onClick={handdleLogut}
             >

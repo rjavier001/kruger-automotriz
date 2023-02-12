@@ -9,7 +9,7 @@ import { useEffect } from "react";
 import { toast } from "react-toastify";
 import userApi from "../../api/modules/users.api";
 // import favoriteApi from "../../api/modules/favorite.api";
-import { setUser } from "../../redux/features/userSlice";
+import { setUser, setUserRole } from "../../redux/features/userSlice";
 
 const MainLayout = () => {
   const dispatch = useDispatch();
@@ -19,7 +19,10 @@ const MainLayout = () => {
   useEffect(() => {
     const authUser = async () => {
       const { response, err } = await userApi.validateAuth();
-      if (response) dispatch(setUser(response));
+      if (response) {
+        dispatch(setUserRole(response.role));
+        dispatch(setUser(response));
+      }
       if (err) dispatch(setUser(null));
     };
     authUser();

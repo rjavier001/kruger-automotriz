@@ -117,7 +117,7 @@ const Shop = () => {
                 <p>No data</p>
               ) : (
                 <>
-                  {product.map((item, i) => (
+                  {product.slice(0, 12).map((item, i) => (
                     <Grid key={i} item xs={12} md={4} sm={6} justify="center">
                       <CardComp props={item} />
                     </Grid>

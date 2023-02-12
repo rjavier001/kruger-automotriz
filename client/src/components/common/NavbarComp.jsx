@@ -4,10 +4,8 @@ import { useSelector, useDispatch } from "react-redux";
 import MenuIcon from "@mui/icons-material/Menu";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import WbSunnyOutlinedIcon from "@mui/icons-material/WbSunnyOutlined";
-import SearchIcon from "@mui/icons-material/Search";
 import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
-import CarRepairIcon from "@mui/icons-material/CarRepair";
-import LoginIcon from "@mui/icons-material/Login";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import {
   AppBar,
   Box,
@@ -24,12 +22,6 @@ import { setThemeMode } from "../../redux/features/themeModeSlice";
 import { setAuthModalOpen } from "../../redux/features/authModalSlice";
 import Sidebar from "./Sidebar";
 import UserMenu from "./UserMenu";
-import Image from "mui-image";
-import FacebookIcon from "@mui/icons-material/Facebook";
-import InstagramIcon from "@mui/icons-material/Instagram";
-import TwitterIcon from "@mui/icons-material/Twitter";
-import Logo from "../../assets/LOGO_KRUGERMOTORS.png";
-import Slide from "@mui/material/Slide";
 
 const ScrollAppBar = ({ children, window }) => {
   const { themeMode } = useSelector((state) => state.themeMode);
@@ -88,7 +80,7 @@ const Navbar = () => {
                 onClick={toggleSidebar}
               >
                 <MenuIcon />
-              </IconButton>           
+              </IconButton>
             </Stack>
 
             <Box
@@ -127,7 +119,7 @@ const Navbar = () => {
                 </IconButton>
               </NavLink>
               {!user && (
-                <LoginIcon
+                <AccountCircleIcon
                   variant="contained"
                   onClick={() => dispatch(setAuthModalOpen(true))}
                 />
