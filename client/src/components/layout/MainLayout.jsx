@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import { Outlet } from "react-router-dom";
 import FooterComp from "../common/FooterComp";
-// import GlobalLoading from "../common/GlobalLoading";
+import GlobalLoading from "../common/GlobalLoading";
 import NavbarComp from "../common/NavbarComp";
 import AuthModal from "../common/AuthModal";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,7 +9,7 @@ import { useEffect } from "react";
 import { toast } from "react-toastify";
 import userApi from "../../api/modules/users.api";
 // import favoriteApi from "../../api/modules/favorite.api";
-import { setUser,setUserRole } from "../../redux/features/userSlice";
+import { setUser, setUserRole } from "../../redux/features/userSlice";
 
 const MainLayout = () => {
   const dispatch = useDispatch();
@@ -21,7 +21,8 @@ const MainLayout = () => {
       const { response, err } = await userApi.validateAuth();
       if (response) {
         dispatch(setUserRole(response.role));
-        dispatch(setUser(response))};
+        dispatch(setUser(response));
+      }
       if (err) dispatch(setUser(null));
     };
     authUser();
@@ -41,7 +42,7 @@ const MainLayout = () => {
 
   return (
     <>
-      {/* <GlobalLoading /> */}
+      <GlobalLoading />
       <AuthModal />
       <Box display="flex" minHeight="100vh" pt={{ xs: 25, sm: 25, md: 20 }}>
         <NavbarComp />
