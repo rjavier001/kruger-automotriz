@@ -11,6 +11,8 @@ import Swal from "sweetalert2";
 import productsApi from "../../../api/modules/products.api";
 import { useNavigate } from "react-router-dom";
 import uiConfigs from "../../../configs/ui.configs";
+import { setSaveData, setSaveDiscount } from "../../../redux/features/productsSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 
 const CreateCategory = () => {
@@ -20,6 +22,9 @@ const CreateCategory = () => {
 	const [categories, setCategories] = useState([]);
 	const [modalInsertar, setModalInsertar] = useState(false);
 
+	const dispatch = useDispatch();
+  	const { saveData } = useSelector((state) => state.products);
+
 	//---------------------------------------------------------------------------------
 	const navigate = useNavigate();
 	let category;
@@ -27,7 +32,8 @@ const CreateCategory = () => {
 	//---------------------------------------------------------------------------------
 	const postCategories = async () => {
 		const { response, err } = await productsApi.postCategory(category);
-		if (response) setCategories(response);
+		if (response) {setCategories(response)
+			dispatch(setSaveData(!saveData))};
 	};
 
 	//---------------------------------------------------------------------------------
@@ -54,9 +60,6 @@ const CreateCategory = () => {
 					Swal.fire({icon: 'success',
 					title: 'Your work has been saved', showConfirmButton: false});
 					postCategories(category);
-					setTimeout(() => {
-						window.location.reload();
-					}, 1000);
 				} else if (result.isDenied) {
 					Swal.fire("Changes are not saved", "", "info");
 				}

@@ -4,6 +4,7 @@ import appStateSlice from "./features/appStateSlice";
 import cartSlice from "./features/cartSlice";
 import userSlice from "./features/userSlice";
 import authModalSlice from "./features/authModalSlice";
+import productsSlice from "./features/productsSlice";
 
 const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ const store = configureStore({
     authModal: authModalSlice,
     appState: appStateSlice,
     cart: cartSlice,
+    products: productsSlice,
   },
 });
 

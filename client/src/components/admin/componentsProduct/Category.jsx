@@ -18,6 +18,8 @@ import productsApi from "../../../api/modules/products.api";
 import uiConfigs from "../../../configs/ui.configs";
 import CreateCategory from "./CreateCategory";
 import { useApi } from "../hooks/useApi";
+import { useDispatch, useSelector } from "react-redux";
+import { setSaveData } from "../../../redux/features/productsSlice";
 
 const Category = () => {
 	const navigate = useNavigate();
@@ -32,6 +34,9 @@ const Category = () => {
 
 	//---------------------------------------------------------------------------------
 	const { categories, product } = useApi();
+
+	const dispatch = useDispatch();
+  	const { saveData } = useSelector((state) => state.products);
 
 	
 	//---------------------------------------------------------------------------------
@@ -52,7 +57,8 @@ const Category = () => {
 	const handleDelete = (idCategory) => {
 		const deleteCategories = async () => {
 			const { response } = await productsApi.deleteCategory(idCategory);
-			if (response) setDeleteCategories(response);
+			if (response) {setDeleteCategories(response)
+				dispatch(setSaveData(!saveData))};
 		};
 
 		//---------------------------------------------------------------------------------
@@ -83,9 +89,6 @@ const Category = () => {
 						"success"
 					);
 					deleteCategories(idCategory);
-					setTimeout(() => {
-						navigate("/");
-					}, 10);
 				}
 			}, 10);
 	  })
@@ -115,9 +118,6 @@ const Category = () => {
 								"success"
 							);
 							deleteCategories(idCategory);
-							setTimeout(() => {
-								navigate("/");
-							}, 10);
 						}
 					}, 10);
 			  });

@@ -18,10 +18,15 @@ import ErrorIcon from "@mui/icons-material/Error";
 import productsApi from "../../../api/modules/products.api";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { setSaveData, setSaveDiscount } from "../../../redux/features/productsSlice";
 
 export default function EditFeatured({ id }) {
 
 	const navigate = useNavigate();
+
+	const dispatch = useDispatch();
+  	const { saveData } = useSelector((state) => state.products);
 
 	//---------------------------------------------------------------------------------
 	const [name, setName] = useState("");
@@ -58,7 +63,8 @@ export default function EditFeatured({ id }) {
 		/* A function that is not being called. */
         const editfeatured = async () => {
 			const { response } = await productsApi.putFeaturedById(id, dataFeatured);
-			if (response) setFeaturedModal(response);
+			if (response) {setFeaturedModal(response)
+				dispatch(setSaveData(!saveData))};
 		};
 
 		//----------------------------------------------------------------------
@@ -82,9 +88,6 @@ export default function EditFeatured({ id }) {
 					showConfirmButton: false,
 				});
 				editfeatured(id, dataFeatured);
-				setTimeout(() => {
-					window.location.reload();
-				}, 850);
 			} else if (result.isDenied) {
 				setModalInsertar(true);
 			}

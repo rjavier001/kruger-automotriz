@@ -7,6 +7,8 @@ import userApi from "../../../api/modules/users.api";
 import { useEffect } from "react";
 import Swal from "sweetalert2";
 import { WifiFind } from "@mui/icons-material";
+import { useDispatch, useSelector } from "react-redux";
+import { setSaveData } from "../../../redux/features/productsSlice";
 
 export default function EditUser({ id }) {
 	// const navigate = useNavigate();
@@ -27,12 +29,16 @@ export default function EditUser({ id }) {
 		setModalInsertar(!modalInsertar);
 	};
 
+	const dispatch = useDispatch();
+  	const { saveData } = useSelector((state) => state.products);
+
 	//---------------------------------------------------------------------------------
 	useEffect(() => {
 		//----------------------------------
 		const getListUsers = async () => {
 			const { response } = await userApi.usersById(id);
-			if (response) setUserById(response);
+			if (response) {setUserById(response)
+				dispatch(setSaveData(!saveData))};
 		};
 		getListUsers();
 		setValue();
@@ -90,7 +96,7 @@ export default function EditUser({ id }) {
                         })
                         editUsers(id, user);
                         setTimeout(() => {
-                            window.location.reload();
+                            setModalInsertar(false);
                         }, 600);
                     } else {
                         Swal.fire({

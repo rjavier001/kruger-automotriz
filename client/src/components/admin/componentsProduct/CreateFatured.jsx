@@ -9,12 +9,18 @@ import ErrorIcon from "@mui/icons-material/Error";
 import productsApi from "../../../api/modules/products.api";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import { setSaveData, setSaveDiscount } from "../../../redux/features/productsSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function CreateFeatured() {
 
 	//---------------------------------------------------------------------------------
 	const [featured, setFeatured] = useState("");
 	const [modalInsertar, setModalInsertar] = useState(false);
+
+
+	const dispatch = useDispatch();
+  	const { saveData } = useSelector((state) => state.products);
 
 	//---------------------------------------------------------------------------------
 	const abrirCerrarModalInsertar = () => {
@@ -24,7 +30,8 @@ export default function CreateFeatured() {
 	//----------------------------------------------------------------------
 	const postFeatured = async () => {
 		const { response } = await productsApi.postFeatured(dataFeatured);
-		if (response) setFeatured(response);
+		if (response) {setFeatured(response)
+			dispatch(setSaveData(!saveData))};
 	};
 
 	//----------------------------------------------------------------------
@@ -45,6 +52,7 @@ export default function CreateFeatured() {
 	const onSubmit = (data) => {
 		dataOnSumit = data;
 		saveDiscount();
+		dataOnSumit.Name = "";
 	};
 
 	//---------------------------------------------------------------------------------
@@ -71,9 +79,7 @@ export default function CreateFeatured() {
 					showConfirmButton: false,
 				});
 				postFeatured(dataFeatured);
-				setTimeout(() => {
-					window.location.reload();
-				}, 500);
+				
 			} else if (result.isDenied) {
 				setModalInsertar(true);
 			}

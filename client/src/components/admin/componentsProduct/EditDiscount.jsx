@@ -12,6 +12,8 @@ import {
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import productsApi from "../../../api/modules/products.api";
+import { useDispatch, useSelector } from "react-redux";
+import { setSaveData, setSaveDiscount } from "../../../redux/features/productsSlice";
 
 export default function EditDiscount({ id }) {
 
@@ -24,6 +26,10 @@ export default function EditDiscount({ id }) {
 	const [discount, setDiscount] = useState("");
 	const [discountUpdated, setDiscountUpdated] = useState("");
 	const [modalInsertar, setModalInsertar] = useState(false);
+
+
+	const dispatch = useDispatch();
+  	const { saveData } = useSelector((state) => state.products);
 
 	//---------------------------------------------------------------------------------
 	const abrirCerrarModalInsertar = () => {
@@ -54,7 +60,9 @@ export default function EditDiscount({ id }) {
 		// Save data edit
 		const editDiscount = async () => {
 			const { response } = await productsApi.putDiscountById(id, dataDiscount);
-			if (response) setDiscountUpdated(response);
+			if (response) {setDiscountUpdated(response)
+			dispatch(setSaveData(!saveData))
+			};
 		};
 
 		//----------------------------------------------------------------------
@@ -80,9 +88,7 @@ export default function EditDiscount({ id }) {
 					showConfirmButton: false,
 				});
                 editDiscount(id, dataDiscount);
-				setTimeout(() => {
-					window.location.reload();
-				}, 850);
+
 			} else if (result.isDenied) {
 				setModalInsertar(true);
 			}

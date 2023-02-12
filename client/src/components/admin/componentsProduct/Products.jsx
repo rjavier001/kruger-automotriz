@@ -81,11 +81,9 @@ const Products = () => {
 			) : (
 				<Grid container xs={12} sx={{ display: "flex", justifyContent:'center',gap: 4 }}>
 					<Card sx={{ width: "20rem" }}>
-						<TabContext value={value}>
-							<TabList
-								onChange={handleChange}
-								aria-label="card navigation example">
-								<Tab value="1" label={<AddBusinessIcon />} />
+						<TabContext value="1">
+							<TabList onChange={handleChange} aria-label="card navigation example">
+								<Tab value="1"label={<AddBusinessIcon />} />
 							</TabList>
 							<CardContent>
 								<TabPanel value="1" sx={{ p: 0 }}>
@@ -109,14 +107,14 @@ const Products = () => {
 						</TabContext>
 					</Card>
 					<Card sx={{ width: "20rem" }}>
-						<TabContext value={value}>
+						<TabContext value="1">
 							<TabList
 								onChange={handleChange}
 								aria-label="card navigation example">
-								<Tab value="1" label={<CategoryIcon />} />
+								<Tab value="1"  label={<CategoryIcon />} />
 							</TabList>
 							<CardContent>
-								<TabPanel value="1" sx={{ p: 0 }}>
+								<TabPanel value="1"  sx={{ p: 0 }}>
 									<Typography variant="h6" sx={{ marginBottom: 2 }}>
 										Category
 									</Typography>
@@ -135,14 +133,14 @@ const Products = () => {
 						</TabContext>
 					</Card>
 					<Card sx={{ width: "20rem" }}>
-						<TabContext value={value}>
+						<TabContext value={2}>
 							<TabList
 								onChange={handleChange}
 								aria-label="card navigation example">
-								<Tab value="1" label={<DiscountIcon />} />
+								<Tab value={2}  label={<DiscountIcon />} />
 							</TabList>
 							<CardContent>
-								<TabPanel value="1" sx={{ p: 0 }}>
+								<TabPanel value={2}  sx={{ p: 0 }}>
 									<Typography variant="h6" sx={{ marginBottom: 2 }}>
 										Discount
 									</Typography>

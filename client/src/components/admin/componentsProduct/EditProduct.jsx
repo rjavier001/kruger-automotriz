@@ -19,11 +19,16 @@ import Swal from "sweetalert2";
 import productsApi from "../../../api/modules/products.api";
 import { useApi } from "../hooks/useApi";
 import uiConfigs from "../../../configs/ui.configs";
+import { useDispatch, useSelector } from "react-redux";
+import { setSaveData } from "../../../redux/features/productsSlice";
 
 
 export const EditProduct = () => {
 	let { id } = useParams();
 	const navigate = useNavigate();
+
+	const dispatch = useDispatch();
+  	const { saveData } = useSelector((state) => state.products);
 
     //---------------------------------------------------------------------------------
 	const [product, setProduct] = useState([]);
@@ -45,7 +50,8 @@ export const EditProduct = () => {
 	useEffect(() => {
 		const getList = async () => {
 			const { response } = await productsApi.getProductById(id);
-			if (response) setProduct(response);
+			if (response){ setProduct(response)
+				dispatch(setSaveData(!saveData))};
 		};
 		getList();
 

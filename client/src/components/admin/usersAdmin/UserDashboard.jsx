@@ -30,7 +30,7 @@ export default function UserDashboard() {
 			if (response) setUsersList(response);
 		};
 		getListUsers();
-	}, []);
+	}, [usersList]);
 
 	console.log(usersList);
 
@@ -47,35 +47,6 @@ export default function UserDashboard() {
 		setPage(0);
 	};
 
-	const handleDeleteUser = (idUser) => {
-		const deleteUsers = async () => {
-			const { response } = await userApi.deleteUserById(idUser);
-			if (response) setUsersDelete(response);
-		};
-
-		Swal.fire({
-			title: "Are you sure?",
-			text: "You won't be able to revert this!",
-			icon: "warning",
-			showCancelButton: true,
-			confirmButtonColor: "#3085d6",
-			cancelButtonColor: "#d33",
-			confirmButtonText: "Yes, delete it!",
-	  }).then((result) => {
-			if (result.isConfirmed) {
-				Swal.fire({
-					icon: "success",
-					title: "Your discount has been deleted.",
-					showConfirmButton: false,
-				});
-				deleteUsers(idUser);
-				setTimeout(() => {
-					// window.location.reload();
-				}, 500);
-			}
-	  });
-		console.log("delete", idUser);
-	};
 
 	return (
 		<Container sx={{ marginTop: "3rem" }}>

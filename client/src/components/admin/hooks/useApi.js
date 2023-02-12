@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import productsApi from "../../../api/modules/products.api";
+import { useDispatch, useSelector } from "react-redux";
+import { setSaveDiscount } from "../../../redux/features/productsSlice";
 
 export const useApi = () =>{
 
@@ -8,6 +10,9 @@ export const useApi = () =>{
 	const [featured, setFeatured] = useState([]);
     const [categories, setCategories] = useState([]);
     const [product, setProduct] = useState([]);
+
+	const dispatch = useDispatch();
+  	const { saveData } = useSelector((state) => state.products);
 
     //---------------------------------------------------------------------------------
 	useEffect(() => {
@@ -39,7 +44,7 @@ export const useApi = () =>{
 		};
 		getList();
 	
-	}, []);
+	}, [saveData]);
 
 
     
