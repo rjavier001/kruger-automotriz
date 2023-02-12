@@ -18,6 +18,10 @@ spec:
           ports:
             - containerPort: 8002
           env:
+            - name: MY_POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
             - name: PORT
               valueFrom:
                 configMapKeyRef:
