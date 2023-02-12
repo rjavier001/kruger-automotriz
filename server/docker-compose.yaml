@@ -45,6 +45,21 @@ services:
       - "8080:8080"
     networks:
       - km_net
+    depends_on:
+      - discovery-server
+    restart: always
+
+  auth-server:
+    container_name: auth-server
+    build:
+      context: ./
+      dockerfile: ./auth-server/Dockerfile
+    ports:
+      - "8004:8004"
+    networks:
+      - km_net
+    depends_on:
+      - gateway-server
     restart: always
 
   msv-users:
@@ -58,7 +73,41 @@ services:
     networks:
       - km_net
     depends_on:
+      - discovery-server
+      - gateway-server
       - postgres14
+      - msv-order
+    restart: always
+
+  msv-order:
+    container_name: msv-order
+    build:
+      context: ./
+      dockerfile: ./msv-order/Dockerfile
+    ports:
+      - "8003:8003"
+    env_file: ./msv-order/.env
+    networks:
+      - km_net
+    depends_on:
+      - postgres14
+      - gateway-server
+      - msv-products
+    restart: always
+
+  msv-products:
+    container_name: msv-products
+    build:
+      context: ./
+      dockerfile: ./msv-products/Dockerfile
+    ports:
+      - "8002:8002"
+    env_file: ./msv-products/.env
+    networks:
+      - km_net
+    depends_on:
+      - postgres14
+      - gateway-server
     restart: always
 
 
