@@ -6783,16 +6783,6 @@ node-releases@^2.0.6:
   resolved "https://registry.npmjs.org/node-releases/-/node-releases-2.0.8.tgz"
   integrity sha512-dFSmB8fFHEH/s81Xi+Y/15DQY6VHW81nXRj86EMSL3lmuTmK1e+aT4wrFCkTbm+gSwkw4KpX+rT/pMM2c1mF+A==
 
-nodemailer-react@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/nodemailer-react/-/nodemailer-react-1.0.2.tgz#b4f938f36645923a1b5a4cdef13c3b739f4bafc8"
-  integrity sha512-3XJ1lZUQivQDq9arYGSqbDAT8iDZEVMpRvECQ9MW6N6/c2U15ndcX69vjgshvYjm4Sbu8u+YLTy/D+zKIkka6A==
-
-nodemailer@^6.9.1:
-  version "6.9.1"
-  resolved "https://registry.yarnpkg.com/nodemailer/-/nodemailer-6.9.1.tgz#8249d928a43ed85fec17b13d2870c8f758a126ed"
-  integrity sha512-qHw7dOiU5UKNnQpXktdgQ1d3OFgRAekuvbJLcdG5dnEo/GtcTHRYM7+UfJARdOFU9WUQO8OiIamgWPmiSFHYAA==
-
 normalize-path@^3.0.0, normalize-path@~3.0.0:
   version "3.0.0"
   resolved "https://registry.npmjs.org/normalize-path/-/normalize-path-3.0.0.tgz"
