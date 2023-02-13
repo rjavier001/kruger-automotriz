@@ -1,27 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: msv-products
+  name: discovery-server
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: msv-products
+      app: discovery-server
   template:
     metadata:
       labels:
-        app: msv-products
+        app: discovery-server
     spec:
       containers:
-        - name: msv-products
-          image: sathell/msv-products:latest
+        - name: discovery-server
+          image: sathell/discovery-server:latest
           ports:
-            - containerPort: 8002
+            - containerPort: 8761
           env:
-            - name: MY_POD_NAME
-              valueFrom:
-                fieldRef:
-                  fieldPath: metadata.name
             - name: PORT
               valueFrom:
                 configMapKeyRef:

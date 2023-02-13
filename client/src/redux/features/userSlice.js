@@ -5,7 +5,7 @@ export const userSlice = createSlice({
   initialState: {
     user: null,
     userData: null,
-    userRole: 'invite',
+    userRole: "invite",
     listHistory: [],
     userOrderId: null,
   },

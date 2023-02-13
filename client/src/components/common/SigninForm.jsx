@@ -7,7 +7,11 @@ import { toast } from "react-toastify";
 import * as Yup from "yup";
 import userApi from "../../api/modules/users.api";
 import { setAuthModalOpen } from "../../redux/features/authModalSlice";
-import { setUser, setUserData,setUserRole } from "../../redux/features/userSlice";
+import {
+  setUser,
+  setUserData,
+  setUserRole,
+} from "../../redux/features/userSlice";
 
 const SigninForm = ({ switchAuthState }) => {
   const dispatch = useDispatch();

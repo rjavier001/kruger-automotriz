@@ -23,7 +23,6 @@ import { setAuthModalOpen } from "../../redux/features/authModalSlice";
 import Sidebar from "./Sidebar";
 import UserMenu from "./UserMenu";
 
-
 const ScrollAppBar = ({ children, window }) => {
   const { themeMode } = useSelector((state) => state.themeMode);
 

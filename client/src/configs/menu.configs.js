@@ -111,7 +111,7 @@ const admin = [
     path: "/",
     icon: <SettingsIcon />,
     state: "settings",
-  }
+  },
 ];
 
 const menuConfigs = { main, user, admin };

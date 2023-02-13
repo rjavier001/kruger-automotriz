@@ -22,5 +22,3 @@ spring:
     hibernate:
       ddl-auto: update
     database: postgresql
-
-
