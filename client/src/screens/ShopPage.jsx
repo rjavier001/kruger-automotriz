@@ -29,13 +29,9 @@ const Shop = () => {
     setName(e.target.value);
   };
   */
-  // const SearchProducts = ({ product }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
 
-  // productss.description.toLowerCase().includes(name)
-
-  // Esta función es memoizada para optimizar la búsqueda de productos
   const searchProducts = useMemo(() => {
     console.log("MEmo");
     return productI.filter((product) =>
@@ -51,9 +47,7 @@ const Shop = () => {
   //---------------------------------------------------------------------------------
   useEffect(() => {
     //----------------------------------
-    console.log("EFFECT");
     const getList = async () => {
-      console.log("END1");
       dispatch(setGlobalLoading(true));
       const { response, err } = await productsApi.getList();
       if (response) {
@@ -63,35 +57,10 @@ const Shop = () => {
       if (err) toast.error(err.message);
       dispatch(setGlobalLoading(false));
     };
-
-    if (productI.length === 0) {
-      console.log("TRUE");
-      getList();
-    }
-
-    //----------------------------------
-    /*
-    const searchList = async () => {
-      console.log("END1");
-      const { response } = await productsApi.search(name);
-      if (response) setProducts(response);
-    };
-    searchList();
-    */
+    getList();
   }, []);
 
   //---------------------------------------------------------------------------------
-  /*
-  let productsQuery =
-    products.status === 204
-      ? null
-      : products.filter((productss) =>
-          productss.description.toLowerCase().includes(name)
-        );
-  */
-
-  //---------------------------------------------------------------------------------
-
   const handleCategory = (e) => {
     setSelectCategory(e.target.value);
   };
