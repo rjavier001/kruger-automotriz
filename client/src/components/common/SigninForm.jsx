@@ -71,7 +71,7 @@ const SigninForm = ({ switchAuthState }) => {
     >
       <Stack spacing={2}>
         <TextField
-          id="outlined-basic"
+          id="outlined-basic-signin-1"
           label="User Name"
           variant="outlined"
           type="text"
@@ -87,7 +87,7 @@ const SigninForm = ({ switchAuthState }) => {
           helperText={signinForm.touched.userName && signinForm.errors.userName}
         />
         <TextField
-          id="outlined-basic"
+          id="outlined-basic-signin-2"
           label="Password"
           variant="outlined"
           type="password"
