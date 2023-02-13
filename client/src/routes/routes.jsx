@@ -15,6 +15,8 @@ import Discounts from "../components/admin/componentsProduct/Discounts";
 import Products from "../components/admin/componentsProduct/Products";
 import { EditProduct } from "../components/admin/componentsProduct/EditProduct";
 import Featured from "../components/admin/componentsProduct/Featured";
+import ContactPage from "../screens/ContactPage";
+import AboutUsPage from "../screens/AboutUsPage";
 
 export const routesGen = {
   home: "/",
@@ -40,6 +42,16 @@ const routes = [
     path: "/details",
     element: <ProductDetailPage />,
     state: "details",
+  },
+  {
+    path: "/contact",
+    element: <ContactPage />,
+    state: "contact",
+  },
+  {
+    path: "/about",
+    element: <AboutUsPage />,
+    state: "about",
   },
   {
     path: "/*",
