@@ -108,7 +108,7 @@ const ProductDetailPage = () => {
 
               <Stack>
                 <Typography variant="h7" sx={{ fontWeight: "bold" }}>
-                  Nro de serie: 1745646
+                  Nro de serie:
                 </Typography>
                 <Typography variant="h7">1745646</Typography>
               </Stack>
