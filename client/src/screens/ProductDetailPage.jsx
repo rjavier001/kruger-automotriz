@@ -93,21 +93,30 @@ const ProductDetailPage = () => {
             {/* RIGHT PANEL */}
           </Grid>
           <Grid item xs={12} md={4}>
-            Kruger Motors
-            <Stack
-              direction={"column"}
-              sx={{
-                flex: 1,
-                height: 450,
-                alignItems: "space-around",
-                justifyContent: "space-around",
-              }}
-            >
+            <Stack direction={"column"} sx={styles.rightPanel}>
               <Typography variant="h6">{props.name}</Typography>
               <Typography variant="h6">{props.description}</Typography>
-              <Typography variant="h7">{props.salePrice}$</Typography>
-              <Typography variant="h7">Nro de serie: 1745646</Typography>
-              <Typography variant="h7">Stock: {props.stock}</Typography>
+              <Stack sx={{ fontWeigth: "bold" }}>
+                <Typography variant="h7" sx={{ fontWeight: "bold" }}>
+                  Precio Unit.
+                </Typography>
+
+                <Typography variant="h7">{props.salePrice}$</Typography>
+              </Stack>
+
+              <Stack>
+                <Typography variant="h7" sx={{ fontWeight: "bold" }}>
+                  Nro de serie: 1745646
+                </Typography>
+                <Typography variant="h7">1745646</Typography>
+              </Stack>
+
+              <Stack>
+                <Typography variant="h7" sx={{ fontWeight: "bold" }}>
+                  Stock:{" "}
+                </Typography>
+                <Typography variant="h7"> {props.stock}</Typography>
+              </Stack>
 
               <Stack direction={"row"} sx={styles.add}>
                 <IconButton size="small" onClick={() => resCounter()}>
@@ -155,5 +164,15 @@ export const styles = {
   add: {
     alignItems: "center",
   },
-  rightPanel: {},
+  rightPanel: {
+    flex: 1,
+    height: 450,
+    alignItems: "space-around",
+    justifyContent: "space-around",
+    borderRadius: 10,
+    borderWidth: 1,
+    borderStyle: "solid",
+    boxShadow: "-13px 18px 8px -5px rgba(34, 60, 80, 0.2)",
+    padding: 5,
+  },
 };

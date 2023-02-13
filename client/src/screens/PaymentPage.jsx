@@ -99,7 +99,7 @@ const PaymentPage = () => {
               Peso Total a precio de envio:
             </Typography>
             <Typography sx={styles.headers}>
-              {cart.cartTotalWeight / 200}
+              {cart.cartTotalWeight / 200}$
             </Typography>
           </Stack>
         </Grid>
