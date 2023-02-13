@@ -35,7 +35,14 @@ const ContactPage = () => {
 
   return (
     <Grid textAlign="center">
-      <Card style={{ maxWidth: 450, padding: "20px 5px", margin: "0 auto" }}>
+      <Card
+        style={{
+          maxWidth: 450,
+          padding: "20px 5px",
+          margin: "0 auto",
+          borderRadius: "20px",
+        }}
+      >
         <CardContent>
           <Typography gutterBottom variant="h5">
             Contact Us
