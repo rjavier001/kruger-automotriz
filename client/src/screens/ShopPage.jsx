@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 import productsApi from "../api/modules/products.api";
 import ProductSelected from "../components/common/ProductSelected";
 import { useApi } from "../components/admin/hooks/useApi";
+import { setGlobalLoading } from "../redux/features/globalLoadingSlice";
 
 const Shop = () => {
   //---------------------------------------------------------------------------------
@@ -30,11 +31,13 @@ const Shop = () => {
   //---------------------------------------------------------------------------------
   useEffect(() => {
     //----------------------------------
+    
     const getList = async () => {
+      dispatch(setGlobalLoading(true));
       const { response, err } = await productsApi.getList();
       if (response) setProduct(response);
       if (err) toast.error(err.message);
-      // dispatch(setGlobalLoading(false));
+      dispatch(setGlobalLoading(false));
     };
     getList();
 

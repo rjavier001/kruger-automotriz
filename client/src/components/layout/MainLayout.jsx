@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import { Outlet } from "react-router-dom";
 import FooterComp from "../common/FooterComp";
-// import GlobalLoading from "../common/GlobalLoading";
+import GlobalLoading from "../common/GlobalLoading";
 import NavbarComp from "../common/NavbarComp";
 import AuthModal from "../common/AuthModal";
 import { useDispatch, useSelector } from "react-redux";
@@ -42,7 +42,7 @@ const MainLayout = () => {
 
   return (
     <>
-      {/* <GlobalLoading /> */}
+      <GlobalLoading />
       <AuthModal />
       <Box display="flex" minHeight="100vh" pt={{ xs: 25, sm: 25, md: 20 }}>
         <NavbarComp />

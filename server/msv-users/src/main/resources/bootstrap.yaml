@@ -20,7 +20,7 @@ spring:
     show-sql: true
     generate-ddl: true
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
     database: postgresql
 
 resilience4j.circuitbreaker:
