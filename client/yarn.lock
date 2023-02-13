@@ -7,6 +7,36 @@
   resolved "https://registry.yarnpkg.com/@adobe/css-tools/-/css-tools-4.1.0.tgz#417fef4a143f4396ad0b3b4351fee21323f15aa8"
   integrity sha512-mMVJ/j/GbZ/De4ZHWbQAQO1J6iVnjtZLc9WEdkUQb8S/Bu2cAF2bETXUgMAdvMG3/ngtKmcNBe+Zms9bg6jnQQ==
 
+"@algolia/autocomplete-core@1.8.0":
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/@algolia/autocomplete-core/-/autocomplete-core-1.8.0.tgz#1287c650e8960da77aaf52f96756e2005975a7e2"
+  integrity sha512-gKrUMBN93Rq4f8lt+tChSeYnlaudoBQ7URQPtFjQU2QXoJTogUJYPbP2YRZBZgxGwGS8jdB3UryUJWJVJx9sSg==
+  dependencies:
+    "@algolia/autocomplete-shared" "1.8.0"
+
+"@algolia/autocomplete-js@^1.8.0":
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/@algolia/autocomplete-js/-/autocomplete-js-1.8.0.tgz#8cd38349314e74593a7037086c1d3d22bf4fcdd9"
+  integrity sha512-wYAnvz5i1cwBdIX9R4jQwVaEolg5sziorftyyBr2nEVLX0B3QeFAXKSCN58YHNOk+qdVH7l4kUaMbqaEhRRuaA==
+  dependencies:
+    "@algolia/autocomplete-core" "1.8.0"
+    "@algolia/autocomplete-preset-algolia" "1.8.0"
+    "@algolia/autocomplete-shared" "1.8.0"
+    htm "^3.1.1"
+    preact "^10.0.0"
+
+"@algolia/autocomplete-preset-algolia@1.8.0":
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/@algolia/autocomplete-preset-algolia/-/autocomplete-preset-algolia-1.8.0.tgz#501e1b93d13dcd7da00972142182736497b93db4"
+  integrity sha512-GfZVFA9qpd6Hf1mB7xSCYN36xlxK2S87kneF0Wrjv55s+3eFboSkbG/E4kLoyElOa+DqnCEjrQq/dd5hezfjSw==
+  dependencies:
+    "@algolia/autocomplete-shared" "1.8.0"
+
+"@algolia/autocomplete-shared@1.8.0":
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/@algolia/autocomplete-shared/-/autocomplete-shared-1.8.0.tgz#305057825a624dc4808e01642437ada40b69deeb"
+  integrity sha512-KxnotO4FyN81kF/1rWmMZ/WBCZXNiXqpcXbcsSGK/Ta9HHWN3hT9+XVS8oXStqEX/acN0FS7YfPtQLmFeWlCRw==
+
 "@ampproject/remapping@^2.1.0":
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/@ampproject/remapping/-/remapping-2.2.0.tgz#56c133824780de3174aed5ab6834f3026790154d"
@@ -5360,6 +5390,11 @@ hpack.js@^2.1.6:
     readable-stream "^2.0.1"
     wbuf "^1.1.0"
 
+htm@^3.1.1:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/htm/-/htm-3.1.1.tgz#49266582be0dc66ed2235d5ea892307cc0c24b78"
+  integrity sha512-983Vyg8NwUE7JkZ6NmOqpCZ+sh1bKv2iYTlUkzlWmA5JD2acKoxd4KVxbMmxX/85mtfdnDmTFoNKcg5DGAvxNQ==
+
 html-encoding-sniffer@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/html-encoding-sniffer/-/html-encoding-sniffer-2.0.1.tgz#42a6dc4fd33f00281176e8b23759ca4e4fa185f3"
@@ -7863,6 +7898,11 @@ postcss@^8.0.9, postcss@^8.3.5, postcss@^8.4.19, postcss@^8.4.4:
     nanoid "^3.3.4"
     picocolors "^1.0.0"
     source-map-js "^1.0.2"
+
+preact@^10.0.0:
+  version "10.12.1"
+  resolved "https://registry.yarnpkg.com/preact/-/preact-10.12.1.tgz#8f9cb5442f560e532729b7d23d42fd1161354a21"
+  integrity sha512-l8386ixSsBdbreOAkqtrwqHwdvR35ID8c3rKPa8lCWuO86dBi32QWHV4vfsZK1utLLFMvw+Z5Ad4XLkZzchscg==
 
 prelude-ls@^1.2.1:
   version "1.2.1"
