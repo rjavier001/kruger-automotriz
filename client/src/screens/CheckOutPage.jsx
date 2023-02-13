@@ -248,7 +248,6 @@ export const styles = {
     justifyContent: "center",
     alignItems: "center",
     padding: 5,
-    height: "100%",
   },
   stackParent: {
     flex: 1,

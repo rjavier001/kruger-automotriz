@@ -15,6 +15,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Image from "mui-image";
 const PaymentPage = () => {
   const cart = useSelector((state) => state.cart);
+  const { userData } = useSelector((state) => state.user);
   const payments = [
     {
       value: "Paypall",
@@ -27,10 +28,10 @@ const PaymentPage = () => {
   ];
   const formik = useFormik({
     initialValues: {
-      name: "",
-      apellido: "",
-      email: "",
-      address: "",
+      name: userData?.name || "",
+      apellido: userData?.lastName || "",
+      email: userData?.email || "",
+      address: userData?.address || "",
     },
     onSubmit: (values, { resetForm }) => {
       alert(JSON.stringify(values, null, 2));
@@ -190,7 +191,7 @@ export default PaymentPage;
 
 export const styles = {
   container: {
-    marginY: 10,
+    marginY: 5,
   },
   headers: {
     fontWeight: "bold",
