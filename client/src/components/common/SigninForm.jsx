@@ -12,12 +12,21 @@ import {
   setUserData,
   setUserRole,
 } from "../../redux/features/userSlice";
+import ordersApi from "../../api/modules/orders.api";
+import { setOrderId } from "../../redux/features/userSlice";
 
 const SigninForm = ({ switchAuthState }) => {
   const dispatch = useDispatch();
 
   const [isLoginRequest, setIsLoginRequest] = useState(false);
   const [errorMessage, setErrorMessage] = useState();
+  const [order, setOrder] = useState({ status: "Created", totalPrice: 0 });
+
+  const createOrder = async () => {
+    const { response } = await ordersApi.postOrders(order);
+    console.log("order created", response);
+    dispatch(setOrderId(response.id));
+  };
 
   const signinForm = useFormik({
     initialValues: {
@@ -37,6 +46,7 @@ const SigninForm = ({ switchAuthState }) => {
       setIsLoginRequest(true);
       const { response, err } = await userApi.signin(values);
       setIsLoginRequest(false);
+      createOrder();
 
       if (response) {
         signinForm.resetForm();

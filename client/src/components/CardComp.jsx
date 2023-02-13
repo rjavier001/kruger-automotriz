@@ -26,12 +26,17 @@ import productsApi from "../api/modules/products.api";
 import Swal from "sweetalert2";
 import { useApi } from "./admin/hooks/useApi";
 import { setAuthModalOpen } from "../redux/features/authModalSlice";
+import userApi from "../api/modules/users.api";
+import { setOrderId } from "../redux/features/userSlice";
+import ordersApi from "../api/modules/orders.api";
 
 const CardComp = ({ props }) => {
   const [product, setProduct] = useState([]);
   const navigate = useNavigate();
   const location = useLocation();
   const { user } = useSelector((state) => state.user);
+  const [order, setOrder] = useState({ status: "Created", totalPrice: 0 });
+
   //---------------------------------------------------------------------------------
   const {
     name,
@@ -46,7 +51,7 @@ const CardComp = ({ props }) => {
   } = props;
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
-
+  const { userOrderId } = useSelector((state) => state.user);
   //---------------------------------------------------------------------------------
   useEffect(() => {
     dispatch(getTotal());
@@ -58,8 +63,23 @@ const CardComp = ({ props }) => {
   const handleAddtoCart = (props) => {
     if (user) {
       props = { ...props, quantity: 1 };
+      if (!userOrderId) createOrder();
+      else assignProd();
       dispatch(addToCart(props));
     } else dispatch(setAuthModalOpen(true));
+  };
+
+  const createOrder = async () => {
+    const { response } = await ordersApi.postOrders(order);
+    console.log("order created", userOrderId);
+    dispatch(setOrderId(response.id));
+  };
+
+  const assignProd = async () => {
+    const { response } = await ordersApi.assignProdToOrder(userOrderId, {
+      productId: props.id,
+    });
+    console.log("Prod assigned", response);
   };
 
   //---------------------------------------------------------------------------------

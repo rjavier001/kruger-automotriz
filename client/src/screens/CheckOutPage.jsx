@@ -56,7 +56,7 @@ const CheckOutPage = () => {
     const { response } = await userApi.assignOrder(user.userId, {
       orderId: userOrderId,
     });
-    console.log("Order assigned", user.userId);
+    console.log("Order assigned", response);
   };
 
   const handleonPay = () => {

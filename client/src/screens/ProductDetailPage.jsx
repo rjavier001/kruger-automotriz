@@ -35,7 +35,7 @@ const ProductDetailPage = () => {
 
   const createOrder = async () => {
     const { response } = await ordersApi.postOrders(order);
-    console.log("order created", userOrderId);
+    console.log("order created", response);
     dispatch(setOrderId(response.id));
   };
 
@@ -46,12 +46,14 @@ const ProductDetailPage = () => {
     console.log("Prod assigned", userOrderId);
   };
 
-  const handleAddtoCart = (props) => {
+  const handleAddtoCart = async (props) => {
     console.log(props);
     if (user) {
       props = { ...props, quantity };
-      if (!userOrderId) createOrder();
-      else assignProd();
+      if (!userOrderId) {
+        await createOrder();
+        await assignProd();
+      } else assignProd();
 
       dispatch(addToCart(props));
       navigate("/checkout");
