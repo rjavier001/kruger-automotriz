@@ -35,7 +35,6 @@ export const ProgressOrder = () => {
 	];
 
 
-    console.log(name.map((i)=>i.id))
 
 	return (
 		<Box
