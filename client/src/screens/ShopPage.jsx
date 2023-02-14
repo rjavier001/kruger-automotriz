@@ -20,6 +20,9 @@ import {
   Highlight,
   Pagination,
   Configure,
+  ClearRefinements,
+  RefinementList,
+  SortBy,
 } from "react-instantsearch-hooks-web";
 
 const Shop = () => {
@@ -117,6 +120,16 @@ const Shop = () => {
         <Stack>
           <InstantSearch searchClient={searchClient} indexName="krugermotors">
             <SearchBox />
+            <ClearRefinements />
+            <h2>Brands</h2>
+            <RefinementList attribute="category.description" />
+            <SortBy
+              items={[
+                { label: "Featured", value: "instant_search" },
+                { label: "Price (asc)", value: "instant_search_price_asc" },
+                { label: "Price (desc)", value: "instant_search_price_desc" },
+              ]}
+            />
             <Configure hitsPerPage={12} />
             <Hits hitComponent={Hit} />
             <Pagination />
