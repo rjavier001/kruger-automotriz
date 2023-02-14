@@ -11,6 +11,9 @@ import ProductSelected from "../components/common/ProductSelected";
 import { useApi } from "../components/admin/hooks/useApi";
 import { setGlobalLoading } from "../redux/features/globalLoadingSlice";
 
+import algoliasearch from "algoliasearch";
+import { InstantSearch, SearchBox, Hits } from "react-instantsearch-dom";
+
 const Shop = () => {
   //---------------------------------------------------------------------------------
   const dispatch = useDispatch();
@@ -64,6 +67,20 @@ const Shop = () => {
   const handleCategory = (e) => {
     setSelectCategory(e.target.value);
   };
+
+  const searchClient = algoliasearch(
+    "STF3VI4F0V",
+    "ebafaf8b16373dded67356b9e639bc2a"
+  );
+  const index = searchClient.initIndex("krugermotors");
+  const fetchDataFromDatabase = () => {
+    const products = productI;
+    return products;
+  };
+
+  const records = fetchDataFromDatabase();
+  index.saveObjects(records, { autoGenerateObjectIDIfNotExist: true });
+
   console.log("searchProducts");
   console.log(searchProducts);
 
