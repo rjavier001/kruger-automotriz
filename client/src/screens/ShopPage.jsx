@@ -54,6 +54,7 @@ const Shop = () => {
       dispatch(setGlobalLoading(true));
       const { response, err } = await productsApi.getList();
       if (response) {
+        setProducts(response);
         setProductI(response);
         setSearchResults(response);
       }
@@ -74,20 +75,24 @@ const Shop = () => {
   );
   const index = searchClient.initIndex("krugermotors");
   const fetchDataFromDatabase = () => {
-    const products = productI;
-    return products;
+    const productos = products;
+    return productos;
   };
-
   const records = fetchDataFromDatabase();
+  console.log(records);
   index.saveObjects(records, { autoGenerateObjectIDIfNotExist: true });
 
-  console.log("searchProducts");
-  console.log(searchProducts);
+  // console.log("searchProducts");
+  // console.log(searchProducts);
 
   //---------------------------------------------------------------------------------
   return (
     <>
       <Container>
+        <InstantSearch searchClient={searchClient} indexName="krugermotors">
+          <SearchBox />
+          <Hits />
+        </InstantSearch>
         <Grid container my={4}>
           <Grid
             item
