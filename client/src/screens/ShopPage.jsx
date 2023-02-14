@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import { useEffect, useMemo, useState } from "react";
-import { Box, Grid, Input, MenuItem, TextField } from "@mui/material";
+import { Box, Grid, Input, MenuItem, Stack, TextField } from "@mui/material";
 import { Container } from "@mui/system";
 import React from "react";
 import CardComp from "../components/CardComp";
@@ -12,7 +12,15 @@ import { useApi } from "../components/admin/hooks/useApi";
 import { setGlobalLoading } from "../redux/features/globalLoadingSlice";
 
 import algoliasearch from "algoliasearch";
-import { InstantSearch, SearchBox, Hits } from "react-instantsearch-dom";
+// import { InstantSearch, SearchBox, Hits } from "react-instantsearch-dom";
+import {
+  InstantSearch,
+  SearchBox,
+  Hits,
+  Highlight,
+  Pagination,
+  Configure,
+} from "react-instantsearch-hooks-web";
 
 const Shop = () => {
   //---------------------------------------------------------------------------------
@@ -80,19 +88,41 @@ const Shop = () => {
   };
   const records = fetchDataFromDatabase();
   console.log(records);
-  index.saveObjects(records, { autoGenerateObjectIDIfNotExist: true });
+  index
+    .search("query", {
+      page: 2,
+      hitsPerPage: 5,
+    })
+    .then(({ hits }) => {
+      console.log(hits);
+    });
 
-  // console.log("searchProducts");
-  // console.log(searchProducts);
+  function Hit({ hit }) {
+    return (
+      <article>
+        <img width={120} src={hit.photoUrl} alt={hit.name} />
+        <p>{hit.category.description}</p>
+        <h1>
+          <Highlight attribute="description" hit={hit} />
+        </h1>
+        <p>${hit.price}</p>
+      </article>
+    );
+  }
 
   //---------------------------------------------------------------------------------
   return (
     <>
       <Container>
-        <InstantSearch searchClient={searchClient} indexName="krugermotors">
-          <SearchBox />
-          <Hits />
-        </InstantSearch>
+        <Stack>
+          <InstantSearch searchClient={searchClient} indexName="krugermotors">
+            <SearchBox />
+            <Configure hitsPerPage={12} />
+            <Hits hitComponent={Hit} />
+            <Pagination />
+          </InstantSearch>
+        </Stack>
+
         <Grid container my={4}>
           <Grid
             item

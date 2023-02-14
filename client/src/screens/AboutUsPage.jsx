@@ -1,13 +1,6 @@
 import { Avatar, Stack, Typography } from "@mui/material";
-import { Hits, InstantSearch, SearchBox } from "react-instantsearch-dom";
-
-import algoliasearch from "algoliasearch";
 
 const AboutUsPage = () => {
-  const searchClient = algoliasearch(
-    "STF3VI4F0V",
-    "ebafaf8b16373dded67356b9e639bc2a"
-  );
   return (
     <Stack
       textAlign="center"
@@ -15,10 +8,6 @@ const AboutUsPage = () => {
       alignItems="center"
       spacing={4}
     >
-      <InstantSearch searchClient={searchClient} indexName="krugermotors">
-        <SearchBox />
-        <Hits />
-      </InstantSearch>
       <Stack width={924}>
         <Typography variant="h5">
           <Typography variant="p" color="primary" sx={{ fontWeight: "bold" }}>
