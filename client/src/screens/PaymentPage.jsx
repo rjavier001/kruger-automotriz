@@ -79,8 +79,8 @@ const PaymentPage = () => {
                       width={80}
                       duration={1000}
                     />
-                    <Typography>{cartItem.cartQuantity}x</Typography>
-                    {cartItem.name}
+                    <Typography>{cartItem.cartQuantity}</Typography>
+                    <Typography>x {cartItem.name}</Typography>
                   </Box>
                 </Grid>
 
@@ -183,6 +183,23 @@ const PaymentPage = () => {
           </form>
         </Grid>
       </Grid>
+      <Stack direction={"row"} sx={{ marginTop: 3 }}>
+        <Image
+          height={100}
+          fit={"contain"}
+          src={require("../assets/secure.png")}
+        />
+        <Image
+          height={100}
+          fit={"contain"}
+          src={require("../assets/payments.png")}
+        />
+        <Image
+          height={100}
+          fit={"contain"}
+          src={require("../assets/warantee.png")}
+        />
+      </Stack>
     </Container>
   );
 };
@@ -206,8 +223,8 @@ export const styles = {
   },
   stackRoot: {
     borderWidth: 1,
-    borderColor: "black",
+    /* borderColor: "black", */
     borderStyle: "solid",
-    borderRadius: 20,
+    borderRadius: 5,
   },
 };
