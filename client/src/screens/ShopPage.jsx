@@ -66,6 +66,7 @@ const Shop = () => {
     const getList = async () => {
       dispatch(setGlobalLoading(true));
       const { response, err } = await productsApi.getList();
+      console.log(response);
       if (response) {
         setProducts(response);
         setProductI(response);
@@ -93,6 +94,12 @@ const Shop = () => {
   };
   const records = fetchDataFromDatabase();
   // console.log(records);
+  /*
+  index.then(({ hits }) => {
+    // console.log(hits);
+  });
+  */
+
   index
     .saveObjects(records, { autoGenerateObjectIDIfNotExist: true })
     .then(({ hits }) => {
@@ -101,7 +108,7 @@ const Shop = () => {
 
   function CustomHits(props) {
     const { hits, results, sendEvent } = useHits(props);
-    console.log(hits);
+    // console.log(hits);
     <Highlight attribute="description" hit={hits} />;
 
     return hits.map((item, i) => (
@@ -173,7 +180,7 @@ const Shop = () => {
           <RefinementList attribute="category.description" />
           <SortBy
             items={[
-              { label: "Featured", value: "instant_search" },
+              { label: "Featured", value: "krugermotors" },
               { label: "Price (asc)", value: "instant_search_price_asc" },
               { label: "Price (desc)", value: "instant_search_price_desc" },
             ]}
