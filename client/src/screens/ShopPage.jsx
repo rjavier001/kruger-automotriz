@@ -23,6 +23,7 @@ import {
   ClearRefinements,
   RefinementList,
   SortBy,
+  useHits,
 } from "react-instantsearch-hooks-web";
 
 const Shop = () => {
@@ -59,6 +60,7 @@ const Shop = () => {
   };
 
   //---------------------------------------------------------------------------------
+
   useEffect(() => {
     //----------------------------------
     const getList = async () => {
@@ -90,51 +92,33 @@ const Shop = () => {
     return productos;
   };
   const records = fetchDataFromDatabase();
-  console.log(records);
+  // console.log(records);
   index
-    .search("query", {
-      page: 2,
-      hitsPerPage: 5,
-    })
+    .saveObjects(records, { autoGenerateObjectIDIfNotExist: true })
     .then(({ hits }) => {
-      console.log(hits);
+      // console.log(hits);
     });
 
-  function Hit({ hit }) {
-    return (
-      <article>
-        <img width={120} src={hit.photoUrl} alt={hit.name} />
-        <p>{hit.category.description}</p>
-        <h1>
-          <Highlight attribute="description" hit={hit} />
-        </h1>
-        <p>${hit.price}</p>
-      </article>
-    );
+  function CustomHits(props) {
+    const { hits, results, sendEvent } = useHits(props);
+    console.log(hits);
+    <Highlight attribute="description" hit={hits} />;
+
+    return hits.map((item, i) => (
+      <Grid key={i} item xs={12} md={4} sm={6} justify="center">
+        {/* <Highlight attribute="description" hit={item} /> */}
+        <CardComp props={item} />
+      </Grid>
+    ));
+
+    // return <CardComp props={hits} />;
   }
 
   //---------------------------------------------------------------------------------
   return (
     <>
       <Container>
-        <Stack>
-          <InstantSearch searchClient={searchClient} indexName="krugermotors">
-            <SearchBox />
-            <ClearRefinements />
-            <h2>Brands</h2>
-            <RefinementList attribute="category.description" />
-            <SortBy
-              items={[
-                { label: "Featured", value: "instant_search" },
-                { label: "Price (asc)", value: "instant_search_price_asc" },
-                { label: "Price (desc)", value: "instant_search_price_desc" },
-              ]}
-            />
-            <Configure hitsPerPage={12} />
-            <Hits hitComponent={Hit} />
-            <Pagination />
-          </InstantSearch>
-        </Stack>
+        <Stack>{/* SEARCH */}</Stack>
 
         <Grid container my={4}>
           <Grid
@@ -182,13 +166,35 @@ const Shop = () => {
           </Grid>
         </Grid>
 
-        <Grid item container spacing={2} marginTop="2px">
+        <InstantSearch searchClient={searchClient} indexName="krugermotors">
+          <SearchBox />
+          <ClearRefinements />
+          <h2>Brands</h2>
+          <RefinementList attribute="category.description" />
+          <SortBy
+            items={[
+              { label: "Featured", value: "instant_search" },
+              { label: "Price (asc)", value: "instant_search_price_asc" },
+              { label: "Price (desc)", value: "instant_search_price_desc" },
+            ]}
+          />
+          <Configure hitsPerPage={12} />
+
+          {/* <Hits hitComponent={Hit} /> */}
+          <Grid item container spacing={2} marginTop="2px">
+            <CustomHits {...this} />
+          </Grid>
+
+          <Pagination />
+        </InstantSearch>
+
+        {/* <Grid item container spacing={2} marginTop="2px">
           {searchResults.slice(0, 12).map((item, i) => (
             <Grid key={i} item xs={12} md={4} sm={6} justify="center">
               <CardComp props={item} />
             </Grid>
           ))}
-        </Grid>
+        </Grid> */}
       </Container>
     </>
   );

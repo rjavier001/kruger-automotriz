@@ -26,6 +26,7 @@ import productsApi from "../api/modules/products.api";
 import Swal from "sweetalert2";
 import { useApi } from "./admin/hooks/useApi";
 import { setAuthModalOpen } from "../redux/features/authModalSlice";
+import { Highlight } from "react-instantsearch-hooks-web";
 
 const CardComp = ({ props }) => {
   const [product, setProduct] = useState([]);
@@ -193,8 +194,9 @@ const CardComp = ({ props }) => {
                 component="div"
                 sx={uiConfigs.item}
               >
-                {name.charAt(0).toUpperCase() + name.slice(1)}
+                {name?.charAt(0).toUpperCase() + name?.slice(1)}
               </Typography>
+              <Highlight attribute="description" hit={props} />
               <Typography variant="body2" color="text.secondary">
                 {description}
               </Typography>
