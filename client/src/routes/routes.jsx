@@ -17,6 +17,7 @@ import { EditProduct } from "../components/admin/componentsProduct/EditProduct";
 import Featured from "../components/admin/componentsProduct/Featured";
 import ContactPage from "../screens/ContactPage";
 import AboutUsPage from "../screens/AboutUsPage";
+import { ProgressOrder } from "../screens/ProgressOrder";
 
 export const routesGen = {
   home: "/",
@@ -62,6 +63,11 @@ const routes = [
     path: "/payment",
     element: <PaymentPage />,
     state: "payment",
+  },
+  {
+    path: "/progressorders",
+    element: <ProgressOrder />,
+    state: "progress",
   },
   {
     path: "/admin",
@@ -144,6 +150,7 @@ const routes = [
     ),
     state: "users",
   },
+  
 ];
 
 export default routes;
