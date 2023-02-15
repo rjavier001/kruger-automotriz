@@ -45,16 +45,18 @@ const CarouselComp = ({ items }) => {
             <Box
               sx={{
                 paddingTop: {
-                  xs: "100%",
-                  sm: "60%",
+                  xs: "50%",
+                  sm: "80%",
                   md: "45%",
                   lg: "25%",
                 },
+                marginTop: { xs: 15, md: 0 },
                 backgroundPosition: "top",
                 backgroundRepeat: "no-repeat",
                 backgroundSize: "80% 20rem",
                 objectFit: "contain",
                 backgroundImage: `url(${item.photoUrl})`,
+                backgroundSize: "contain",
               }}
             />
 

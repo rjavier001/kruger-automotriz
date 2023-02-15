@@ -14,11 +14,15 @@ import { useFormik } from "formik";
 import { useSelector, useDispatch } from "react-redux";
 import Image from "mui-image";
 import { useNavigate } from "react-router-dom";
-
+import { clearCart, paymentClear } from "../redux/features/cartSlice";
 const PaymentPage = () => {
   const cart = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
   const { userData } = useSelector((state) => state.user);
   const navigate = useNavigate();
+  const handleClearCart = () => {
+    dispatch(paymentClear());
+  };
 
   const payments = [
     {
@@ -41,6 +45,7 @@ const PaymentPage = () => {
     onSubmit: (values, { resetForm }) => {
       /* alert(JSON.stringify(values, null, 2)); */
       resetForm();
+      handleClearCart();
       navigate("/success");
     },
   });
