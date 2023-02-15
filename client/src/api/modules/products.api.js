@@ -2,6 +2,7 @@ import privateClient from "../client/private.client";
 
 const productsEndpoints = {
   list: "products",
+  listPagination: ({ page, size, enablePagination }) => `products?page=${page}&size=${size}&enablePagination=${enablePagination}`,
   add: "products/save",
   search: ({ query }) => `products/search?description=${query}`,
   remove: ({ productId }) => `products/${productId}`,
@@ -34,6 +35,17 @@ const productsApi = {
   getList: async () => {
     try {
       const response = await privateClient.get(productsEndpoints.list);
+
+      return { response };
+    } catch (err) {
+      return { err };
+    }
+  },
+
+  listPagination: async ({ page, size, enablePagination }) => {
+    console.log(page, size, enablePagination)
+    try {
+      const response = await privateClient.get(productsEndpoints.listPagination({ page, size, enablePagination }));
 
       return { response };
     } catch (err) {
