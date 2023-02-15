@@ -22,6 +22,7 @@ import { setThemeMode } from "../../redux/features/themeModeSlice";
 import { setAuthModalOpen } from "../../redux/features/authModalSlice";
 import Sidebar from "./Sidebar";
 import UserMenu from "./UserMenu";
+import { useNavigate } from "react-router-dom";
 
 const ScrollAppBar = ({ children, window }) => {
   const { themeMode } = useSelector((state) => state.themeMode);
@@ -50,12 +51,18 @@ const ScrollAppBar = ({ children, window }) => {
 
 const Navbar = () => {
   const { user } = useSelector((state) => state.user);
+  const navigate = useNavigate();
   const { appState } = useSelector((state) => state.appState);
   const { themeMode } = useSelector((state) => state.themeMode);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const { cartTotalQuantity } = useSelector((state) => state.cart);
 
   const dispatch = useDispatch();
+
+  const handleToCO = () => {
+    if (user) navigate("/checkout");
+    else dispatch(setAuthModalOpen(true));
+  };
 
   const onSwithTheme = () => {
     const theme =
@@ -112,12 +119,11 @@ const Navbar = () => {
                 {themeMode === themeModes.dark && <DarkModeOutlinedIcon />}
                 {themeMode === themeModes.light && <WbSunnyOutlinedIcon />}
               </IconButton>
-              <NavLink to={"/checkout"} style={{ textDecoration: "none" }}>
-                <IconButton>
-                  <ShoppingCartCheckoutIcon />
-                  <Typography sx={styles.badge}>{cartTotalQuantity}</Typography>
-                </IconButton>
-              </NavLink>
+
+              <IconButton onClick={() => handleToCO()}>
+                <ShoppingCartCheckoutIcon />
+                <Typography sx={styles.badge}>{cartTotalQuantity}</Typography>
+              </IconButton>
               {!user && (
                 <AccountCircleIcon
                   variant="contained"
@@ -144,5 +150,8 @@ export const styles = {
     width: 25,
     fontWeight: "700",
     color: "black",
+
+    borderWidth: 0.5,
+    borderStyle: "solid",
   },
 };
