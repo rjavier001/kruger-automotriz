@@ -24,6 +24,7 @@ import {
   RefinementList,
   SortBy,
   useHits,
+  useRefinementList,
 } from "react-instantsearch-hooks-web";
 
 const Shop = () => {
@@ -60,13 +61,12 @@ const Shop = () => {
   };
 
   //---------------------------------------------------------------------------------
-
+  /*
   useEffect(() => {
     //----------------------------------
     const getList = async () => {
       dispatch(setGlobalLoading(true));
       const { response, err } = await productsApi.getList();
-      console.log(response);
       if (response) {
         setProducts(response);
         setProductI(response);
@@ -77,6 +77,7 @@ const Shop = () => {
     };
     getList();
   }, []);
+  */
 
   //---------------------------------------------------------------------------------
   const handleCategory = (e) => {
@@ -100,11 +101,13 @@ const Shop = () => {
   });
   */
 
-  index
+  /*
+    index
     .saveObjects(records, { autoGenerateObjectIDIfNotExist: true })
     .then(({ hits }) => {
       // console.log(hits);
     });
+    */
 
   function CustomHits(props) {
     const { hits, results, sendEvent } = useHits(props);
@@ -119,6 +122,26 @@ const Shop = () => {
     ));
 
     // return <CardComp props={hits} />;
+  }
+
+  function CustomRefinementList(props) {
+    const {
+      items,
+      hasExhaustiveItems,
+      createURL,
+      refine,
+      sendEvent,
+      searchForItems,
+      isFromSearch,
+      canRefine,
+      canToggleShowMore,
+      isShowingMore,
+      toggleShowMore,
+    } = useRefinementList(props);
+
+    console.log(items);
+
+    return <>hola</>;
   }
 
   //---------------------------------------------------------------------------------
@@ -177,7 +200,8 @@ const Shop = () => {
           <SearchBox />
           <ClearRefinements />
           <h2>Brands</h2>
-          <RefinementList attribute="category.description" />
+          {/* <RefinementList attribute="category" /> */}
+          <CustomRefinementList attribute="category_name" {...this} />
           <SortBy
             items={[
               { label: "Featured", value: "krugermotors" },
