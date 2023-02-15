@@ -194,7 +194,7 @@ const PaymentPage = () => {
             </Grid>
 
             <Button variant="contained" type="submit">
-              Submit
+              Pagar
             </Button>
           </form>
         </Grid>
