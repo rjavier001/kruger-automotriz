@@ -17,6 +17,7 @@ import { EditProduct } from "../components/admin/componentsProduct/EditProduct";
 import Featured from "../components/admin/componentsProduct/Featured";
 import ContactPage from "../screens/ContactPage";
 import AboutUsPage from "../screens/AboutUsPage";
+import PaymentCompletedPage from "../screens/PaymentCompletedPage";
 
 export const routesGen = {
   home: "/",
@@ -62,6 +63,11 @@ const routes = [
     path: "/payment",
     element: <PaymentPage />,
     state: "payment",
+  },
+  {
+    path: "/success",
+    element: <PaymentCompletedPage />,
+    state: "success",
   },
   {
     path: "/admin",

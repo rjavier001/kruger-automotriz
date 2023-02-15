@@ -112,7 +112,7 @@ const Navbar = () => {
                 {themeMode === themeModes.dark && <DarkModeOutlinedIcon />}
                 {themeMode === themeModes.light && <WbSunnyOutlinedIcon />}
               </IconButton>
-              <NavLink to={"/checkout"}>
+              <NavLink to={"/checkout"} style={{ textDecoration: "none" }}>
                 <IconButton>
                   <ShoppingCartCheckoutIcon />
                   <Typography sx={styles.badge}>{cartTotalQuantity}</Typography>
@@ -138,7 +138,7 @@ export default Navbar;
 
 export const styles = {
   badge: {
-    background: "yellow",
+    background: "#ff910d",
     borderRadius: 25,
     height: 25,
     width: 25,

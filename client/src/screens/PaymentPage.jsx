@@ -13,9 +13,13 @@ import React, { useState } from "react";
 import { useFormik } from "formik";
 import { useSelector, useDispatch } from "react-redux";
 import Image from "mui-image";
+import { useNavigate } from "react-router-dom";
+
 const PaymentPage = () => {
   const cart = useSelector((state) => state.cart);
   const { userData } = useSelector((state) => state.user);
+  const navigate = useNavigate();
+
   const payments = [
     {
       value: "Paypall",
@@ -32,10 +36,12 @@ const PaymentPage = () => {
       apellido: userData?.lastName || "",
       email: userData?.email || "",
       address: userData?.address || "",
+      cardNumber: "",
     },
     onSubmit: (values, { resetForm }) => {
-      alert(JSON.stringify(values, null, 2));
+      /* alert(JSON.stringify(values, null, 2)); */
       resetForm();
+      navigate("/success");
     },
   });
   return (
@@ -79,7 +85,7 @@ const PaymentPage = () => {
                       width={80}
                       duration={1000}
                     />
-                    <Typography>{cartItem.cartQuantity}</Typography>
+                    <Typography>{cartItem.cartQuantity}</Typography>{" "}
                     <Typography>x {cartItem.name}</Typography>
                   </Box>
                 </Grid>
@@ -106,24 +112,34 @@ const PaymentPage = () => {
         </Grid>
 
         <Grid container item xs={12} md={6}>
-          <Grid item xs={12} md={6}>
+          <Grid item xs={12} md={12}>
             <Typography variant="h6" sx={styles.numberHeaders}>
               2.-Escoge un metodo de pago:
             </Typography>
 
-            <TextField
-              id="outlined-select-currency"
-              select
-              label="Select"
-              defaultValue="EUR"
-              helperText="Please select your currency"
-            >
-              {payments.map((option) => (
-                <MenuItem key={option.value} value={option.value}>
-                  {option.label}
-                </MenuItem>
-              ))}
-            </TextField>
+            <Stack direction={"row"} spacing={2}>
+              <TextField
+                id="outlined-select-currency"
+                select
+                label="Select"
+                helperText="Please select your payment"
+              >
+                {payments.map((option) => (
+                  <MenuItem key={option.value} value={option.value}>
+                    {option.label}
+                  </MenuItem>
+                ))}
+              </TextField>
+              <TextField
+                required
+                id="name"
+                label="numero o ID"
+                name="cardNumber"
+                onChange={formik.handleChange}
+                value={formik.values.cardNumber}
+                fullWidth
+              />
+            </Stack>
           </Grid>
           <Typography variant="h6" sx={styles.numberHeaders}>
             3.-Ingresa tu informacion de pago:
