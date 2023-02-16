@@ -1,8 +1,5 @@
 server:
   port: ${PORT:${SERVER_PORT:8004}}
-server:
-  port: ${PORT:${SERVER_PORT:8004}}
-
 eureka:
   client:
     fetchRegistry: true
@@ -24,30 +21,6 @@ spring:
     generate-ddl: true
     hibernate:
       ddl-auto: update
-    database: postgresql
-jwt:
-  secret: secret
-eureka:
-  client:
-    fetchRegistry: true
-    registerWithEureka: true
-    serviceUrl:
-      defaultZone: http://discovery-server:8761/eureka
-  instance:
-    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
-spring:
-  application:
-    name: auth-server
-  datasource:
-    driver-class-name: org.postgresql.Driver
-    username: postgres
-    password: sa.1
-    url: jdbc:postgresql://postgres14:5432/postgres
-  jpa:
-    show-sql: true
-    generate-ddl: true
-    hibernate:
-      ddl-auto: create-drop
     database: postgresql
 jwt:
   secret: secret
