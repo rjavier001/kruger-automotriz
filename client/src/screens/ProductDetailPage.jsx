@@ -42,8 +42,9 @@ const ProductDetailPage = () => {
   const assignProd = async () => {
     const { response } = await ordersApi.assignProdToOrder(userOrderId, {
       productId: props.id,
+      quantity,
     });
-    console.log("Prod assigned", response);
+    console.log("Prod info", response);
   };
 
   const handleAddtoCart = async (props) => {

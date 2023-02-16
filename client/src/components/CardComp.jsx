@@ -78,8 +78,9 @@ const CardComp = ({ props }) => {
   const assignProd = async () => {
     const { response } = await ordersApi.assignProdToOrder(userOrderId, {
       productId: props.id,
+      quantity: 1,
     });
-    console.log("Prod assigned", response);
+    console.log("Product info", response);
   };
 
   //---------------------------------------------------------------------------------

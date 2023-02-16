@@ -15,16 +15,18 @@ public class OrderProduct {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    //Con la regla unique not nemos repetido el mismo product en la order
-    //@Column(name = "product_id", unique = true)
+    // Con la regla unique not nemos repetido el mismo product en la order
+    // @Column(name = "product_id", unique = true)
     private Long productId;
+
+    private Double quantity;
 
     @Override
     public boolean equals(Object obj) {
-        if(this == obj){
+        if (this == obj) {
             return true;
         }
-        if(!(obj instanceof OrderProduct)){
+        if (!(obj instanceof OrderProduct)) {
             return false;
         }
 
