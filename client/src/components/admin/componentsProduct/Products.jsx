@@ -112,6 +112,14 @@ const Products = () => {
                   >
                     Create
                   </Button>
+                  <Button
+                    onClick={() => navigate("/admin/products/viewAll")}
+                    color="primary"
+                    size="medium"
+                    variant="contained"
+                  >
+                    Edit
+                  </Button>
                 </TabPanel>
               </CardContent>
             </TabContext>

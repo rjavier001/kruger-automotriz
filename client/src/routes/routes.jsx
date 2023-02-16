@@ -19,6 +19,7 @@ import ContactPage from "../screens/ContactPage";
 import AboutUsPage from "../screens/AboutUsPage";
 import PaymentCompletedPage from "../screens/PaymentCompletedPage";
 import { ProgressOrder } from "../screens/ProgressOrder";
+import EditDeleteProducts from "../components/admin/componentsProduct/EditDeleteProducts";
 
 export const routesGen = {
   home: "/",
@@ -101,6 +102,15 @@ const routes = [
       </ProtectedPageAdmin>
     ),
     state: "create",
+  },
+  {
+    path: "/admin/products/viewAll",
+    element: (
+      <ProtectedPageAdmin>
+        <EditDeleteProducts />
+      </ProtectedPageAdmin>
+    ),
+    state: "edit-all-products",
   },
   {
     path: "/admin/products/edit/:id",
