@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.order.msvorder.entity.Order;
 import com.order.msvorder.entity.OrderProduct;
+import com.order.msvorder.entity.Payment;
 import com.order.msvorder.model.Product;
 import com.order.msvorder.services.order.OrderServiceImpl;
 
@@ -108,6 +109,22 @@ public class OrderController {
         Optional<Order> o;
         try {
             o = orderService.assignProduct(orderProduct, orderId);
+        } catch (FeignException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Collections.singletonMap("mensaje",
+                    "No existe el producto por el id o no se logro la comunicación" + e.getMessage()));
+        }
+
+        if (o.isPresent()) {
+            return ResponseEntity.status(HttpStatus.CREATED).body(o.get());
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    @PutMapping("/assign-payment/{orderId}")
+    public ResponseEntity<?> assignPayment(@RequestBody Payment payment, @PathVariable Long orderId) {
+        Optional<Order> o;
+        try {
+            o = orderService.assignPayment(payment, orderId);
         } catch (FeignException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Collections.singletonMap("mensaje",
                     "No existe el producto por el id o no se logro la comunicación" + e.getMessage()));

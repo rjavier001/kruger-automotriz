@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.UUID;
 
 @Entity
-@Table(name="payments")
+@Table(name = "payments")
 @Getter
 @Setter
 public class Payment {
@@ -20,9 +20,8 @@ public class Payment {
         this.status = status;
         this.payPallPaymentId = payPallPaymentId;
         this.created = created;
-//        this.order = order;
+        // this.order = order;
     }
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,12 +31,15 @@ public class Payment {
 
     private UUID payPallPaymentId;
 
+    private String cardNumber;
+
+    private String shipmentAddress;
+
     @Temporal(TemporalType.DATE)
     private Date created;
 
-//    @OneToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "order_id")
-//    private Order order;
-
+    // @OneToOne(cascade = CascadeType.ALL)
+    // @JoinColumn(name = "order_id")
+    // private Order order;
 
 }

@@ -1,6 +1,5 @@
 package com.order.msvorder.services.order;
 
-
 import com.order.msvorder.clients.ProductClientRest;
 import com.order.msvorder.clients.UserClientRest;
 import com.order.msvorder.entity.Order;
@@ -20,7 +19,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
-public class OrderServiceImpl implements IOrderService{
+public class OrderServiceImpl implements IOrderService {
 
     @Autowired
     OrderRepository orderRepository;
@@ -34,26 +33,26 @@ public class OrderServiceImpl implements IOrderService{
     @Autowired
     private ProductClientRest clientProduct;
 
-
-    // -------------------create order service--------------------------------------------
-    public Order createOrder(Order order, Long customerId){
+    // -------------------create order
+    // service--------------------------------------------
+    public Order createOrder(Order order, Long customerId) {
 
         order.setCreated(new Date());
         order.setShipmentDate(new Date());
 
         Order createdOrder = orderRepository.save(order);
 
-        //Al crear la orden se debe también crear el payment
+        // Al crear la orden se debe también crear el payment
         paymentServiceImpl.createPayment(new Payment("CREATED", UUID.randomUUID(), new Date()));
-
 
         return createdOrder;
 
     }
 
-    // -------------------create order sin userId--------------------------------------------
-    public Order createOrder2(Order order){
-        //crear un payment por defecto al crearse una orden
+    // -------------------create order sin
+    // userId--------------------------------------------
+    public Order createOrder2(Order order) {
+        // crear un payment por defecto al crearse una orden
         Payment payment = new Payment("CREATED", UUID.randomUUID(), new Date());
         order.setOrderProducts(order.getOrderProducts());
         order.setCreated(new Date());
@@ -61,15 +60,13 @@ public class OrderServiceImpl implements IOrderService{
         order.setPayment(payment);
         Order createdOrder = orderRepository.save(order);
 
-
-
-
         return createdOrder;
 
     }
 
-    // -------------------getOrder by ID service--------------------------------------------
-    public Order getOrder(Long id){
+    // -------------------getOrder by ID
+    // service--------------------------------------------
+    public Order getOrder(Long id) {
         Order orderDB = orderRepository.findById(id).orElse(null);
         return orderDB;
     }
@@ -84,12 +81,13 @@ public class OrderServiceImpl implements IOrderService{
     @Override
     @Transactional(readOnly = true)
     public Optional<Order> findByIdWithProducts(Long id) {
-        Optional<Order> o= orderRepository.findById(id);
+        Optional<Order> o = orderRepository.findById(id);
 
-        if(o.isPresent()){
+        if (o.isPresent()) {
             Order order = o.get();
-            if(!order.getOrderProducts().isEmpty()){
-                List<Long> ids = order.getOrderProducts().stream().map(op -> op.getProductId()).collect(Collectors.toList());
+            if (!order.getOrderProducts().isEmpty()) {
+                List<Long> ids = order.getOrderProducts().stream().map(op -> op.getProductId())
+                        .collect(Collectors.toList());
 
                 List<Product> products = clientProduct.getAllProductsByOrder(ids);
                 order.setProducts(products);
@@ -102,13 +100,13 @@ public class OrderServiceImpl implements IOrderService{
     @Override
     @Transactional
     public Optional<Order> assignProduct(OrderProduct orderProduct, Long orderId) {
-        Optional<Order> o= orderRepository.findById(orderId);
-        if(o.isPresent()){
-//            Product productMsv = clientProduct.detail(product.getId());
+        Optional<Order> o = orderRepository.findById(orderId);
+        if (o.isPresent()) {
+            // Product productMsv = clientProduct.detail(product.getId());
 
             Order order = o.get();
-//            OrderProduct orderProduct = new OrderProduct();
-//            orderProduct.setProductId(productMsv.getId());
+            // OrderProduct orderProduct = new OrderProduct();
+            // orderProduct.setProductId(productMsv.getId());
 
             order.addOrderProduct(orderProduct);
             orderRepository.save(order);
@@ -120,9 +118,26 @@ public class OrderServiceImpl implements IOrderService{
 
     @Override
     @Transactional
+    public Optional<Order> assignPayment(Payment payment, Long orderId) {
+        Optional<Order> o = orderRepository.findById(orderId);
+        if (o.isPresent()) {
+            Order order = o.get();
+            payment.setCreated(new Date());
+            order.setShipmentAddress(payment.getShipmentAddress());
+            order.setPayment(payment);
+            order.setStatus("Payment completed");
+            orderRepository.save(order);
+            return Optional.of(order);
+        }
+
+        return Optional.empty();
+    }
+
+    @Override
+    @Transactional
     public Optional<Product> deleteProduct(Product product, Long orderId) {
-        Optional<Order> o= orderRepository.findById(orderId);
-        if(o.isPresent()){
+        Optional<Order> o = orderRepository.findById(orderId);
+        if (o.isPresent()) {
             Product productMsv = clientProduct.detail(product.getId());
 
             Order order = o.get();
@@ -139,21 +154,22 @@ public class OrderServiceImpl implements IOrderService{
     // -------------------Delete order --------------------------------------------
     @Override
     @Transactional
-    public void deleteOrder(Long id){
+    public void deleteOrder(Long id) {
         orderRepository.deleteById(id);
-        //se aprovecha este metodo para eliminar de una vez Order de User
-        //eliminamos order de ORDERS y order de USER
+        // se aprovecha este metodo para eliminar de una vez Order de User
+        // eliminamos order de ORDERS y order de USER
         client.deleteUserOrderById(id);
     }
 
-    // -------------------UpdateOrder service--------------------------------------------
+    // -------------------UpdateOrder
+    // service--------------------------------------------
     @Override
-    public Order updateOrder(Order order){
+    public Order updateOrder(Order order) {
         Order existingOrder = getOrder(order.getId());
-        if(existingOrder == null){
+        if (existingOrder == null) {
             return null;
         }
-//        Order existingOrder = orderRepository.findById(order.getId()).orElse(null);
+        // Order existingOrder = orderRepository.findById(order.getId()).orElse(null);
         existingOrder.setStatus(order.getStatus());
         existingOrder.setCreated(order.getCreated());
         existingOrder.setShipmentAddress(order.getShipmentAddress());
@@ -165,7 +181,7 @@ public class OrderServiceImpl implements IOrderService{
 
     @Override
     public List<Order> findAllOrders() {
-        return  orderRepository.findAll();
+        return orderRepository.findAll();
     }
 
     @Override

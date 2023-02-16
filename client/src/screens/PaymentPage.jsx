@@ -15,13 +15,25 @@ import { useSelector, useDispatch } from "react-redux";
 import Image from "mui-image";
 import { useNavigate } from "react-router-dom";
 import { clearCart, paymentClear } from "../redux/features/cartSlice";
+import ordersApi from "../api/modules/orders.api";
+
 const PaymentPage = () => {
   const cart = useSelector((state) => state.cart);
+  const { userOrderId } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const { userData } = useSelector((state) => state.user);
   const navigate = useNavigate();
   const handleClearCart = () => {
     dispatch(paymentClear());
+  };
+
+  const assignPayment = async (values) => {
+    const { response } = await ordersApi.assignPaymentToOrder(userOrderId, {
+      cardNumber: values.cardNumber,
+      shipmentAddress: values.address,
+      status: "Payment completed",
+    });
+    console.log("Payment info", response);
   };
 
   const payments = [
@@ -46,6 +58,7 @@ const PaymentPage = () => {
       /* alert(JSON.stringify(values, null, 2)); */
       resetForm();
       handleClearCart();
+      assignPayment(values);
       navigate("/success");
     },
   });
