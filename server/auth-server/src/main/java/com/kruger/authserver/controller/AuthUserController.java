@@ -1,6 +1,6 @@
 package com.kruger.authserver.controller;
 
-
+import com.kruger.authserver.dto.AuthDto;
 import com.kruger.authserver.dto.AuthUserDto;
 import com.kruger.authserver.dto.TokenDto;
 import com.kruger.authserver.entity.AuthUser;
@@ -22,9 +22,9 @@ public class AuthUserController {
   AuthUserService authUserService;
 
   @GetMapping()
-  public ResponseEntity<TokenDto> validateAuthUser(HttpServletRequest request){
+  public ResponseEntity<TokenDto> validateAuthUser(HttpServletRequest request) {
     String jwt = request.getHeader("Authorization").replace("Bearer ", "");
-    if(jwt==null){
+    if (jwt == null) {
       return ResponseEntity.badRequest().build();
     }
     TokenDto tokenDto = authUserService.validateAuthUser(jwt);
@@ -32,27 +32,36 @@ public class AuthUserController {
       return ResponseEntity.badRequest().build();
     return ResponseEntity.ok(tokenDto);
   }
+
   @PostMapping("/sign-in")
-  public ResponseEntity<TokenDto> login(@RequestBody AuthUserDto dto){
+  public ResponseEntity<TokenDto> login(@RequestBody AuthUserDto dto) {
     TokenDto tokenDto = authUserService.login(dto);
-    if(tokenDto == null)
+    if (tokenDto == null)
       return ResponseEntity.badRequest().build();
     return ResponseEntity.ok(tokenDto);
   }
 
   @PostMapping("/validate")
-  public ResponseEntity<TokenDto> validate(@RequestParam String token){
+  public ResponseEntity<TokenDto> validate(@RequestParam String token) {
     TokenDto tokenDto = authUserService.validate(token);
-    if(tokenDto == null)
+    if (tokenDto == null)
       return ResponseEntity.badRequest().build();
     return ResponseEntity.ok(tokenDto);
   }
 
   @PostMapping("/sign-up")
-  public ResponseEntity<TokenDto> create(@RequestBody AuthUserDto dto){
+  public ResponseEntity<TokenDto> create(@RequestBody AuthUserDto dto) {
     TokenDto tokenDto = authUserService.save(dto);
-    if(tokenDto == null)
+    if (tokenDto == null)
       return ResponseEntity.badRequest().build();
     return ResponseEntity.ok(tokenDto);
+  }
+
+  @PostMapping("/update-password")
+  public ResponseEntity<?> updatePassword(@RequestBody AuthDto dto) {
+    TokenDto tokenDto = authUserService.update(dto);
+    if (tokenDto == null)
+      return ResponseEntity.badRequest().build();
+    return ResponseEntity.ok().build();
   }
 }
