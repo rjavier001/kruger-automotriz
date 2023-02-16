@@ -46,9 +46,9 @@ const SigninForm = ({ switchAuthState }) => {
       setIsLoginRequest(true);
       const { response, err } = await userApi.signin(values);
       setIsLoginRequest(false);
-      createOrder();
 
       if (response) {
+        createOrder();
         signinForm.resetForm();
         dispatch(setUserRole(response.role));
         dispatch(setUser(response));
