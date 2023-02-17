@@ -27,6 +27,7 @@ import {
 import { NavLink } from "react-router-dom";
 import { Container } from "@mui/system";
 import userApi from "../api/modules/users.api";
+import ordersApi from "../api/modules/orders.api";
 
 const CheckOutPage = () => {
   const cart = useSelector((state) => state.cart);
@@ -50,6 +51,7 @@ const CheckOutPage = () => {
   };
   const handleClearCart = () => {
     dispatch(clearCart());
+    clearOrder();
   };
 
   const assignOrd = async () => {
@@ -57,6 +59,11 @@ const CheckOutPage = () => {
       orderId: userOrderId,
     });
     console.log("Order assigned", response);
+  };
+
+  const clearOrder = async () => {
+    const { response } = await ordersApi.clearOrder(userOrderId, {});
+    console.log("Cleared cart", response);
   };
 
   const handleonPay = () => {

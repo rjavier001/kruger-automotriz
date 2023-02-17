@@ -182,6 +182,7 @@ public class OrderServiceImpl implements IOrderService {
         if (existingOrder == null) {
             return null;
         }
+        existingOrder.clearOrderProduct();
         // Order existingOrder = orderRepository.findById(order.getId()).orElse(null);
         existingOrder.setStatus(order.getStatus());
         existingOrder.setCreated(order.getCreated());

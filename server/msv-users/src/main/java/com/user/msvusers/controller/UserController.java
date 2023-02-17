@@ -19,7 +19,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/users")
-public class UserController extends FallBackMethods{
+public class UserController extends FallBackMethods {
 
   @Autowired
   private IUserService service;
@@ -28,103 +28,115 @@ public class UserController extends FallBackMethods{
   private UserServiceImpl serviceIm;
 
   @GetMapping
-  public List<User> getAllUser(){
+  public List<User> getAllUser() {
     return service.findAll();
   }
 
   @GetMapping("/{id}")
-  public ResponseEntity<?> getUserById(@PathVariable Long id){
-    Optional<User> optionalUser=service.findById(id); //service.findById(id);
-    if(optionalUser.isPresent()){
-//      return ResponseEntity.ok(optionalUser.get());
+  public ResponseEntity<?> getUserById(@PathVariable Long id) {
+    Optional<User> optionalUser = service.findById(id); // service.findById(id);
+    if (optionalUser.isPresent()) {
+      // return ResponseEntity.ok(optionalUser.get());
       return new ResponseEntity<>(optionalUser.get(), HttpStatus.OK);
     }
     return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
   }
 
   @PostMapping("/save")
-  public ResponseEntity<?> createUser(@RequestBody User user){
-    return new ResponseEntity<>(service.save(user),HttpStatus.CREATED);
+  public ResponseEntity<?> createUser(@RequestBody User user) {
+    return new ResponseEntity<>(service.save(user), HttpStatus.CREATED);
+  }
+
+  @GetMapping(value = "list/{id}")
+  public ResponseEntity<?> getUserOrders(@PathVariable("id") long id) {
+
+    Optional<List<UserOrder>> o = serviceIm.findUserOrders(id);
+
+    if (!o.isPresent()) {
+      return ResponseEntity.notFound().build();
+    }
+    return ResponseEntity.ok(o.get());
   }
 
   @PutMapping("/{id}")
-  public ResponseEntity<?> editUser(@RequestBody User req,@PathVariable Long id){
-    Optional<User> optionalUser= service.findById(id);
-    if(optionalUser.isPresent()){
-      User userDB=optionalUser.get();
+  public ResponseEntity<?> editUser(@RequestBody User req, @PathVariable Long id) {
+    Optional<User> optionalUser = service.findById(id);
+    if (optionalUser.isPresent()) {
+      User userDB = optionalUser.get();
       userDB.setName(req.getName());
       userDB.setLastName(req.getLastName());
       userDB.setAge(req.getAge());
       userDB.setPhone(req.getPhone());
       userDB.setEmail(req.getEmail());
       userDB.setAddress(req.getAddress());
-      return new ResponseEntity<>(service.save(userDB),HttpStatus.CREATED);
+      return new ResponseEntity<>(service.save(userDB), HttpStatus.CREATED);
     }
     return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
   }
 
   @DeleteMapping("/{id}")
-  public ResponseEntity<?> deleteUser(@PathVariable Long id){
+  public ResponseEntity<?> deleteUser(@PathVariable Long id) {
     Optional<User> optionalUser = service.findById(id);
-    if(optionalUser.isPresent()){
+    if (optionalUser.isPresent()) {
       service.delete(id);
-      return new ResponseEntity<>(null,HttpStatus.NO_CONTENT);
+      return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
     }
-    return new ResponseEntity<>(null,HttpStatus.NOT_FOUND);
+    return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
   }
 
-
-//  @CircuitBreaker(name="ordersCB", fallbackMethod = "fallBackAssignOrder")
-    @PutMapping("/assign-order/{userId}")
-  public ResponseEntity<?> assignOrder(@RequestBody UserOrder userOrder, @PathVariable Long userId){
+  // @CircuitBreaker(name="ordersCB", fallbackMethod = "fallBackAssignOrder")
+  @PutMapping("/assign-order/{userId}")
+  public ResponseEntity<?> assignOrder(@RequestBody UserOrder userOrder, @PathVariable Long userId) {
     Optional<User> o;
-    try{
+    try {
       o = serviceIm.assignOrder(userOrder, userId);
-    } catch (FeignException e){
-      return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Collections.singletonMap("mensaje","No existe el usuario por el ID o error en la comunicacion"+ e.getMessage()));
+    } catch (FeignException e) {
+      return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Collections.singletonMap("mensaje",
+          "No existe el usuario por el ID o error en la comunicacion" + e.getMessage()));
     }
-    if(o.isPresent()){
+    if (o.isPresent()) {
       return ResponseEntity.status(HttpStatus.CREATED).body(o.get());
     }
-    return  ResponseEntity.notFound().build();
+    return ResponseEntity.notFound().build();
   }
 
-
-  @CircuitBreaker(name="ordersCB", fallbackMethod = "fallBackCreateOrder")
+  @CircuitBreaker(name = "ordersCB", fallbackMethod = "fallBackCreateOrder")
   @PostMapping("/create-order/{userId}")
-  public ResponseEntity<?> createOrder(@RequestBody Order order, @PathVariable Long userId){
+  public ResponseEntity<?> createOrder(@RequestBody Order order, @PathVariable Long userId) {
     Optional<Order> o;
-    //if u want use fallback methods disable try-catch
-    try{
+    // if u want use fallback methods disable try-catch
+    try {
       o = service.createOrder(order, userId);
-    } catch (FeignException e){
+    } catch (FeignException e) {
       return ResponseEntity.status(HttpStatus.NOT_FOUND)
-              .body(Collections.singletonMap("mensaje","No se pudo crear la orden o error en la comunicacion"+ e.getMessage()));
+          .body(Collections.singletonMap("mensaje",
+              "No se pudo crear la orden o error en la comunicacion" + e.getMessage()));
     }
-    if(o.isPresent()){
+    if (o.isPresent()) {
       return ResponseEntity.status(HttpStatus.CREATED).body(o.get());
     }
-    return  ResponseEntity.notFound().build();
+    return ResponseEntity.notFound().build();
   }
 
-  @CircuitBreaker(name="ordersCB", fallbackMethod = "fallBackDeleteOrder")
+  @CircuitBreaker(name = "ordersCB", fallbackMethod = "fallBackDeleteOrder")
   @DeleteMapping("/delete-order/{userId}")
-  public ResponseEntity<?> deleteOrder(@RequestBody Order order, @PathVariable Long userId){
+  public ResponseEntity<?> deleteOrder(@RequestBody Order order, @PathVariable Long userId) {
     Optional<Order> o;
-    try{
+    try {
       o = service.deleteOrder(order, userId);
-    } catch (FeignException e){
-      return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Collections.singletonMap("mensaje","No existe el usuario por el ID o error en la comunicacion"+ e.getMessage()));
+    } catch (FeignException e) {
+      return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Collections.singletonMap("mensaje",
+          "No existe el usuario por el ID o error en la comunicacion" + e.getMessage()));
     }
-    if(o.isPresent()){
+    if (o.isPresent()) {
       return ResponseEntity.status(HttpStatus.OK).body(o.get());
     }
-    return  ResponseEntity.notFound().build();
+    return ResponseEntity.notFound().build();
   }
 
-  @CircuitBreaker(name="ordersCB", fallbackMethod = "fallBackDeleteOrderById")
+  @CircuitBreaker(name = "ordersCB", fallbackMethod = "fallBackDeleteOrderById")
   @DeleteMapping("/delete-user-order/{id}")
-  public ResponseEntity<?> deleteUserOrderById(@PathVariable Long id){
+  public ResponseEntity<?> deleteUserOrderById(@PathVariable Long id) {
     service.deleteUserOrderById(id);
     return ResponseEntity.noContent().build();
   }
