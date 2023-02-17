@@ -6,15 +6,35 @@ import {
   CardContent,
   Typography,
 } from "@mui/material";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
+import { useForm } from "../components/admin/hooks/useForm";
 
 const ContactPage = () => {
+  const [formState, setFormState] = useState({
+    name: "",
+    last: "",
+    email: "",
+    phone: "",
+    message: "",
+  });
+
+  const [
+    { user_name, user_last, user_email, user_phone, message },
+    handleInputChange,
+    reset,
+  ] = useForm({
+    user_name: "",
+    user_last: "",
+    user_email: "",
+    user_phone: "",
+    message: "",
+  });
+
   const form = useRef();
 
   const sendEmail = (e) => {
     e.preventDefault();
-
     emailjs
       .sendForm(
         "service_uyhf86h",
@@ -26,6 +46,7 @@ const ContactPage = () => {
         (result) => {
           console.log(result.text);
           console.log("mensaje enviado");
+          reset();
         },
         (error) => {
           console.log(error.text);
@@ -66,6 +87,8 @@ const ContactPage = () => {
                   required
                   type="text"
                   name="user_name"
+                  value={user_name}
+                  onChange={handleInputChange}
                 />
               </Grid>
               <Grid xs={12} sm={6} item>
@@ -77,6 +100,8 @@ const ContactPage = () => {
                   required
                   type="text"
                   name="user_last"
+                  value={user_last}
+                  onChange={handleInputChange}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -88,6 +113,8 @@ const ContactPage = () => {
                   required
                   type="email"
                   name="user_email"
+                  value={user_email}
+                  onChange={handleInputChange}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -99,6 +126,8 @@ const ContactPage = () => {
                   fullWidth
                   required
                   name="user_phone"
+                  value={user_phone}
+                  onChange={handleInputChange}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -111,6 +140,8 @@ const ContactPage = () => {
                   fullWidth
                   required
                   name="message"
+                  value={message}
+                  onChange={handleInputChange}
                 />
               </Grid>
               <Grid item xs={12}>
