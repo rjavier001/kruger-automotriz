@@ -53,17 +53,28 @@ public class UserServiceImpl implements IUserService {
     repository.deleteUserOrderById(id);
   }
 
-////  @Override
-//  @Transactional(readOnly = true)
-//  public Optional<User> findByAuthId(int id) {
-//    Optional<User> o = repository.findByAuthId(id);
-//    if (o.isPresent()) {
-//
-//      return o;
-//    }
-//    return Optional.empty();
-//  }
+  //// @Override
+  // @Transactional(readOnly = true)
+  // public Optional<User> findByAuthId(int id) {
+  // Optional<User> o = repository.findByAuthId(id);
+  // if (o.isPresent()) {
+  //
+  // return o;
+  // }
+  // return Optional.empty();
+  // }
+  /* GET ORDERPRODUCTS FROM ORDER */
+  @Override
+  @Transactional(readOnly = true)
+  public Optional<List<UserOrder>> findUserOrders(Long id) {
+    Optional<User> u = repository.findById(id);
 
+    if (u.isPresent()) {
+      User user = u.get();
+      return Optional.of(user.getUserOrders());
+    }
+    return Optional.empty();
+  }
 
   @Override
   @Transactional(readOnly = true)
@@ -87,14 +98,14 @@ public class UserServiceImpl implements IUserService {
   public Optional<User> assignOrder(UserOrder userOrder, Long userId) {
     Optional<User> o = repository.findById(userId);
     if (o.isPresent()) {
-//      Order orderMsv = client.getOrder(order.getId());
+      // Order orderMsv = client.getOrder(order.getId());
 
       User user = o.get();
       user.addUserOrder(userOrder);
-//      UserOrder userOrder = new UserOrder();
-//      userOrder.setOrderId(orderMsv.getId());
-//
-//      user.addUserOrder(userOrder);
+      // UserOrder userOrder = new UserOrder();
+      // userOrder.setOrderId(orderMsv.getId());
+      //
+      // user.addUserOrder(userOrder);
       repository.save(user);
       return Optional.of(user);
     }
