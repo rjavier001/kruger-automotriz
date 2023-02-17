@@ -63,6 +63,9 @@ public class Product {
     @Column(name = "discount_id")
     private Long discountId;
 
+    @Column(name = "objectID")
+    private Integer objectID;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
     @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
