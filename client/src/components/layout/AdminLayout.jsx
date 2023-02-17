@@ -153,8 +153,8 @@ const AdminLayout = () => {
                   </ListItem>
                 ))}
                 <ListItemButton
-                 component={Link}
-                 to="/"
+                  component={Link}
+                  to="/"
                   sx={{ borderRadius: "10px" }}
                   onClick={handdleLogut}
                 >
@@ -172,7 +172,7 @@ const AdminLayout = () => {
                 </ListItemButton>
               </List>
             </Drawer>
-            <Box component="main" sx={{ flexGrow: 1}}>
+            <Box sx={{ flexGrow: 1 }}>
               <Outlet />
             </Box>
           </Box>

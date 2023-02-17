@@ -35,7 +35,7 @@ const themeConfigs = {
               contrastText: "#ffffff",
             },
             background: {
-              default: colors.grey["50"],
+              // default: colors.grey["50"],
               // paper: "#ff910d",
             },
             text: {

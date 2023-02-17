@@ -13,6 +13,8 @@ const userEndpoints = {
   updateUserById: ({ id }) => `users/${id}`,
   deleteUserById: ({ id }) => `users/${id}`,
   assignOrder: ({ id }) => `users/assign-order/${id}`,
+
+  userListOrders: ({ id }) => `users/list/${id}`,
 };
 
 const userApi = {
@@ -113,6 +115,16 @@ const userApi = {
       return { err };
     }
   },
+
+  userListOrders: async (id) => {
+    try {
+      const response = await privateClient.get(userEndpoints.userListOrders({id}));
+      return {response}
+    }
+    catch (err){
+      return{err}
+    }
+  }
 };
 
 export default userApi;

@@ -117,8 +117,9 @@ const Products = () => {
                     color="primary"
                     size="medium"
                     variant="contained"
+                    sx={{marginLeft:2}}
                   >
-                    Edit
+                    View
                   </Button>
                 </TabPanel>
               </CardContent>
@@ -146,7 +147,7 @@ const Products = () => {
                     size="medium"
                     variant="contained"
                   >
-                    Create
+                    View
                   </Button>
                 </TabPanel>
               </CardContent>
@@ -174,7 +175,7 @@ const Products = () => {
                     size="medium"
                     variant="contained"
                   >
-                    Create
+                    View
                   </Button>
                 </TabPanel>
               </CardContent>
@@ -202,7 +203,7 @@ const Products = () => {
                     size="medium"
                     variant="contained"
                   >
-                    Create
+                    View
                   </Button>
                 </TabPanel>
               </CardContent>

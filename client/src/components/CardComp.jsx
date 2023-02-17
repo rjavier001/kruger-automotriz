@@ -29,6 +29,7 @@ import { setAuthModalOpen } from "../redux/features/authModalSlice";
 import userApi from "../api/modules/users.api";
 import { setOrderId } from "../redux/features/userSlice";
 import ordersApi from "../api/modules/orders.api";
+import { Highlight } from "react-instantsearch-hooks-web";
 
 const CardComp = ({ props }) => {
   const [product, setProduct] = useState([]);
@@ -214,11 +215,12 @@ const CardComp = ({ props }) => {
                 component="div"
                 sx={uiConfigs.item}
               >
-                {name.charAt(0).toUpperCase() + name.slice(1)}
+                {name?.charAt(0).toUpperCase() + name?.slice(1)}
               </Typography>
-              <Typography variant="body2" color="text.secondary">
+              <Highlight attribute="description" hit={props} />
+              {/* <Typography variant="body2" color="text.secondary">
                 {description}
-              </Typography>
+              </Typography> */}
             </Box>
           </Box>
           <Box
@@ -254,7 +256,7 @@ const CardComp = ({ props }) => {
         </CardContent>
         <CardActions sx={uiConfigs.button}>
           <Stack direction={"row"} spacing={12}>
-            {location.pathname === "/viewAll" ? (
+            {location.pathname === "/admin/products/viewAll" ? (
               <>
                 <NavLink
                   to={{ pathname: `/admin/products/edit/${id}` }}

@@ -1,10 +1,9 @@
 package com.product.msvproducts.controller;
 
+
 import com.product.msvproducts.entity.Product;
 import com.product.msvproducts.entity.Reviews;
 import com.product.msvproducts.service.product.IProductService;
-
-
 import javax.validation.Valid;
 
 import com.product.msvproducts.service.reviews.ReviewServiceImpl;
@@ -32,8 +31,10 @@ public class ProductController {
 
     @GetMapping
     public ResponseEntity<List<Product>> listCategories(){
+
         List<Product> products = new ArrayList<>();
         products = service.listAllProducts();
+
         if(products.isEmpty()){
             return ResponseEntity.noContent().build();
         }
