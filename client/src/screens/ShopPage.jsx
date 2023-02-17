@@ -1,6 +1,14 @@
 import { useDispatch } from "react-redux";
 import { useEffect, useMemo, useState } from "react";
-import { Box, Grid, Input, MenuItem, Stack, TextField } from "@mui/material";
+import {
+  Box,
+  Grid,
+  Input,
+  MenuItem,
+  Stack,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { Container } from "@mui/system";
 import React from "react";
 import CardComp from "../components/CardComp";
@@ -90,12 +98,14 @@ const Shop = () => {
     "STF3VI4F0V",
     "ebafaf8b16373dded67356b9e639bc2a"
   );
+
   const index = searchClient.initIndex("krugermotors");
   const fetchDataFromDatabase = () => {
     const productos = products;
     return productos;
   };
   const records = fetchDataFromDatabase();
+
   // console.log(records);
   /*
   index.then(({ hits }) => {
@@ -113,17 +123,13 @@ const Shop = () => {
 
   function CustomHits(props) {
     const { hits, results, sendEvent } = useHits(props);
-    // console.log(hits);
     <Highlight attribute="description" hit={hits} />;
 
     return hits.map((item, i) => (
       <Grid key={i} item xs={12} md={4} sm={6} justify="center">
-        {/* <Highlight attribute="description" hit={item} /> */}
         <CardComp props={item} />
       </Grid>
     ));
-
-    // return <CardComp props={hits} />;
   }
 
   function CustomRefinementList(props) {
@@ -152,105 +158,70 @@ const Shop = () => {
       <Container>
         <Stack>{/* SEARCH */}</Stack>
 
-        <Grid container my={4}>
-          <Grid
-            item
-            xs={12}
-            sm={6}
-            container
-            direction="row"
-            style={{ display: "flex", justifyContent: "center" }}
-            my={4}
-          >
-            <Box sx={{ display: "flex", alignItems: "center" }}>
-              <Input
-                sx={{ width: "250px", fontSize: "1.1rem" }}
-                placeholder="Search product"
-                onChange={handleSearch}
-              />
-              <SearchIcon />
-            </Box>
-          </Grid>
-          <Grid
-            item
-            xs={12}
-            sm={6}
-            container
-            direction="row"
-            style={{ display: "flex", justifyContent: "center" }}
-            my={4}
-          >
-            <Container>
-              <TextField
-                fullWidth
-                select
-                label="Select Category"
-                defaultValue={categorySelect}
-                onChange={handleCategory}
-              >
-                {categories.map((category, item) => (
-                  <MenuItem key={item} value={category.name}>
-                    {category.name}
-                  </MenuItem>
-                ))}
-              </TextField>
-            </Container>
-          </Grid>
-        </Grid>
-
         <InstantSearch searchClient={searchClient} indexName="krugermotors">
           <SearchBox />
-          <CurrentRefinements
-            classNames={{
-              categoryLabel: "MyCustomCurrentRefinements",
-            }}
-            value="ASD"
-          />
-          <ClearRefinements
-            translations={{
-              resetButtonText: "Borrar filtros",
-            }}
-          />
-          <h2>Categorias</h2>
-          {/* <RefinementList attribute="category" /> */}
-          {/* <CustomRefinementList attribute="category.name" {...this} /> */}
-          <RefinementList
-            attribute="category.name"
-            showMore={true}
-            translations={{
-              showMoreButtonText({ isShowingMore }) {
-                return isShowingMore
-                  ? "Mostrar menos marcas"
-                  : "Mostrar más marcas";
-              },
-            }}
-          />
+          <Stack
+            direction={{ xs: "column", sm: "row" }}
+            spacing={{ xs: 1, sm: 2, md: 4 }}
+          >
+            <Stack>
+              <h2>Categorias</h2>
+              <RefinementList
+                attribute="category.name"
+                showMore={true}
+                translations={{
+                  showMoreButtonText({ isShowingMore }) {
+                    return isShowingMore
+                      ? "Mostrar menos marcas"
+                      : "Mostrar más marcas";
+                  },
+                }}
+              />
+            </Stack>
 
-          <h2>Ordenar por:</h2>
-          <SortBy
-            items={[
-              { label: "Más relevantes", value: "krugermotors" },
-              { label: "Menor precio", value: "instant_search_price_asc" },
-              { label: "Mayor precio", value: "instant_search_price_desc" },
-            ]}
-          />
-          <Configure hitsPerPage={12} />
+            <Stack>
+              <Stack direction="row" justifyContent="space-between">
+                <ClearRefinements
+                  translations={{
+                    resetButtonText: "Borrar filtros",
+                  }}
+                />
+                <CurrentRefinements />
+                <Stack
+                  direction="row"
+                  justifyContent="flex-end"
+                  alignItems="flex-end"
+                >
+                  <Typography variant="h6" sx={{ fontWeight: "bold" }}>
+                    Ordenar por &nbsp;
+                  </Typography>
+                  <Typography>
+                    <SortBy
+                      items={[
+                        { label: "Más relevantes", value: "krugermotors" },
+                        {
+                          label: "Menor precio",
+                          value: "instant_search_price_asc",
+                        },
+                        {
+                          label: "Mayor precio",
+                          value: "instant_search_price_desc",
+                        },
+                      ]}
+                    />
+                  </Typography>
+                </Stack>
+              </Stack>
 
-          {/* <Hits hitComponent={Hit} /> */}
-          <Grid item container spacing={2} marginTop="2px">
-            <CustomHits {...this} />
-          </Grid>
+              <Configure hitsPerPage={12} />
+              <Grid item container spacing={2} marginTop="2px">
+                <CustomHits {...this} />
+              </Grid>
 
-          <Pagination />
+              <Pagination />
+            </Stack>
+          </Stack>
         </InstantSearch>
-
-        {/* <Grid item container spacing={2} marginTop="2px">
-          {searchResults.slice(0, 12).map((item, i) => (
-            <Grid key={i} item xs={12} md={4} sm={6} justify="center">
-              <CardComp props={item} />
-            </Grid>
-          ))}
-        </Grid> */}
       </Container>
     </>
   );
