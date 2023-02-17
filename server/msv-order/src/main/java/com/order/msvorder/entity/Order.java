@@ -1,6 +1,5 @@
 package com.order.msvorder.entity;
 
-
 import javax.persistence.*;
 import com.order.msvorder.model.Product;
 import lombok.AllArgsConstructor;
@@ -10,12 +9,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-
 @Data
 @Entity
-@Table(name="orders")
+@Table(name = "orders")
 @AllArgsConstructor
-//@NoArgsConstructor
+// @NoArgsConstructor
 public class Order {
 
     @Id
@@ -30,22 +28,24 @@ public class Order {
 
     private String status;
 
-    @Column(name="shipment_address")
+    @Column(name = "shipment_address")
     private String shipmentAddress;
 
     @Temporal(TemporalType.DATE)
-    @Column(name="shipment_date")
+    @Column(name = "shipment_date")
     private Date shipmentDate;
 
-/*
-    @Valid
-    @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "order_id")
-    private List<OrderItem> items;
-
- */
-
+    /*
+     * @Valid
+     * 
+     * @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+     * 
+     * @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+     * 
+     * @JoinColumn(name = "order_id")
+     * private List<OrderItem> items;
+     * 
+     */
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "order_id")
@@ -59,11 +59,16 @@ public class Order {
         products = new ArrayList<>();
     }
 
-    public void addOrderProduct(OrderProduct orderProduct){
+    public void addOrderProduct(OrderProduct orderProduct) {
         orderProducts.add(orderProduct);
     }
-    public void removeOrderProduct(OrderProduct orderProduct){
+
+    public void removeOrderProduct(OrderProduct orderProduct) {
         orderProducts.remove((orderProduct));
+    }
+
+    public void clearOrderProduct() {
+        orderProducts.clear();
     }
 
     @OneToOne(cascade = CascadeType.ALL)

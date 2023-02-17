@@ -324,7 +324,7 @@ export const EditProduct = () => {
                           variant="contained"
                           color="secondary"
                           fullWidth
-                          onClick={() => navigate("/")}
+                          onClick={() => navigate("/admin/products/viewAll")}
                         >
                           Exit
                         </Button>

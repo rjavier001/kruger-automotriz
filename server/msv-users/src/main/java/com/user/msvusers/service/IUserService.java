@@ -7,27 +7,34 @@ import com.user.msvusers.model.entity.UserOrder;
 import java.util.List;
 import java.util.Optional;
 
-
 //@FeignClient(name = "user-service")
 //@LoadBalancerClient(name = "user-service", configuration= LoadBalancerConfiguration.class)
 public interface IUserService {
   List<User> findAll();
+
   Optional<User> findById(Long id);
-//  Optional<User> findByAuthId(int id);
+
+  // Optional<User> findByAuthId(int id);
   User save(User user);
+
   void delete(Long id);
 
   void deleteUserOrderById(Long id);
 
-  //METODOS relacionados con el cliente http
-  //Optional<Product> asignarProducts
+  // METODOS relacionados con el cliente http
+  // Optional<Product> asignarProducts
   Optional<User> findByIdWithOrders(Long id);
-  //Recibe la orden y el ID del usuario, asigna a un usuario ya existente en BDD
+
+  // Recibe la orden y el ID del usuario, asigna a un usuario ya existente en BDD
   Optional<User> assignOrder(UserOrder userOrder, Long userId);
-  //Recibe la orden y el ID del usuario, es para un usuario que todabia no existe en BDD
+
+  // Recibe la orden y el ID del usuario, es para un usuario que todabia no existe
+  // en BDD
   Optional<Order> createOrder(Order order, Long userId);
-  //Se elimina la orden del usuario mas no de BDD
+
+  // Se elimina la orden del usuario mas no de BDD
   Optional<Order> deleteOrder(Order order, Long userId);
 
+  Optional<List<UserOrder>> findUserOrders(Long userId);
 
 }
