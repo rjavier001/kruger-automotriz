@@ -18,10 +18,11 @@ import Featured from "../components/admin/componentsProduct/Featured";
 import ContactPage from "../screens/ContactPage";
 import AboutUsPage from "../screens/AboutUsPage";
 import PaymentCompletedPage from "../screens/PaymentCompletedPage";
-import { ProgressOrder } from "../screens/ProgressOrder";
+import { ProgressOrderPage } from "../screens/ProgressOrderPage";
 import EditDeleteProducts from "../components/admin/componentsProduct/EditDeleteProducts";
 import PasswordUpdatePage from "../screens/PasswordUpdatePage";
 import UnderConstructionPage from "../screens/UnderConstructionPage";
+import { HistoryPage } from "../screens/HistoryPage";
 
 export const routesGen = {
   home: "/",
@@ -87,8 +88,13 @@ const routes = [
     state: "success",
   },
   {
+    path: "/history",
+    element: <HistoryPage />,
+    state: "progress",
+  },
+  {
     path: "/progressorders",
-    element: <ProgressOrder />,
+    element: <ProgressOrderPage />,
     state: "progress",
   },
   {

@@ -9,7 +9,7 @@ import { useEffect } from "react";
 import { toast } from "react-toastify";
 import userApi from "../../api/modules/users.api";
 // import favoriteApi from "../../api/modules/favorite.api";
-import { setUser, setUserRole } from "../../redux/features/userSlice";
+import { setUser, setUserRole,setUserData } from "../../redux/features/userSlice";
 
 const MainLayout = () => {
   const dispatch = useDispatch();
@@ -22,23 +22,13 @@ const MainLayout = () => {
       if (response) {
         dispatch(setUserRole(response.role));
         dispatch(setUser(response));
+        const userData = await userApi.getInfo(response.userId);
+        dispatch(setUserData(userData.response));
       }
       if (err) dispatch(setUser(null));
     };
     authUser();
   }, [dispatch]);
-
-  // useEffect(() => {
-  //   const getFavorites = async () => {
-  //     const { response, err } = await favoriteApi.getList();
-
-  //     if (response) dispatch(setListFavorites(response));
-  //     if (err) toast.error(err.message);
-  //   };
-
-  //   if (user) getFavorites();
-  //   if (!user) dispatch(setListFavorites([]));
-  // }, [user, dispatch]);
 
   return (
     <>

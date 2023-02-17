@@ -6,6 +6,7 @@ import LockResetOutlinedIcon from "@mui/icons-material/LockResetOutlined";
 import SettingsSuggestIcon from "@mui/icons-material/SettingsSuggest";
 import HistoryIcon from "@mui/icons-material/History";
 import ProductionQuantityLimitsIcon from "@mui/icons-material/ProductionQuantityLimits";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import GroupIcon from "@mui/icons-material/Group";
@@ -57,7 +58,7 @@ const user = [
   },
   {
     display: "in progress orders",
-    path: "/progressorders",
+    path: "/under-construction",
     icon: <ProductionQuantityLimitsIcon />,
     state: "progressorders",
   },
