@@ -32,6 +32,8 @@ public interface IOrderService {
 
     Optional<Order> assignPayment(Payment payment, Long orderId);
 
+    Optional<List<OrderProduct>> findOrderProducts(Long orderId);
+
     // Este metodo no se lo voy a implementar , crea un producto nuevo
     // Optional<Product> createProduct(Product product, Long orderId);
     // Elimina el producto de la orden no de la BDD

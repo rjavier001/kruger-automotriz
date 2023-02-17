@@ -97,6 +97,19 @@ public class OrderServiceImpl implements IOrderService {
         return Optional.empty();
     }
 
+    /* GET ORDERPRODUCTS FROM ORDER */
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<List<OrderProduct>> findOrderProducts(Long id) {
+        Optional<Order> o = orderRepository.findById(id);
+
+        if (o.isPresent()) {
+            Order order = o.get();
+            return Optional.of(order.getOrderProducts());
+        }
+        return Optional.empty();
+    }
+
     @Override
     @Transactional
     public Optional<Order> assignProduct(OrderProduct orderProduct, Long orderId) {
