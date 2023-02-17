@@ -2,6 +2,7 @@ package com.order.msvorder.services.order;
 
 import com.order.msvorder.entity.Order;
 import com.order.msvorder.entity.OrderProduct;
+import com.order.msvorder.entity.Payment;
 import com.order.msvorder.model.Product;
 
 import java.util.List;
@@ -14,7 +15,9 @@ public interface IOrderService {
     Order save(Order order);
 
     public Order createOrder(Order Order, Long customerId);
+
     public Order updateOrder(Order Order);
+
     public void deleteOrder(Long id);
 
     public Order getOrder(Long id);
@@ -23,13 +26,15 @@ public interface IOrderService {
 
     Optional<Order> findByIdWithProducts(Long id);
 
-    //Metodos remotos
-    //Recibe el objeto dle producto y el id de la orden
+    // Metodos remotos
+    // Recibe el objeto dle producto y el id de la orden
     Optional<Order> assignProduct(OrderProduct orderProduct, Long orderId);
-    //Este metodo no se lo voy  a implementar , crea un producto nuevo
-    //Optional<Product> createProduct(Product product, Long orderId);
-    //Elimina el producto de la orden no de la BDD
-    Optional<Product> deleteProduct(Product product, Long orderId);
 
+    Optional<Order> assignPayment(Payment payment, Long orderId);
+
+    // Este metodo no se lo voy a implementar , crea un producto nuevo
+    // Optional<Product> createProduct(Product product, Long orderId);
+    // Elimina el producto de la orden no de la BDD
+    Optional<Product> deleteProduct(Product product, Long orderId);
 
 }
