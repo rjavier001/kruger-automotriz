@@ -69,7 +69,6 @@ const SignupForm = ({ switchAuthState }) => {
         dispatch(setAuthModalOpen(false));
         toast.success("Sign in success");
       }
-
       if (err) setErrorMessage(err.message);
     },
   });

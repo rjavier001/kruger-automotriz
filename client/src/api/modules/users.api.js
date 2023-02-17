@@ -4,9 +4,9 @@ import publicClient from "../client/public.client";
 const userEndpoints = {
   signin: "auth/sign-in",
   signup: "auth/sign-up",
+  passwordUpdate: "auth/update-password",
   validateAuth: "auth",
   getInfo: ({ id }) => `users/${id}`,
-  passwordUpdate: "users/update-password",
 
   listUsers: "users",
   usersById: ({ id }) => `users/${id}`,
@@ -51,14 +51,12 @@ const userApi = {
       return { err };
     }
   },
-  passwordUpdate: async ({ password, newPassword, confirmNewPassword }) => {
+  passwordUpdate: async (data) => {
     try {
-      const response = await privateClient.put(userEndpoints.passwordUpdate, {
-        password,
-        newPassword,
-        confirmNewPassword,
-      });
-
+      const response = await privateClient.put(
+        userEndpoints.passwordUpdate,
+        data
+      );
       return { response };
     } catch (err) {
       return { err };
@@ -83,8 +81,6 @@ const userApi = {
     }
   },
   updateUserById: async (id, data) => {
-    console.log("usersApi", id, data);
-    console.log(localStorage.getItem("actkn"));
     try {
       const response = await privateClient.put(
         userEndpoints.updateUserById({ id }),
@@ -96,7 +92,6 @@ const userApi = {
     }
   },
   deleteUserById: async (id) => {
-    console.log("usersApi", id);
     try {
       const response = await privateClient.delete(
         userEndpoints.deleteUserById({ id })

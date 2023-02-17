@@ -52,9 +52,8 @@ public class AuthUserService {
       return null;
     if (passwordEncoder.matches(dto.getOldPassword(), user.get().getPassword())) {
       String password = passwordEncoder.encode(dto.getNewPassword());
-      AuthUser authUser = AuthUser.builder()
-          .password(password)
-          .build();
+      AuthUser authUser = user.get();
+      authUser.setPassword(password);
       authUserRepository.save(authUser);
       Optional<AuthUser> userLogin = authUserRepository.findByUserName(dto.getUserName());
       return new TokenDto(jwtProvider.createToken(userLogin.get()), userLogin.get().getUserName(),

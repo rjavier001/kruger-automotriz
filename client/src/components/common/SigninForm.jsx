@@ -24,7 +24,6 @@ const SigninForm = ({ switchAuthState }) => {
 
   const createOrder = async () => {
     const { response } = await ordersApi.postOrders(order);
-    console.log("order created", response);
     dispatch(setOrderId(response.id));
   };
 
@@ -52,14 +51,12 @@ const SigninForm = ({ switchAuthState }) => {
         signinForm.resetForm();
         dispatch(setUserRole(response.role));
         dispatch(setUser(response));
-
-        const userData = await userApi.getInfo(response.userId);
-        dispatch(setUserData(userData.response));
         dispatch(setAuthModalOpen(false));
         toast.success("Sign in success");
+        const userData = await userApi.getInfo(response.userId);
+        dispatch(setUserData(userData.response));
       }
-
-      if (err) setErrorMessage(err.message);
+      if (err) setErrorMessage(err);
     },
   });
 
@@ -118,7 +115,6 @@ const SigninForm = ({ switchAuthState }) => {
       <Button fullWidth sx={{ marginTop: 1 }} onClick={() => switchAuthState()}>
         sign up
       </Button>
-
       {errorMessage && (
         <Box sx={{ marginTop: 2 }}>
           <Alert severity="error" variant="outlined">

@@ -20,6 +20,7 @@ import AboutUsPage from "../screens/AboutUsPage";
 import PaymentCompletedPage from "../screens/PaymentCompletedPage";
 import { ProgressOrder } from "../screens/ProgressOrder";
 import EditDeleteProducts from "../components/admin/componentsProduct/EditDeleteProducts";
+import PasswordUpdatePage from "../screens/PasswordUpdatePage";
 
 export const routesGen = {
   home: "/",
@@ -40,7 +41,6 @@ const routes = [
     element: <CheckOutPage />,
     state: "checkout",
   },
-
   {
     path: "/details",
     element: <ProductDetailPage />,
@@ -55,6 +55,15 @@ const routes = [
     path: "/about",
     element: <AboutUsPage />,
     state: "about",
+  },
+  {
+    path: "/password-update",
+    element: (
+      <ProtectedPage>
+        <PasswordUpdatePage />
+      </ProtectedPage>
+    ),
+    state: "password.update",
   },
   {
     path: "/*",

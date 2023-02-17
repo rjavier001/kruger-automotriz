@@ -34,10 +34,10 @@ public class AuthUserController {
   }
 
   @PostMapping("/sign-in")
-  public ResponseEntity<TokenDto> login(@RequestBody AuthUserDto dto) {
+  public ResponseEntity<?> login(@RequestBody AuthUserDto dto) {
     TokenDto tokenDto = authUserService.login(dto);
     if (tokenDto == null)
-      return ResponseEntity.badRequest().build();
+      return new ResponseEntity<>("Login fail please check username and password", HttpStatus.BAD_REQUEST);
     return ResponseEntity.ok(tokenDto);
   }
 
@@ -50,18 +50,18 @@ public class AuthUserController {
   }
 
   @PostMapping("/sign-up")
-  public ResponseEntity<TokenDto> create(@RequestBody AuthUserDto dto) {
+  public ResponseEntity<?> create(@RequestBody AuthUserDto dto) {
     TokenDto tokenDto = authUserService.save(dto);
     if (tokenDto == null)
-      return ResponseEntity.badRequest().build();
+      return new ResponseEntity<>("Error to save user please check data", HttpStatus.BAD_REQUEST);
     return ResponseEntity.ok(tokenDto);
   }
 
-  @PostMapping("/update-password")
+  @PutMapping("/update-password")
   public ResponseEntity<?> updatePassword(@RequestBody AuthDto dto) {
     TokenDto tokenDto = authUserService.update(dto);
     if (tokenDto == null)
-      return ResponseEntity.badRequest().build();
+      return new ResponseEntity<>("Error to update password please check data", HttpStatus.BAD_REQUEST);
     return ResponseEntity.ok().build();
   }
 }
