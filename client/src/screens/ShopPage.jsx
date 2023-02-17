@@ -156,16 +156,19 @@ const Shop = () => {
   return (
     <>
       <Container>
-        <Stack>{/* SEARCH */}</Stack>
-
         <InstantSearch searchClient={searchClient} indexName="krugermotors">
-          <SearchBox />
+          <Stack direction="column" justifyContent="center" alignItems="center">
+            <SearchBox placeholder="Buscar productos" />
+          </Stack>
+          <br />
           <Stack
             direction={{ xs: "column", sm: "row" }}
             spacing={{ xs: 1, sm: 2, md: 4 }}
           >
             <Stack>
-              <h2>Categorias</h2>
+              <Typography variant="h6" sx={{ fontWeight: "bold" }}>
+                Categorias
+              </Typography>
               <RefinementList
                 attribute="category.name"
                 showMore={true}
@@ -180,7 +183,11 @@ const Shop = () => {
             </Stack>
 
             <Stack>
-              <Stack direction="row" justifyContent="space-between">
+              <Stack
+                paddingLeft="16px"
+                direction="row"
+                justifyContent="space-between"
+              >
                 <ClearRefinements
                   translations={{
                     resetButtonText: "Borrar filtros",
@@ -191,6 +198,7 @@ const Shop = () => {
                   direction="row"
                   justifyContent="flex-end"
                   alignItems="flex-end"
+                  paddingRight="16px"
                 >
                   <Typography variant="h6" sx={{ fontWeight: "bold" }}>
                     Ordenar por &nbsp;
@@ -217,8 +225,9 @@ const Shop = () => {
               <Grid item container spacing={2} marginTop="2px">
                 <CustomHits {...this} />
               </Grid>
-
+              <br />
               <Pagination />
+              <br />
             </Stack>
           </Stack>
         </InstantSearch>

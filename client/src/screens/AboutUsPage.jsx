@@ -44,8 +44,9 @@ const AboutUsPage = () => {
             David Lozada
           </Typography>
           <Typography variant="caption">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt
-            quam excepturi itaque nihil.
+            I am a developer. I really enjoy creating new things and never shy
+            away from a challenge. Seeing ideas and concepts come to life is one
+            of my favorite part.
           </Typography>
         </Stack>
         <Stack
@@ -63,8 +64,8 @@ const AboutUsPage = () => {
             Javier Vallejo
           </Typography>
           <Typography variant="caption">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt
-            quam excepturi itaque nihil.
+            Development of ERP systems, CRM, Web Servers, design and
+            implementation of data storage solutions and database management.
           </Typography>
         </Stack>
         <Stack
@@ -82,8 +83,9 @@ const AboutUsPage = () => {
             Javier Yanez
           </Typography>
           <Typography variant="caption">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt
-            quam excepturi itaque nihil.
+            Web developer specialized in React, Node.js, MongoDB and JavaScript
+            lover. Passionate about creating and developing web applications
+            using modern technologies.
           </Typography>
         </Stack>
         <Stack
@@ -101,8 +103,9 @@ const AboutUsPage = () => {
             Kevin Veliz
           </Typography>
           <Typography variant="caption">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt
-            quam excepturi itaque nihil.
+            I am a full-stack developer. I like to learn new things and put them
+            into practice in different projects. I hope I can keep learning a
+            lot more and accomplish all my goals.
           </Typography>
         </Stack>
       </Stack>
