@@ -25,6 +25,8 @@ import {
   SortBy,
   useHits,
   useRefinementList,
+  HierarchicalMenu,
+  CurrentRefinements,
 } from "react-instantsearch-hooks-web";
 
 const Shop = () => {
@@ -198,15 +200,38 @@ const Shop = () => {
 
         <InstantSearch searchClient={searchClient} indexName="krugermotors">
           <SearchBox />
-          <ClearRefinements />
-          <h2>Brands</h2>
+          <CurrentRefinements
+            classNames={{
+              categoryLabel: "MyCustomCurrentRefinements",
+            }}
+            value="ASD"
+          />
+          <ClearRefinements
+            translations={{
+              resetButtonText: "Borrar filtros",
+            }}
+          />
+          <h2>Categorias</h2>
           {/* <RefinementList attribute="category" /> */}
-          <CustomRefinementList attribute="category_name" {...this} />
+          {/* <CustomRefinementList attribute="category.name" {...this} /> */}
+          <RefinementList
+            attribute="category.name"
+            showMore={true}
+            translations={{
+              showMoreButtonText({ isShowingMore }) {
+                return isShowingMore
+                  ? "Mostrar menos marcas"
+                  : "Mostrar más marcas";
+              },
+            }}
+          />
+
+          <h2>Ordenar por:</h2>
           <SortBy
             items={[
-              { label: "Featured", value: "krugermotors" },
-              { label: "Price (asc)", value: "instant_search_price_asc" },
-              { label: "Price (desc)", value: "instant_search_price_desc" },
+              { label: "Más relevantes", value: "krugermotors" },
+              { label: "Menor precio", value: "instant_search_price_asc" },
+              { label: "Mayor precio", value: "instant_search_price_desc" },
             ]}
           />
           <Configure hitsPerPage={12} />

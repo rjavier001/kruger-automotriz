@@ -197,9 +197,9 @@ const CardComp = ({ props }) => {
                 {name?.charAt(0).toUpperCase() + name?.slice(1)}
               </Typography>
               <Highlight attribute="description" hit={props} />
-              <Typography variant="body2" color="text.secondary">
+              {/* <Typography variant="body2" color="text.secondary">
                 {description}
-              </Typography>
+              </Typography> */}
             </Box>
           </Box>
           <Box
