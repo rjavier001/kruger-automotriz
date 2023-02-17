@@ -9,6 +9,7 @@ const initialState = {
   cartTotalQuantity: 0,
   cartTotalAmount: 0,
   cartTotalWeight: 0,
+  discount: 0,
 };
 
 export const cartSlice = createSlice({
@@ -89,6 +90,13 @@ export const cartSlice = createSlice({
         });
       }
     },
+    /* Discount */
+    applyDiscount: (state, action) => {
+      state.discount = action.payload;
+      state.cartTotalAmount = state.cartTotalAmount - action.payload;
+      console.log("total", state.cartTotalAmount);
+      console.log(action.payload);
+    },
     /* FUNCION CLEAR CART */
     clearCart(state, action) {
       state.cartItems = [];
@@ -122,7 +130,7 @@ export const cartSlice = createSlice({
       );
       /* Actualizamos el state */
       state.cartTotalQuantity = quantity;
-      state.cartTotalAmount = total;
+      state.cartTotalAmount = total - state.discount;
       state.cartTotalWeight = weight;
     },
   },
@@ -135,6 +143,7 @@ export const {
   clearCart,
   getTotal,
   paymentClear,
+  applyDiscount,
 } = cartSlice.actions;
 
 export default cartSlice.reducer;

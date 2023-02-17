@@ -5,7 +5,10 @@ import {
   Button,
   IconButton,
   Grid,
+  Modal,
 } from "@mui/material";
+import Backdrop from "@mui/material/Backdrop";
+import Fade from "@mui/material/Fade";
 import DiscountIcon from "@mui/icons-material/Discount";
 import TextField from "@mui/material/TextField";
 import React, { useState, useEffect } from "react";
@@ -23,11 +26,13 @@ import {
   addToCart,
   clearCart,
   getTotal,
+  applyDiscount,
 } from "../redux/features/cartSlice";
 import { NavLink } from "react-router-dom";
 import { Container } from "@mui/system";
 import userApi from "../api/modules/users.api";
 import ordersApi from "../api/modules/orders.api";
+import FeedbackIcon from "@mui/icons-material/Feedback";
 
 const CheckOutPage = () => {
   const cart = useSelector((state) => state.cart);
@@ -35,6 +40,16 @@ const CheckOutPage = () => {
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.user);
   const { userOrderId } = useSelector((state) => state.user);
+  const [open, setOpen] = useState(false);
+  const [cupon, setCupon] = useState({ obj: "", disc: 0 });
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   useEffect(() => {
     dispatch(getTotal());
@@ -52,6 +67,12 @@ const CheckOutPage = () => {
   const handleClearCart = () => {
     dispatch(clearCart());
     clearOrder();
+  };
+  const handleDiscountChange = (item) => {
+    const discount = Number(item.disc);
+    console.log(item);
+    dispatch(applyDiscount(discount));
+    setCupon(item);
   };
 
   const assignOrd = async () => {
@@ -71,12 +92,61 @@ const CheckOutPage = () => {
     assignOrd();
   };
 
+  const coupons = [
+    {
+      obj: "MV44",
+      disc: 2.5,
+    },
+    { obj: "ASA3", disc: 1.5 },
+    { obj: "HY65", disc: 3.5 },
+    { obj: "QW12", disc: 5.5 },
+  ];
+
   return (
     <Stack
       direction={{ sm: "row", xs: "column", md: "row" }}
       spacing={{ xs: 1, sm: 2, md: 4 }}
       sx={styles.stackContainer}
     >
+      <Modal
+        aria-labelledby="transition-modal-title"
+        aria-describedby="transition-modal-description"
+        open={open}
+        onClose={handleClose}
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{
+          timeout: 500,
+        }}
+      >
+        <Fade in={open}>
+          <Box sx={styles.modal}>
+            <Typography id="transition-modal-title" variant="h7" component="h5">
+              Prueba uno de estos
+            </Typography>
+            <Grid md={12}>
+              {coupons.map((item) => (
+                <Button
+                  onClick={() => handleDiscountChange(item)}
+                  sx={{
+                    borderRadius: 2,
+                    borderStyle: "dotted",
+                    borderWidth: 2,
+                    margin: 2,
+                  }}
+                >
+                  <Typography
+                    id="transition-modal-description"
+                    sx={{ mt: 2, textAlign: "center" }}
+                  >
+                    {item.obj}
+                  </Typography>
+                </Button>
+              ))}
+            </Grid>
+          </Box>
+        </Fade>
+      </Modal>
       <Box sx={styles.boxLeft}>
         <Typography variant="h5" mb={2} sx={styles.titleLeft}>
           Detalles de Orden
@@ -179,22 +249,30 @@ const CheckOutPage = () => {
             <DiscountIcon color="success" />
             <Typography variant="h6">Cupones:</Typography>
           </Stack>
-          <TextField
-            label="Inserte numero"
-            id="filled-size-small"
-            variant="outlined"
-            size="small"
-          />
+          <Stack direction={"row"}>
+            <TextField
+              label="Inserte numero"
+              id="filled-size-small"
+              variant="outlined"
+              size="small"
+              value={cupon.obj}
+            />
+            <IconButton onClick={handleOpen}>
+              <FeedbackIcon sx={{ color: "red" }} />
+            </IconButton>
+          </Stack>
           <Divider sx={{ marginY: 2 }} />
 
           <Stack sx={styles.stackRoot}>
             <Typography variant="h8">Subtotal:</Typography>
-            <Typography variant="h8">{cart.cartTotalAmount}$</Typography>
+            <Typography variant="h8">
+              {cart.cartTotalAmount + cupon.disc}$
+            </Typography>
           </Stack>
 
           <Stack sx={styles.stackRoot}>
             <Typography variant="h8">Descuento:</Typography>
-            <Typography variant="h8">0$</Typography>
+            <Typography variant="h8">{cupon.disc}$</Typography>
           </Stack>
 
           <Stack sx={styles.stackRoot}>
@@ -283,5 +361,20 @@ export const styles = {
   },
   add: {
     alignItems: "center",
+  },
+  modal: {
+    position: "absolute",
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: 300,
+    bgcolor: "background.paper",
+    border: "2px solid #000",
+    boxShadow: 24,
+    borderRadius: 10,
+    p: 4,
   },
 };
