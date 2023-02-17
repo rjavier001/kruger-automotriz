@@ -30,7 +30,6 @@ import userApi from "../api/modules/users.api";
 
 import { useSelector } from "react-redux";
 import { userData } from "../redux/features/userSlice";
-import ordersApi from "../api/modules/orders.api";
 import productsApi from "../api/modules/products.api";
 
 export const ProgressOrder = () => {
@@ -45,20 +44,19 @@ export const ProgressOrder = () => {
 	const [products, setProducts] = useState([]);
 
 	useEffect(() => {
-		if (userState) userById();
+
 		getList();
 	}, []);
 
-	const userById = async () => {
-		const userData = await userApi.getInfo(userState?.userId);
-	};
 
 	const getList = async () => {
 		const { response } = await productsApi.getList();
 		if (response) setProducts(response);
 	};
 
+
 	let arrayProduct = products.slice(0, 5);
+
 
 	return (
 		<Box

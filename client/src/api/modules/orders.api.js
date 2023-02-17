@@ -6,6 +6,8 @@ const ordersEndPoints = {
   update: ({ id }) => `orders/${id}`,
   assignProduct: ({ id }) => `orders/assign-product/${id}`,
   assignPayment: ({ id }) => `orders/assign-payment/${id}`,
+
+  listOrderByUser:({ id }) => `orders/list/${id}`,
 };
 
 const ordersApi = {
@@ -62,6 +64,17 @@ const ordersApi = {
       const response = await publicClient.put(
         ordersEndPoints.update({ id }),
         data
+      );
+      return { response };
+    } catch (err) {
+      return { err };
+    }
+  },
+
+  listOrderByUser: async (id) => {
+    try {
+      const response = await publicClient.get(
+        ordersEndPoints.listOrderByUser({ id })
       );
       return { response };
     } catch (err) {
