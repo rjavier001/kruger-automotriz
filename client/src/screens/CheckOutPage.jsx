@@ -66,12 +66,12 @@ const CheckOutPage = () => {
 
   return (
     <Stack
-      direction={{ sm: "row", xs: "column" }}
+      direction={{ sm: "row", xs: "column", md: "row" }}
       spacing={{ xs: 1, sm: 2, md: 4 }}
       sx={styles.stackContainer}
     >
       <Box sx={styles.boxLeft}>
-        <Typography variant="h5" mb={2}>
+        <Typography variant="h5" mb={2} sx={styles.titleLeft}>
           Detalles de Orden
         </Typography>
         {cart.cartItems.length === 0 && (
@@ -101,7 +101,7 @@ const CheckOutPage = () => {
                     sx={{ flex: 1, flexDirection: "row", alignItems: "center" }}
                   >
                     <IconButton onClick={() => handleRemoveItem(cartItem)}>
-                      <DeleteForeverIcon />
+                      <DeleteForeverIcon sx={{ color: "red" }} />
                     </IconButton>
                     <Typography variant="h6">Producto</Typography>
                   </Stack>
@@ -217,6 +217,9 @@ export const styles = {
   boxItem: {
     justifyContent: "center",
   },
+  titleLeft: {
+    color: "#ff910d",
+  },
   headers: {
     justifyContent: "space-around",
     fontWeight: "bold",
@@ -231,16 +234,20 @@ export const styles = {
     color: "gray",
   },
   boxLeft: {
-    width: "80%",
+    width: "100%",
     minheight: 350,
     borderRadius: 5,
+    borderStyle: "solid",
+    borderWidth: 1,
     padding: 5,
     boxShadow: "-13px 18px 8px -5px rgba(34, 60, 80, 0.2)",
   },
   boxRight: {
-    width: 250,
-    height: 350,
+    width: "100",
+    minheight: 350,
     borderRadius: 5,
+    borderStyle: "solid",
+    borderWidth: 1,
     padding: 5,
     boxShadow: "-13px 18px 8px -5px rgba(34, 60, 80, 0.2)",
   },

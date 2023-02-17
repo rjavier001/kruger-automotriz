@@ -16,6 +16,7 @@ import Image from "mui-image";
 import { useNavigate } from "react-router-dom";
 import { clearCart, paymentClear } from "../redux/features/cartSlice";
 import ordersApi from "../api/modules/orders.api";
+import { setOrderId } from "../redux/features/userSlice";
 
 const PaymentPage = () => {
   const cart = useSelector((state) => state.cart);
@@ -23,6 +24,14 @@ const PaymentPage = () => {
   const dispatch = useDispatch();
   const { userData } = useSelector((state) => state.user);
   const navigate = useNavigate();
+  const [order, setOrder] = useState({ status: "Created", totalPrice: 0 });
+
+  const createOrder = async () => {
+    const { response } = await ordersApi.postOrders(order);
+    console.log("order created", response);
+    dispatch(setOrderId(response.id));
+  };
+
   const handleClearCart = () => {
     dispatch(paymentClear());
   };
@@ -59,6 +68,7 @@ const PaymentPage = () => {
       resetForm();
       handleClearCart();
       assignPayment(values);
+      createOrder();
       navigate("/success");
     },
   });
@@ -151,7 +161,7 @@ const PaymentPage = () => {
               <TextField
                 required
                 id="name"
-                label="numero o ID"
+                label="Card number or ID"
                 name="cardNumber"
                 onChange={formik.handleChange}
                 value={formik.values.cardNumber}

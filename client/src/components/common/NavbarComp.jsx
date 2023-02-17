@@ -122,7 +122,9 @@ const Navbar = () => {
 
               <IconButton onClick={() => handleToCO()}>
                 <ShoppingCartCheckoutIcon />
-                <Typography sx={styles.badge}>{cartTotalQuantity}</Typography>
+                {user && (
+                  <Typography sx={styles.badge}>{cartTotalQuantity}</Typography>
+                )}
               </IconButton>
               {!user && (
                 <AccountCircleIcon

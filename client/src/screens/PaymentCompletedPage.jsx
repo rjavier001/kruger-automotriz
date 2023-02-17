@@ -15,9 +15,10 @@ const PaymentCompletedPage = () => {
       alignItems={"center"}
       container
       md={12}
+      sm={12}
       mt={7}
     >
-      <Grid item md={12}>
+      <Grid item md={12} sm={12} xs={12}>
         <Image
           alt="product"
           showLoading={false}
@@ -28,7 +29,7 @@ const PaymentCompletedPage = () => {
           duration={1000}
         />
       </Grid>
-      <Grid item md={12}>
+      <Grid item md={12} sm={12} xs={12}>
         <Stack spacing={3} sx={styles.items}>
           <Typography variant="h6" sx={{ textAlign: "center" }}>
             Gracias por tu compra

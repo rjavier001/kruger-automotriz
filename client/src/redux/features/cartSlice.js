@@ -99,6 +99,7 @@ export const cartSlice = createSlice({
     },
     paymentClear(state, action) {
       state.cartItems = [];
+      state.cartTotalQuantity = 0;
       localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
     },
     /* FUNCTION CALCULATE TOTAL */
