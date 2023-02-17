@@ -165,7 +165,7 @@ const Shop = () => {
             direction={{ xs: "column", sm: "row" }}
             spacing={{ xs: 1, sm: 2, md: 4 }}
           >
-            <Stack>
+            <Stack sx={{ width: "100%" }}>
               <Typography variant="h6" sx={{ fontWeight: "bold" }}>
                 Categorias
               </Typography>
