@@ -16,9 +16,10 @@ services:
 
   config-server:
     container_name: config-server
-    build:
-      context: ./
-      dockerfile: ./config-server/Dockerfile
+    image: sathell/config-server
+    # build:
+    #   context: ./
+    #   dockerfile: ./config-server/Dockerfile
     ports:
       - "8888:8888"
     networks:
@@ -27,9 +28,10 @@ services:
 
   discovery-server:
     container_name: discovery-server
-    build:
-      context: ./
-      dockerfile: ./discovery-server/Dockerfile
+    image: sathell/discovery-server
+    # build:
+    #   context: ./
+    #   dockerfile: ./discovery-server/Dockerfile
     ports:
       - "8761:8761"
     networks:
@@ -38,9 +40,10 @@ services:
 
   gateway-server:
     container_name: gateway-server
-    build:
-      context: ./
-      dockerfile: ./gateway-server/Dockerfile
+    image: sathell/gateway-server
+    # build:
+    #   context: ./
+    #   dockerfile: ./gateway-server/Dockerfile
     ports:
       - "8080:8080"
     networks:
@@ -51,9 +54,10 @@ services:
 
   auth-server:
     container_name: auth-server
-    build:
-      context: ./
-      dockerfile: ./auth-server/Dockerfile
+    image: sathell/auth-server
+    # build:
+    #   context: ./
+    #   dockerfile: ./auth-server/Dockerfile
     ports:
       - "8004:8004"
     networks:
@@ -64,9 +68,10 @@ services:
 
   msv-users:
     container_name: msv-users
-    build:
-      context: ./
-      dockerfile: ./msv-users/Dockerfile
+    image: sathell/msv-users
+    # build:
+    #   context: ./
+    #   dockerfile: ./msv-users/Dockerfile
     ports:
       - "8001:8001"
     env_file: ./msv-users/.env
@@ -81,9 +86,10 @@ services:
 
   msv-order:
     container_name: msv-order
-    build:
-      context: ./
-      dockerfile: ./msv-order/Dockerfile
+    image: sathell/msv-order
+    # build:
+    #   context: ./
+    #   dockerfile: ./msv-order/Dockerfile
     ports:
       - "8003:8003"
     env_file: ./msv-order/.env
@@ -97,9 +103,10 @@ services:
 
   msv-products:
     container_name: msv-products
-    build:
-      context: ./
-      dockerfile: ./msv-products/Dockerfile
+    image: sathell/msv-products
+    # build:
+    #   context: ./
+    #   dockerfile: ./msv-products/Dockerfile
     ports:
       - "8002:8002"
     env_file: ./msv-products/.env
@@ -109,7 +116,6 @@ services:
       - postgres14
       - gateway-server
     restart: always
-
 
 volumes:
   data-postgres:
