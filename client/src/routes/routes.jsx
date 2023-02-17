@@ -21,6 +21,7 @@ import PaymentCompletedPage from "../screens/PaymentCompletedPage";
 import { ProgressOrder } from "../screens/ProgressOrder";
 import EditDeleteProducts from "../components/admin/componentsProduct/EditDeleteProducts";
 import PasswordUpdatePage from "../screens/PasswordUpdatePage";
+import UnderConstructionPage from "../screens/UnderConstructionPage";
 
 export const routesGen = {
   home: "/",
@@ -69,6 +70,11 @@ const routes = [
     path: "/*",
     element: <NotFoundPage />,
     state: "not-found",
+  },
+  {
+    path: "/under-construction",
+    element: <UnderConstructionPage />,
+    state: "under-construction",
   },
   {
     path: "/payment",
