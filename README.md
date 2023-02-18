@@ -2,7 +2,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/rjavier001/kruger-automotriz">
-    <img src="./src/assets/LOGO_KRUGERMOTORS.png" alt="Logo" width="80" height="80">
+    <img src="./client/src/assets/LOGO_KRUGERMOTORS.png" alt="Logo" width="80" height="80">
   </a>
 
   <h1 align="center">Kruger Motors</h1>
@@ -228,8 +228,8 @@ Project Link: [KrugerMotors](https://github.com/rjavier001/kruger-automotriz)
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
-[usage2-screenshot]: ./src/assets/sign.gif
-[usage-screenshot]: ./src/assets/filter.gif
+[usage2-screenshot]: ./client/src/assets/sign.gif
+[usage-screenshot]: ./client/src/assets/filter.gif
 [contributors-shield]: https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=for-the-badge
 [contributors-url]: https://github.com/othneildrew/Best-README-Template/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=for-the-badge
@@ -241,7 +241,7 @@ Project Link: [KrugerMotors](https://github.com/rjavier001/kruger-automotriz)
 [license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
 [license-url]: https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[product-screenshot]: ./src/assets/home.gif
+[product-screenshot]: ./client/src/assets/home.gif
 [react.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
 [react-url]: https://reactjs.org/
 [spring.js]: https://img.shields.io/badge/SpringBoot-6DB33F?style=for-the-badge&logo=react&logoColor=61DAFB
