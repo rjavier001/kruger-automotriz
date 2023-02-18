@@ -1,4 +1,5 @@
 import { Avatar, Stack, Typography } from "@mui/material";
+import Typewriter from "typewriter-effect";
 
 const AboutUsPage = () => {
   return (
@@ -13,9 +14,17 @@ const AboutUsPage = () => {
           <Typography variant="p" color="primary" sx={{ fontWeight: "bold" }}>
             Kruger Motors
           </Typography>
-          , Somos una importadora automotriz con sede en la ciudad de Quito -
-          Ecuador, distribuimos repuestos automotrices de varias líneas tanto
-          pesada como para automóviles.
+          <Typewriter
+            options={{
+              strings: [
+                "Somos una importadora automotriz con sede en la ciudad de Quito -  Ecuador, distribuimos repuestos automotrices de varias líneas tanto pesada como para automóviles.",
+              ],
+              autoStart: true,
+              loop: true,
+              delay: 40,
+              deleteSpeed: 40,
+            }}
+          />
         </Typography>
       </Stack>
 

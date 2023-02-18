@@ -23,6 +23,7 @@ import { setAuthModalOpen } from "../../redux/features/authModalSlice";
 import Sidebar from "./Sidebar";
 import UserMenu from "./UserMenu";
 import { useNavigate } from "react-router-dom";
+import Image from "mui-image";
 
 const ScrollAppBar = ({ children, window }) => {
   const { themeMode } = useSelector((state) => state.themeMode);
@@ -90,6 +91,16 @@ const Navbar = () => {
               </IconButton>
             </Stack>
 
+            <Image
+              alt="product"
+              showLoading={false}
+              errorIcon={true}
+              fit={"contain"}
+              src={require("../../assets/LOGO_KRUGERMOTORS.png")}
+              height={50}
+              width={50}
+              duration={10}
+            />
             <Box
               flexGrow={1}
               alignItems="center"
